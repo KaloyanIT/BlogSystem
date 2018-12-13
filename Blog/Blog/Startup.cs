@@ -43,13 +43,25 @@ namespace Blog
             {
                 app.UseExceptionHandler("/Error");
             }
-
+            UpdateDatabase(app);
             app.UseStaticFiles();
 
             app.UseMvc(routes => {
 
             });
             app.UseMvcWithDefaultRoute();
+        }
+
+        private static void UpdateDatabase(IApplicationBuilder app)
+        {
+            using(var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (var context = serviceScope.ServiceProvider.GetService<BlogContext>())
+                {
+                    context.Database.EnsureCreated();
+                    context.Database.Migrate();
+                }
+            }
         }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Blog.Data
 {
-    public class Blog
+    public class BlogPost
     {
         public Guid Id { get; set; }
 

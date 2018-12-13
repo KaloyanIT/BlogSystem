@@ -9,6 +9,6 @@ namespace Blog.Data
 
         }
 
-        public DbSet<Blog> Blogs { get; set; }
+        public DbSet<BlogPost> Blogs { get; set; }
     }
 }
