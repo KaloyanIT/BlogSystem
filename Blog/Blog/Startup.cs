@@ -1,6 +1,8 @@
 ﻿using Blog.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,8 +27,11 @@ namespace Blog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));             
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<IdentityUser, IdentityRole>()
+              .AddEntityFrameworkStores<BlogContext>()
+              .AddDefaultTokenProviders();
 
             services.AddMvc();
             services.AddRouting();
@@ -46,21 +51,25 @@ namespace Blog
             UpdateDatabase(app);
             app.UseStaticFiles();
 
-            app.UseMvc(routes => {
+            app.UseMvc(routes =>
+            {
 
             });
+            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)
         {
-            using(var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 using (var context = serviceScope.ServiceProvider.GetService<BlogContext>())
                 {
-                    context.Database.EnsureCreated();
+                    //context.Database.EnsureCreated();
                     context.Database.Migrate();
                 }
+
+              
             }
         }
     }
