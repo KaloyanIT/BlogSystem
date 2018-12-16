@@ -1,4 +1,6 @@
 ﻿using Blog.Data;
+using Blog.Services.Contracts;
+using Blog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,10 +12,12 @@ namespace Blog.Controllers
     public class BlogsController : Controller
     {
         private readonly BlogContext _context;
+        private readonly IBlogService blogService;
 
-        public BlogsController(BlogContext context)
+        public BlogsController(BlogContext context, IBlogService blogService)
         {
             this._context = context;
+            this.blogService = blogService;
         }
 
         // GET: Blogs
@@ -51,16 +55,16 @@ namespace Blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateCreated,DateModified,Title,Content")] BlogPost blog)
+        public async Task<IActionResult> Create([Bind("Id,DateCreated,DateModified,Title,Content")] BlogServiceModel blog)
         {
-            if (this.ModelState.IsValid)
+            if(!this.ModelState.IsValid)
             {
-                blog.Id = Guid.NewGuid();
-                this._context.Add(blog);
-                await this._context.SaveChangesAsync();
-                return this.RedirectToAction(nameof(Index));
+                return this.View(blog);
             }
-            return this.View(blog);
+
+            await this.blogService.Create(blog);
+          
+            return this.RedirectToAction(nameof(Index));
         }
 
         // GET: Blogs/Edit/5

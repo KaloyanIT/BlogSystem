@@ -1,4 +1,7 @@
-﻿using Blog.Data;
+﻿using AutoMapper;
+using Blog.Data;
+using Blog.Services;
+using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -27,14 +30,19 @@ namespace Blog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+
 
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders();
 
+            services.AddTransient<IBlogService, BlogService>();
+
             services.AddMvc();
             services.AddRouting();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
