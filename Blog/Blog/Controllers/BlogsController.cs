@@ -1,4 +1,6 @@
-﻿using Blog.Data;
+﻿using AutoMapper;
+using Blog.Core.ViewModels.Blogs;
+using Blog.Data;
 using Blog.Services.Contracts;
 using Blog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -13,11 +15,13 @@ namespace Blog.Controllers
     {
         private readonly BlogContext _context;
         private readonly IBlogService blogService;
+        private readonly IMapper mapper;
 
-        public BlogsController(BlogContext context, IBlogService blogService)
+        public BlogsController(BlogContext context, IBlogService blogService, IMapper mapper)
         {
             this._context = context;
             this.blogService = blogService;
+            this.mapper = mapper;
         }
 
         // GET: Blogs
@@ -50,19 +54,20 @@ namespace Blog.Controllers
             return this.View();
         }
 
-        // POST: Blogs/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+      
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,DateCreated,DateModified,Title,Content")] BlogServiceModel blog)
+        public async Task<IActionResult> Create(CreateBlogViewModel blog)
         {
             if(!this.ModelState.IsValid)
             {
                 return this.View(blog);
             }
 
-            await this.blogService.Create(blog);
+            //Add validation
+            var serviceModel = this.mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
+
+            await this.blogService.Create(serviceModel);
           
             return this.RedirectToAction(nameof(Index));
         }

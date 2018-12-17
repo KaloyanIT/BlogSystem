@@ -20,7 +20,7 @@ namespace Blog.Services
         }
 
 
-        public async Task Create(BlogServiceModel blogServiceModel)
+        public async Task Create(CreateBlogServiceModel blogServiceModel)
         {
             var blogPost = this.mapper.Map<BlogPost>(blogServiceModel);
 

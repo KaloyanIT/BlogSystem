@@ -6,7 +6,7 @@ namespace Blog.Services.Contracts
 {
     public interface IBlogService
     {
-        Task Create(BlogServiceModel blogServiceModel);
+        Task Create(CreateBlogServiceModel blogServiceModel);
 
         Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel);
 
