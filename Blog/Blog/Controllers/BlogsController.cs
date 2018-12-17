@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Controllers
 {
+    [Area("Admin")]
     public class BlogsController : Controller
     {
         private readonly BlogContext _context;
