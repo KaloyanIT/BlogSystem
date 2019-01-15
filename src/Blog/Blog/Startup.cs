@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Blog.Data;
+using Blog.Data.Seeders;
 using Blog.Services;
 using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Builder;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace Blog
 {
@@ -55,7 +57,7 @@ namespace Blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -66,6 +68,7 @@ namespace Blog
                 app.UseExceptionHandler("/Error");
             }
             UpdateDatabase(app);
+            MainSeeder.Seed(serviceProvider, this.Configuration).Wait();
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
