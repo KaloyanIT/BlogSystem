@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blog.Core.Helpers;
 using Blog.Data;
 using Blog.Data.Seeders;
 using Blog.Services;
@@ -36,15 +37,13 @@ namespace Blog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IBlogContext, BlogContext>();
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
+            services.AddBlogServices(this.configuration);
 
 
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders();
 
-            services.AddTransient<IBlogService, BlogService>();
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -62,18 +61,7 @@ namespace Blog
             });
 
             services.Configure<IdentityOptions>(options =>
-            {
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                options.Lockout.AllowedForNewUsers = true;
-
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
-
+            {              
                 options.SignIn.RequireConfirmedEmail = false;
             });
 
