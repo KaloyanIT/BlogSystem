@@ -5,11 +5,11 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog", "Blog\Blog.csproj", "{E566EC0E-713A-4984-B7FA-D4D41115834B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Data", "Blog.Data\Blog.Data.csproj", "{F6BBB112-592A-4AFB-8083-C5F0249DF2E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data", "Blog.Data\Blog.Data.csproj", "{F6BBB112-592A-4AFB-8083-C5F0249DF2E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services", "Blog.Services\Blog.Services.csproj", "{2C2CA10A-CC26-448B-B7F6-90B4A019FF99}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Services", "Blog.Services\Blog.Services.csproj", "{2C2CA10A-CC26-448B-B7F6-90B4A019FF99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Core", "Blog.Core\Blog.Core.csproj", "{D96908D5-A87C-4BC4-A6D3-2F26E81624B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Core", "Blog.Core\Blog.Core.csproj", "{D96908D5-A87C-4BC4-A6D3-2F26E81624B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

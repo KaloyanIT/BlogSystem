@@ -3,11 +3,14 @@ using Blog.Data;
 using Blog.Data.Seeders;
 using Blog.Services;
 using Blog.Services.Contracts;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -52,8 +55,49 @@ namespace Blog
             });
 
             services.AddMvc();
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+            });
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+
+                options.SignIn.RequireConfirmedEmail = false;
+            });
+
+            //services.AddAuthentication().AddApplicationCookie();
+
+            services.AddSession(opt =>
+            {
+                opt.IdleTimeout = TimeSpan.FromMinutes(5);
+                opt.Cookie.HttpOnly = true;
+            });
+
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromHours(4);            
+            });
+
+
             services.AddRouting();
             services.AddAutoMapper();
+
+
+            var protectionBuilder = services.AddDataProtection().SetApplicationName("BLOG_IT")
+.SetDefaultKeyLifetime(TimeSpan.FromDays(90));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +106,7 @@ namespace Blog
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -70,6 +115,10 @@ namespace Blog
             UpdateDatabase(app);
             MainSeeder.Seed(serviceProvider, this.Configuration).Wait();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
+            app.UseAuthentication();
+            app.UseSession();
+            
 
             app.UseMvc(routes =>
             {
@@ -81,7 +130,6 @@ namespace Blog
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-            app.UseAuthentication();
             app.UseMvcWithDefaultRoute();
         }
 

@@ -14,6 +14,15 @@ namespace Blog.Core.Controllers
 
         public IActionResult Index()
         {
+            var isAuthenticated = this.User.Identity.IsAuthenticated;
+
+            var user = this.User;
+
+            if(!isAuthenticated)
+            {
+                return this.Redirect("/account/login");
+            }
+
             return this.View();
         }
     }

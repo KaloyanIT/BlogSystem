@@ -17,9 +17,10 @@ namespace Blog.Controllers
             {
                 if (this.User.IsInRole("Admin"))
                 {
-                    return this.Redirect("/login");
+                    return this.Redirect("/admin");
                 }
             }
+
 
             return this.View();
         }
