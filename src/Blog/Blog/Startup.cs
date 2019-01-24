@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -95,6 +96,10 @@ namespace Blog
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
+                //{
+                //    HotModuleReplacement = true
+                //});
             }
             else
             {
