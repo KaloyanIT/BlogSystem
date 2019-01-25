@@ -4,7 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('allstyles.css');
 
 module.exports = {
-    entry: { 'main': './wwwroot/js/app.js'},
+    entry: { 'main': './wwwroot/js/app.js' },
     output: {
         path: path.resolve(__dirname, 'wwwroot/dist'),
         filename: 'bundle.js',
@@ -36,6 +36,7 @@ module.exports = {
                     }
                 }
             },
+            { test: /\.jsx$/, loader: 'babel-loader', options: { presets: ['@babel/react', ['@babel/env', { 'targets': { 'browsers': '> 5%' } }]] } }
 
         ]
 

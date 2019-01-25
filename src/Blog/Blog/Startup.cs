@@ -96,10 +96,7 @@ namespace Blog
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
-                //app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
-                //{
-                //    HotModuleReplacement = true
-                //});
+                //app.UseWebpackDevMiddleware();
             }
             else
             {

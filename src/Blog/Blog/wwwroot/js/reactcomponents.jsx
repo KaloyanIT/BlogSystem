@@ -1,7 +1,7 @@
 ﻿import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-export default class Counter extends React.Component {
+export class Counter extends React.Component {
 
     constructor() {
         super();

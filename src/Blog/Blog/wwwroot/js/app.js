@@ -5,7 +5,7 @@ import '../css/site.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Counter from './reactcomponents';
+import {Counter} from './reactcomponents.jsx';
 
 ReactDOM.render(
     <Counter />,
