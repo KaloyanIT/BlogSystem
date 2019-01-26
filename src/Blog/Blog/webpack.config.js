@@ -4,11 +4,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const extractCSS = new ExtractTextPlugin('allstyles.css');
 
 module.exports = {
-    entry: { 'main': './wwwroot/js/app.js' },
+    mode: 'development',
+    target: 'web',
+    entry: { bundle: './Scripts/entry.tsx' },
     output: {
         path: path.resolve(__dirname, 'wwwroot/dist'),
-        filename: 'bundle.js',
-        publicPath: 'dist/'
+        filename: '[name].js',
+        publicPath: '/dist/'
     },
     plugins: [
         extractCSS,
@@ -36,9 +38,13 @@ module.exports = {
                     }
                 }
             },
+            { test: /\.tsx{0,1}$/, loader: 'ts-loader', options: { configFile: 'tsconfig.json' } },
             { test: /\.jsx$/, loader: 'babel-loader', options: { presets: ['@babel/react', ['@babel/env', { 'targets': { 'browsers': '> 5%' } }]] } }
 
         ]
 
+    },
+    resolve: {
+        extensions: ['.ts', '.tsx', '.jsx', '.js'] // with this, you don't need extension when importing modules
     }
 };
