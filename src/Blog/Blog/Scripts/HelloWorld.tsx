@@ -3,28 +3,28 @@ import { connect } from 'react-redux';
 import { retrieveData } from './async-thunks';
 import { IHelloWorldData } from './redux-actions';
 
-interface Props_redux extends IHelloWorldData {
+export interface Props_redux extends IHelloWorldData {
     dispatch: <T>(action: any) => T
 }
 
-interface IState {}
+export interface IState {}
 
-class Comp extends React.Component<Props_redux, IState> {
+class Comp extends React.PureComponent<Props_redux, IState> {
     componentDidMount() {
-        if (!props.status) {
-            this.props.dispatch(retrieveData());
-        }
+        //if (!props.status) {
+        //    this.props.dispatch(retrieveData());
+        //}
     }
 
     render() {
-        const {status, count} = this.props;
+        //const {status, count} = this.props;
 
         var content = null;
         if(status) {
             content = [
                 <div>Data obtained from server:</div>,
                 <div>Status: {status}</div>,
-                <div>Count: {count}</div>
+                //<div>Count: {count}</div>
             ]
         }
 
