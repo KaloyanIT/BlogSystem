@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Core.ViewModels.Blogs;
 using Blog.Data;
+using Blog.Data.Models;
 using Blog.Services.Contracts;
 using Blog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
