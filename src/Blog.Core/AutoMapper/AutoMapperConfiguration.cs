@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using Blog.Core.ViewModels.Blogs;
+using Blog.Core.ViewModels.Users;
 using Blog.Data;
 using Blog.Data.Models;
 using Blog.Services.Models;
+using Microsoft.AspNetCore.Identity;
 using System.Reflection;
 
 namespace Blog.Core.AutoMapper
@@ -12,6 +14,7 @@ namespace Blog.Core.AutoMapper
         public AutoMapperConfiguration()
         {
             this.CreateMap<BlogPost, BlogServiceModel>().ReverseMap();
+            this.CreateMap<IdentityUser, UserViewModel>().ReverseMap();
             this.CreateMap<BlogPost, BlogViewModel>().ReverseMap();
             this.CreateMap<CreateBlogServiceModel, BlogPost>().ReverseMap();    
             this.CreateMap<CreateBlogViewModel, CreateBlogServiceModel>().ReverseMap();

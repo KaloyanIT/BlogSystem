@@ -1,4 +1,6 @@
-﻿using Blog.Core.ViewModels.Users;
+﻿using AutoMapper;
+using Blog.Core.ViewModels.Users;
+using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,14 +12,26 @@ namespace Blog.Controllers
     [Area("Admin")]
     public class UsersController : Controller
     {
-        public UsersController()
-        {
+        private readonly IUserService userService;
+        private readonly IMapper mapper;
 
+        public UsersController(IUserService userService, IMapper mapper)
+        {
+            this.userService = userService;
+            this.mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            return this.View();
+            var model = new List<UserViewModel>();
+            var users = this.userService.GetAll();
+
+            foreach(var user in users)
+            {
+                model.Add(this.mapper.Map<UserViewModel>(user));
+            }
+
+            return this.View(model);
         }
 
         public async Task<IActionResult> Register()

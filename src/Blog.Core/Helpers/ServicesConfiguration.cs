@@ -1,15 +1,9 @@
-﻿using AutoMapper;
-using Blog.Data;
+﻿using Blog.Data;
 using Blog.Services;
 using Blog.Services.Contracts;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Blog.Core.Helpers
 {
@@ -19,7 +13,8 @@ namespace Blog.Core.Helpers
         {
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IBlogService, BlogService>();           
+            services.AddTransient<IBlogService, BlogService>();
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
