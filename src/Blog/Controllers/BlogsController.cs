@@ -7,6 +7,7 @@ using Blog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -29,7 +30,15 @@ namespace Blog.Controllers
         // GET: Blogs
         public async Task<IActionResult> Index()
         {
-            return this.View(await this._context.Blogs.ToListAsync());
+            var model = new List<BlogViewModel>();
+            var blogs = this.blogService.GetAll();
+
+            foreach(var blog in blogs)
+            {
+                model.Add(this.mapper.Map<BlogViewModel>(blog));
+            }
+
+            return this.View(model);
         }
 
         // GET: Blogs/Details/5
@@ -40,8 +49,8 @@ namespace Blog.Controllers
                 return this.NotFound();
             }
 
-            var blog = await this._context.Blogs
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var blog = await this.blogService.GetById(id);
+
             if (blog == null)
             {
                 return this.NotFound();
@@ -111,7 +120,7 @@ namespace Blog.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.BlogExists(blog.Id))
+                    if (!await this.blogService.Exists(id))
                     {
                         return this.NotFound();
                     }

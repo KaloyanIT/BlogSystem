@@ -1,6 +1,8 @@
-﻿using Blog.Services.Models;
-using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data.Models;
+using Blog.Services.Models;
 
 namespace Blog.Services.Contracts
 {
@@ -10,8 +12,10 @@ namespace Blog.Services.Contracts
 
         Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel);
 
-        Task<ICollection<BlogServiceModel>> GetAll();
+        IQueryable<BlogPost> GetAll();
 
-        Task<BlogServiceModel> GetById();
+        Task<BlogPost> GetById(Guid? id);
+
+        Task<bool> Exists(Guid? id);
     }
 }

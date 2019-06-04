@@ -3,18 +3,20 @@ using Blog.Data;
 using Blog.Data.Models;
 using Blog.Services.Contracts;
 using Blog.Services.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Blog.Services
 {
     public class BlogService : IBlogService
     {
-        private readonly IBlogContext blogContext;
+        private readonly BlogContext blogContext;
         private readonly IMapper mapper;
 
-        public BlogService(IBlogContext blogContext, IMapper mapper)
+        public BlogService(BlogContext blogContext, IMapper mapper)
         {
             this.blogContext = blogContext;
             this.mapper = mapper;
@@ -37,14 +39,35 @@ namespace Blog.Services
             throw new NotImplementedException();
         }
 
-        public Task<ICollection<BlogServiceModel>> GetAll()
+        public async Task<bool> Exists(Guid? id)
         {
-            throw new NotImplementedException();
+            if(!id.HasValue)
+            {
+                return false;
+            }
+
+            var result = await this.blogContext.Blogs.AnyAsync(x => x.Id == id);
+
+            return result;
         }
 
-        public Task<BlogServiceModel> GetById()
+        public IQueryable<BlogPost> GetAll()
         {
-            throw new NotImplementedException();
+            var result = this.blogContext.Blogs.AsQueryable();
+
+            return result;
+        }
+
+        public async Task<BlogPost> GetById(Guid? id)
+        {
+            if(!id.HasValue)
+            {
+                return null;
+            }
+
+            var result = await this.blogContext.Blogs.FirstOrDefaultAsync(x => x.Id == id);
+
+            return result;
         }
     }
 }
