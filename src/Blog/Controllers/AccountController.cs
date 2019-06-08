@@ -24,18 +24,35 @@ namespace Blog.Controllers
             return this.View();
         }
 
+        [AllowAnonymous]
         public IActionResult Register()
         {
             return this.View();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(registerViewModel);
+            }
+
+            var user = new IdentityUser()
+            {
+                UserName = registerViewModel.Username,
+                Email = registerViewModel.Email
+            };
+
+            await this.userManager.CreateAsync(user, registerViewModel.Password);
+
+            return this.View("Login");
+        }
+
         [AllowAnonymous]
         public IActionResult Login()
         {
-
-
-
-
             return this.View();
         }
 
@@ -44,7 +61,7 @@ namespace Blog.Controllers
         {
             await this.signInManager.SignOutAsync();
 
-            if(returnUrl != null)
+            if (returnUrl != null)
             {
                 return this.Redirect(returnUrl);
             }
@@ -69,7 +86,7 @@ namespace Blog.Controllers
 
             var user = await this.userManager.FindByEmailAsync(loginViewModel.Username);
 
-            if(user == null)
+            if (user == null)
             {
                 return this.View();
             }
