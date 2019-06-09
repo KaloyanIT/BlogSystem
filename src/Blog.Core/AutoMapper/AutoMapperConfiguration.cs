@@ -15,10 +15,12 @@ namespace Blog.Core.AutoMapper
         {
             this.CreateMap<BlogPost, BlogServiceModel>().ReverseMap();
             this.CreateMap<IdentityUser, UserViewModel>().ReverseMap();
+            this.CreateMap<IdentityUser, EditUserViewModel>().ReverseMap();
             this.CreateMap<BlogPost, BlogViewModel>().ReverseMap();
             this.CreateMap<CreateBlogServiceModel, BlogPost>().ReverseMap();    
             this.CreateMap<CreateBlogViewModel, CreateBlogServiceModel>().ReverseMap();
             this.CreateMap<CreateBlogViewModel, BlogServiceModel>().IgnoreAllNonExisting().ReverseMap();
+
         }        
     }
 

@@ -33,16 +33,26 @@ namespace Blog.Core.Controllers
 
             return this.View(model);
         }
-
-        public async Task<IActionResult> Register()
+        
+        public async Task<IActionResult> Edit(string id)
         {
-            return this.View();
+            var user = await this.userService.GetById(id);
+
+            if(user == null)
+            {
+                return this.RedirectToAction("Index");
+            }
+
+            var viewModel = this.mapper.Map<EditUserViewModel>(user);
+
+            return this.View(viewModel);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Register(CreateUserViewModel userViewModel, string returnUrl)
+        public async Task<IActionResult> Delete(string id)
         {
-            return this.View();
+            var result = await this.userService.Delete(id);
+
+            return this.Json(new { success = result });
         }
     }
 }

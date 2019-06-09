@@ -6,6 +6,7 @@ namespace Blog.Data.Models
     public class BlogPost
     {
         private ICollection<Comment> comments;
+
         public BlogPost()
         {
             this.comments = new HashSet<Comment>();
