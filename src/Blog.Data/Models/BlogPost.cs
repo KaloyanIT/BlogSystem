@@ -1,27 +1,35 @@
-﻿using System;
+﻿using Blog.Data.Base;
+using System;
 using System.Collections.Generic;
 
 namespace Blog.Data.Models
 {
-    public class BlogPost
-    {
-        private ICollection<Comment> comments;
-
-        public BlogPost()
-        {
-            this.comments = new HashSet<Comment>();
-        }
-
-        public Guid Id { get; set; }
-
-        public DateTime DateCreated { get; set; }
-
-        public DateTime DateModified { get; set; }
-
+    public class BlogPost : BaseDbObject
+    {      
         public string Title { get; set; }
 
         public string Content { get; set; }
 
-        public ICollection<Comment> Comments { get => this.comments; set => this.comments = value; }
+        public ICollection<Comment> Comments { get; set; }
+
+        public BlogPost()
+        {
+        }
+
+        public BlogPost(string title, string content)
+        {
+            if(string.IsNullOrWhiteSpace(title))
+            {
+                throw new ArgumentNullException("BlogPost title");
+            }
+
+            if(string.IsNullOrWhiteSpace(content))
+            {
+                throw new ArgumentNullException("BlogPost content");
+            }
+
+            this.Title = title;
+            this.Content = content;
+        }
     }
 }
