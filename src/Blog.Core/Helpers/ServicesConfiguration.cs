@@ -1,4 +1,7 @@
 ﻿using Blog.Data;
+using Blog.Data.Models;
+using Blog.Data.Repositories.Blog;
+using Blog.DataAccess;
 using Blog.Services;
 using Blog.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +18,7 @@ namespace Blog.Core.Helpers
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRepository<BlogPost>, BlogRepository>();
         }
     }
 }

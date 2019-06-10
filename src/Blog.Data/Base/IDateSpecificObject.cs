@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Blog.DataAccess;
+using System;
 
 namespace Blog.Data.Base
 {

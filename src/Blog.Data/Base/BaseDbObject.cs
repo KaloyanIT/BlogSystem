@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.DataAccess;
+using System;
 
 namespace Blog.Data.Base
 {

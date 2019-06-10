@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Blog.Data.Base
+namespace Blog.DataAccess
 {
     public interface IDbObject
     {
