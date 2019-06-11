@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Blog.Data;
 using Blog.Data.Models;
+using Blog.Data.Repositories.Blog;
 using Blog.Services.Contracts;
 using Blog.Services.Models;
 using Microsoft.EntityFrameworkCore;
@@ -14,11 +15,13 @@ namespace Blog.Services
     public class BlogService : IBlogService
     {
         private readonly BlogContext blogContext;
+        private readonly IBlogRepository blogRepository;
         private readonly IMapper mapper;
 
-        public BlogService(BlogContext blogContext, IMapper mapper)
+        public BlogService(BlogContext blogContext, IBlogRepository blogRepository, IMapper mapper)
         {
             this.blogContext = blogContext;
+            this.blogRepository = blogRepository;
             this.mapper = mapper;
         }
 
@@ -27,11 +30,7 @@ namespace Blog.Services
         {
             var blogPost = this.mapper.Map<BlogPost>(blogServiceModel);
 
-            blogPost.DateCreated = DateTime.Now;
-            blogPost.DateModified = DateTime.Now;
-
-            await this.blogContext.AddAsync<BlogPost>(blogPost);
-            await this.blogContext.SaveChangesAsync();
+            await this.blogRepository.Save(blogPost);           
         }
 
         public Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
@@ -46,14 +45,14 @@ namespace Blog.Services
                 return false;
             }
 
-            var result = await this.blogContext.Blogs.AnyAsync(x => x.Id == id);
+            var result = await this.GetAll().AnyAsync(x => x.Id == id);
 
             return result;
         }
 
         public IQueryable<BlogPost> GetAll()
         {
-            var result = this.blogContext.Blogs.AsQueryable();
+            var result = this.blogRepository.GetAll();
 
             return result;
         }
@@ -65,7 +64,7 @@ namespace Blog.Services
                 return null;
             }
 
-            var result = await this.blogContext.Blogs.FirstOrDefaultAsync(x => x.Id == id);
+            var result = await this.blogRepository.GetById(id.Value);
 
             return result;
         }

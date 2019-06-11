@@ -18,7 +18,7 @@ namespace Blog.Core.Helpers
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IUserService, UserService>();
-            services.AddTransient<IRepository<BlogPost>, BlogRepository>();
+            services.AddTransient<IBlogRepository, BlogRepository>();
         }
     }
 }
