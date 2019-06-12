@@ -18,12 +18,14 @@ namespace Blog.Core.Controllers
     {
         private readonly BlogContext _context;
         private readonly IBlogService blogService;
+        private readonly IUserService userService;
         private readonly IMapper mapper;
 
-        public BlogsController(BlogContext context, IBlogService blogService, IMapper mapper)
+        public BlogsController(BlogContext context, IBlogService blogService, IUserService userService, IMapper mapper)
         {
             this._context = context;
             this.blogService = blogService;
+            this.userService = userService;
             this.mapper = mapper;
         }
 
@@ -31,7 +33,7 @@ namespace Blog.Core.Controllers
         public async Task<IActionResult> Index()
         {
             var model = new List<BlogViewModel>();
-            var blogs = this.blogService.GetAll();
+            var blogs = this.blogService.GetAll().OrderByDescending(x => x.DateCreated);
 
             foreach(var blog in blogs)
             {
@@ -77,6 +79,9 @@ namespace Blog.Core.Controllers
 
             //Add validation
             var serviceModel = this.mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
+
+            var userId = await this.userService.GetIdByUsername(this.User.Identity.Name);
+            serviceModel.UserId = Guid.Parse(userId);
 
             await this.blogService.Create(serviceModel);
           

@@ -3,7 +3,7 @@ using System;
 
 namespace Blog.Data.Base
 {
-    public class BaseDbObject : IDbObject, IDateSpecificObject
+    public abstract class BaseDbObject : IDbObject, IDateSpecificObject
     {
         public BaseDbObject()
         {

@@ -62,5 +62,34 @@ namespace Blog.Services
 
             return user;
         }
+
+        public async Task<string> GetIdByUsername(string username)
+        {
+            if(string.IsNullOrEmpty(username))
+            {
+                return null;
+            }
+
+            var user = await this.GetAll().FirstOrDefaultAsync(x => x.UserName == username);
+
+            if(user == null)
+            {
+                return null;
+            }
+
+            return user.Id;
+        }
+
+        public async Task<string> GetUsernameById(string id)
+        {
+            var user = await this.GetById(id);
+
+            if(user == null)
+            {
+                return string.Empty;
+            }
+
+            return user.UserName;
+        }
     }
 }
