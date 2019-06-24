@@ -29,13 +29,12 @@ namespace Blog.Core.Controllers
             this.mapper = mapper;
         }
 
-        // GET: Blogs
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var model = new List<BlogViewModel>();
             var blogs = this.blogService.GetAll().OrderByDescending(x => x.DateCreated);
 
-            foreach(var blog in blogs)
+            foreach (var blog in blogs)
             {
                 model.Add(this.mapper.Map<BlogViewModel>(blog));
             }
@@ -43,7 +42,6 @@ namespace Blog.Core.Controllers
             return this.View(model);
         }
 
-        // GET: Blogs/Details/5
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -58,7 +56,9 @@ namespace Blog.Core.Controllers
                 return this.NotFound();
             }
 
-            return this.View(blog);
+            var blogViewModel = this.mapper.Map<DetailedBlogViewModel>(blog);
+
+            return this.View(blogViewModel);
         }
 
         // GET: Blogs/Create
@@ -67,12 +67,12 @@ namespace Blog.Core.Controllers
             return this.View();
         }
 
-      
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateBlogViewModel blog)
         {
-            if(!this.ModelState.IsValid)
+            if (!this.ModelState.IsValid)
             {
                 return this.View(blog);
             }
@@ -81,10 +81,16 @@ namespace Blog.Core.Controllers
             var serviceModel = this.mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
 
             var userId = await this.userService.GetIdByUsername(this.User.Identity.Name);
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                return this.Redirect("/account/login");
+            }
+
             serviceModel.UserId = Guid.Parse(userId);
 
             await this.blogService.Create(serviceModel);
-          
+
             return this.RedirectToAction(nameof(Index));
         }
 
@@ -96,12 +102,16 @@ namespace Blog.Core.Controllers
                 return this.NotFound();
             }
 
-            var blog = await this._context.Blogs.FindAsync(id);
+            var blog = await this.blogService.GetById(id);
+
             if (blog == null)
             {
                 return this.NotFound();
             }
-            return this.View(blog);
+
+            var viewModel = this.mapper.Map<EditBlogViewModel>(blog);
+
+            return this.View(viewModel);
         }
 
         // POST: Blogs/Edit/5
@@ -109,7 +119,7 @@ namespace Blog.Core.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,DateCreated,DateModified,Title,Content")] BlogPost blog)
+        public async Task<IActionResult> Edit(Guid id, EditBlogViewModel blog)
         {
             if (id != blog.Id)
             {
@@ -120,8 +130,18 @@ namespace Blog.Core.Controllers
             {
                 try
                 {
-                    this._context.Update(blog);
-                    await this._context.SaveChangesAsync();
+                    var serviceModel = this.mapper.Map<BlogServiceModel>(blog);
+
+                    var userId = await this.userService.GetIdByUsername(this.User.Identity.Name);
+
+                    if (string.IsNullOrEmpty(userId))
+                    {
+                        return this.Redirect("/account/login");
+                    }
+
+                    serviceModel.UserId = Guid.Parse(userId);
+
+                    await this.blogService.Edit(serviceModel);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -134,8 +154,10 @@ namespace Blog.Core.Controllers
                         throw;
                     }
                 }
+
                 return this.RedirectToAction(nameof(Index));
             }
+
             return this.View(blog);
         }
 

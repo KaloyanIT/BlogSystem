@@ -31,9 +31,13 @@ namespace Blog.Services
             await this.blogRepository.Save(blogPost);           
         }
 
-        public Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
+        public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
         {
-            throw new NotImplementedException();
+            var blog = this.mapper.Map<BlogPost>(blogServiceModel);
+
+            await this.blogRepository.Save(blog);
+
+            return blogServiceModel;
         }
 
         public async Task<bool> Exists(Guid? id)
