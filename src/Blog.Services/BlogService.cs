@@ -14,13 +14,11 @@ namespace Blog.Services
 {
     public class BlogService : IBlogService
     {
-        private readonly BlogContext blogContext;
         private readonly IBlogRepository blogRepository;
         private readonly IMapper mapper;
 
-        public BlogService(BlogContext blogContext, IBlogRepository blogRepository, IMapper mapper)
+        public BlogService(IBlogRepository blogRepository, IMapper mapper)
         {
-            this.blogContext = blogContext;
             this.blogRepository = blogRepository;
             this.mapper = mapper;
         }
