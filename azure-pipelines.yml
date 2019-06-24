@@ -7,8 +7,15 @@ trigger:
 - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: 'vs2017-win2016'
+
+variables:
+  buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build
-  displayName: 'Build'
+- script: npm --prefix src/Blog.Web install
+  displayName: Install npm packages 
+- script: dotnet restore Blog.sln
+  displayName: Restore NuGet packages
+- script: dotnet build Blog.sln --configuration $(buildConfiguration)
+  displayName: 'dotnet build $(buildConfiguration)'
