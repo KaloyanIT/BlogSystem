@@ -19,8 +19,6 @@ namespace Blog.Data.Models
 
         public IdentityUser User { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
-
         public BlogPost() : base()
         {
         }

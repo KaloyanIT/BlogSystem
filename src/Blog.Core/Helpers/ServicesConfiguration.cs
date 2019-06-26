@@ -1,6 +1,7 @@
 ﻿using Blog.Data;
 using Blog.Data.Models;
 using Blog.Data.Repositories.Blog;
+using Blog.Data.Repositories.Comments;
 using Blog.DataAccess;
 using Blog.Services;
 using Blog.Services.Contracts;
@@ -19,6 +20,7 @@ namespace Blog.Core.Helpers
             services.AddTransient<IBlogService, BlogService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBlogRepository, BlogRepository>();
+            services.AddTransient<ICommentRepository, CommentRepository>();
         }
     }
 }
