@@ -1,8 +1,11 @@
-﻿using Blog.Data;
+﻿using AutoMapper;
+using Blog.Core.AutoMapper;
+using Blog.Data;
 using Blog.Data.Models;
 using Blog.Data.Repositories.Blog;
 using Blog.Data.Repositories.Comments;
 using Blog.DataAccess;
+using Blog.Infrastructure.AutoMapper;
 using Blog.Services;
 using Blog.Services.Contracts;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +24,7 @@ namespace Blog.Core.Helpers
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBlogRepository, BlogRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
         }
     }
 }

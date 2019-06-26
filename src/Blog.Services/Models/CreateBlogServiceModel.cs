@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using Blog.Data.Models;
+using Blog.Infrastructure.AutoMapper;
 
 namespace Blog.Services.Models
 {
-    public class CreateBlogServiceModel
+    public class CreateBlogServiceModel : IHaveMapTo<BlogPost>
     {
         public string Title { get; set; }
 

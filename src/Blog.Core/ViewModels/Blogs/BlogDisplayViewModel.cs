@@ -1,8 +1,10 @@
 ﻿using System;
+using Blog.Data.Models;
+using Blog.Infrastructure.AutoMapper;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class BlogDisplayViewModel
+    public class BlogDisplayViewModel : IHaveMapFrom<BlogPost>
     {
         public Guid Id { get; set; }
 

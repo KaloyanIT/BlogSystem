@@ -1,6 +1,9 @@
-﻿namespace Blog.Web.ViewModels.Blog
+﻿using Blog.Data.Models;
+using Blog.Infrastructure.AutoMapper;
+
+namespace Blog.Web.ViewModels.Blog
 {
-    public class DetailedBlogPostViewModel
+    public class DetailedBlogPostViewModel : IHaveMapFrom<BlogPost>
     {
         public string Title { get; set; }
 
