@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
-using Blog.Core.AutoMapper;
 using Blog.Data;
-using Blog.Data.Models;
 using Blog.Data.Repositories.Blog;
 using Blog.Data.Repositories.Comments;
-using Blog.DataAccess;
 using Blog.Infrastructure.AutoMapper;
 using Blog.Services;
 using Blog.Services.Contracts;

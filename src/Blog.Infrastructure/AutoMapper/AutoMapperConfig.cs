@@ -41,19 +41,19 @@ namespace Blog.Infrastructure.AutoMapper
 
                 foreach (var i in interfaces)
                 {
-                    if (i.GetGenericTypeDefinition() == typeof(IHaveMapFrom<>))
-                    {
-                        var source = i.GetGenericArguments()[0];
-                        var destination = type;
+                    var interfaceArgs = i.GetGenericArguments()[0];
 
-                        mapperConfiguration.CreateMap(source, destination);
+                    if(i.GetGenericTypeDefinition() == typeof(IHaveReverseMap<>))
+                    {
+                        mapperConfiguration.CreateMap(interfaceArgs, type).ReverseMap();
+                    }
+                    else if (i.GetGenericTypeDefinition() == typeof(IHaveMapFrom<>))
+                    {
+                        mapperConfiguration.CreateMap(interfaceArgs, type);
                     }
                     else if (i.GetGenericTypeDefinition() == typeof(IHaveMapTo<>))
                     {
-                        var source = type;
-                        var destination = i.GetGenericArguments()[0];
-
-                        mapperConfiguration.CreateMap(source, destination);
+                        mapperConfiguration.CreateMap(type, interfaceArgs);
                     }
                     else if (typeof(IHaveCustomMap).IsAssignableFrom(type))
                     {
