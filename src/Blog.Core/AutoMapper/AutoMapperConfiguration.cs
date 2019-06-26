@@ -15,6 +15,7 @@ namespace Blog.Core.AutoMapper
         {
             this.CreateMap<BlogPost, BlogServiceModel>().ReverseMap();
             this.CreateMap<BlogPost, BlogDisplayViewModel>().ReverseMap();
+            this.CreateMap<BlogPost, BlogDisplayViewModel>().ReverseMap();
             this.CreateMap<IdentityUser, UserViewModel>().ReverseMap();
             this.CreateMap<IdentityUser, EditUserViewModel>().ReverseMap();
             this.CreateMap<BlogPost, BlogViewModel>().ReverseMap();

@@ -42,8 +42,6 @@ namespace Blog.Controllers
                 var currBlogViewModel = this.mapper.Map<BlogViewModel>(blogs[i]);
 
                 blogViewModels[row].Add(currBlogViewModel);
-
-
             }        
 
             return this.View(blogViewModels);
