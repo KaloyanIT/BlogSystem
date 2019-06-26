@@ -2,6 +2,7 @@
 using Blog.Core.Helpers;
 using Blog.Data;
 using Blog.Data.Seeders;
+using Blog.Infrastructure.AutoMapper;
 using Blog.Services;
 using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -38,6 +39,7 @@ namespace Blog
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            AutoMapperConfig.Init();
             services.AddBlogServices(this.configuration);
 
 
@@ -82,7 +84,6 @@ namespace Blog
 
 
             services.AddRouting();
-            services.AddAutoMapper();
 
 
             var protectionBuilder = services.AddDataProtection().SetApplicationName("BLOG_IT")

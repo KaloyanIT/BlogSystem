@@ -5,9 +5,9 @@ namespace Blog.Data.Models
 {
     public class Comment : BaseDbObject
     {
-        public Guid BlogId { get; set; }
+        public Guid AttachedItemId { get; set; }
 
-        public virtual BlogPost Blog { get; set; }
+        public string AttachedItemType { get; set; }
 
         public string Username { get; set; }
 
@@ -17,9 +17,9 @@ namespace Blog.Data.Models
 
         public Comment() { }
 
-        public Comment(Guid blogId, string username, string email, string content)
+        public Comment(Guid itemId, string username, string email, string content)
         {
-            if(blogId == null || blogId == Guid.Empty)
+            if(itemId == null || itemId == Guid.Empty)
             {
                 throw new ArgumentNullException("Comment blogId can not be null or empty Guid.");
             }
@@ -39,7 +39,7 @@ namespace Blog.Data.Models
                 throw new ArgumentNullException("Comment content can not be null or empty string");
             }
 
-            this.BlogId = blogId;
+            this.AttachedItemId = itemId;
             this.Username = username;
             this.Email = email;
             this.Content = content;

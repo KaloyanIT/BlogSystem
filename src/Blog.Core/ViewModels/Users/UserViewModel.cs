@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Blog.Infrastructure.AutoMapper;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blog.Core.ViewModels.Users
 {
-    public class UserViewModel
+    public class UserViewModel : IHaveMapFrom<IdentityUser>
     {
         public string Id { get; set; }
 

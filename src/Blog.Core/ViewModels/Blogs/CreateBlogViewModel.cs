@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Blog.Infrastructure.AutoMapper;
+using Blog.Services.Models;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class CreateBlogViewModel
+    public class CreateBlogViewModel : IHaveMapFrom<CreateBlogServiceModel>
     {
         [Required]
         public string Title { get; set; }

@@ -1,11 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using Blog.Data.Models;
+using Blog.Infrastructure.AutoMapper;
+using Blog.Services.Models;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class EditBlogViewModel
+    public class EditBlogViewModel : IHaveReverseMap<BlogServiceModel>, IHaveMapFrom<BlogPost>
     {
         public Guid Id { get; set; }
 

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data.Models;
+using Blog.Infrastructure.AutoMapper;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class BlogViewModel
+    public class BlogViewModel : IHaveMapFrom<BlogPost>
     {
         public Guid Id { get; set; }
 
