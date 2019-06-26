@@ -1,4 +1,5 @@
 ﻿using Blog.Data.Base;
+using Microsoft.AspNetCore.Identity;
 using System;
 
 namespace Blog.Data.Models
@@ -8,6 +9,10 @@ namespace Blog.Data.Models
         public Guid AttachedItemId { get; set; }
 
         public string AttachedItemType { get; set; }
+
+        public string UserId { get; set; }
+
+        public IdentityUser User { get; set; }
 
         public string Username { get; set; }
 
