@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Blog.Data.Models;
+﻿using Blog.Data.Models;
 using Blog.DataAccess.SqlServer;
 using Microsoft.EntityFrameworkCore;
 

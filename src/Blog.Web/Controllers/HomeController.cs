@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Collections;
+using Blog.Infrastructure.Extensions;
 
 namespace Blog.Controllers
 {
@@ -22,29 +23,21 @@ namespace Blog.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var blogs = this.blogService.GetAll().ToList();
-            IDictionary<int, ICollection<BlogViewModel>> blogViewModels = new Dictionary<int, ICollection<BlogViewModel>>();
-            int row = 0;
+            var blogs = this.blogService.GetAllLatest();
 
-            for(int i = 0; i < blogs.Count; i++)
-            {
-                if(i == 0)
-                {
-                    blogViewModels.Add(row, new List<BlogViewModel>());
-                }
+            var blogsViewModels = blogs.To<BlogViewModel>().ToList();           
 
-                if (i % 3 == 0 && i != 0)
-                {
-                    row++;
-                    blogViewModels.Add(row, new List<BlogViewModel>());
-                }
+            return this.View(blogsViewModels);
+        }
 
-                var currBlogViewModel = this.mapper.Map<BlogViewModel>(blogs[i]);
+        public ActionResult About()
+        {
+            return this.View();
+        }
 
-                blogViewModels[row].Add(currBlogViewModel);
-            }        
-
-            return this.View(blogViewModels);
+        public IActionResult Contact()
+        {
+            return this.View();
         }
 
         public ActionResult BlogPostSummaryPartial()

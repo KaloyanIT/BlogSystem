@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Blog.Infrastructure
+﻿namespace Blog.Infrastructure
 {
     public interface IValidatorStrategy
     {

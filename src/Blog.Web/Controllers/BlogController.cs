@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Services.Contracts;
@@ -40,6 +41,14 @@ namespace Blog.Web.Controllers
             var detailedBlogPost = this.mapper.Map<DetailedBlogPostViewModel>(blogPost);
 
             return this.View(detailedBlogPost);
+        }
+
+        public IActionResult OlderPosts()
+        {
+            var blogs = this.blogService.GetAllLatest();
+
+
+            return this.View();
         }
     }
 }

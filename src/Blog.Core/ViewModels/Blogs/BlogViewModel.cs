@@ -17,6 +17,8 @@ namespace Blog.Core.ViewModels.Blogs
 
         public string Title { get; set; }
 
+        public string Summary { get; set; }
+
         public string Content { get; set; }
     }
 }
