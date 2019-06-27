@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Blog.Services.Contracts;
@@ -21,7 +20,7 @@ namespace Blog.Web.Controllers
 
         public IActionResult Index()
         {
-            return this.View();
+            return this.RedirectToAction("OlderPosts");
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -33,7 +32,7 @@ namespace Blog.Web.Controllers
 
             var blogPost = await this.blogService.GetById(id);
 
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 return this.NotFound();
             }
