@@ -59,6 +59,13 @@ namespace Blog.Services
             return result;
         }
 
+        public IQueryable<BlogPost> GetAllLatest()
+        {
+            var result = this.GetAll().OrderByDescending(x => x.DateCreated);
+
+            return result;
+        }
+
         public async Task<BlogPost> GetById(Guid? id)
         {
             if(!id.HasValue)

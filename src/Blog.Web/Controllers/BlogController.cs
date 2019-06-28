@@ -20,7 +20,7 @@ namespace Blog.Web.Controllers
 
         public IActionResult Index()
         {
-            return this.View();
+            return this.RedirectToAction("OlderPosts");
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -32,7 +32,7 @@ namespace Blog.Web.Controllers
 
             var blogPost = await this.blogService.GetById(id);
 
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 return this.NotFound();
             }
@@ -40,6 +40,14 @@ namespace Blog.Web.Controllers
             var detailedBlogPost = this.mapper.Map<DetailedBlogPostViewModel>(blogPost);
 
             return this.View(detailedBlogPost);
+        }
+
+        public IActionResult OlderPosts()
+        {
+            var blogs = this.blogService.GetAllLatest();
+
+
+            return this.View();
         }
     }
 }

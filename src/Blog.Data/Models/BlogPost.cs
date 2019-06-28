@@ -19,6 +19,10 @@ namespace Blog.Data.Models
 
         public IdentityUser User { get; set; }
 
+        public ICollection<BlogPostKeyword> BlogKeywords { get; set; } 
+
+        public ICollection<BlogPostTag> BlogTags { get; set; }
+
         public BlogPost() : base()
         {
         }

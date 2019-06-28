@@ -4,14 +4,16 @@ using Blog.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20190626223707_AddUsersToComment")]
+    partial class AddUsersToComment
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,44 +49,6 @@ namespace Blog.Data.Migrations
                     b.ToTable("Blogs");
                 });
 
-            modelBuilder.Entity("Blog.Data.Models.BlogPostKeyword", b =>
-                {
-                    b.Property<Guid>("BlogPostId");
-
-                    b.Property<Guid>("KeywordId");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<Guid>("Id");
-
-                    b.HasKey("BlogPostId", "KeywordId");
-
-                    b.HasIndex("KeywordId");
-
-                    b.ToTable("BlogPostKeywords");
-                });
-
-            modelBuilder.Entity("Blog.Data.Models.BlogPostTag", b =>
-                {
-                    b.Property<Guid>("BlogPostId");
-
-                    b.Property<Guid>("TagId");
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<Guid>("Id");
-
-                    b.HasKey("BlogPostId", "TagId");
-
-                    b.HasIndex("TagId");
-
-                    b.ToTable("BlogPostTags");
-                });
-
             modelBuilder.Entity("Blog.Data.Models.Comment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -102,47 +66,17 @@ namespace Blog.Data.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("UserId");
+                    b.Property<Guid?>("UserId");
+
+                    b.Property<string>("UserId1");
 
                     b.Property<string>("Username");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Comments");
-                });
-
-            modelBuilder.Entity("Blog.Data.Models.Keyword", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Keywords");
-                });
-
-            modelBuilder.Entity("Blog.Data.Models.Tag", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("DateCreated");
-
-                    b.Property<DateTime>("DateModified");
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -313,37 +247,11 @@ namespace Blog.Data.Migrations
                         .HasForeignKey("UserId1");
                 });
 
-            modelBuilder.Entity("Blog.Data.Models.BlogPostKeyword", b =>
-                {
-                    b.HasOne("Blog.Data.Models.BlogPost", "BlogPost")
-                        .WithMany("BlogKeywords")
-                        .HasForeignKey("BlogPostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Blog.Data.Models.Keyword", "Keyword")
-                        .WithMany("BlogKeywords")
-                        .HasForeignKey("KeywordId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Blog.Data.Models.BlogPostTag", b =>
-                {
-                    b.HasOne("Blog.Data.Models.BlogPost", "BlogPost")
-                        .WithMany("BlogTags")
-                        .HasForeignKey("BlogPostId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Blog.Data.Models.Tag", "Tag")
-                        .WithMany("BlogPostTag")
-                        .HasForeignKey("TagId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("Blog.Data.Models.Comment", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
