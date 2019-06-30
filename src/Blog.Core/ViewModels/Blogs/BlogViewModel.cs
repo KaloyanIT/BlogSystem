@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using Blog.Data.Models;
 using Blog.Infrastructure.AutoMapper;
+using System;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class BlogViewModel : IHaveMapFrom<BlogPost>
+    public class BlogViewModel : IHaveMapFrom<BlogPost>, IHaveCustomMap
     {
         public Guid Id { get; set; }
 
@@ -20,5 +18,13 @@ namespace Blog.Core.ViewModels.Blogs
         public string Summary { get; set; }
 
         public string Content { get; set; }
+
+        public string CreatedBy { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<BlogPost, BlogViewModel>()
+                .ForMember(x => x.CreatedBy, x => x.MapFrom(z => z.User.UserName));
+        }
     }
 }

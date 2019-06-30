@@ -12,7 +12,7 @@ namespace Blog.Data.Models
 
         public string UserId { get; set; }
 
-        public IdentityUser User { get; set; }
+        public virtual IdentityUser User { get; set; }
 
         public string Username { get; set; }
 

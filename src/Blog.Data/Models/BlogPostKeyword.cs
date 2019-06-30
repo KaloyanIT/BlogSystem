@@ -7,10 +7,10 @@ namespace Blog.Data.Models
     {
         public Guid BlogPostId { get; set; }
 
-        public BlogPost BlogPost { get; set; }
+        public virtual BlogPost BlogPost { get; set; }
 
         public Guid KeywordId { get; set; }
 
-        public Keyword Keyword { get; set; }
+        public virtual Keyword Keyword { get; set; }
     }
 }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Blog.Data.Base;
+﻿using Blog.Data.Base;
+using System;
 
 namespace Blog.Data.Models
 {
@@ -9,10 +7,10 @@ namespace Blog.Data.Models
     {
         public Guid BlogPostId { get; set; }
 
-        public BlogPost BlogPost { get; set; }
+        public virtual BlogPost BlogPost { get; set; }
 
         public Guid TagId { get; set; }
 
-        public Tag Tag { get; set; }
+        public virtual Tag Tag { get; set; }
     }
 }
