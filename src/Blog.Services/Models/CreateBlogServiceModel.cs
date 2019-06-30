@@ -6,6 +6,8 @@ namespace Blog.Services.Models
 {
     public class CreateBlogServiceModel : IHaveMapTo<BlogPost>
     {
+        public Guid Id { get; set; }
+
         public string Title { get; set; }
 
         public string Content { get; set; }
@@ -14,9 +16,7 @@ namespace Blog.Services.Models
 
         public bool ShowOnHomePage { get; set; }
 
-        public Guid UserId { get; set; }
-
-        public Guid Id { get; set; }
+        public string UserId { get; set; }
 
         public DateTime DateCreated { get; set; }
 

@@ -4,7 +4,7 @@ using Blog.Services.Models;
 
 namespace Blog.Core.ViewModels.Blogs
 {
-    public class CreateBlogViewModel : IHaveMapFrom<CreateBlogServiceModel>
+    public class CreateBlogViewModel : IHaveReverseMap<CreateBlogServiceModel>
     {
         [Required]
         public string Title { get; set; }

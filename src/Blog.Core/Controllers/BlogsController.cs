@@ -2,6 +2,7 @@
 using Blog.Core.ViewModels.Blogs;
 using Blog.Data;
 using Blog.Data.Models;
+using Blog.Infrastructure.Extensions;
 using Blog.Services.Contracts;
 using Blog.Services.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -29,17 +30,15 @@ namespace Blog.Core.Controllers
             this.mapper = mapper;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             var model = new List<BlogViewModel>();
-            var blogs = this.blogService.GetAll().OrderByDescending(x => x.DateCreated);
+            var blogs = await this.blogService.GetAll()
+                .OrderByDescending(x => x.DateCreated)
+                .To<BlogViewModel>()
+                .ToListAsync();            
 
-            foreach (var blog in blogs)
-            {
-                model.Add(this.mapper.Map<BlogViewModel>(blog));
-            }
-
-            return this.View(model);
+            return this.View(blogs);
         }
 
         public async Task<IActionResult> Details(Guid? id)
@@ -87,7 +86,7 @@ namespace Blog.Core.Controllers
                 return this.Redirect("/account/login");
             }
 
-            serviceModel.UserId = Guid.Parse(userId);
+            serviceModel.UserId = userId;
 
             await this.blogService.Create(serviceModel);
 

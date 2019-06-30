@@ -15,19 +15,19 @@ namespace Blog.Data.Models
 
         public bool ShowOnHomePage { get; set; }
 
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
-        public IdentityUser User { get; set; }
+        public virtual IdentityUser User { get; set; }
 
-        public ICollection<BlogPostKeyword> BlogKeywords { get; set; } 
+        public virtual ICollection<BlogPostKeyword> BlogKeywords { get; set; } 
 
-        public ICollection<BlogPostTag> BlogTags { get; set; }
+        public virtual ICollection<BlogPostTag> BlogTags { get; set; }
 
         public BlogPost() : base()
         {
         }
 
-        public BlogPost(string title, string content, string summary, Guid userId, bool showOnHomePage = true) : base()
+        public BlogPost(string title, string content, string summary, string userId, bool showOnHomePage = true) : base()
         {
             if(string.IsNullOrWhiteSpace(title))
             {
@@ -44,7 +44,7 @@ namespace Blog.Data.Models
                 throw new ArgumentNullException("BlogPost Summary");
             }
 
-            if(userId == null || userId == Guid.Empty)
+            if(string.IsNullOrEmpty(userId))
             {
                 throw new ArgumentNullException("BlogPost UserId");
             }

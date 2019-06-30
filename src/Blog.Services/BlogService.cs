@@ -24,9 +24,9 @@ namespace Blog.Services
         }
 
 
-        public async Task Create(CreateBlogServiceModel blogServiceModel)
+        public async Task Create(CreateBlogServiceModel serviceModel)
         {
-            var blogPost = this.mapper.Map<BlogPost>(blogServiceModel);
+            var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
             await this.blogRepository.Save(blogPost);           
         }

@@ -9,7 +9,6 @@ namespace Blog.Data
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
-
         }
 
         public DbSet<BlogPost> Blogs { get; set; }
@@ -23,6 +22,11 @@ namespace Blog.Data
         public DbSet<Keyword> Keywords { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseLazyLoadingProxies();
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

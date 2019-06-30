@@ -8,6 +8,6 @@ namespace Blog.Data.Models
     {
         public string Name { get; set; }
 
-        public ICollection<BlogPostTag> BlogPostTag { get; set; }
+        public virtual ICollection<BlogPostTag> BlogPostTag { get; set; }
     }
 }
