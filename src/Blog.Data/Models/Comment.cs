@@ -22,7 +22,7 @@ namespace Blog.Data.Models
 
         public Comment() { }
 
-        public Comment(Guid itemId, string username, string email, string content)
+        public Comment(Guid itemId, string userId, string username, string email, string content)
         {
             if(itemId == null || itemId == Guid.Empty)
             {
@@ -39,6 +39,11 @@ namespace Blog.Data.Models
                 throw new ArgumentNullException("Comment email can not be null or empty string.");
             }
 
+            if(string.IsNullOrWhiteSpace(userId))
+            {
+                throw new ArgumentNullException("UserId can not be null or empty string.");
+            }
+
             if(string.IsNullOrWhiteSpace(content))
             {
                 throw new ArgumentNullException("Comment content can not be null or empty string");
@@ -46,6 +51,7 @@ namespace Blog.Data.Models
 
             this.AttachedItemId = itemId;
             this.Username = username;
+            this.UserId = userId;
             this.Email = email;
             this.Content = content;
         }
