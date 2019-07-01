@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Blog.Data;
 using Blog.Data.Repositories.Blog;
+using Blog.Data.Repositories.BlogPostKeywords;
+using Blog.Data.Repositories.BlogPostTags;
 using Blog.Data.Repositories.Comments;
+using Blog.Data.Repositories.Keywords;
+using Blog.Data.Repositories.Tags;
 using Blog.Infrastructure.AutoMapper;
 using Blog.Services;
 using Blog.Services.Contracts;
@@ -21,6 +25,10 @@ namespace Blog.Core.Helpers
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IBlogRepository, BlogRepository>();
             services.AddTransient<ICommentRepository, CommentRepository>();
+            services.AddTransient<IBlogPostKeywordRepository, BlogPostKeywordRepository>();
+            services.AddTransient<IBlogPostTagRepository, BlogPostTagRepository>();
+            services.AddTransient<ITagSqlRepository, TagRepository>();
+            services.AddTransient<IKeywordRepository, KeywordRepository>();
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
         }
     }

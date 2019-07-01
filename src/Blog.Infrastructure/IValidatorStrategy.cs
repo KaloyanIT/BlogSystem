@@ -1,7 +1,7 @@
 ﻿namespace Blog.Infrastructure
 {
-    public interface IValidatorStrategy
+    public interface IValidatorStrategy<T>
     {
-
+        bool IsValid(T validateThis);
     }
 }
