@@ -13,7 +13,7 @@ namespace Blog.Core.ViewModels.Blogs
         public string Content { get; set; }
 
         [Required]
-        public string Summary { get; set; }
+        public string Summary { get; set; }        
 
         public bool ShowOnHomepage { get; set; }
     }
