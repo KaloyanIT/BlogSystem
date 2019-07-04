@@ -44,7 +44,7 @@ namespace Blog.Data.Models
                 throw new ArgumentNullException("BlogPost Summary");
             }
 
-            if(string.IsNullOrEmpty(userId))
+            if(string.IsNullOrWhiteSpace(userId))
             {
                 throw new ArgumentNullException("BlogPost UserId");
             }
