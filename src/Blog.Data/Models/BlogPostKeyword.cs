@@ -9,7 +9,7 @@ namespace Blog.Data.Models
 
         public virtual BlogPost BlogPost { get; private set; }
 
-        public Guid KeywordId { get; private private set; }
+        public Guid KeywordId { get; private set; }
 
         public virtual Keyword Keyword { get; private set; }
 
