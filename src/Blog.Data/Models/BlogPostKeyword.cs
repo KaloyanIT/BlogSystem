@@ -5,13 +5,13 @@ namespace Blog.Data.Models
 {
     public class BlogPostKeyword : BaseDbObject
     {
-        public Guid BlogPostId { get; set; }
+        public Guid BlogPostId { get; private set; }
 
-        public virtual BlogPost BlogPost { get; set; }
+        public virtual BlogPost BlogPost { get; private set; }
 
-        public Guid KeywordId { get; set; }
+        public Guid KeywordId { get; private private set; }
 
-        public virtual Keyword Keyword { get; set; }
+        public virtual Keyword Keyword { get; private set; }
 
         public BlogPostKeyword()
         {

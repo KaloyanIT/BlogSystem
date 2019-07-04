@@ -6,19 +6,19 @@ namespace Blog.Data.Models
 {
     public class Comment : BaseDbObject
     {
-        public Guid AttachedItemId { get; set; }
+        public Guid AttachedItemId { get; private set; }
 
-        public string AttachedItemType { get; set; }
+        public string AttachedItemType { get; private set; }
 
-        public string UserId { get; set; }
+        public string UserId { get; private set; }
 
-        public virtual IdentityUser User { get; set; }
+        public virtual IdentityUser User { get; private set; }
 
-        public string Username { get; set; }
+        public string Username { get; private set; }
 
-        public string Email { get; set; }
+        public string Email { get; private set; }
 
-        public string Content { get; set; }
+        public string Content { get; private set; }
 
         public Comment() { }
 

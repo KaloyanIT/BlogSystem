@@ -7,21 +7,21 @@ namespace Blog.Data.Models
 {
     public class BlogPost : BaseDbObject
     {      
-        public string Title { get; set; }
+        public string Title { get; private set; }
 
-        public string Content { get; set; }
+        public string Content { get; private set; }
 
-        public string Summary { get; set; }
+        public string Summary { get; private set; }
 
-        public bool ShowOnHomePage { get; set; }
+        public bool ShowOnHomePage { get; private set; }
 
-        public string UserId { get; set; }
+        public string UserId { get; private set; }
 
-        public virtual IdentityUser User { get; set; }
+        public virtual IdentityUser User { get; private set; }
 
-        public virtual ICollection<BlogPostKeyword> BlogKeywords { get; set; } 
+        public virtual ICollection<BlogPostKeyword> BlogKeywords { get; private set; } 
 
-        public virtual ICollection<BlogPostTag> BlogTags { get; set; }
+        public virtual ICollection<BlogPostTag> BlogTags { get; private set; }
 
         public BlogPost() : base()
         {
