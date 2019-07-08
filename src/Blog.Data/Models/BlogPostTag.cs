@@ -5,13 +5,13 @@ namespace Blog.Data.Models
 {
     public class BlogPostTag : BaseDbObject
     {
-        public Guid BlogPostId { get; set; }
+        public Guid BlogPostId { get; private set; }
 
-        public virtual BlogPost BlogPost { get; set; }
+        public virtual BlogPost BlogPost { get; private set; }
 
-        public Guid TagId { get; set; }
+        public Guid TagId { get; private set; }
 
-        public virtual Tag Tag { get; set; }
+        public virtual Tag Tag { get; private set; }
 
         public BlogPostTag() { }
 
