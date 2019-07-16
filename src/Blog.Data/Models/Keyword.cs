@@ -6,9 +6,9 @@ namespace Blog.Data.Models
 {
     public class Keyword : BaseDbObject
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
-        public virtual  ICollection<BlogPostKeyword> BlogKeywords { get; set; }
+        public virtual  ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
 
         public Keyword() { }
 

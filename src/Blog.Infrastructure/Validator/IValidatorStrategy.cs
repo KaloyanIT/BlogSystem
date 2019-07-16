@@ -1,4 +1,4 @@
-﻿namespace Blog.Infrastructure
+﻿namespace Blog.Infrastructure.Validators
 {
     public interface IValidatorStrategy<T>
     {
