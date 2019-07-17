@@ -1,7 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Blog.Core.Controllers
 {
@@ -15,6 +12,8 @@ namespace Blog.Core.Controllers
 
         public IActionResult Index()
         {
+
+
             return this.View();
         }
     }

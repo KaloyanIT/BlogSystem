@@ -54,7 +54,7 @@ namespace Blog.Services
 
         public IQueryable<BlogPost> GetAll()
         {
-            var result = this.blogRepository.GetAll();
+            var result = this.blogRepository.GetAll();            
 
             return result;
         }
