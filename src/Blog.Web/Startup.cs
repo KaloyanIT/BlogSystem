@@ -40,7 +40,12 @@ namespace Blog
         public void ConfigureServices(IServiceCollection services)
         {
             AutoMapperConfig.Init();
-            services.AddBlogServices(this.configuration);
+
+            services.InjectCore(this.configuration)
+                .InjectRepositories()
+                .InjectServices();
+
+            //services.AddBlogServices(this.configuration);
 
 
             services.AddIdentity<IdentityUser, IdentityRole>()
