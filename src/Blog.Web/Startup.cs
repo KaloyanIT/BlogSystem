@@ -1,6 +1,6 @@
 ﻿namespace Blog
 {
-    using Core.Helpers;
+    using Controllers.Helpers;
     using Data;
     using Data.Seeders;
     using Infrastructure.AutoMapper;

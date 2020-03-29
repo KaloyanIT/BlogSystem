@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Blog.Core.Controllers
+namespace Blog.Controllers.Controllers
 {
     [Area("Admin")]
     public class KeywordsController : Controller

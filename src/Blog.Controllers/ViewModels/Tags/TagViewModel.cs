@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Core.ViewModels.Tags
+namespace Blog.Controllers.ViewModels.Tags
 {
     public class TagViewModel
     {

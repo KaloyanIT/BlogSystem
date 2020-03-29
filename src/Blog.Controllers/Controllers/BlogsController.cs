@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Blog.Core.ViewModels.Blogs;
+using Blog.Controllers.ViewModels.Blogs;
 using Blog.Data;
 using Blog.Data.Models;
 using Blog.Infrastructure.Extensions;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blog.Core.Controllers
+namespace Blog.Controllers.Controllers
 {
     [Area("Admin")]
     public class BlogsController : Controller

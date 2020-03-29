@@ -1,7 +1,7 @@
 ﻿using Blog.Infrastructure.AutoMapper;
 using Microsoft.AspNetCore.Identity;
 
-namespace Blog.Core.ViewModels.Users
+namespace Blog.Controllers.ViewModels.Users
 {
     public class UserViewModel : IHaveMapFrom<IdentityUser>
     {

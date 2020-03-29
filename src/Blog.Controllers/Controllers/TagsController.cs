@@ -1,4 +1,4 @@
-﻿using Blog.Core.ViewModels.Tags;
+﻿using Blog.Controllers.ViewModels.Tags;
 using Blog.Services.Tags;
 using Blog.Services.Tags.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Blog.Core.Controllers
+namespace Blog.Controllers.Controllers
 {
     [Area("Admin")]
     public class TagsController : Controller

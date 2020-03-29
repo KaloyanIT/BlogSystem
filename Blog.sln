@@ -9,13 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data", "src\Blog.Data\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Services", "src\Blog.Services\Blog.Services.csproj", "{2C2CA10A-CC26-448B-B7F6-90B4A019FF99}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Core", "src\Blog.Core\Blog.Core.csproj", "{D96908D5-A87C-4BC4-A6D3-2F26E81624B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Controllers", "src\Blog.Controllers\Blog.Controllers.csproj", "{D96908D5-A87C-4BC4-A6D3-2F26E81624B5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.UnitTests", "test\Blog.UnitTests\Blog.UnitTests.csproj", "{40BF8C95-03C7-49F7-AE13-984AB89FB15E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Infrastructure", "src\Blog.Infrastructure\Blog.Infrastructure.csproj", "{2C4AF726-9006-4C78-9EE7-6CAC97F8A708}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.DataAccess", "src\Blog.DataAccess\Blog.DataAccess.csproj", "{029F4A8D-8E05-4C62-BDD6-BC2C60DC2090}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.DataAccess", "src\Blog.DataAccess\Blog.DataAccess.csproj", "{029F4A8D-8E05-4C62-BDD6-BC2C60DC2090}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

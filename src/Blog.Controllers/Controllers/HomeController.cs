@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Blog.Core.Controllers
+namespace Blog.Controllers.Controllers
 {
     [Area("Admin")]
     public class HomeController : Controller

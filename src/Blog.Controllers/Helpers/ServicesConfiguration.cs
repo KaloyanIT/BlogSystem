@@ -14,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Blog.Core.Helpers
+namespace Blog.Controllers.Helpers
 {
     public static class ServicesConfiguration
     {

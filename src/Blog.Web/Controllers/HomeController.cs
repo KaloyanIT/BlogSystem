@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Blog.Core.ViewModels.Blogs;
+using Blog.Controllers.ViewModels.Blogs;
 using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

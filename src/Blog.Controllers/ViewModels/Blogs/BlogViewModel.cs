@@ -3,7 +3,7 @@ using Blog.Data.Models;
 using Blog.Infrastructure.AutoMapper;
 using System;
 
-namespace Blog.Core.ViewModels.Blogs
+namespace Blog.Controllers.ViewModels.Blogs
 {
     public class BlogViewModel : IHaveMapFrom<BlogPost>, IHaveCustomMap
     {

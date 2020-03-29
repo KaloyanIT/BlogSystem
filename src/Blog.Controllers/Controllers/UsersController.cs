@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Blog.Core.ViewModels.Users;
+using Blog.Controllers.ViewModels.Users;
 using Blog.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Blog.Core.Controllers
+namespace Blog.Controllers.Controllers
 {
     [Area("Admin")]
     public class UsersController : Controller
