@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Models.Comments
+﻿namespace Blog.Services.Comment.Models
 {
     using System;
     using Microsoft.AspNetCore.Identity;

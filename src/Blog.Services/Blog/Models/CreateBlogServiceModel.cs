@@ -1,6 +1,6 @@
 ﻿using System;
 using Blog.Data.Models;
-namespace Blog.Services.Models
+namespace Blog.Services.Blog.Models
 {
     using Infrastructure.AutoMapper;
 

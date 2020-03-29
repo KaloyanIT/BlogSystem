@@ -1,7 +1,7 @@
 ﻿using System;
 using Blog.Data.Repositories.Comments;
 using Blog.Services.Contracts;
-namespace Blog.Services
+namespace Blog.Services.Comment
 {
     using System.Threading.Tasks;
 

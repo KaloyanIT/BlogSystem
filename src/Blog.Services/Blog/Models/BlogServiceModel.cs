@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Models
+﻿namespace Blog.Services.Blog.Models
 {
     using System;
     using Data.Models;

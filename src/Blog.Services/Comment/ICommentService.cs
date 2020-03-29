@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Contracts
+﻿namespace Blog.Services.Comment
 {
     using System.Threading.Tasks;
 

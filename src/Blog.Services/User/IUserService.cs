@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Contracts
+﻿namespace Blog.Services.User
 {
     using System.Linq;
     using System.Threading.Tasks;

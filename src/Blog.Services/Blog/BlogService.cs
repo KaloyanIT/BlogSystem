@@ -1,14 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
-namespace Blog.Services
+﻿namespace Blog.Services.Blog
 {
-    using Microsoft.EntityFrameworkCore;
-
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AutoMapper;
     using Data.Models;
     using Data.Repositories.Blog;
-    using Contracts;
+    using Microsoft.EntityFrameworkCore;
     using Models;
 
     public class BlogService : IBlogService

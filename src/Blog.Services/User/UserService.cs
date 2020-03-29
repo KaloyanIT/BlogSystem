@@ -1,4 +1,4 @@
-﻿namespace Blog.Services
+﻿namespace Blog.Services.User
 {
     using System;
     using System.Linq;
@@ -6,7 +6,6 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Data;
-    using Contracts;
 
     public class UserService : IUserService
     {
