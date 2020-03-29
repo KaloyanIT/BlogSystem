@@ -9,7 +9,7 @@ namespace Blog.Data
 {
     public interface IBlogContext
     {
-        Task<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken)) where TEntity : class;
+        ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default(CancellationToken)) where TEntity : class;
 
         Task AddRangeAsync(IEnumerable<object> entities, CancellationToken cancellationToken = default(CancellationToken));
 
@@ -19,13 +19,13 @@ namespace Blog.Data
 
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
 
-        Task<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class;
+        ValueTask<TEntity> FindAsync<TEntity>(params object[] keyValues) where TEntity : class;
 
-        Task<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken);
+        ValueTask<object> FindAsync(Type entityType, object[] keyValues, CancellationToken cancellationToken);
 
-        Task<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
+        ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
 
-        Task<object> FindAsync(Type entityType, params object[] keyValues);
+        ValueTask<object> FindAsync(Type entityType, params object[] keyValues);
 
         DbQuery<TQuery> Query<TQuery>() where TQuery : class;
 

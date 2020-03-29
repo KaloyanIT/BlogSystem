@@ -1,22 +1,18 @@
-﻿using AutoMapper;
-using Blog.Core.Helpers;
+﻿using Blog.Core.Helpers;
 using Blog.Data;
 using Blog.Data.Seeders;
 using Blog.Infrastructure.AutoMapper;
-using Blog.Services;
-using Blog.Services.Contracts;
-using Microsoft.AspNetCore.Authentication.Cookies;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using System;
 
 namespace Blog
@@ -69,7 +65,7 @@ namespace Blog
             });
 
             services.Configure<IdentityOptions>(options =>
-            {              
+            {
                 options.SignIn.RequireConfirmedEmail = false;
             });
 
@@ -84,7 +80,7 @@ namespace Blog
 
             services.ConfigureApplicationCookie(options =>
             {
-                options.ExpireTimeSpan = TimeSpan.FromHours(4);            
+                options.ExpireTimeSpan = TimeSpan.FromHours(4);
             });
 
 
@@ -101,7 +97,7 @@ namespace Blog
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                //app.UseDatabaseErrorPage();
                 //app.UseWebpackDevMiddleware();
             }
             else
@@ -114,7 +110,7 @@ namespace Blog
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseSession();
-            
+
 
             app.UseMvc(routes =>
             {
@@ -139,7 +135,7 @@ namespace Blog
                     context.Database.Migrate();
                 }
 
-              
+
             }
         }
     }
