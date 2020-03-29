@@ -1,8 +1,10 @@
-﻿using Blog.Data.Base;
-using System;
-
+﻿
 namespace Blog.Data.Models
 {
+    using System;
+
+    using Base;
+
     public class BlogPostTag : BaseDbObject
     {
         public Guid BlogPostId { get; private set; }
@@ -27,24 +29,24 @@ namespace Blog.Data.Models
                 throw new ArgumentNullException("BlogPostTag tagId can not be empty guid.");
             }
 
-            this.BlogPostId = blogPostId;
-            this.TagId = tagId;
+            BlogPostId = blogPostId;
+            TagId = tagId;
         }
 
         public BlogPostTag(BlogPost blogPost, Tag tag)
         {
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 throw new ArgumentNullException("Blog post can not be null.");
             }
 
-            if(tag == null)
+            if (tag == null)
             {
                 throw new ArgumentNullException("Tag can not be null.");
             }
 
-            this.BlogPost = blogPost;
-            this.Tag = tag;
+            BlogPost = blogPost;
+            Tag = tag;
         }
     }
 }

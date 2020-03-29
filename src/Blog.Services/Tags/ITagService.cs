@@ -1,12 +1,13 @@
-﻿using Blog.Data.Models;
-using Blog.Services.Contracts.Base;
-using Blog.Services.Tags.Models;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
+﻿
 namespace Blog.Services.Tags
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using Data.Models;
+    using Tags.Models;
+
     public interface ITagService
     {
         Task Save(TagServiceModel value);

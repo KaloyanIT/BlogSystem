@@ -19,7 +19,7 @@ function helloWorld_reducers(state, action) {
     if (state === void 0) { state = initialState; }
     switch (action.type) {
         case redux_actions_1.RECEIVE_HELLOWORLD:
-            return __assign({}, state, action.data);
+            return __assign(__assign({}, state), action.data);
         default:
             return state;
     }

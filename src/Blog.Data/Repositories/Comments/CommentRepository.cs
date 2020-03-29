@@ -1,9 +1,9 @@
-﻿using Blog.Data.Models;
-using Blog.DataAccess.SqlServer;
-using Microsoft.EntityFrameworkCore;
-
-namespace Blog.Data.Repositories.Comments
+﻿namespace Blog.Data.Repositories.Comments
 {
+    using Data.Models;
+    using DataAccess.SqlServer;
+    using Microsoft.EntityFrameworkCore;
+
     public class CommentRepository : SqlServerEntityFrameworkCrudRepository<Comment, BlogContext>, ICommentRepository
     {
         public CommentRepository(BlogContext context) : base(context)

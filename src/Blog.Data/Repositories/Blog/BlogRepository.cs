@@ -1,11 +1,12 @@
-﻿using Blog.Data.Models;
-using Blog.DataAccess.SqlServer;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
-
-namespace Blog.Data.Repositories.Blog
+﻿namespace Blog.Data.Repositories.Blog
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
+    using Data.Models;
+    using DataAccess.SqlServer;
+
     public class BlogRepository : SqlServerEntityFrameworkCrudRepository<BlogPost, BlogContext>, IBlogRepository
     {
         public BlogRepository(BlogContext context) : base(context)
@@ -13,7 +14,7 @@ namespace Blog.Data.Repositories.Blog
 
         }
 
-        protected override DbSet<BlogPost> EntityDbSet => this.Context.Blogs;
+        protected override DbSet<BlogPost> EntityDbSet => Context.Blogs;
 
         public async Task<BlogPost> GetByTitle(string title)
         {
@@ -22,7 +23,7 @@ namespace Blog.Data.Repositories.Blog
                 throw new ArgumentNullException("Blog title is null.");
             }
 
-            var result = await this.GetAll().FirstOrDefaultAsync(x => x.Title == title);
+            var result = await GetAll().FirstOrDefaultAsync(x => x.Title == title);
 
             return result;
         }

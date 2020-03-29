@@ -1,9 +1,9 @@
-﻿using System;
-using Blog.Data.Models;
-using Blog.Services;
-
-namespace Blog.UnitTests.Services
+﻿namespace Blog.UnitTests.Services
 {
+    using System;
+    using Data.Models;
+    using Blog.Services.Blog;
+
     public class BlogPostServiceShould : IDisposable
     {
         private readonly BlogService systemUnderTest;
@@ -17,7 +17,7 @@ namespace Blog.UnitTests.Services
 
         public void Dispose()
         {
-            
+
         }
     }
 }

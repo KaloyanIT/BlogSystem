@@ -1,9 +1,9 @@
-﻿using Blog.Data.Models;
-using Blog.DataAccess.SqlServer;
-using Microsoft.EntityFrameworkCore;
-
-namespace Blog.Data.Repositories.Keywords
+﻿namespace Blog.Data.Repositories.Keywords
 {
+    using Models;
+    using DataAccess.SqlServer;
+    using Microsoft.EntityFrameworkCore;
+
     public class KeywordRepository : SqlServerEntityFrameworkCrudRepository<Keyword, BlogContext>, IKeywordRepository
     {
         public KeywordRepository(BlogContext context) : base(context)

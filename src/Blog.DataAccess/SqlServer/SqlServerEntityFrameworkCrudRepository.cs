@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace Blog.DataAccess.SqlServer
 {
-    public abstract class SqlServerEntityFrameworkCrudRepository<TEntity, TDbContext> : SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext>, IRepository<TEntity>
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    public abstract class SqlServerEntityFrameworkCrudRepository<TEntity, TDbContext> :
+        SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext>, IRepository<TEntity>
         where TEntity : class, IDbObject
         where TDbContext : DbContext
     {

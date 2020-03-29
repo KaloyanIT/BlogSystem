@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace Blog.Infrastructure.Validators
+﻿namespace Blog.Infrastructure.Validators
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class DefaultValidatorStrategy<T> : IValidatorStrategy<T>
     {
         public bool IsValid(T validateThis)
         {
-            var results = this.Validate(validateThis);
+            var results = Validate(validateThis);
 
             if (results.Count == 0)
             {

@@ -1,14 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
-
-namespace Blog.DataAccess.SqlServer
+﻿namespace Blog.DataAccess.SqlServer
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+
     public abstract class SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext> : IDisposable
         where TEntity : class, IDbObject
         where TDbContext : DbContext
     {
-        private readonly TDbContext context;
+        private readonly TDbContext _context;
 
         public SqlServerEntityFrameworkRepositoryBase(TDbContext context)
         {
@@ -17,20 +17,20 @@ namespace Blog.DataAccess.SqlServer
                 throw new ArgumentNullException("Missing context.");
             }
 
-            this.context = context;
+            _context = context;
         }
 
         protected TDbContext Context
         {
             get
             {
-                return this.context;
+                return _context;
             }
         }
 
         public void Dispose()
         {
-            ((IDisposable)this.Context).Dispose();
+            ((IDisposable)Context).Dispose();
         }
 
         protected async Task VerifyItemIsAddedOrAttachedToDbSet(DbSet<TEntity> dbset, TEntity item)
@@ -47,7 +47,7 @@ namespace Blog.DataAccess.SqlServer
                 }
                 else
                 {
-                    var entry = this.Context.Entry<TEntity>(item);
+                    var entry = Context.Entry<TEntity>(item);
 
                     if (entry.State == EntityState.Detached)
                     {
