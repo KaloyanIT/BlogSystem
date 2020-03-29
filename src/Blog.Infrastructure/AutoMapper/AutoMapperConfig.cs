@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-
-namespace Blog.Infrastructure.AutoMapper
+﻿namespace Blog.Infrastructure.AutoMapper
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using global::AutoMapper;
+
     public class AutoMapperConfig
     {
         public static MapperConfiguration MapperConfiguration { get; private set; }
@@ -43,7 +44,7 @@ namespace Blog.Infrastructure.AutoMapper
                 {
                     var interfaceArgs = i.GetGenericArguments()[0];
 
-                    if(i.GetGenericTypeDefinition() == typeof(IHaveReverseMap<>))
+                    if (i.GetGenericTypeDefinition() == typeof(IHaveReverseMap<>))
                     {
                         mapperConfiguration.CreateMap(interfaceArgs, type).ReverseMap();
                     }
