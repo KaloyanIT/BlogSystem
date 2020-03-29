@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Blog.Controllers.Controllers
+﻿namespace Blog.Controllers.Controllers.Admin
 {
+    using Microsoft.AspNetCore.Mvc;
+
     [Area("Admin")]
     public class KeywordsController : Controller
     {
@@ -12,8 +12,6 @@ namespace Blog.Controllers.Controllers
 
         public IActionResult Index()
         {
-
-
             return this.View();
         }
     }

@@ -1,8 +1,9 @@
-﻿using Blog.Infrastructure.AutoMapper;
-using Microsoft.AspNetCore.Identity;
-
-namespace Blog.Controllers.ViewModels.Users
+﻿namespace Blog.Controllers.ViewModels.Admin.Users
 {
+    using Microsoft.AspNetCore.Identity;
+
+    using Infrastructure.AutoMapper;
+
     public class UserViewModel : IHaveMapFrom<IdentityUser>
     {
         public string Id { get; set; }

@@ -27,8 +27,7 @@
             _environment = environment;
             _configuration = configuration;
         }
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+       
         public void ConfigureServices(IServiceCollection services)
         {
             AutoMapperConfig.Init();
@@ -81,29 +80,31 @@
 .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+       
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
             if (_environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseDatabaseErrorPage();
-                //app.UseWebpackDevMiddleware();
             }
             else
             {
                 app.UseExceptionHandler("/Error");
             }
+
+
             UpdateDatabase(app);
             MainSeeder.Seed(serviceProvider, _configuration).Wait();
+
             app.UseStaticFiles();
+
             app.UseCookiePolicy();
+
             app.UseAuthentication();
+
             app.UseSession();
 
             app.UseRouting();
-
-
             app.UseEndpoints(routes =>
             {
                 routes.MapControllerRoute(

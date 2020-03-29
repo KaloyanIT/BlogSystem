@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Blog.Controllers.ViewModels.Tags
+﻿namespace Blog.Controllers.ViewModels.Admin.Tags
 {
+    using System;
+
     public class TagViewModel
     {
         public Guid Id { get; set; }

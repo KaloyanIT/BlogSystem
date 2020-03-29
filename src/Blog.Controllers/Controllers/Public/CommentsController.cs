@@ -1,27 +1,28 @@
-﻿using Blog.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Blog.Web.Controllers
+﻿namespace Blog.Controllers.Controllers.Public
 {
+    using Microsoft.AspNetCore.Mvc;
+
+    using Services.Contracts;
+
     public class CommentsController : Controller
     {
-        private readonly ICommentService commentService;
+        private readonly ICommentService _commentService;
 
         public CommentsController(ICommentService commentService)
         {
-            this.commentService = commentService;
+            _commentService = commentService;
         }
 
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
 
 
         [HttpPost]
         public IActionResult AddComment()
         {
-            return this.View();
+            return View();
         }
     }
 }

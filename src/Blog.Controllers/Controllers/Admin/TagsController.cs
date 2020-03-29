@@ -1,30 +1,31 @@
-﻿using Blog.Controllers.ViewModels.Tags;
-using Blog.Services.Tags;
-using Blog.Services.Tags.Models;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Blog.Controllers.Controllers
+﻿namespace Blog.Controllers.Controllers.Admin
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+
+    using ViewModels.Admin.Tags;
+    using Services.Tags;
+    using Services.Tags.Models;
+
     [Area("Admin")]
     public class TagsController : Controller
     {
-        private readonly ITagService tagService;
+        private readonly ITagService _tagService;
 
         public TagsController(ITagService tagService)
         {
-            this.tagService = tagService ?? throw new ArgumentNullException("tagServiceInstance", "Tag service is null.");
+            _tagService = tagService ?? throw new ArgumentNullException("tagServiceInstance", "Tag service is null.");
         }
 
         public IActionResult Index()
         {
-            var tags = this.tagService.GetAll();
+            var tags = _tagService.GetAll();
 
             var viewModels = new List<TagViewModel>();
 
-            foreach(var item in tags)
+            foreach (var item in tags)
             {
                 viewModels.Add(new TagViewModel()
                 {
@@ -35,28 +36,28 @@ namespace Blog.Controllers.Controllers
                 });
             }
 
-            return this.View(viewModels);
+            return View(viewModels);
         }
 
         public IActionResult Create()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Create(TagViewModel tagViewModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(tagViewModel);
+                return View(tagViewModel);
             }
 
             var tagServiceModel = new TagServiceModel();
             tagServiceModel.Name = tagViewModel.Name;
 
-            await this.tagService.Save(tagServiceModel);
+            await _tagService.Save(tagServiceModel);
 
-            return this.RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }

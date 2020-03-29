@@ -1,4 +1,4 @@
-﻿namespace Blog.Controllers.ViewModels.Users
+﻿namespace Blog.Controllers.ViewModels.Admin.Users
 {
     public class CreateUserViewModel
     {

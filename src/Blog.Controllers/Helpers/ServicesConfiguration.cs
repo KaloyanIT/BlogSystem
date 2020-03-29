@@ -1,21 +1,22 @@
-﻿using AutoMapper;
-using Blog.Data;
-using Blog.Data.Repositories.Blog;
-using Blog.Data.Repositories.BlogPostKeywords;
-using Blog.Data.Repositories.BlogPostTags;
-using Blog.Data.Repositories.Comments;
-using Blog.Data.Repositories.Keywords;
-using Blog.Data.Repositories.Tags;
-using Blog.Infrastructure.AutoMapper;
-using Blog.Services;
-using Blog.Services.Contracts;
-using Blog.Services.Tags;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Blog.Controllers.Helpers
+﻿namespace Blog.Controllers.Helpers
 {
+    using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Data;
+    using Data.Repositories.Blog;
+    using Data.Repositories.BlogPostKeywords;
+    using Data.Repositories.BlogPostTags;
+    using Data.Repositories.Comments;
+    using Data.Repositories.Keywords;
+    using Data.Repositories.Tags;
+    using Infrastructure.AutoMapper;
+    using Services;
+    using Services.Contracts;
+    using Services.Tags;
+
     public static class ServicesConfiguration
     {
         public static void AddBlogServices(this IServiceCollection services, IConfiguration configuration)

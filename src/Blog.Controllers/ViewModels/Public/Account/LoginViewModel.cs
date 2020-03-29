@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Blog.ViewModels.Account
+﻿namespace Blog.Controllers.ViewModels.Public.Account
 {
     public class LoginViewModel
     {

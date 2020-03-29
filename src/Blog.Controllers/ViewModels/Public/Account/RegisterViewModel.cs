@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Blog.ViewModels.Account
+﻿namespace Blog.Controllers.ViewModels.Public.Account
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class RegisterViewModel
     {
-        
+
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

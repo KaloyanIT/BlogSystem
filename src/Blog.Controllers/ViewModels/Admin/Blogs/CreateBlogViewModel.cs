@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Blog.Infrastructure.AutoMapper;
-using Blog.Services.Models;
-
-namespace Blog.Controllers.ViewModels.Blogs
+﻿namespace Blog.Controllers.ViewModels.Admin.Blogs
 {
+    using System.ComponentModel.DataAnnotations;
+
+    using Infrastructure.AutoMapper;
+    using Services.Models;
+
     public class CreateBlogViewModel : IHaveReverseMap<CreateBlogServiceModel>
     {
         [Required]

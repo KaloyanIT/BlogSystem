@@ -1,10 +1,12 @@
-﻿using AutoMapper;
-using Blog.Data.Models;
-using Blog.Infrastructure.AutoMapper;
-using System;
-
-namespace Blog.Controllers.ViewModels.Blogs
+﻿namespace Blog.Controllers.ViewModels.Public.Blogs
 {
+    using AutoMapper;
+    using System;
+
+
+    using Data.Models;
+    using Infrastructure.AutoMapper;
+
     public class BlogViewModel : IHaveMapFrom<BlogPost>, IHaveCustomMap
     {
         public Guid Id { get; set; }

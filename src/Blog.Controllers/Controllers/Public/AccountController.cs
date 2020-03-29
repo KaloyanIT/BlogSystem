@@ -1,42 +1,44 @@
-﻿using Blog.ViewModels.Account;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace Blog.Controllers
+﻿namespace Blog.Controllers.Controllers.Public
 {
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+
+    using ViewModels.Public.Account;
+
+
     [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
         public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
-            this.userManager = userManager;
-            this.signInManager = signInManager;
+            _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
         {
-            return this.View();
+            return View();
         }
 
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel registerViewModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(registerViewModel);
+                return View(registerViewModel);
             }
 
             var user = new IdentityUser()
@@ -45,29 +47,29 @@ namespace Blog.Controllers
                 Email = registerViewModel.Email
             };
 
-            await this.userManager.CreateAsync(user, registerViewModel.Password);
+            await _userManager.CreateAsync(user, registerViewModel.Password);
 
-            return this.View("Login");
+            return View("Login");
         }
 
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return this.View();
+            return View();
         }
 
 
         public async Task<IActionResult> Logout(string returnUrl = null)
         {
-            await this.signInManager.SignOutAsync();
+            await _signInManager.SignOutAsync();
 
             if (returnUrl != null)
             {
-                return this.Redirect(returnUrl);
+                return Redirect(returnUrl);
             }
             else
             {
-                return this.RedirectToAction("Login");
+                return RedirectToAction("Login");
             }
         }
 
@@ -76,33 +78,33 @@ namespace Blog.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
         {
-            returnUrl = returnUrl ?? this.Url.Content("~/admin");
+            returnUrl = returnUrl ?? Url.Content("~/admin");
 
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                this.ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return this.View();
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return View();
             }
 
-            var user = await this.userManager.FindByEmailAsync(loginViewModel.Username);
+            var user = await _userManager.FindByEmailAsync(loginViewModel.Username);
 
             if (user == null)
             {
-                return this.View();
+                return View();
             }
 
             //var result = await this.
 
-            var result = await this.signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, true, false);
+            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, true, false);
 
             if (result.Succeeded)
             {
-                return this.Redirect("/admin");
+                return Redirect("/admin");
             }
 
             if (result.RequiresTwoFactor)
             {
-                return this.RedirectToPage("./LoginWith2fa", new
+                return RedirectToPage("./LoginWith2fa", new
                 {
                     ReturnUrl = returnUrl,
                     RememberMe = true
@@ -110,11 +112,11 @@ namespace Blog.Controllers
             }
             if (result.IsLockedOut)
             {
-                return this.RedirectToPage("./Lockout");
+                return RedirectToPage("./Lockout");
             }
 
 
-            return this.View();
+            return View();
         }
     }
 }
