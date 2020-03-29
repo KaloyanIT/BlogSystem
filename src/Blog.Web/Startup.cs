@@ -1,35 +1,31 @@
-﻿using Blog.Core.Helpers;
-using Blog.Data;
-using Blog.Data.Seeders;
-using Blog.Infrastructure.AutoMapper;
-
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Razor;
-using Microsoft.AspNetCore.Routing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-
-using System;
-
-namespace Blog
+﻿namespace Blog
 {
+    using Core.Helpers;
+    using Data;
+    using Data.Seeders;
+    using Infrastructure.AutoMapper;
+
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.DataProtection;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using System;
+
     public class Startup
     {
-        private readonly IHostingEnvironment environment;
-        private readonly IConfiguration configuration;
+        private readonly IWebHostEnvironment _environment;
+        private readonly IConfiguration _configuration;        
 
-        public IHostingEnvironment Environment => this.environment;
-
-        public IConfiguration Configuration => this.configuration;
-
-        public Startup(IHostingEnvironment environment, IConfiguration configuration)
+        public Startup(IWebHostEnvironment environment, IConfiguration configuration)
         {
-            this.environment = environment;
-            this.configuration = configuration;
+            _environment = environment;
+            _configuration = configuration;
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
@@ -37,17 +33,13 @@ namespace Blog
         {
             AutoMapperConfig.Init();
 
-            services.InjectCore(this.configuration)
+            services.InjectCore(_configuration)
                 .InjectRepositories()
                 .InjectServices();
-
-            //services.AddBlogServices(this.configuration);
-
 
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders();
-
 
             services.Configure<RazorViewEngineOptions>(options =>
             {
@@ -68,8 +60,6 @@ namespace Blog
             {
                 options.SignIn.RequireConfirmedEmail = false;
             });
-
-            //services.AddAuthentication().AddApplicationCookie();
 
             services.AddSession(opt =>
             {
@@ -92,9 +82,9 @@ namespace Blog
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
         {
-            if (env.IsDevelopment())
+            if (_environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 //app.UseDatabaseErrorPage();
@@ -105,24 +95,25 @@ namespace Blog
                 app.UseExceptionHandler("/Error");
             }
             UpdateDatabase(app);
-            MainSeeder.Seed(serviceProvider, this.Configuration).Wait();
+            MainSeeder.Seed(serviceProvider, _configuration).Wait();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
             app.UseSession();
 
+            app.UseRouting();
 
-            app.UseMvc(routes =>
+
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "areaRoute",
-                    template: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
 
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
-            app.UseMvcWithDefaultRoute();
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });            
         }
 
         private static void UpdateDatabase(IApplicationBuilder app)
@@ -134,8 +125,6 @@ namespace Blog
                     //context.Database.EnsureCreated();
                     context.Database.Migrate();
                 }
-
-
             }
         }
     }
