@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Blog.DataAccess
+﻿namespace Blog.DataAccess
 {
+    using System;
+
     public interface IDbObject
     {
         Guid Id { get; set; }
