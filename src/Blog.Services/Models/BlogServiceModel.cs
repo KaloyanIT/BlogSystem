@@ -1,9 +1,9 @@
-﻿using System;
-using Blog.Data.Models;
-using Blog.Infrastructure.AutoMapper;
-
-namespace Blog.Services.Models
+﻿namespace Blog.Services.Models
 {
+    using System;
+    using Data.Models;
+    using Infrastructure.AutoMapper;
+
     public class BlogServiceModel : IHaveReverseMap<BlogPost>
     {
         public Guid Id { get; set; }

@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Blog.Services.Tags.Models
+﻿namespace Blog.Services.Tags.Models
 {
+    using System;
+
     public class TagServiceModel
     {
         public Guid Id { get; set; }

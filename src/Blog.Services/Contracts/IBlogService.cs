@@ -1,11 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using Blog.Data.Models;
-using Blog.Services.Models;
-
-namespace Blog.Services.Contracts
+﻿namespace Blog.Services.Contracts
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Data.Models;
+    using Models;
+
     public interface IBlogService
     {
         Task Create(CreateBlogServiceModel blogServiceModel);

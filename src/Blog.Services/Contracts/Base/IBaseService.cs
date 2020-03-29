@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Blog.Services.Contracts.Base
+﻿namespace Blog.Services.Contracts.Base
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public interface IBaseService<T> where T : class
     {
         Task Save(T value);

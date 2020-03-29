@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blog.Services.Contracts
+﻿namespace Blog.Services.Contracts
 {
+    using System.Threading.Tasks;
+
     public interface ICommentService
     {
         Task AddComment();

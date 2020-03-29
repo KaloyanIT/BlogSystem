@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
-
-namespace Blog.Services.Contracts
+﻿namespace Blog.Services.Contracts
 {
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+
     public interface IUserService
     {
         IQueryable<IdentityUser> GetAll();

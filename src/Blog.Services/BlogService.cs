@@ -1,26 +1,25 @@
-﻿using AutoMapper;
-using Blog.Data;
-using Blog.Data.Models;
-using Blog.Data.Repositories.Blog;
-using Blog.Services.Contracts;
-using Blog.Services.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-
+using AutoMapper;
 namespace Blog.Services
 {
+    using Microsoft.EntityFrameworkCore;
+
+    using Data.Models;
+    using Data.Repositories.Blog;
+    using Contracts;
+    using Models;
+
     public class BlogService : IBlogService
     {
-        private readonly IBlogRepository blogRepository;
-        private readonly IMapper mapper;
+        private readonly IBlogRepository _blogRepository;
+        private readonly IMapper _mapper;
 
         public BlogService(IBlogRepository blogRepository, IMapper mapper)
         {
-            this.blogRepository = blogRepository;
-            this.mapper = mapper;
+            _blogRepository = blogRepository;
+            _mapper = mapper;
         }
 
 
@@ -28,52 +27,52 @@ namespace Blog.Services
         {
             var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
-            await this.blogRepository.Save(blogPost);           
+            await _blogRepository.Save(blogPost);
         }
 
         public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
         {
-            var blog = this.mapper.Map<BlogPost>(blogServiceModel);
+            var blog = _mapper.Map<BlogPost>(blogServiceModel);
 
-            await this.blogRepository.Save(blog);
+            await _blogRepository.Save(blog);
 
             return blogServiceModel;
         }
 
         public async Task<bool> Exists(Guid? id)
         {
-            if(!id.HasValue)
+            if (!id.HasValue)
             {
                 return false;
             }
 
-            var result = await this.GetAll().AnyAsync(x => x.Id == id);
+            var result = await GetAll().AnyAsync(x => x.Id == id);
 
             return result;
         }
 
         public IQueryable<BlogPost> GetAll()
         {
-            var result = this.blogRepository.GetAll();            
+            var result = _blogRepository.GetAll();
 
             return result;
         }
 
         public IQueryable<BlogPost> GetAllLatest()
         {
-            var result = this.GetAll().OrderByDescending(x => x.DateCreated);
+            var result = GetAll().OrderByDescending(x => x.DateCreated);
 
             return result;
         }
 
         public async Task<BlogPost> GetById(Guid? id)
         {
-            if(!id.HasValue)
+            if (!id.HasValue)
             {
                 return null;
             }
 
-            var result = await this.blogRepository.GetById(id.Value);
+            var result = await _blogRepository.GetById(id.Value);
 
             return result;
         }

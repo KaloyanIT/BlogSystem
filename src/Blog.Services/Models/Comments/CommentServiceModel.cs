@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-
-namespace Blog.Services.Models.Comments
+﻿namespace Blog.Services.Models.Comments
 {
+    using System;
+    using Microsoft.AspNetCore.Identity;
+
     public class CommentServiceModel
     {
         public Guid Id { get; set; }

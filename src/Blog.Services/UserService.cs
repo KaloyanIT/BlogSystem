@@ -1,20 +1,20 @@
-﻿using Blog.Data;
-using Blog.Services.Contracts;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Blog.Services
+﻿namespace Blog.Services
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.EntityFrameworkCore;
+    using Data;
+    using Contracts;
+
     public class UserService : IUserService
     {
-        private readonly BlogContext blogContext;
+        private readonly BlogContext _blogContext;
 
         public UserService(BlogContext blogContext)
         {
-            this.blogContext = blogContext;
+            _blogContext = blogContext;
         }
 
         public async Task<bool> Delete(string id)
@@ -24,7 +24,7 @@ namespace Blog.Services
                 return false;
             }
 
-            var user = await this.blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {
@@ -33,8 +33,8 @@ namespace Blog.Services
 
             try
             {
-                this.blogContext.Set<IdentityUser>().Remove(user);
-                await this.blogContext.SaveChangesAsync();
+                _blogContext.Set<IdentityUser>().Remove(user);
+                await _blogContext.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -46,7 +46,7 @@ namespace Blog.Services
 
         public IQueryable<IdentityUser> GetAll()
         {
-            var result = this.blogContext.Users.AsQueryable();
+            var result = _blogContext.Users.AsQueryable();
 
             return result;
         }
@@ -58,21 +58,21 @@ namespace Blog.Services
                 return null;
             }
 
-            var user = await this.blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
 
             return user;
         }
 
         public async Task<string> GetIdByUsername(string username)
         {
-            if(string.IsNullOrEmpty(username))
+            if (string.IsNullOrEmpty(username))
             {
                 return null;
             }
 
-            var user = await this.GetAll().FirstOrDefaultAsync(x => x.UserName == username);
+            var user = await GetAll().FirstOrDefaultAsync(x => x.UserName == username);
 
-            if(user == null)
+            if (user == null)
             {
                 return null;
             }
@@ -82,9 +82,9 @@ namespace Blog.Services
 
         public async Task<string> GetUsernameById(string id)
         {
-            var user = await this.GetById(id);
+            var user = await GetById(id);
 
-            if(user == null)
+            if (user == null)
             {
                 return string.Empty;
             }

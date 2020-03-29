@@ -1,9 +1,9 @@
 ﻿using System;
 using Blog.Data.Models;
-using Blog.Infrastructure.AutoMapper;
-
 namespace Blog.Services.Models
 {
+    using Infrastructure.AutoMapper;
+
     public class CreateBlogServiceModel : IHaveMapTo<BlogPost>
     {
         public Guid Id { get; set; }
