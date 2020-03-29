@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Threading.Tasks;
-
+﻿
 namespace Blog.Data.Seeders
 {
+    using System;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
     public class MainSeeder
     {
         public static async Task Seed(IServiceProvider serviceProvider, IConfiguration configuration)

@@ -1,8 +1,8 @@
-﻿using System;
-using Blog.Data.Base;
-
-namespace Blog.Data.Models
+﻿namespace Blog.Data.Models
 {
+    using System;
+    using Base;
+
     public class BlogPostKeyword : BaseDbObject
     {
         public Guid BlogPostId { get; private set; }
@@ -20,7 +20,7 @@ namespace Blog.Data.Models
 
         public BlogPostKeyword(Guid blogPostId, Guid keywordId)
         {
-            if(blogPostId == Guid.Empty)
+            if (blogPostId == Guid.Empty)
             {
                 throw new ArgumentNullException("BlogPostKeyword blogPostId can not be empty guid.");
             }
@@ -36,7 +36,7 @@ namespace Blog.Data.Models
 
         public BlogPostKeyword(BlogPost blogPost, Keyword keyword)
         {
-            if(blogPost == null)
+            if (blogPost == null)
             {
                 throw new ArgumentNullException("BlogPostKeyword BlogPost can not be null.");
             }

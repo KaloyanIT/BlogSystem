@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using Blog.Data.Base;
-
+﻿
 namespace Blog.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+
+    using Base;
+
     public class Tag : BaseDbObject
     {
         public string Name { get; private set; }
@@ -14,22 +16,22 @@ namespace Blog.Data.Models
 
         public Tag(string name)
         {
-            if(string.IsNullOrWhiteSpace(name) || name.Length < 3)
+            if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
             {
                 throw new ArgumentNullException("Tag name can not be null or whitespace or with length less than 3 characters.");
             }
 
-            this.Name = name;
+            Name = name;
         }
 
         public void EditName(string name)
         {
-            if(string.IsNullOrWhiteSpace(name) || name.Length < 3)
+            if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
             {
                 throw new ArgumentNullException("Tag name can not be null or whitespace or with length less than 3 characters.");
             }
 
-            this.Name = name;
+            Name = name;
         }
     }
 }

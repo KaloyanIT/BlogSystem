@@ -1,8 +1,8 @@
 ﻿using Blog.Data.Models;
-using Blog.DataAccess;
-
 namespace Blog.Data.Repositories.BlogPostTags
 {
+    using DataAccess;
+
     public interface IBlogPostTagRepository : IRepository<BlogPostTag>
     {
     }

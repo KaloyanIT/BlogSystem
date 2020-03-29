@@ -1,8 +1,8 @@
-﻿using Blog.Data.Models;
-using Blog.DataAccess;
-
-namespace Blog.Data.Repositories.Comments
+﻿namespace Blog.Data.Repositories.Comments
 {
+    using Models;
+    using DataAccess;
+
     public interface ICommentRepository : IRepository<Comment>
     {
     }

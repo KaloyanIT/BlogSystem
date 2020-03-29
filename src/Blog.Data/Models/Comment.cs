@@ -1,9 +1,10 @@
-﻿using Blog.Data.Base;
-using Microsoft.AspNetCore.Identity;
-using System;
-
-namespace Blog.Data.Models
+﻿namespace Blog.Data.Models
 {
+    using System;
+    using Microsoft.AspNetCore.Identity;
+
+    using Base;
+
     public class Comment : BaseDbObject
     {
         public Guid AttachedItemId { get; private set; }
@@ -47,14 +48,14 @@ namespace Blog.Data.Models
 
             if (!string.IsNullOrWhiteSpace(userId))
             {
-                this.UserId = userId;
+                UserId = userId;
 
                 //throw new ArgumentNullException("UserId can not be null or empty string.");
             }
-            this.AttachedItemId = itemId;
-            this.Username = username;
-            this.Email = email;
-            this.Content = content;
+            AttachedItemId = itemId;
+            Username = username;
+            Email = email;
+            Content = content;
         }
     }
 }

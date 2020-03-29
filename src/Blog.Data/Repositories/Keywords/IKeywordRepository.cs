@@ -1,8 +1,8 @@
 ﻿using Blog.Data.Models;
-using Blog.DataAccess;
-
 namespace Blog.Data.Repositories.Keywords
 {
+    using DataAccess;
+
     public interface IKeywordRepository : IRepository<Keyword>
     {
     }

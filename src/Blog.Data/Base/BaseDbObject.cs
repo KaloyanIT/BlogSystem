@@ -1,8 +1,8 @@
-﻿using Blog.DataAccess;
-using System;
-
-namespace Blog.Data.Base
+﻿namespace Blog.Data.Base
 {
+    using System;
+    using DataAccess;
+
     public abstract class BaseDbObject : IDbObject, IDateSpecificObject
     {
         public BaseDbObject()
