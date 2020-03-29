@@ -1,10 +1,9 @@
-﻿using System;
-using Blog.Data.Repositories.Comments;
-using Blog.Services.Contracts;
-namespace Blog.Services.Comment
+﻿namespace Blog.Services.Comment
 {
+    using System;
     using System.Threading.Tasks;
 
+    using Data.Repositories.Comments;
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;

@@ -6,7 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Infrastructure.Extensions;
-    using Services.Contracts;
+    using Services.Blog;
     using ViewModels.Public.Blogs;
 
     public class HomeController : Controller

@@ -3,7 +3,7 @@
     using System.ComponentModel.DataAnnotations;
 
     using Infrastructure.AutoMapper;
-    using Services.Models;
+    using Services.Blog.Models;
 
     public class CreateBlogViewModel : IHaveReverseMap<CreateBlogServiceModel>
     {

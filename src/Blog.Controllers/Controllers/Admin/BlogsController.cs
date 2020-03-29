@@ -10,8 +10,9 @@
 
     using Data;
     using Infrastructure.Extensions;
-    using Services.Contracts;
-    using Services.Models;
+    using Services.Blog;
+    using Services.Blog.Models;
+    using Services.User;
     using ViewModels.Admin.Blogs;
 
     [Area("Admin")]

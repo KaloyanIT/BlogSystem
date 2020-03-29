@@ -7,7 +7,7 @@ namespace Blog.Controllers.Controllers.Admin
     using Microsoft.AspNetCore.Mvc;
 
     using ViewModels.Admin.Users;
-    using Services.Contracts;
+    using Services.User;
 
     [Area("Admin")]
     public class UsersController : Controller

@@ -2,7 +2,7 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    using Services.Contracts;
+    using Services.Comment;
 
     public class CommentsController : Controller
     {

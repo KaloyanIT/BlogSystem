@@ -5,7 +5,7 @@
     using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
 
-    using Services.Contracts;
+    using Services.Blog;
     using ViewModels.Public.Blogs;
 
     public class BlogController : Controller

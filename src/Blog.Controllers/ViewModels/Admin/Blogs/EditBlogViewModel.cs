@@ -5,7 +5,7 @@
 
     using Data.Models;
     using Infrastructure.AutoMapper;
-    using Services.Models;
+    using Services.Blog.Models;
 
     public class EditBlogViewModel : IHaveReverseMap<BlogServiceModel>, IHaveMapFrom<BlogPost>
     {

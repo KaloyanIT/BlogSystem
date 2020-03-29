@@ -1,10 +1,6 @@
 ﻿namespace Blog.Controllers.Helpers
 {
     using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.Configuration;
-    using Microsoft.Extensions.DependencyInjection;
-
     using Data;
     using Data.Repositories.Blog;
     using Data.Repositories.BlogPostKeywords;
@@ -13,9 +9,12 @@
     using Data.Repositories.Keywords;
     using Data.Repositories.Tags;
     using Infrastructure.AutoMapper;
-    using Services;
-    using Services.Contracts;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Services.Blog;
     using Services.Tags;
+    using Services.User;
 
     public static class ServicesConfiguration
     {
