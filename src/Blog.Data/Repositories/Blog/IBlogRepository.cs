@@ -4,8 +4,9 @@
 
     using Models;
     using DataAccess;
+    using Base;
 
-    public interface IBlogRepository : IRepository<BlogPost>
+    public interface IBlogRepository : IRepository<BlogPost>, ITransientRepository
     {
         Task<BlogPost> GetByTitle(string title);
     }

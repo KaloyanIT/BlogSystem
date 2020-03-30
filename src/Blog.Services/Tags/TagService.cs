@@ -11,10 +11,10 @@
 
     public class TagService : ITagService
     {
-        private readonly ITagSqlRepository _tagSqlRepository;
+        private readonly ITagRepository _tagSqlRepository;
         private readonly IBlogPostTagRepository _blogPostTagRepository;
 
-        public TagService(ITagSqlRepository tagSqlRepository, IBlogPostTagRepository blogPostTagRepository)
+        public TagService(ITagRepository tagSqlRepository, IBlogPostTagRepository blogPostTagRepository)
         {
             _tagSqlRepository = tagSqlRepository ?? throw new ArgumentNullException("tagSqlRepositoryInstance", "TagSqlRepository is null.");
             _blogPostTagRepository = blogPostTagRepository ?? throw new ArgumentNullException("blogPostTagRepositoryInstance", "BlogPostTagRepository is null.");

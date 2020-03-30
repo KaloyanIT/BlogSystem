@@ -2,8 +2,9 @@
 namespace Blog.Data.Repositories.Tags
 {
     using DataAccess;
+    using Base;
 
-    public interface ITagSqlRepository : IRepository<Tag>
+    public interface ITagRepository : IRepository<Tag>, ITransientRepository
     {
     }
 }

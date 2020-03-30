@@ -2,8 +2,9 @@
 {
     using Models;
     using DataAccess;
+    using Base;
 
-    public interface ICommentRepository : IRepository<Comment>
+    public interface ICommentRepository : IRepository<Comment>, ITransientRepository
     {
     }
 }

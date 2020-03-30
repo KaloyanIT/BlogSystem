@@ -28,7 +28,7 @@
             services.AddTransient<ICommentRepository, CommentRepository>();
             services.AddTransient<IBlogPostKeywordRepository, BlogPostKeywordRepository>();
             services.AddTransient<IBlogPostTagRepository, BlogPostTagRepository>();
-            services.AddTransient<ITagSqlRepository, TagRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
             services.AddTransient<IKeywordRepository, KeywordRepository>();
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
         }
@@ -42,25 +42,16 @@
             return services;
         }
 
-        public static IServiceCollection InjectRepositories(this IServiceCollection services)
-        {
-            services.AddTransient<IBlogRepository, BlogRepository>();
-            services.AddTransient<ICommentRepository, CommentRepository>();
-            services.AddTransient<IBlogPostKeywordRepository, BlogPostKeywordRepository>();
-            services.AddTransient<IBlogPostTagRepository, BlogPostTagRepository>();
-            services.AddTransient<ITagSqlRepository, TagRepository>();
-            services.AddTransient<IKeywordRepository, KeywordRepository>();
+        //public static IServiceCollection InjectRepositories(this IServiceCollection services)
+        //{
+        //    services.AddTransient<IBlogRepository, BlogRepository>();
+        //    services.AddTransient<ICommentRepository, CommentRepository>();
+        //    services.AddTransient<IBlogPostKeywordRepository, BlogPostKeywordRepository>();
+        //    services.AddTransient<IBlogPostTagRepository, BlogPostTagRepository>();
+        //    services.AddTransient<ITagSqlRepository, TagRepository>();
+        //    services.AddTransient<IKeywordRepository, KeywordRepository>();
 
-            return services;
-        }
-
-        public static IServiceCollection InjectServices(this IServiceCollection services)
-        {
-            services.AddTransient<IBlogService, BlogService>();
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ITagService, TagService>();
-
-            return services;
-        }
+        //    return services;
+        //}        
     }
 }
