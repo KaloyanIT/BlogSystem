@@ -1,17 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Blog.Data.Base;
-using Blog.DataAccess;
-using Blog.Services.Base;
-using Microsoft.Extensions.DependencyInjection;
-
-namespace Blog.Controllers.Helpers
+﻿namespace Blog.Controllers.Helpers
 {
+    using System.Linq;
+    using AutoMapper;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc.Razor;
+    using Microsoft.AspNetCore.Routing;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+
+    using Data;
+    using Data.Base;
+    using Infrastructure.AutoMapper;
+    using Services.Base;
+
     public static class ServiceCollectionExtensions
     {
+        public static IServiceCollection InjectIdentity(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddScoped<IBlogContext, BlogContext>();
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+              .AddEntityFrameworkStores<BlogContext>()
+              .AddDefaultTokenProviders();
+
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+            });
+
+            services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
+
+            return services;
+        }
 
         public static IServiceCollection InjectStandartServices(this IServiceCollection services)
         {
@@ -32,7 +55,7 @@ namespace Blog.Controllers.Helpers
 
             foreach (var type in types)
             {
-                if(serviceType.IsAssignableFrom(type.Service))
+                if (serviceType.IsAssignableFrom(type.Service))
                 {
                     services.AddTransient(type.Service, type.Implementation);
                 }
@@ -65,13 +88,34 @@ namespace Blog.Controllers.Helpers
                 })
                 .Where(t => t.Repository != null);
 
-            foreach(var type in types)
+            foreach (var type in types)
             {
-                if(repositoryType.IsAssignableFrom(type.Repository))
+                if (repositoryType.IsAssignableFrom(type.Repository))
                 {
                     services.AddTransient(type.Repository, type.Implementation);
                 }
             }
+
+            return services;
+        }
+
+        public static IServiceCollection AddMvcConfigurations(this IServiceCollection services)
+        {
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                options.AreaViewLocationFormats.Clear();
+                options.AreaViewLocationFormats.Add("{2}/Views/{1}/{0}.cshtml");
+                options.AreaViewLocationFormats.Add("/{2}/Views/Shared/{0}.cshtml");
+                options.AreaViewLocationFormats.Add("/Shared/{0}.cshtml");
+            });
+
+            services.AddMvc();
+            services.AddRouting();
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+            });
 
             return services;
         }
