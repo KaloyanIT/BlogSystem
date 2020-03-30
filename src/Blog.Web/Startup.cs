@@ -62,6 +62,10 @@
 
             app.UseSession();
 
+            app.UseRouting();
+
+            app.UseAuthorization();
+
             app.RegisterRoutes();
         }
     }
