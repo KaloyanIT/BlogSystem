@@ -6,9 +6,10 @@ namespace Blog.Services.Tags
     using System.Threading.Tasks;
 
     using Data.Models;
+    using Base;
     using Tags.Models;
 
-    public interface ITagService
+    public interface ITagService : IService
     {
         Task Save(TagServiceModel value);
 

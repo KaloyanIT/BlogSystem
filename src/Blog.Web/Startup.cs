@@ -34,7 +34,7 @@
 
             services.InjectCore(_configuration)
                 .InjectRepositories()
-                .InjectServices();
+                .InjectStandartServices();
 
             services.AddIdentity<IdentityUser, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
