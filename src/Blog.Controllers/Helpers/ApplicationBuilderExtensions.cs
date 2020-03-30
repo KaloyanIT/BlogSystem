@@ -14,7 +14,6 @@
     {
         public static void RegisterRoutes(this IApplicationBuilder app)
         {
-            app.UseRouting();
             app.UseEndpoints(routes =>
             {
                 routes.MapControllerRoute(

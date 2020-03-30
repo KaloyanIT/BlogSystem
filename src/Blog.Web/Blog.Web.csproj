@@ -2,31 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
-    <!--<TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>-->
-  </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="Areas\Admin\Controllers\**" />
-    <Compile Remove="Areas\Admin\Data\**" />
-    <Compile Remove="Areas\Admin\Models\**" />
-    <Content Remove="Areas\Admin\Controllers\**" />
-    <Content Remove="Areas\Admin\Data\**" />
-    <Content Remove="Areas\Admin\Models\**" />
-    <EmbeddedResource Remove="Areas\Admin\Controllers\**" />
-    <EmbeddedResource Remove="Areas\Admin\Data\**" />
-    <EmbeddedResource Remove="Areas\Admin\Models\**" />
-    <None Remove="Areas\Admin\Controllers\**" />
-    <None Remove="Areas\Admin\Data\**" />
-    <None Remove="Areas\Admin\Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Scripts\entry.tsx" />
-    <None Remove="Scripts\HelloWorld.tsx" />
-    <None Remove="Scripts\redux-actions.ts" />
-    <None Remove="Scripts\redux-reducers.ts" />
-  </ItemGroup>
+  </PropertyGroup>  
 
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
@@ -45,33 +21,6 @@
     <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
     <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
     <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\dist\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="Scripts\entry.tsx" />
-    <TypeScriptCompile Include="Scripts\HelloWorld.tsx" />
-    <TypeScriptCompile Include="Scripts\redux-actions.ts" />
-    <TypeScriptCompile Include="Scripts\redux-reducers.ts" />
-  </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES5</TypeScriptTarget>
-    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
-    <TypeScriptModuleKind />
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptOutFile />
-    <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
-  </PropertyGroup>
+  </ItemGroup>   
 
 </Project>
