@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using Blog.Data.Base;
+using Blog.DataAccess;
 using Blog.Services.Base;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -42,6 +45,32 @@ namespace Blog.Controllers.Helpers
                     services.AddSingleton(type.Service, type.Implementation);
                 }
 
+            }
+
+            return services;
+        }
+
+        public static IServiceCollection InjectRepositories(this IServiceCollection services)
+        {
+            var repositoryType = typeof(ITransientRepository);
+
+            var types = repositoryType
+                .Assembly
+                .GetExportedTypes()
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .Select(t => new
+                {
+                    Repository = t.GetInterface($"I{t.Name}"),
+                    Implementation = t
+                })
+                .Where(t => t.Repository != null);
+
+            foreach(var type in types)
+            {
+                if(repositoryType.IsAssignableFrom(type.Repository))
+                {
+                    services.AddTransient(type.Repository, type.Implementation);
+                }
             }
 
             return services;
