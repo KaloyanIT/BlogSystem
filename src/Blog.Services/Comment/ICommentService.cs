@@ -1,8 +1,9 @@
 ﻿namespace Blog.Services.Comment
 {
     using System.Threading.Tasks;
+    using Base;
 
-    public interface ICommentService
+    public interface ICommentService : IService
     {
         Task AddComment();
 

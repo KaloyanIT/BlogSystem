@@ -2,9 +2,10 @@
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using Base;
     using Microsoft.AspNetCore.Identity;
 
-    public interface IUserService
+    public interface IUserService : IService
     {
         IQueryable<IdentityUser> GetAll();
 
