@@ -1,5 +1,6 @@
 ﻿namespace Blog.Data
 {
+    using Blog.Data.Extensions;
     using Blog.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -36,31 +37,7 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasKey(bc => new { bc.BlogPostId, bc.KeywordId });
-
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasOne(bc => bc.BlogPost)
-                .WithMany(b => b.BlogKeywords)
-                .HasForeignKey(bc => bc.BlogPostId);
-
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasOne(bc => bc.Keyword)
-                .WithMany(c => c.BlogKeywords)
-                .HasForeignKey(bc => bc.KeywordId);
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasKey(bc => new { bc.BlogPostId, bc.TagId });
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasOne(bc => bc.BlogPost)
-                .WithMany(b => b.BlogTags)
-                .HasForeignKey(bc => bc.BlogPostId);
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasOne(bc => bc.Tag)
-                .WithMany(c => c.BlogPostTag)
-                .HasForeignKey(bc => bc.TagId);
+            modelBuilder.ApplyDbConfiguration();
         }
     }
 }

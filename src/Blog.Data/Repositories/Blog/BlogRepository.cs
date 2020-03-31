@@ -2,10 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Microsoft.EntityFrameworkCore;
 
     using Data.Models;
     using DataAccess.SqlServer;
+    using Microsoft.EntityFrameworkCore;
 
     public class BlogRepository : SqlServerEntityFrameworkCrudRepository<BlogPost, BlogContext>, IBlogRepository
     {

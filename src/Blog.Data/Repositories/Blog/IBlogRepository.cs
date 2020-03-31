@@ -5,6 +5,7 @@
     using Models;
     using DataAccess;
     using Base;
+    using System.Collections.Generic;
 
     public interface IBlogRepository : IRepository<BlogPost>, ITransientRepository
     {

@@ -1,5 +1,6 @@
 ﻿namespace Blog.Controllers.Controllers.Admin
 {
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
@@ -9,6 +10,7 @@
         {
         }
 
+        [Authorize]
         public IActionResult Index()
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
@@ -17,7 +19,7 @@
 
             if (!isAuthenticated)
             {
-                return Redirect("/account/login");
+                return RedirectToAction("Login", "Account");
             }
 
             return View();
