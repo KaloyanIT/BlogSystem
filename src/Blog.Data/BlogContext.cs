@@ -1,15 +1,20 @@
 ﻿namespace Blog.Data
 {
+    using System;
+    using Blog.Data.Base;
     using Blog.Data.Extensions;
     using Blog.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     public class BlogContext : IdentityDbContext<IdentityUser>, IBlogContext
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
+            this.ChangeTracker.Tracked += OnEntityTracked;
+            this.ChangeTracker.StateChanged += OnEntityStateChanged;
         }
 
         #region DatabaseSets
@@ -25,6 +30,22 @@
         public DbSet<Keyword> Keywords { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+
+        private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
+        {
+            if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
+            {
+                entity.DateCreated = DateTime.UtcNow;
+            }
+        }
+
+        private void OnEntityStateChanged(object? sender, EntityStateChangedEventArgs e)
+        {
+            if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveDateModified entity)
+            {
+                entity.DateModified = DateTime.UtcNow;
+            }
+        }
 
         #endregion
 
