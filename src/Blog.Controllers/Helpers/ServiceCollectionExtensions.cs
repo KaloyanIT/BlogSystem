@@ -38,6 +38,10 @@
 
                 opt.SignIn.RequireConfirmedEmail = false;
                 opt.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
             });
 
             services.Configure<DataProtectionTokenProviderOptions>(opt =>

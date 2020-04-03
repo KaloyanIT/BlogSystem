@@ -130,14 +130,26 @@
 
             var user = await _userManager.FindByEmailAsync(loginViewModel.Username);
 
-            var result = await _signInManager.PasswordSignInAsync(user.Email, loginViewModel.Password, loginViewModel.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(user.Email, loginViewModel.Password, loginViewModel.RememberMe, lockoutOnFailure: true);
 
             if (result.Succeeded)
             {
                 return RedirectToLocal(returnUrl);
             }
 
-            if(!await _userManager.IsEmailConfirmedAsync(user))
+            if (result.IsLockedOut)
+            {
+                var forgotPassLink = Url.Action(nameof(ForgotPassword), "Account", new { }, Request.Scheme);
+                var content = string.Format("Your account is locked out, to reset your password, please click this link: {0}", forgotPassLink);
+
+                //var message = new Message(new string[] { logi.Email }, „Locked out account information“, content, null);
+                //await _emailSender.SendEmailAsync(message);
+
+                ModelState.AddModelError("", "The account is locked out");
+                return View();
+            }
+
+            if (!await _userManager.IsEmailConfirmedAsync(user))
             {
                 ModelState.AddModelError("", "Email address is not confirmed");
             }
