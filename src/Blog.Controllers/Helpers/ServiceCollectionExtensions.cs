@@ -13,6 +13,7 @@
     using Data.Base;
     using Infrastructure.AutoMapper;
     using Services.Base;
+    using Blog.Data.Models;
 
     public static class ServiceCollectionExtensions
     {
@@ -21,7 +22,7 @@
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders();
 

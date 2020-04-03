@@ -1,6 +1,7 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
     using System.Threading.Tasks;
+    using Blog.Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -12,10 +13,10 @@
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -41,7 +42,7 @@
                 return View(registerViewModel);
             }
 
-            var user = new IdentityUser()
+            var user = new User()
             {
                 UserName = registerViewModel.Username,
                 Email = registerViewModel.Email
