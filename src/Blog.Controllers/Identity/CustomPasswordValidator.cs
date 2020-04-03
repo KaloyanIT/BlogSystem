@@ -15,7 +15,7 @@
 
             if (password.ToLower().Contains("password"))
             {
-                return IdentityResult.Failed(new IdentityError { Description = "The word password is not allowed for the Password.", Code = "PasswordContainsPassword" }):
+                return IdentityResult.Failed(new IdentityError { Description = "The word password is not allowed for the Password.", Code = "PasswordContainsPassword" });
             }
 
             return IdentityResult.Success;
