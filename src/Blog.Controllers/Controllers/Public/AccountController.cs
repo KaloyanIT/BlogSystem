@@ -1,9 +1,7 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
-    using System.Security.Claims;
     using System.Threading.Tasks;
     using Blog.Data.Models;
-    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -195,7 +193,7 @@
         [HttpGet]
         public IActionResult ResetPasswordConfirmation()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
