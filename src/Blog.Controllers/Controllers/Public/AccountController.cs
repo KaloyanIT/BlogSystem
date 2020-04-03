@@ -44,11 +44,25 @@
 
             var user = new User()
             {
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
                 UserName = registerViewModel.Username,
                 Email = registerViewModel.Email
             };
 
-            await _userManager.CreateAsync(user, registerViewModel.Password);
+            var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+
+                return View(user);
+            }
+
+            await _userManager.AddToRoleAsync(user, "Member");
 
             return View("Login");
         }

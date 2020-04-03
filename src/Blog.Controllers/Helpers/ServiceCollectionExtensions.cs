@@ -22,7 +22,12 @@
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>(opt => {
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.User.RequireUniqueEmail = true;
+            })
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders();
 
