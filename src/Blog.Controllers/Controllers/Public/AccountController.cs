@@ -1,7 +1,9 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
+    using System.Security.Claims;
     using System.Threading.Tasks;
     using Blog.Data.Models;
+    using Microsoft.AspNetCore.Authentication;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -68,8 +70,9 @@
         }
 
         [AllowAnonymous]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl = null)
         {
+            ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
 
@@ -78,14 +81,7 @@
         {
             await _signInManager.SignOutAsync();
 
-            if (returnUrl != null)
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
+            return RedirectToLocal(returnUrl);            
         }
 
         [HttpPost]
@@ -93,45 +89,33 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/admin");
-
+            //returnUrl = returnUrl ?? Url.Content("~/admin");
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
+                return View(loginViewModel);
             }
 
             var user = await _userManager.FindByEmailAsync(loginViewModel.Username);
 
-            if (user == null)
-            {
-                return View();
-            }
-
-            //var result = await this.
-
-            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, true, false);
-
+            var result = await _signInManager.PasswordSignInAsync(user.Email, loginViewModel.Password, loginViewModel.RememberMe, false);
             if (result.Succeeded)
             {
-                return Redirect("/admin");
+                return RedirectToLocal(returnUrl);
             }
-
-            if (result.RequiresTwoFactor)
+            else
             {
-                return RedirectToPage("./LoginWith2fa", new
-                {
-                    ReturnUrl = returnUrl,
-                    RememberMe = true
-                });
+                ModelState.AddModelError("", "Invalid UserName or Password");
+                return View();
             }
-            if (result.IsLockedOut)
-            {
-                return RedirectToPage("./Lockout");
-            }
+        }
 
+        private IActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+                return Redirect(returnUrl);
+            else
+                return RedirectToAction(nameof(HomeController.Index), "Home");
 
-            return View();
         }
     }
 }
