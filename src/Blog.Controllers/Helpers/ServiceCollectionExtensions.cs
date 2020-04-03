@@ -14,6 +14,8 @@
     using Infrastructure.AutoMapper;
     using Services.Base;
     using Blog.Data.Models;
+    using System;
+    using Blog.Controllers.Identity;
 
     public static class ServiceCollectionExtensions
     {
@@ -22,20 +24,29 @@
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
 
-            services.AddIdentity<User, IdentityRole>(opt => {
+            services.AddIdentity<User, IdentityRole>()
+              .AddEntityFrameworkStores<BlogContext>()
+              .AddDefaultTokenProviders()
+              .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation");
+
+            services.Configure<IdentityOptions>(opt =>
+            {
                 opt.Password.RequiredLength = 6;
                 opt.Password.RequireDigit = false;
                 opt.Password.RequireUppercase = false;
                 opt.User.RequireUniqueEmail = true;
-            })
-              .AddEntityFrameworkStores<BlogContext>()
-              .AddDefaultTokenProviders();
 
-
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.SignIn.RequireConfirmedEmail = false;
+                opt.SignIn.RequireConfirmedEmail = false;
+                opt.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
             });
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                        opt.TokenLifespan = TimeSpan.FromHours(2));
+
+            services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
+                opt.TokenLifespan = TimeSpan.FromDays(3));
+
+
 
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
 

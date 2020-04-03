@@ -1,4 +1,4 @@
-﻿namespace Blog.Web.Identity
+﻿namespace Blog.Controllers.Identity
 {
     using System.Security.Claims;
     using System.Security.Principal;

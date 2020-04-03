@@ -29,8 +29,7 @@
                 .InjectRepositories()
                 .InjectStandartServices();
 
-            services.Configure<DataProtectionTokenProviderOptions>(opt =>
-                        opt.TokenLifespan = TimeSpan.FromHours(2));
+            
 
 
             services.AddMvcConfigurations();

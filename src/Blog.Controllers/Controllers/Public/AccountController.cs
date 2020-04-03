@@ -64,9 +64,42 @@
                 return View(user);
             }
 
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+
+            //var message = new Message(new string[] { user.Email }, "Confirmation email link", confirmationLink, null);
+            //await _emailSender.SendEmailAsync(message);
+
             await _userManager.AddToRoleAsync(user, "Member");
 
             return View("Login");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return View("Error");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
+
+            return View(result.Succeeded ? nameof(ConfirmEmail) : "Error");
+        }
+
+        [HttpGet]
+        public IActionResult Error()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SuccessRegistration()
+        {
+            return View();
         }
 
         [AllowAnonymous]
@@ -98,15 +131,19 @@
             var user = await _userManager.FindByEmailAsync(loginViewModel.Username);
 
             var result = await _signInManager.PasswordSignInAsync(user.Email, loginViewModel.Password, loginViewModel.RememberMe, false);
+
             if (result.Succeeded)
             {
                 return RedirectToLocal(returnUrl);
             }
-            else
+
+            if(!await _userManager.IsEmailConfirmedAsync(user))
             {
-                ModelState.AddModelError("", "Invalid UserName or Password");
-                return View();
+                ModelState.AddModelError("", "Email address is not confirmed");
             }
+
+            ModelState.AddModelError("", "Invalid UserName or Password");
+            return View();
         }
 
 
