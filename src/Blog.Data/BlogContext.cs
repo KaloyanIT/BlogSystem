@@ -1,14 +1,20 @@
 ﻿namespace Blog.Data
 {
+    using System;
+    using Blog.Data.Base;
+    using Blog.Data.Extensions;
     using Blog.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     public class BlogContext : IdentityDbContext<IdentityUser>, IBlogContext
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
+            this.ChangeTracker.Tracked += OnEntityTracked;
+            this.ChangeTracker.StateChanged += OnEntityStateChanged;
         }
 
         #region DatabaseSets
@@ -25,6 +31,22 @@
 
         public DbSet<Tag> Tags { get; set; }
 
+        private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
+        {
+            if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
+            {
+                entity.DateCreated = DateTime.UtcNow;
+            }
+        }
+
+        private void OnEntityStateChanged(object? sender, EntityStateChangedEventArgs e)
+        {
+            if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveDateModified entity)
+            {
+                entity.DateModified = DateTime.UtcNow;
+            }
+        }
+
         #endregion
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,31 +58,7 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasKey(bc => new { bc.BlogPostId, bc.KeywordId });
-
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasOne(bc => bc.BlogPost)
-                .WithMany(b => b.BlogKeywords)
-                .HasForeignKey(bc => bc.BlogPostId);
-
-            modelBuilder.Entity<BlogPostKeyword>()
-                .HasOne(bc => bc.Keyword)
-                .WithMany(c => c.BlogKeywords)
-                .HasForeignKey(bc => bc.KeywordId);
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasKey(bc => new { bc.BlogPostId, bc.TagId });
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasOne(bc => bc.BlogPost)
-                .WithMany(b => b.BlogTags)
-                .HasForeignKey(bc => bc.BlogPostId);
-
-            modelBuilder.Entity<BlogPostTag>()
-                .HasOne(bc => bc.Tag)
-                .WithMany(c => c.BlogPostTag)
-                .HasForeignKey(bc => bc.TagId);
+            modelBuilder.ApplyDbConfiguration();
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     using System;
 
-    public interface IDbObject
+    public interface IDbObject 
     {
         Guid Id { get; set; }
     }
