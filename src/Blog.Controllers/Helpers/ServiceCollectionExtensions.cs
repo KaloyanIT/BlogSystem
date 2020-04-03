@@ -27,7 +27,8 @@
             services.AddIdentity<User, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders()
-              .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation");
+              .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation")
+              .AddPasswordValidator<CustomPasswordValidator<User>>();
 
             services.Configure<IdentityOptions>(opt =>
             {
