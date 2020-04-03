@@ -13,6 +13,9 @@
     using Data.Base;
     using Infrastructure.AutoMapper;
     using Services.Base;
+    using Blog.Data.Models;
+    using System;
+    using Blog.Controllers.Identity;
 
     public static class ServiceCollectionExtensions
     {
@@ -21,15 +24,34 @@
             services.AddScoped<IBlogContext, BlogContext>();
             services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
+            services.AddIdentity<User, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
-              .AddDefaultTokenProviders();
+              .AddDefaultTokenProviders()
+              .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation")
+              .AddPasswordValidator<CustomPasswordValidator<User>>();
 
-
-            services.Configure<IdentityOptions>(options =>
+            services.Configure<IdentityOptions>(opt =>
             {
-                options.SignIn.RequireConfirmedEmail = false;
+                opt.Password.RequiredLength = 6;
+                opt.Password.RequireDigit = false;
+                opt.Password.RequireUppercase = false;
+                opt.User.RequireUniqueEmail = true;
+
+                opt.SignIn.RequireConfirmedEmail = false;
+                opt.Tokens.EmailConfirmationTokenProvider = "emailconfirmation";
+
+                opt.Lockout.AllowedForNewUsers = true;
+                opt.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                opt.Lockout.MaxFailedAccessAttempts = 3;
             });
+
+            services.Configure<DataProtectionTokenProviderOptions>(opt =>
+                        opt.TokenLifespan = TimeSpan.FromHours(2));
+
+            services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
+                opt.TokenLifespan = TimeSpan.FromDays(3));
+
+
 
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
 

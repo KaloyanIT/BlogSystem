@@ -54,46 +54,53 @@
             <span class="bg-light">OR</span>
         </p>
         <form asp-action="Register" asp-controller="Account">
+            <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
                 <input class="form-control" asp-for="FirstName" placeholder="First name" type="text">
+                <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
                 <input class="form-control" asp-for="LastName" placeholder="Last name" type="text">
+                <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-user"></i> </span>
                 </div>
                 <input class="form-control" asp-for="Username" placeholder="Username" type="text">
+                <span asp-validation-for="Username" class="text-danger"></span>
             </div><!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
                 </div>
                 <input class="form-control" asp-for="Email" placeholder="Email address" type="email">
-            </div> <!-- form-group// -->           
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
                 <input class="form-control" asp-for="Password" placeholder="Create password" type="password">
+                <span asp-validation-for="Password" class="text-danger"></span>
             </div> <!-- form-group// -->
             <div class="form-group input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
                 </div>
-                <input class="form-control repeat-password-input" placeholder="Repeat password" type="password">
+                <input class="form-control repeat-password-input" asp-for="RepeatPassword" placeholder="Repeat password" type="password">
+                <span asp-validation-for="RepeatPassword" class="text-danger"></span>
             </div> <!-- form-group// -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
             </div> <!-- form-group// -->
-            <p class="text-center">Have an account? <a href="" type="submit">Log In</a> </p>
+            <p class="text-center">Have an account? <a href="@Url.Action("Login", "Account")" type="submit">Log In</a> </p>
         </form>
     </article>
 </div> <!-- card.// -->

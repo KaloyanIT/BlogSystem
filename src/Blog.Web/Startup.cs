@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
@@ -27,6 +28,8 @@
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandartServices();
+
+            
 
 
             services.AddMvcConfigurations();

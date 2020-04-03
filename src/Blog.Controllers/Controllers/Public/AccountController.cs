@@ -1,6 +1,7 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
     using System.Threading.Tasks;
+    using Blog.Data.Models;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -12,18 +13,13 @@
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<User> _userManager;
+        private readonly SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
+        public AccountController(UserManager<User> userManager, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         [AllowAnonymous]
@@ -41,82 +37,62 @@
                 return View(registerViewModel);
             }
 
-            var user = new IdentityUser()
+            var user = new User()
             {
+                FirstName = registerViewModel.FirstName,
+                LastName = registerViewModel.LastName,
                 UserName = registerViewModel.Username,
                 Email = registerViewModel.Email
             };
 
-            await _userManager.CreateAsync(user, registerViewModel.Password);
+            var result = await _userManager.CreateAsync(user, registerViewModel.Password);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+
+                return View(user);
+            }
+
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+
+            //var message = new Message(new string[] { user.Email }, "Confirmation email link", confirmationLink, null);
+            //await _emailSender.SendEmailAsync(message);
+
+            await _userManager.AddToRoleAsync(user, "Member");
 
             return View("Login");
         }
 
-        [AllowAnonymous]
-        public IActionResult Login()
+        [HttpGet]
+        public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
-            return View();
-        }
-
-
-        public async Task<IActionResult> Logout(string returnUrl = null)
-        {
-            await _signInManager.SignOutAsync();
-
-            if (returnUrl != null)
-            {
-                return Redirect(returnUrl);
-            }
-            else
-            {
-                return RedirectToAction("Login");
-            }
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
-        {
-            returnUrl = returnUrl ?? Url.Content("~/admin");
-
-            if (!ModelState.IsValid)
-            {
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                return View();
-            }
-
-            var user = await _userManager.FindByEmailAsync(loginViewModel.Username);
+            var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
             {
-                return View();
+                return View("Error");
             }
 
-            //var result = await this.
+            var result = await _userManager.ConfirmEmailAsync(user, token);
 
-            var result = await _signInManager.PasswordSignInAsync(loginViewModel.Username, loginViewModel.Password, true, false);
+            return View(result.Succeeded ? nameof(ConfirmEmail) : "Error");
+        }
 
-            if (result.Succeeded)
-            {
-                return Redirect("/admin");
-            }
-
-            if (result.RequiresTwoFactor)
-            {
-                return RedirectToPage("./LoginWith2fa", new
-                {
-                    ReturnUrl = returnUrl,
-                    RememberMe = true
-                });
-            }
-            if (result.IsLockedOut)
-            {
-                return RedirectToPage("./Lockout");
-            }
-
-
+        [HttpGet]
+        public IActionResult Error()
+        {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult SuccessRegistration()
+        {
+            return View();
+        }                     
     }
 }

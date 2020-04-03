@@ -3,6 +3,7 @@ namespace Blog.Data.Seeders
 {
     using System;
     using System.Threading.Tasks;
+    using Blog.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -13,7 +14,7 @@ namespace Blog.Data.Seeders
         {
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
-            var UserManager = serviceProvider.GetRequiredService<UserManager<IdentityUser>>();
+            var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
             string[] roleNames = { "Admin", "Member" };
             IdentityResult roleResult;
@@ -32,10 +33,12 @@ namespace Blog.Data.Seeders
 
             var userEmail = configuration.GetSection("UserSettings")["UserEmail"];
 
-            var powerUser = new IdentityUser
+            var powerUser = new User
             {
                 UserName = userEmail,
-                Email = userEmail
+                Email = userEmail,
+                FirstName = "Test",
+                LastName = "Test"
             };
 
             string userPassword = configuration.GetSection("UserSettings")["UserPassword"];
