@@ -1,0 +1,27 @@
+﻿
+
+<ul class="nav navbar-nav navbar-right" style="clear: both;">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Logout", "Account")">
+                <span class="glyphicon glyphicon-log-out"></span>Logout
+            </a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Login", "Account")">
+                <span class="glyphicon glyphicon-log-in"></span>Login
+            </a>
+
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Register", "Account")">
+                <span class="glyphicon glyphicon-user"></span>Register
+            </a>
+        </li>
+    }
+</ul>
