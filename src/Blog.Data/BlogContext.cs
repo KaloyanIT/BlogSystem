@@ -31,6 +31,8 @@
 
         public DbSet<Tag> Tags { get; set; }
 
+        public DbSet<Settings> Settings { get; set; }
+
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
