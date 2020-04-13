@@ -1,6 +1,7 @@
 ﻿namespace Blog
 {
     using System;
+    using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
     using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Builder;
@@ -29,7 +30,8 @@
                 .InjectRepositories()
                 .InjectStandartServices();
 
-            
+            services.AddSingleton(_configuration.GetEmailConfiguration());
+            services.AddTransient<IEmailSender, EmailSender>();
 
 
             services.AddMvcConfigurations();
