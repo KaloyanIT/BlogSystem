@@ -32,7 +32,7 @@ steps:
   displayName: 'Build'
   inputs:
     command: 'build'
-    projects: 'src/**/*.csproj'
+    projects: 'src/Blog.Web/Blog.Web.csproj'
     arguments: '--configuration $(buiildConfiguration) /p:Version=$(buildNumber)'
 - task: DotNetCoreCLI@2
   displayName: 'Run tests'
