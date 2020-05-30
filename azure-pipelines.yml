@@ -11,16 +11,19 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'Restore NuGet Packages'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
+  displayName: 'Run Tests'
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
