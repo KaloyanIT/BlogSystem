@@ -4,13 +4,10 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- dev
 
 pool:
   vmImage: 'vs2017-win2016'
-
-variables:
-  buildConfiguration: 'Release'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -18,10 +15,6 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
-# - task: DotNetCoreCLI@2
-#   inputs:
-#     command: 'build'
-#     projects: 'src/Blog.Web/Blog.Web.csproj'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
@@ -31,3 +24,4 @@ steps:
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
+    arguments: '--configuration $(testConfiguration)'
