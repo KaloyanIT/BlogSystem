@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: PowerShell@2
+  displayName: 'Set correct version'
   inputs:
     targetType: 'inline'
     script: |
