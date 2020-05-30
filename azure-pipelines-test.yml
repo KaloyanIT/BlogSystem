@@ -23,16 +23,19 @@ steps:
       
       Write-Host "##vso[task.setvariable variable=buildNumber]0.0.$days.1024"
 - task: DotNetCoreCLI@2
+  displayName: 'Restore NuGetPackages'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
+  displayName: 'Build'
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
+    projects: 'src/**/*.csproj'
     arguments: '--configuration $(buiildConfiguration) /p:Version=$(buildNumber)'
 - task: DotNetCoreCLI@2
+  displayName: 'Run tests'
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
