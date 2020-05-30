@@ -1,9 +1,11 @@
-﻿namespace Blog.Infrastructure.Emails
+﻿using System.Threading.Tasks;
+
+namespace Blog.Infrastructure.Emails
 {
     public interface IEmailSender
     {
         void SendEmail(Message message);
 
-        void SendEmailAsync(Message message);
+        Task SendEmailAsync(Message message);
     }
 }

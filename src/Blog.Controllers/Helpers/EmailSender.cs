@@ -1,6 +1,8 @@
 ﻿namespace Blog.Controllers.Helpers
 {
     using System;
+    using System.Threading.Tasks;
+    using Blog.Infrastructure.Emails;
     using Infrastructure.Emails;
     using MailKit.Net.Smtp;
     using Microsoft.Extensions.Logging;
@@ -22,15 +24,9 @@
         {
             var emailMessage = CreateEmailMessage(message);
 
-
             Send(emailMessage);
         }
-        public void SendEmailAsync(Message message)
-        {
-
-            throw new System.NotImplementedException();
-        }
-
+        
         private void Send(MimeMessage emailMessage)
         {
             using (var client = new SmtpClient())
@@ -73,5 +69,9 @@
             return emaiMessage;
         }
 
+        public Task SendEmailAsync(Message message)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

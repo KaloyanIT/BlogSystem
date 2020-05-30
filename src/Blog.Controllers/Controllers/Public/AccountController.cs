@@ -28,8 +28,13 @@
         }
 
         [AllowAnonymous]
-        public IActionResult Register()
+        public async Task<IActionResult> Register()
         {
+            var message = new Message(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "");
+
+            await _emailSender.SendEmailAsync(message);
+
+
             return View();
         }
 
@@ -70,7 +75,7 @@
 
             await _userManager.AddToRoleAsync(user, "Member");
 
-            return View("Login");
+            return View("Login", "Login");
         }
 
         [HttpGet]
