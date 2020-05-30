@@ -18,7 +18,16 @@ steps:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
+# - task: DotNetCoreCLI@2
+#   inputs:
+#     command: 'build'
+#     projects: 'src/Blog.Web/Blog.Web.csproj'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
-    projects: 'src/Blog.Web/Blog.Web.csproj'
+    projects: '**/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'test/**/*.csproj'
