@@ -1,6 +1,7 @@
 ﻿namespace Blog
 {
     using System;
+    using System.IO;
     using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
     using Infrastructure.AutoMapper;
@@ -10,6 +11,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.FileProviders;
 
     public class Startup
     {
@@ -60,6 +62,13 @@
             app.SetUpDatabase(_configuration);
 
             app.UseStaticFiles();
+
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                Path.Combine(_environment.ContentRootPath, "StaticFiles")),
+                RequestPath = "/StaticFiles"
+            });
 
             app.UseCookiePolicy();
 
