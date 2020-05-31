@@ -10,11 +10,17 @@ module.exports = (env, argv) => {
         mode: argv.mode === "production" ? "production" : "development",
         entry: ['./StaticFiles/src/index.js', './StaticFiles/src/sass/index.scss'],
         output: {
-            filename: bundleFileName + '.js',
-            path: path.resolve(__dirname, dirName)
+            path: path.resolve(__dirname, dirName),
+            publicPath: '/',
+            filename: 'bundle.js'
         },
         module: {
             rules: [
+                {
+                    test: /\.(js)$/,
+                    exclude: /node_modules/,
+                    use: ['babel-loader']
+                },
                 {
                     test: /\.s[c|a]ss$/,
                     use:
@@ -37,6 +43,12 @@ module.exports = (env, argv) => {
                 }
             ]
         },
+        resolve: {
+            extensions: ['*', '.js']
+          },
+          devServer: {
+            contentBase: './dist'
+          },
         plugins: [
             new CleanWebpackPlugin(),
             new MiniCssExtractPlugin({
