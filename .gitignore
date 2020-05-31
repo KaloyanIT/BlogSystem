@@ -235,3 +235,4 @@ _Pvt_Extensions
 
 /src/Blog/Blog/wwwroot/dist
 /src/Blog/Blog/Scripts/vsCompile
+/src/Blog.Web/StaticFiles/dist
