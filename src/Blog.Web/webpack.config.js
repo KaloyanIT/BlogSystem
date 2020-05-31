@@ -1,67 +1,93 @@
 ﻿const path = require('path');
+const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const bundleFileName = 'bundle';
 const dirName = 'StaticFiles/dist';
 
-module.exports = (env, argv) => {
-  return {
-    mode: argv.mode === 'production' ? 'production' : 'development',
-    entry: [
-      './StaticFiles/src/index.js',
-      './StaticFiles/src/sass/index.scss',
-    ],
-    output: {
-      path: path.resolve(__dirname, dirName),
-      publicPath: '/',
-      filename: 'bundle.js',
+module.exports = {
+  mode: 'development',
+  // prettier-ignore
+  entry: {
+      'bundle': './StaticFiles/src/js/bundle.js',
+      'js/text-editor' : './StaticFiles/src/js/text-editor.js',
+      'scss/entry': './StaticFiles/src/scss/entry.scss',
     },
-    module: {
-      rules: [
-        {
-          test: /\.(js)$/,
-          exclude: /node_modules/,
-          use: ['babel-loader', 'eslint-loader'],
-        },
-        {
-          test: /\.s[c|a]ss$/,
-          use: [
-            'style-loader',
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            {
-              loader: 'postcss-loader',
-              options: {
-                config: {
-                  ctx: {
-                    env: argv.mode,
-                  },
+  output: {
+    path: path.resolve(__dirname, dirName),
+    publicPath: '/js/',
+    filename: '[name].js',
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader'],
+      },
+      {
+        test: /\.s[c|a]ss$/,
+        use: [
+          'style-loader',
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              config: {
+                ctx: {
+                  env: 'development',
                 },
               },
             },
-            'sass-loader',
-          ],
-        },
-        {
-          test: /\.(woff|woff2)$/,
-          use: {
-            loader: 'url-loader',
           },
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.(woff|woff2)$/,
+        use: {
+          loader: 'url-loader',
         },
-      ],
-    },
-    resolve: {
-      extensions: ['*', '.js'],
-    },
-    devServer: {
-      contentBase: './dist',
-    },
-    plugins: [
-      new CleanWebpackPlugin(),
-      new MiniCssExtractPlugin({
-        filename: bundleFileName + '.css',
-      }),
+      },
+      {
+        test: require.resolve('jquery'),
+        use: [
+          {
+            loader: 'expose-loader',
+            options: 'jQuery',
+          },
+          {
+            loader: 'expose-loader',
+            options: '$',
+          },
+        ],
+      },
     ],
-  };
+  },
+  resolve: {
+    modules: [
+      path.resolve('./StaticFiles/src/js'),
+      path.resolve('./node_modules'),
+    ],
+    extensions: ['.js'],
+  },
+  devServer: {
+    contentBase: './dist',
+  },
+  plugins: [
+    new CleanWebpackPlugin(),
+    new webpack.SourceMapDevToolPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+    }),
+    new MiniCssExtractPlugin({
+      filename: bundleFileName + '.css',
+    }),
+  ],
+  // externals: {
+  //   jquery: 'jQuery',
+  // },
 };
