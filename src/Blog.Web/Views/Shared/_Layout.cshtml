@@ -15,25 +15,27 @@
     <!-- Custom styles for this template -->
     <link href="~/css/blog-theme/clean-blog.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="~/StaticFiles/dist/bundle.css" asp-append-version="true" />
 
     <title>@ViewData["Title"]</title>
 </head>
 <body>
     <!-- Navigation -->
-    @await Html.PartialAsync("_Navigation") 
+    @await Html.PartialAsync("_Navigation")
 
     <!-- Page Header -->
-   @await Html.PartialAsync("_Header")
+    @await Html.PartialAsync("_Header")
 
     <div class="container">
         @RenderBody()
     </div>
 
     <!--   Footer -->
-   @await Html.PartialAsync("_Footer") 
+    @await Html.PartialAsync("_Footer")
 
 
-    <script src="~/dist/bundle.js"></script>
+    <script src="~/StaticFiles/dist/bundle.js" asp-append-version="true"></script>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

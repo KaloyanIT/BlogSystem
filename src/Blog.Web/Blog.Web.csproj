@@ -28,6 +28,8 @@
 
   <ItemGroup>
     <Folder Include="Identity\" />
+    <Folder Include="StaticFiles\src\js\" />
+    <Folder Include="StaticFiles\src\sass\" />
   </ItemGroup>   
 
 </Project>
