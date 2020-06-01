@@ -5,16 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "build": "webpack --display-error-details --progress --profile --mode=\"development\"",
     "watch": "webpack --progress --profile --watch",
     "watch:dev": "webpack --display-error-details --progress --profile --mode=\"development\" --watch",
     "build:prod": "webpack --display-error-details --mode=\"production\" --config webpack.config.Production.js",
     "watch:prod": "webpack --display-error-details --mode=\"production\" --config webpack.config.Production.js --watch",
-=======
-    "build": "webpack --progress --profile",
-    "watch": "webpack --progress --profile --watch",
->>>>>>> 619ef0e... Add TinyMCE and webpack libraries
     "production": "webpack --progress --profile --mode production"
   },
   "keywords": [],
@@ -29,7 +24,6 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
     "cssnano": "^4.1.10",
-<<<<<<< HEAD
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0",
@@ -40,22 +34,15 @@
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^2.5.0",
     "expose-loader": "^0.7.5",
-=======
->>>>>>> 619ef0e... Add TinyMCE and webpack libraries
     "jquery": "^3.5.1",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.14.1",
     "popper.js": "^1.16.1",
     "postcss-loader": "^3.0.0",
-<<<<<<< HEAD
     "prettier": "^2.0.5",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.2.1",
     "url-loader": "^4.1.0",
-=======
-    "sass-loader": "^8.0.2",
-    "style-loader": "^1.2.1",
->>>>>>> 619ef0e... Add TinyMCE and webpack libraries
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   },
