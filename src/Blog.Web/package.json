@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --display-error-details --progress --profile --mode=\"development\"",
     "watch": "webpack --progress --profile --watch",
-    "watch:dev": "webpack --display-error-details --mode=\"development\" --watch",
+    "watch:dev": "webpack --display-error-details --progress --profile --mode=\"development\" --watch",
     "build:prod": "webpack --display-error-details --mode=\"production\" --config webpack.config.Production.js",
     "watch:prod": "webpack --display-error-details --mode=\"production\" --config webpack.config.Production.js --watch",
     "production": "webpack --progress --profile --mode production"

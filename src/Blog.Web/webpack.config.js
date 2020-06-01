@@ -10,6 +10,10 @@ module.exports = {
   mode: 'development',
   // prettier-ignore
   entry: {
+      // Admin
+      'js/admin/blog': './StaticFiles/src/js/admin/blog.js',
+
+
       'bundle': './StaticFiles/src/js/bundle.js',
       'js/text-editor' : './StaticFiles/src/js/text-editor.js',
       'scss/entry': './StaticFiles/src/scss/entry.scss',
