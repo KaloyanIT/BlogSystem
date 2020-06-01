@@ -1,16 +1,12 @@
 ﻿const path = require('path');
-<<<<<<< HEAD
 const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-=======
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
->>>>>>> 619ef0e... Add TinyMCE and webpack libraries
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const bundleFileName = 'bundle';
 const dirName = 'StaticFiles/dist';
 
-<<<<<<< HEAD
+
 module.exports = {
   mode: 'development',
   // prettier-ignore
@@ -100,57 +96,3 @@ module.exports = {
   //   jquery: 'jQuery',
   // },
 };
-=======
-module.exports = (env, argv) => {
-    return {
-        mode: argv.mode === "production" ? "production" : "development",
-        entry: ['./StaticFiles/src/index.js', './StaticFiles/src/sass/index.scss'],
-        output: {
-            path: path.resolve(__dirname, dirName),
-            publicPath: '/',
-            filename: 'bundle.js'
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.(js)$/,
-                    exclude: /node_modules/,
-                    use: ['babel-loader', 'eslint-loader']
-                },
-                {
-                    test: /\.s[c|a]ss$/,
-                    use:
-                        [
-                            'style-loader',
-                            MiniCssExtractPlugin.loader,
-                            'css-loader',
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    config: {
-                                        ctx: {
-                                            env: argv.mode
-                                        }
-                                    }
-                                }
-                            },
-                            'sass-loader'
-                        ]
-                }
-            ]
-        },
-        resolve: {
-            extensions: ['*', '.js']
-          },
-          devServer: {
-            contentBase: './dist'
-          },
-        plugins: [
-            new CleanWebpackPlugin(),
-            new MiniCssExtractPlugin({
-                filename: bundleFileName + '.css'
-            })
-        ]
-    };
-};
->>>>>>> 619ef0e... Add TinyMCE and webpack libraries
