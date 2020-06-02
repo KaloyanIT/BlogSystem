@@ -10,7 +10,7 @@ namespace Blog.Data.Models
     {
         public string Name { get; private set; }
 
-        public virtual ICollection<BlogPostTag> BlogPostTag { get; private set; }
+        public ICollection<BlogPostTag> BlogPostTag { get; private set; }
 
         public Tag() { }
 

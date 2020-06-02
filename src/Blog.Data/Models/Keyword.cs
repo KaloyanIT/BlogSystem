@@ -10,7 +10,7 @@ namespace Blog.Data.Models
     {
         public string Name { get; private set; }
 
-        public virtual ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
+        public ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
 
         public Keyword() { }
 
