@@ -4,6 +4,7 @@
     using Blog.Data.Base;
     using Blog.Data.Extensions;
     using Blog.Data.Models;
+    using Blog.Data.Models.Emails;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -33,6 +34,14 @@
 
         public DbSet<Settings> Settings { get; set; }
 
+        //Emails Models
+
+        public DbSet<MailList> MailLists { get; set; }
+
+        public DbSet<Subscriber> Subscribers { get; set; }
+
+        public DbSet<MailListSubscirber> MailListSubscribers { get; set; }
+
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
@@ -53,7 +62,7 @@
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
                                     => optionsBuilder
-                                        .UseLazyLoadingProxies();
+                                        .UseLazyLoadingProxies(false);
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

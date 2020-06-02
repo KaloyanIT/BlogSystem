@@ -13,7 +13,7 @@
 
         public string UserId { get; private set; }
 
-        public virtual IdentityUser User { get; private set; }
+        public IdentityUser User { get; private set; }
 
         public string Username { get; private set; }
 

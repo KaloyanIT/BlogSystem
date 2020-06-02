@@ -18,11 +18,11 @@
 
         public string UserId { get; private set; }
 
-        public virtual IdentityUser User { get; private set; }
+        public IdentityUser User { get; private set; }
 
-        public virtual ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
+        public ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
 
-        public virtual ICollection<BlogPostTag> BlogTags { get; private set; }
+        public ICollection<BlogPostTag> BlogTags { get; private set; }
 
         public BlogPost() : base()
         {

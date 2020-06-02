@@ -9,11 +9,11 @@ namespace Blog.Data.Models
     {
         public Guid BlogPostId { get; private set; }
 
-        public virtual BlogPost BlogPost { get; private set; }
+        public BlogPost BlogPost { get; private set; }
 
         public Guid TagId { get; private set; }
 
-        public virtual Tag Tag { get; private set; }
+        public Tag Tag { get; private set; }
 
         public BlogPostTag() { }
 
