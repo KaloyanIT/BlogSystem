@@ -1,8 +1,8 @@
-﻿using Blog.Services.Emails.Subscribe;
-
-namespace Blog.Services.Emails.MailList
+﻿namespace Blog.Services.Emails.MailList
 {
-    interface IMailListService : ISubscribeService
+    using Base;
+
+    public interface IMailListService : IService
     {
     }
 }
