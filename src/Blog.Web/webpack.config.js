@@ -13,6 +13,7 @@ module.exports = {
   entry: {
       // Admin
       'js/admin/blog': './StaticFiles/src/js/admin/blog.js',
+      'js/common/dropdown': './StaticFiles/src/js/common/dropdown.js',
 
 
       'bundle': './StaticFiles/src/js/bundle.js',
