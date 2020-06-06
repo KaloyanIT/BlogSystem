@@ -1,6 +1,6 @@
 ﻿namespace Blog.Controllers.Controllers.Admin.Emails
 {
-    using Blog.Services.Emails.Subscribe;
+    using Blog.Services.Emails.Subscribers;
     using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
