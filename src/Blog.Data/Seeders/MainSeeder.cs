@@ -1,5 +1,4 @@
-﻿
-namespace Blog.Data.Seeders
+﻿namespace Blog.Data.Seeders
 {
     using System;
     using System.Threading.Tasks;

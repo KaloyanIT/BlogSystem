@@ -1,4 +1,4 @@
-﻿namespace Blog.Services.Emails.Subscribe
+﻿namespace Blog.Services.Emails.Subscribers
 {
     using AutoMapper;
 
