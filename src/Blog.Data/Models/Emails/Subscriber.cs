@@ -11,7 +11,7 @@
 
         public string LastName { get; private set; }
 
-        public ICollection<MailListSubscirber> MailListSubscriber { get; set; }
+        public ICollection<MailListSubscriber> MailListSubscriber { get; set; }
 
         public Subscriber(string email, string firstName, string lastName)
         {
