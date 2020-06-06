@@ -40,7 +40,7 @@
 
         public DbSet<Subscriber> Subscribers { get; set; }
 
-        public DbSet<MailListSubscirber> MailListSubscribers { get; set; }
+        public DbSet<MailListSubscriber> MailListSubscribers { get; set; }
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {

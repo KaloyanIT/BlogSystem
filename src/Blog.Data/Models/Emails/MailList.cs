@@ -9,7 +9,7 @@
 
         public string Description { get; private set; }
 
-        public ICollection<MailListSubscirber> MailListSubscribers { get; private set; }
+        public ICollection<MailListSubscriber> MailListSubscribers { get; private set; }
 
         public MailList(string name, string description)
         {

@@ -1,8 +1,10 @@
 ﻿namespace Blog.Services.Emails.MailList
 {
-    using Base;
+    using System.Linq;
+    using Base;    
 
     public interface IMailListService : IService
     {
+        //IQueryable<MailList> GetAll();
     }
 }

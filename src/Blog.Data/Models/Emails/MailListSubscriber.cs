@@ -3,9 +3,9 @@
     using System;
     using Blog.Data.Base;
 
-    public class MailListSubscirber : BaseDbObject
+    public class MailListSubscriber : BaseDbObject
     {
-        public Guid SusbcriberId { get; set; }
+        public Guid SubscriberId { get; set; }
 
         public Subscriber Subscriber { get; set; }
 
