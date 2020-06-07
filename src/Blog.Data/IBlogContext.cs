@@ -1,12 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-namespace Blog.Data
+﻿namespace Blog.Data
 {
     using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore.ChangeTracking;
 
     public interface IBlogContext
     {
@@ -27,8 +26,6 @@ namespace Blog.Data
         ValueTask<TEntity> FindAsync<TEntity>(object[] keyValues, CancellationToken cancellationToken) where TEntity : class;
 
         ValueTask<object> FindAsync(Type entityType, params object[] keyValues);
-
-        DbQuery<TQuery> Query<TQuery>() where TQuery : class;
 
         EntityEntry Remove(object entity);
 

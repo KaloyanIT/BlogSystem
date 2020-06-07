@@ -6,8 +6,8 @@
 
     public class BlogPostServiceShould : IDisposable
     {
-        private readonly BlogService systemUnderTest;
-        private readonly InMemoryRepository<BlogPost> blogPostRepositoryInstance;
+        //private readonly BlogService systemUnderTest;
+        //private readonly InMemoryRepository<BlogPost> blogPostRepositoryInstance;
         //private readonly 
 
         public BlogPostServiceShould()

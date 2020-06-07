@@ -35,7 +35,7 @@
                 _blogContext.Set<IdentityUser>().Remove(user);
                 await _blogContext.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return false;
             }

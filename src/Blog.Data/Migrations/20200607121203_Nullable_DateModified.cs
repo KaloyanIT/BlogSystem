@@ -90,12 +90,12 @@ namespace Blog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
-                values: new object[] { new Guid("09fe78f9-3a31-4912-bc0f-2c0ad1f721d4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
+                values: new object[] { new Guid("09fe78f9-3a31-4912-bc0f-2c0ad1f721d4"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null!, "Test", "Test" });
 
             migrationBuilder.InsertData(
                 table: "mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
-                values: new object[] { new Guid("7177ebba-6a39-4c6a-bbe2-6c3fe79f4c5a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
+                values: new object[] { new Guid("7177ebba-6a39-4c6a-bbe2-6c3fe79f4c5a"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null!, "Test2", "Test1" });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

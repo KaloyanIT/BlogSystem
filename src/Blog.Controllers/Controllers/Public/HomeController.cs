@@ -20,7 +20,7 @@
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             var blogs = _blogService.GetAllLatest();
 

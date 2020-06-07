@@ -11,7 +11,8 @@
 
         public Settings()
         {
-
+            Name = string.Empty;
+            Content = string.Empty;
         }
 
         public Settings(string name, string content)

@@ -12,7 +12,11 @@ namespace Blog.Data.Models
 
         public ICollection<BlogPostTag> BlogPostTag { get; private set; }
 
-        public Tag() { }
+        public Tag() 
+        {
+            Name = string.Empty;
+            BlogPostTag = new List<BlogPostTag>();
+        }
 
         public Tag(string name)
         {
@@ -22,6 +26,7 @@ namespace Blog.Data.Models
             }
 
             Name = name;
+            BlogPostTag = new List<BlogPostTag>();
         }
 
         public void EditName(string name)

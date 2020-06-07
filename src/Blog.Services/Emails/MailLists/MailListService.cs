@@ -30,17 +30,21 @@
         {
             var item = await _mailListRepository.GetById(id);
 
+
             if (item == null)
             {
                 //throw
             }
 
+            item.Delete();
             await _mailListRepository.Delete(item);
         }
 
         public async Task Edit(EditMailListServiceModel serviceModel)
         {
-            var item = _mapper.Map<MailList>(serviceModel);
+            var item = await GetById(serviceModel.Id);
+
+            item.Edit(serviceModel.Name, serviceModel.Description);
 
             await _mailListRepository.Save(item);
         }

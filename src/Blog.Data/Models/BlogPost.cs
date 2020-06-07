@@ -2,9 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using Microsoft.AspNetCore.Identity;
-
     using Base;
+    using Microsoft.AspNetCore.Identity;
 
     public class BlogPost : BaseDbObject
     {
@@ -18,14 +17,19 @@
 
         public string UserId { get; private set; }
 
-        public IdentityUser User { get; private set; }
+        public IdentityUser? User { get; private set; }
 
-        public ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
+        public ICollection<BlogPostKeyword>? BlogKeywords { get; private set; }
 
-        public ICollection<BlogPostTag> BlogTags { get; private set; }
+        public ICollection<BlogPostTag>? BlogTags { get; private set; }
 
-        public BlogPost() : base()
+        public BlogPost()
         {
+            Title = string.Empty;
+            Content = string.Empty;
+            Summary = string.Empty;
+            UserId = string.Empty;
+            ShowOnHomePage = true;
         }
 
         public BlogPost(string title, string content, string summary, string userId, bool showOnHomePage = true) : base()

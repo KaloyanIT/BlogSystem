@@ -12,7 +12,11 @@ namespace Blog.Data.Models
 
         public ICollection<BlogPostKeyword> BlogKeywords { get; private set; }
 
-        public Keyword() { }
+        public Keyword() 
+        {
+            Name = string.Empty;
+            BlogKeywords = new List<BlogPostKeyword>();
+        }
 
         public Keyword(string name)
         {
@@ -22,6 +26,7 @@ namespace Blog.Data.Models
             }
 
             Name = name;
+            BlogKeywords = new List<BlogPostKeyword>();
         }
     }
 }
