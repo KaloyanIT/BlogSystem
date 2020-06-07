@@ -13,8 +13,10 @@
 
         public MailList(string name, string description)
         {
-            this.Name = name;
-            this.Description = description;
+            Name = name;
+            Description = description;
+
+            MailListSubscribers = new List<MailListSubscriber>();
         }
     }
 }
