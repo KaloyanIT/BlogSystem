@@ -1,5 +1,6 @@
 ﻿namespace Blog.Controllers.Controllers.Admin.Emails
 {
+    using System;
     using System.Threading.Tasks;
     using AutoMapper;
     using Blog.Controllers.ViewModels.Admin.Emails.MailLists;
@@ -58,6 +59,19 @@
         public IActionResult Edit()
         {
             return View();
+        }
+
+        [Route("delete")]
+        public IActionResult Delete(Guid? id)
+        {
+            if(!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            _mailListService.Delete(id.Value);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

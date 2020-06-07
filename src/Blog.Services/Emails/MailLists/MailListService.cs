@@ -6,6 +6,7 @@
     using Data.Models.Emails;
     using Models;
     using System.Threading.Tasks;
+    using System;
 
     public class MailListService : IMailListService
     {
@@ -23,6 +24,18 @@
             var mailList = new MailList(serviceModel.Name, serviceModel.Description);
 
             await _mailListRepository.Save(mailList);
+        }
+
+        public async Task Delete(Guid id)
+        {
+            var item = await _mailListRepository.GetById(id);
+
+            if(item == null)
+            {
+                //throw
+            }
+
+            await _mailListRepository.Delete(item);
         }
 
         public IQueryable<MailList> GetAll()

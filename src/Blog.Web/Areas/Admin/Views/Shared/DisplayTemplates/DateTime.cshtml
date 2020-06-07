@@ -1,6 +1,6 @@
-﻿@model DateTime
+﻿@model DateTime?
 
-@if (Model != null)
+@if (Model.HasValue)
 {
-    @Model.ToLocalTime().ToString("MM/dd/yyyy h:mm tt");
+    @Model.Value.ToLocalTime().ToString("MM/dd/yyyy h:mm tt");
 }
