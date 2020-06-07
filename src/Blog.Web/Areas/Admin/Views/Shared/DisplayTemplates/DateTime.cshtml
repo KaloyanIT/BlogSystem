@@ -1,0 +1,6 @@
+﻿@model DateTime
+
+@if (Model != null)
+{
+    @Model.ToLocalTime().ToString("MM/dd/yyyy h:mm tt");
+}
