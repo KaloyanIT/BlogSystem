@@ -17,6 +17,6 @@
         public DateTime DateCreated { get; set; }
 
         [DisplayName("Last Modified")]
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
     }
 }

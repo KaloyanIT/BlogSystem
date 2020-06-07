@@ -4,6 +4,6 @@
 
     public interface IHaveDateModified
     {
-        DateTime DateModified { get; set; }
+        DateTime? DateModified { get; set; }
     }
 }
