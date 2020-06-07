@@ -1,6 +1,7 @@
 ﻿namespace Blog.Data.Models.Emails
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Blog.Data.Base;
 
     public class Subscriber : BaseDbObject

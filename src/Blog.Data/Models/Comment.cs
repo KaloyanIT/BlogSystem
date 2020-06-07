@@ -11,9 +11,9 @@
 
         public string AttachedItemType { get; private set; }
 
-        public string UserId { get; private set; }
+        public string? UserId { get; private set; }
 
-        public IdentityUser User { get; private set; }
+        public IdentityUser? User { get; private set; }
 
         public string Username { get; private set; }
 
@@ -21,9 +21,15 @@
 
         public string Content { get; private set; }
 
-        public Comment() { }
+        public Comment() 
+        {
+            AttachedItemType = string.Empty;
+            Username = string.Empty;
+            Email = string.Empty;
+            Content = string.Empty;
+        }
 
-        public Comment(Guid itemId, string username, string email, string content, string userId = "")
+        public Comment(Guid itemId, string username, string email, string content, string userId = "", string attchementType = "")
         {
             if (itemId == null || itemId == Guid.Empty)
             {
@@ -56,6 +62,8 @@
             Username = username;
             Email = email;
             Content = content;
+            AttachedItemType = attchementType;
+
         }
     }
 }

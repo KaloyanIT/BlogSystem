@@ -20,27 +20,27 @@
 
         #region DatabaseSets
 
-        public DbSet<BlogPost> Blogs { get; set; }
+        public DbSet<BlogPost> Blogs { get; set; } = null!;
 
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Comment> Comments { get; set; } = null!;
 
-        public DbSet<BlogPostKeyword> BlogPostKeywords { get; set; }
+        public DbSet<BlogPostKeyword> BlogPostKeywords { get; set; } = null!;
 
-        public DbSet<BlogPostTag> BlogPostTags { get; set; }
+        public DbSet<BlogPostTag> BlogPostTags { get; set; } = null!;
 
-        public DbSet<Keyword> Keywords { get; set; }
+        public DbSet<Keyword> Keywords { get; set; } = null!;
 
-        public DbSet<Tag> Tags { get; set; }
+        public DbSet<Tag> Tags { get; set; } = null!;
 
-        public DbSet<Settings> Settings { get; set; }
+        public DbSet<Settings> Settings { get; set; } = null!;
 
         //Emails Models
 
-        public DbSet<MailList> MailLists { get; set; }
+        public DbSet<MailList> MailLists { get; set; } = null!;
 
-        public DbSet<Subscriber> Subscribers { get; set; }
+        public DbSet<Subscriber> Subscribers { get; set; } = null!;
 
-        public DbSet<MailListSubscriber> MailListSubscribers { get; set; }
+        public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {

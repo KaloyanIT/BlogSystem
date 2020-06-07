@@ -28,41 +28,50 @@ namespace Blog.UnitTests
 
         public async Task<T> GetById(Guid id)
         {
-            return (from temp in this.Items
-                    where temp.Id == id
-                    select temp).FirstOrDefault();
+            return await Task.Run(() =>
+            {
+                return (from temp in this.Items
+                        where temp.Id == id
+                        select temp).FirstOrDefault();
+            });
         }
 
         public async Task Save(T saveThis)
         {
-            if (saveThis == null)
+            await Task.Run(() =>
             {
-                throw new ArgumentNullException("saveThis", "Argument cannot be null.");
-            }
+                if (saveThis == null)
+                {
+                    throw new ArgumentNullException("saveThis", "Argument cannot be null.");
+                }
 
-            if (saveThis.Id == this.currId)
-            {
-                // assign new identity value
-                saveThis.Id = this.GetNextIdValue();
-            }
+                if (saveThis.Id == this.currId)
+                {
+                    // assign new identity value
+                    saveThis.Id = this.GetNextIdValue();
+                }
 
-            if (this.Items.Contains(saveThis) == false)
-            {
-                this.Items.Add(saveThis);
-            }
+                if (this.Items.Contains(saveThis) == false)
+                {
+                    this.Items.Add(saveThis);
+                }
+            });
         }
 
         public async Task Delete(T deleteThis)
         {
-            if (deleteThis == null)
+            await Task.Run(() =>
             {
-                throw new ArgumentNullException("deleteThis", "Argument cannot be null.");
-            }
+                if (deleteThis == null)
+                {
+                    throw new ArgumentNullException("deleteThis", "Argument cannot be null.");
+                }
 
-            if (this.Items.Contains(deleteThis) == true)
-            {
-                this.Items.Remove(deleteThis);
-            }
+                if (this.Items.Contains(deleteThis) == true)
+                {
+                    this.Items.Remove(deleteThis);
+                }
+            });
         }
 
         protected Guid GetNextIdValue()

@@ -14,7 +14,7 @@
         public static EmailConfiguration GetEmailConfiguration(this IConfiguration configuration)
         {
             var emailConfiguration = configuration
-                    .GetSection("EmailConfiguration")
+                    .GetSection(EmailConfigurationName)
                     .Get<EmailConfiguration>();
 
             if(emailConfiguration == null)

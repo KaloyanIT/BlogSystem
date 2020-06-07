@@ -10,11 +10,11 @@
         {
             builder.HasKey(bc => new { bc.MailListId, bc.SubscriberId });
 
-            builder.HasOne(bc => bc.MailList)
+            builder.HasOne(bc => bc.MailList!)
                 .WithMany(b => b.MailListSubscribers)
                 .HasForeignKey(bc => bc.MailListId);
 
-            builder.HasOne(bc => bc.Subscriber)
+            builder.HasOne(bc => bc.Subscriber!)
                  .WithMany(c => c.MailListSubscriber)
                  .HasForeignKey(bc => bc.SubscriberId);
         }

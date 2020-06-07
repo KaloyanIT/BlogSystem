@@ -7,11 +7,11 @@
     {
         public Guid BlogPostId { get; private set; }
 
-        public BlogPost BlogPost { get; private set; }
+        public BlogPost? BlogPost { get; private set; }
 
         public Guid KeywordId { get; private set; }
 
-        public Keyword Keyword { get; private set; }
+        public Keyword? Keyword { get; private set; }
 
         public BlogPostKeyword()
         {

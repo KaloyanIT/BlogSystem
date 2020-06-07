@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Blog.Infrastructure.Emails;
     using Infrastructure.Emails;
     using MailKit.Net.Smtp;
     using Microsoft.Extensions.Logging;
@@ -44,7 +43,7 @@
                 }
                 catch(Exception ex)
                 {
-                    _logger.LogError("Email can not be sent");
+                    _logger.LogError(ex, "Email can not be sent");
                 }
                 finally
                 {

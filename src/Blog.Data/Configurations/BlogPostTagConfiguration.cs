@@ -13,11 +13,11 @@
 
             builder.HasKey(bc => new { bc.BlogPostId, bc.TagId });
 
-            builder.HasOne(bc => bc.BlogPost)
+            builder.HasOne(bc => bc.BlogPost!)
                 .WithMany(b => b.BlogTags)
                 .HasForeignKey(bc => bc.BlogPostId);
 
-            builder.HasOne(bc => bc.Tag)
+            builder.HasOne(bc => bc.Tag!)
                 .WithMany(c => c.BlogPostTag)
                 .HasForeignKey(bc => bc.TagId);
         }
