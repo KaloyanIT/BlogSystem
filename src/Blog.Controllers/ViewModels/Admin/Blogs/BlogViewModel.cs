@@ -13,20 +13,20 @@
 
         public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        public string Summary { get; set; }
+        public string Summary { get; set; } = null!;
 
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
 
-        public string CreatedBy { get; set; }
+        public string CreatedBy { get; set; } = null!;
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<BlogPost, BlogViewModel>()
-                .ForMember(x => x.CreatedBy, x => x.MapFrom(z => z.User.UserName));
+                .ForMember(x => x.CreatedBy, x => x.MapFrom(z => z.User!.UserName));
         }
     }
 }

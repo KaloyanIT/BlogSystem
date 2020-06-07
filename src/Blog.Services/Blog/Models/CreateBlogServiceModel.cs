@@ -8,18 +8,18 @@ namespace Blog.Services.Blog.Models
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
 
-        public string Summary { get; set; }
+        public string Summary { get; set; } = null!;
 
         public bool ShowOnHomePage { get; set; }
 
-        public string UserId { get; set; }
+        public string UserId { get; set; } = null!;
 
         public DateTime DateCreated { get; set; }
 
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
     }
 }

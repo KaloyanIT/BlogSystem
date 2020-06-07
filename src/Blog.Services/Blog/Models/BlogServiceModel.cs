@@ -8,11 +8,11 @@
     {
         public Guid Id { get; set; }
 
-        public string Title { get; set; }
+        public string Title { get; set; } = null!;
 
-        public string Content { get; set; }
+        public string Content { get; set; } = null!;
 
-        public string Summary { get; set; }
+        public string Summary { get; set; } = null!;
 
         public bool ShowOnHomePage { get; set; }
 

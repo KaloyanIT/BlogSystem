@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
     using Data;
+    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 
     public class UserService : IUserService
     {
@@ -54,7 +55,7 @@
         {
             if (string.IsNullOrEmpty(id))
             {
-                return null;
+                return null!;
             }
 
             var user = await _blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
@@ -66,14 +67,14 @@
         {
             if (string.IsNullOrEmpty(username))
             {
-                return null;
+                return null!;
             }
 
             var user = await GetAll().FirstOrDefaultAsync(x => x.UserName == username);
 
             if (user == null)
             {
-                return null;
+                return null!;
             }
 
             return user.Id;

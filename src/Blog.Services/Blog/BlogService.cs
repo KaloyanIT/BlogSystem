@@ -67,7 +67,7 @@
         {
             if (!id.HasValue)
             {
-                return null;
+                return null!;
             }
 
             var result = await _blogRepository.GetById(id.Value);

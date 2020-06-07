@@ -19,15 +19,15 @@
         }
 
 
-        public IActionResult Login(string returnUrl = null)
+        public IActionResult Login(string? returnUrl = null)
         {
-            ViewData["ReturnUrl"] = returnUrl;
+            ViewData["ReturnUrl"] = returnUrl ?? "";
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel, string? returnUrl = null)
         {
             //returnUrl = returnUrl ?? Url.Content("~/admin");
             if (!ModelState.IsValid)
@@ -65,16 +65,16 @@
             return View();
         }
 
-        public async Task<IActionResult> Logout(string returnUrl = null)
+        public async Task<IActionResult> Logout(string? returnUrl)
         {
             await _signInManager.SignOutAsync();
 
             return RedirectToLocal(returnUrl);
         }
 
-        private IActionResult RedirectToLocal(string returnUrl)
+        private IActionResult RedirectToLocal(string? returnUrl)
         {
-            if (Url.IsLocalUrl(returnUrl))
+            if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                 return Redirect(returnUrl);
             else
                 return RedirectToAction(nameof(HomeController.Index), "Home");

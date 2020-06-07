@@ -51,9 +51,7 @@
             services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
                 opt.TokenLifespan = TimeSpan.FromDays(3));
 
-
-
-            services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration.CreateMapper());
+            services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration!.CreateMapper());
 
             return services;
         }
