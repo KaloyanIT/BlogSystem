@@ -26,7 +26,6 @@ namespace Blog.UnitTests.Domain
 
             //Assert
             Assert.True(baseModel.DateCreated != null);
-            Assert.True(baseModel.DateModified != null);
         }
     }
 
