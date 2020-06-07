@@ -8,7 +8,7 @@
 
     public class AutoMapperConfig
     {
-        public static MapperConfiguration MapperConfiguration { get; private set; }
+        public static MapperConfiguration? MapperConfiguration { get; private set; }
 
         public static void Init()
         {
@@ -16,7 +16,7 @@
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var projectAssemblies = assemblies
-                .Where(a => a.FullName.Contains("Blog")).ToList();
+                .Where(a => a.FullName!.Contains("Blog")).ToList();
 
             MapperConfiguration = new MapperConfiguration(
                 cfg =>
@@ -58,7 +58,7 @@
                     }
                     else if (typeof(IHaveCustomMap).IsAssignableFrom(type))
                     {
-                        var map = (IHaveCustomMap)Activator.CreateInstance(type);
+                        var map = (IHaveCustomMap)Activator.CreateInstance(type)!;
 
                         map.CreateMappings(mapperConfiguration);
                     }

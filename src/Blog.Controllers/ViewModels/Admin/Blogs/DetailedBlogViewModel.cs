@@ -5,6 +5,6 @@
 
     public class DetailedBlogViewModel : BlogViewModel, IHaveMapFrom<BlogPost>
     {
-        public string Username { get; set; }
+        public string Username { get; set; } = null!;
     }
 }

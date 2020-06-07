@@ -80,7 +80,7 @@
             //Add validation
             var serviceModel = _mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
 
-            var userId = await _userService.GetIdByUsername(User.Identity.Name);
+            var userId = await _userService.GetIdByUsername(User.Identity.Name!);
 
             if (string.IsNullOrEmpty(userId))
             {
@@ -132,7 +132,7 @@
                 {
                     var serviceModel = _mapper.Map<BlogServiceModel>(blog);
 
-                    var userId = await _userService.GetIdByUsername(User.Identity.Name);
+                    var userId = await _userService.GetIdByUsername(User.Identity.Name!);
 
                     if (string.IsNullOrEmpty(userId))
                     {

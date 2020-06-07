@@ -66,9 +66,10 @@ namespace Blog.Controllers.Controllers.Public
                 return View(resetPasswordModel);
 
             var user = await _userManager.FindByEmailAsync(resetPasswordModel.Email);
+
             if (user == null)
             {
-                RedirectToAction(nameof(ResetPasswordConfirmation));
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
 
             var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPasswordModel.Token, resetPasswordModel.Password);

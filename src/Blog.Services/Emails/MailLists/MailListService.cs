@@ -30,10 +30,10 @@
         {
             var item = await _mailListRepository.GetById(id);
 
-
             if (item == null)
             {
                 //throw
+                return;
             }
 
             item.Delete();

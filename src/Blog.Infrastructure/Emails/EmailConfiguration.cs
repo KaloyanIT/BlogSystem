@@ -13,5 +13,15 @@
         public string Password { get; set; }
 
         public bool UseSSL { get; set; }
+
+        public EmailConfiguration()
+        {
+            From = string.Empty;
+            SmtpServer = string.Empty;
+            Port = 0;
+            Username = string.Empty;
+            Password = string.Empty;
+            UseSSL = false;
+        }
     }
 }
