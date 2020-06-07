@@ -1,11 +1,14 @@
 ﻿namespace Blog.Controllers.Controllers.Admin.Emails
 {
+    using System.Threading.Tasks;
     using AutoMapper;
     using Blog.Controllers.ViewModels.Admin.Emails.MailLists;
     using Blog.Data.Extensions;
     using Blog.Infrastructure.Extensions;
     using Blog.Services.Emails.MailLists;
+    using Blog.Services.Emails.MailLists.Models;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
     [Area("Admin")]
     [Route("emails/mailLists")]
@@ -32,6 +35,23 @@
         public IActionResult Create()
         {
             return View();
+        }
+
+        [HttpPost]
+        [Route("create")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(CreateMailListViewModel viewModel)
+        {
+            if(!ModelState.IsValid)
+            {
+                return this.View(viewModel);
+            }
+
+            var serviceModel = _mapper.Map<CreateMailListServiceModel>(viewModel);
+
+            await _mailListService.Create(serviceModel);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [Route("edit")]
