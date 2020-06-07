@@ -3,11 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
-    using Blog.Controllers.ViewModels.Admin.Emails.MailLists;
-    using Blog.Data.Extensions;
-    using Blog.Infrastructure.Extensions;
-    using Blog.Services.Emails.MailLists;
-    using Blog.Services.Emails.MailLists.Models;
+    using ViewModels.Admin.Emails.MailLists;
+    using Data.Extensions;
+    using Infrastructure.Extensions;
+    using Services.Emails.MailLists;
+    using Services.Emails.MailLists.Models;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
@@ -43,9 +43,9 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateMailListViewModel viewModel)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(viewModel);
+                return View(viewModel);
             }
 
             var serviceModel = _mapper.Map<CreateMailListServiceModel>(viewModel);
@@ -56,15 +56,51 @@
         }
 
         [Route("edit")]
-        public IActionResult Edit()
+        public async Task<IActionResult> Edit(Guid? id)
         {
-            return View();
+            if(!id.HasValue)
+            {
+                return NotFound();
+            }
+
+            var item = await _mailListService.GetById(id.Value);
+
+            if(item == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<EditMailListViewModel>(item);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [Route("edit")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, EditMailListViewModel viewModel)
+        {
+            if(id != viewModel.Id)
+            {
+                return NotFound();
+            }
+
+            if(!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            var serviceModel = _mapper.Map<EditMailListServiceModel>(viewModel);
+
+            await _mailListService.Edit(serviceModel);
+
+            return RedirectToAction(nameof(Index));
         }
 
         [Route("delete")]
         public IActionResult Delete(Guid? id)
         {
-            if(!id.HasValue)
+            if (!id.HasValue)
             {
                 return NotFound();
             }

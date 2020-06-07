@@ -14,5 +14,9 @@
         Task Create(CreateMailListServiceModel serviceModel);
 
         Task Delete(Guid id);
+
+        Task<MailList> GetById(Guid id);
+
+        Task Edit(EditMailListServiceModel serviceModel);
     }
 }

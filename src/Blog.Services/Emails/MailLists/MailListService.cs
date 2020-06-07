@@ -1,12 +1,12 @@
 ﻿namespace Blog.Services.Emails.MailLists
 {
-    using System.Linq;
-    using AutoMapper;
-    using Data.Repositories.MailLists;
-    using Data.Models.Emails;
-    using Models;
-    using System.Threading.Tasks;
     using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using AutoMapper;
+    using Data.Models.Emails;
+    using Data.Repositories.MailLists;
+    using Models;
 
     public class MailListService : IMailListService
     {
@@ -30,7 +30,7 @@
         {
             var item = await _mailListRepository.GetById(id);
 
-            if(item == null)
+            if (item == null)
             {
                 //throw
             }
@@ -38,11 +38,25 @@
             await _mailListRepository.Delete(item);
         }
 
+        public async Task Edit(EditMailListServiceModel serviceModel)
+        {
+            var item = _mapper.Map<MailList>(serviceModel);
+
+            await _mailListRepository.Save(item);
+        }
+
         public IQueryable<MailList> GetAll()
         {
-            var result = this._mailListRepository.GetAll();
+            var result = _mailListRepository.GetAll();
 
             return result;
+        }
+
+        public Task<MailList> GetById(Guid id)
+        {
+            var item = _mailListRepository.GetById(id);
+
+            return item;
         }
     }
 }
