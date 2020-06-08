@@ -18,14 +18,12 @@
     [Area("Admin")]
     public class BlogsController : Controller
     {
-        private readonly BlogContext _context;
         private readonly IBlogService _blogService;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public BlogsController(BlogContext context, IBlogService blogService, IUserService userService, IMapper mapper)
+        public BlogsController(IBlogService blogService, IUserService userService, IMapper mapper)
         {
-            _context = context;
             _blogService = blogService;
             _userService = userService;
             _mapper = mapper;
@@ -161,38 +159,38 @@
             return View(blog);
         }
 
-        // GET: Blogs/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        //// GET: Blogs/Delete/5
+        //public async Task<IActionResult> Delete(Guid? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var blog = await _context.Blogs
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (blog == null)
-            {
-                return NotFound();
-            }
+        //    var blog = await _context.Blogs
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (blog == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(blog);
-        }
+        //    return View(blog);
+        //}
 
         // POST: Blogs/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
-        {
-            var blog = await _context.Blogs.FindAsync(id);
-            _context.Blogs.Remove(blog);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> DeleteConfirmed(Guid id)
+        //{
+        //    var blog = await _context.Blogs.FindAsync(id);
+        //    _context.Blogs.Remove(blog);
+        //    await _context.SaveChangesAsync();
+        //    return RedirectToAction(nameof(Index));
+        //}
 
-        private bool BlogExists(Guid id)
-        {
-            return _context.Blogs.Any(e => e.Id == id);
-        }
+        //private bool BlogExists(Guid id)
+        //{
+        //    return _context.Blogs.Any(e => e.Id == id);
+        //}
     }
 }

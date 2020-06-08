@@ -9,10 +9,13 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.4"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Blog.Data.Base\Blog.Data.Base.csproj" />
+    <ProjectReference Include="..\Blog.Data.Models\Blog.Data.Models.csproj" />
+    <ProjectReference Include="..\src\Blog.Infrastructure\Blog.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

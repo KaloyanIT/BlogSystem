@@ -3,10 +3,9 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data.Models.Context;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
-    using Data;
-    using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
 
     public class UserService : IUserService
     {

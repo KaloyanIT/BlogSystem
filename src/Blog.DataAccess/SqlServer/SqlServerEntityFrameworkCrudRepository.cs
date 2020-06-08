@@ -4,6 +4,7 @@ namespace Blog.DataAccess.SqlServer
 {
     using System.Linq;
     using System.Threading.Tasks;
+    using Blog.Data.Base;
 
     public abstract class SqlServerEntityFrameworkCrudRepository<TEntity, TDbContext> :
         SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext>, IRepository<TEntity>

@@ -3,13 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
-    using ViewModels.Admin.Emails.MailLists;
-    using Data.Extensions;
+    using Data.Base.Extensions;
     using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Mvc;
     using Services.Emails.MailLists;
     using Services.Emails.MailLists.Models;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore.Metadata.Internal;
+    using ViewModels.Admin.Emails.MailLists;
 
     [Area("Admin")]
     [Route("emails/mailLists")]
@@ -58,14 +57,14 @@
         [Route("edit")]
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if(!id.HasValue)
+            if (!id.HasValue)
             {
                 return NotFound();
             }
 
             var item = await _mailListService.GetById(id.Value);
 
-            if(item == null)
+            if (item == null)
             {
                 return NotFound();
             }
@@ -80,12 +79,12 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditMailListViewModel viewModel)
         {
-            if(id != viewModel.Id)
+            if (id != viewModel.Id)
             {
                 return NotFound();
             }
 
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return View(viewModel);
             }

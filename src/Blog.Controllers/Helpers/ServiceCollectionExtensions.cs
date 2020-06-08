@@ -1,28 +1,27 @@
 ﻿namespace Blog.Controllers.Helpers
 {
+    using System;
     using System.Linq;
     using AutoMapper;
+    using Data.Base;
+    using Data.Models;
+    using Data.Models.Context;
+    using Identity;
+    using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-
-    using Data;
-    using Data.Base;
-    using Infrastructure.AutoMapper;
     using Services.Base;
-    using Blog.Data.Models;
-    using System;
-    using Blog.Controllers.Identity;
 
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection InjectIdentity(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IBlogContext, BlogContext>();
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
+            services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
 
             services.AddIdentity<User, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
