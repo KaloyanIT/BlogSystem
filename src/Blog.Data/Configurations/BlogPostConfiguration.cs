@@ -1,14 +1,15 @@
 ﻿namespace Blog.Data.Configurations
 {
-    using Blog.Data.Models;
+    using Models;
+    using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class BlogConfiguration : IEntityTypeConfiguration<BlogPost>
+    public class BlogPostConfiguration : IEntityTypeConfiguration<BlogPost>
     {
         public void Configure(EntityTypeBuilder<BlogPost> builder)
         {
-            builder.ToTable("blogPosts");
+            builder.ToTable(DataBaseConstants.BLOG_POST_TABLE_NAME);
         }
     }
 }

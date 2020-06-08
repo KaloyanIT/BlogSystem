@@ -1,5 +1,6 @@
 ﻿namespace Blog.Data.Configurations
 {
+    using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,7 +10,7 @@
     {
         public void Configure(EntityTypeBuilder<BlogPostKeyword> builder)
         {
-            builder.ToTable("blogPostKeywords");
+            builder.ToTable(DataBaseConstants.BLOG_POST_KEYWORD_TABLE_NAME);
 
             builder.HasKey(bc => new { bc.BlogPostId, bc.KeywordId });
 
