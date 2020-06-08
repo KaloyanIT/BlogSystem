@@ -98,14 +98,14 @@
         }
 
         [Route("delete")]
-        public IActionResult Delete(Guid? id)
+        public async Task<IActionResult> Delete(Guid? id)
         {
             if (!id.HasValue)
             {
                 return NotFound();
             }
 
-            _mailListService.Delete(id.Value);
+            await _mailListService.Delete(id.Value);
 
             return RedirectToAction(nameof(Index));
         }
