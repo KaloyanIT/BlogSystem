@@ -5,11 +5,11 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-    public class SettingsConfiguration : IEntityTypeConfiguration<Settings>
+    public class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
-        public void Configure(EntityTypeBuilder<Settings> builder)
+        public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable(DataBaseConstants.SETTINGS_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.COMMENT_TABLE_NAME);
         }
     }
 }

@@ -1,13 +1,16 @@
-﻿namespace Blog.Data.Configurations
+﻿namespace Blog.Data.Configurations.Emails
 {
     using Models.Emails;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
+    using Infrastructure.Constants;
 
     public class MailListSubscriberConfiguration : IEntityTypeConfiguration<MailListSubscriber>
     {
         public void Configure(EntityTypeBuilder<MailListSubscriber> builder)
         {
+            builder.ToTable(DataBaseConstants.MAIL_LIST_SUBSCRIBER_TABLE_NAME);
+
             builder.HasKey(bc => new { bc.MailListId, bc.SubscriberId });
 
             builder.HasOne(bc => bc.MailList!)
