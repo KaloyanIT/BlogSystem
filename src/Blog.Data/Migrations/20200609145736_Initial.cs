@@ -126,7 +126,7 @@ namespace Blog.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "fm_roleClaims",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -137,9 +137,9 @@ namespace Blog.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.PrimaryKey("PK_fm_roleClaims", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        name: "FK_fm_roleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
@@ -169,91 +169,6 @@ namespace Blog.Data.Migrations
                         name: "FK_fm_mailListsSubscribers_fm_subscribers_SubscriberId",
                         column: x => x.SubscriberId,
                         principalTable: "fm_subscribers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(nullable: false),
-                    ClaimType = table.Column<string>(nullable: true),
-                    ClaimValue = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_fm_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "fm_users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(nullable: false),
-                    ProviderKey = table.Column<string>(nullable: false),
-                    ProviderDisplayName = table.Column<string>(nullable: true),
-                    UserId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_fm_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "fm_users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    RoleId = table.Column<string>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_fm_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "fm_users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(nullable: false),
-                    LoginProvider = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
-                    Value = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_fm_users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "fm_users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -305,6 +220,91 @@ namespace Blog.Data.Migrations
                         principalTable: "fm_users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fm_userClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: false),
+                    ClaimType = table.Column<string>(nullable: true),
+                    ClaimValue = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_fm_userClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_fm_userClaims_fm_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "fm_users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fm_userLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(nullable: false),
+                    ProviderKey = table.Column<string>(nullable: false),
+                    ProviderDisplayName = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_fm_userLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_fm_userLogins_fm_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "fm_users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fm_userRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    RoleId = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_fm_userRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_fm_userRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_fm_userRoles_fm_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "fm_users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "fm_userTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(nullable: false),
+                    LoginProvider = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
+                    Value = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_fm_userTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_fm_userTokens_fm_users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "fm_users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -364,17 +364,12 @@ namespace Blog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
-                values: new object[] { new Guid("67d42294-b944-4021-b398-913eb1d29f57"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
+                values: new object[] { new Guid("be3c1b9a-92a2-4f9e-8b0e-522614e25c19"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
 
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
-                values: new object[] { new Guid("b37c6cce-91dd-4c13-a2d2-1e57f7e660d8"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
+                values: new object[] { new Guid("d71f1922-5aac-41d9-ba6a-555040890655"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
@@ -382,21 +377,6 @@ namespace Blog.Data.Migrations
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_fm_blogPostKeywords_KeywordId",
@@ -424,6 +404,26 @@ namespace Blog.Data.Migrations
                 column: "SubscriberId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_fm_roleClaims_RoleId",
+                table: "fm_roleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_fm_userClaims_UserId",
+                table: "fm_userClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_fm_userLogins_UserId",
+                table: "fm_userLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_fm_userRoles_RoleId",
+                table: "fm_userRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "fm_users",
                 column: "NormalizedEmail");
@@ -439,21 +439,6 @@ namespace Blog.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
                 name: "fm_blogPostKeywords");
 
             migrationBuilder.DropTable(
@@ -466,10 +451,22 @@ namespace Blog.Data.Migrations
                 name: "fm_mailListsSubscribers");
 
             migrationBuilder.DropTable(
+                name: "fm_roleClaims");
+
+            migrationBuilder.DropTable(
                 name: "fm_settings");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "fm_userClaims");
+
+            migrationBuilder.DropTable(
+                name: "fm_userLogins");
+
+            migrationBuilder.DropTable(
+                name: "fm_userRoles");
+
+            migrationBuilder.DropTable(
+                name: "fm_userTokens");
 
             migrationBuilder.DropTable(
                 name: "fm_keywords");
@@ -485,6 +482,9 @@ namespace Blog.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "fm_subscribers");
+
+            migrationBuilder.DropTable(
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "fm_users");

@@ -4,14 +4,16 @@ using Blog.Data.Models.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20200609145736_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,14 +175,14 @@ namespace Blog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("a0be145c-8f9b-4eab-82f2-269a3ad9ac49"),
+                            Id = new Guid("be3c1b9a-92a2-4f9e-8b0e-522614e25c19"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Test",
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("e33a0889-0772-456c-ae7c-0354fb2c93fe"),
+                            Id = new Guid("d71f1922-5aac-41d9-ba6a-555040890655"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Test2",
                             Name = "Test1"
@@ -331,7 +333,7 @@ namespace Blog.Data.Migrations
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("fm_roles");
+                    b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -5,6 +5,7 @@
     using Blog.Data.Base.Extensions;
     using Blog.Data.Models;
     using Blog.Data.Models.Emails;
+    using Blog.Infrastructure.Constants;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -64,6 +65,13 @@
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityRole>(entity => { entity.ToTable(name: DataBaseConstants.ROLES_TABLE_NAME); });
+            modelBuilder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable(DataBaseConstants.USER_ROLES_TABLE_NAME); });
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity => { entity.ToTable(DataBaseConstants.USER_CLAIMS_TABLE_NAME); });
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable(DataBaseConstants.USER_LOGIN_TABLE_NAME); });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable(DataBaseConstants.USER_TOKEN_TABLE_NAME); });
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity => { entity.ToTable(DataBaseConstants.ROLE_CLAIM_TABLE_NAME); });
 
             modelBuilder.ApplyDbConfiguration();
         }

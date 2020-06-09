@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20200608230621_Initial")]
-    partial class Initial
+    [Migration("20200609150137_Rename_Role_Table")]
+    partial class Rename_Role_Table
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,14 +175,14 @@ namespace Blog.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("67d42294-b944-4021-b398-913eb1d29f57"),
+                            Id = new Guid("a0be145c-8f9b-4eab-82f2-269a3ad9ac49"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Test",
                             Name = "Test"
                         },
                         new
                         {
-                            Id = new Guid("b37c6cce-91dd-4c13-a2d2-1e57f7e660d8"),
+                            Id = new Guid("e33a0889-0772-456c-ae7c-0354fb2c93fe"),
                             DateCreated = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Description = "Test2",
                             Name = "Test1"
@@ -333,7 +333,7 @@ namespace Blog.Data.Migrations
                         .HasName("RoleNameIndex")
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("fm_roles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -357,7 +357,7 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("fm_roleClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
@@ -452,7 +452,7 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("fm_userClaims");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
@@ -474,7 +474,7 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("fm_userLogins");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
@@ -489,7 +489,7 @@ namespace Blog.Data.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("fm_userRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -508,7 +508,7 @@ namespace Blog.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("fm_userTokens");
                 });
 
             modelBuilder.Entity("Blog.Data.Models.User", b =>
