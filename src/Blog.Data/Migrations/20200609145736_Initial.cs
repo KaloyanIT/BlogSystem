@@ -364,12 +364,16 @@ namespace Blog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("be3c1b9a-92a2-4f9e-8b0e-522614e25c19"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("d71f1922-5aac-41d9-ba6a-555040890655"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",

@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Blog.Data.Base;
-    using Data.Base;
 
     public interface IRepository<T> where T : IDbObject
     {

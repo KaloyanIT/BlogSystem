@@ -29,11 +29,20 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data.Base", "src\Blog.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers", "{2F92D872-CC90-448E-971C-A1F22D926068}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Controllers.BackEnd", "src\Blog.Controllers.BackEnd\Blog.Controllers.BackEnd.csproj", "{8C9BDBF5-A648-4936-931B-30842537287A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Controllers.BackEnd", "src\Blog.Controllers.BackEnd\Blog.Controllers.BackEnd.csproj", "{8C9BDBF5-A648-4936-931B-30842537287A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "src\ViewModels", "{1BF19B3B-D2E8-4EB1-9B27-EC2D2C66B5BC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{1BF19B3B-D2E8-4EB1-9B27-EC2D2C66B5BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.ViewModels.BackEnd", "src\Blog.ViewModels.BackEnd\Blog.ViewModels.BackEnd.csproj", "{B340C4D7-DE2F-45C9-9D25-DF603368B1ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.ViewModels.BackEnd", "src\Blog.ViewModels.BackEnd\Blog.ViewModels.BackEnd.csproj", "{B340C4D7-DE2F-45C9-9D25-DF603368B1ED}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E57E6404-D851-4BE7-8DC1-E7DDE51B4FD6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EE02D06-20CF-4760-B6ED-8CC8954AC3DB}"
+	ProjectSection(SolutionItems) = preProject
+		src\Blog.Data.Base\.editorconfig = src\Blog.Data.Base\.editorconfig
+		src\Blog.Data.Base\DefaultSet.ruleset = src\Blog.Data.Base\DefaultSet.ruleset
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -100,6 +109,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{F6BBB112-592A-4AFB-8083-C5F0249DF2E7} = {B04D31C4-9ABA-4849-9B8D-72A02EE0F535}
 		{D96908D5-A87C-4BC4-A6D3-2F26E81624B5} = {2F92D872-CC90-448E-971C-A1F22D926068}
+		{40BF8C95-03C7-49F7-AE13-984AB89FB15E} = {E57E6404-D851-4BE7-8DC1-E7DDE51B4FD6}
 		{029F4A8D-8E05-4C62-BDD6-BC2C60DC2090} = {B04D31C4-9ABA-4849-9B8D-72A02EE0F535}
 		{41CFDACA-0DDF-4939-99A8-04CEA94070D8} = {B04D31C4-9ABA-4849-9B8D-72A02EE0F535}
 		{2FBF54DF-EC25-476C-A5D0-3727FD71EB3A} = {B04D31C4-9ABA-4849-9B8D-72A02EE0F535}

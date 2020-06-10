@@ -5,14 +5,27 @@
     using System.Reflection;
     using Microsoft.EntityFrameworkCore;
 
+    /// <summary>
+    /// Module Builder Extension Methods
+    /// </summary>
     public static class ModuleBuilderExtensions
     {
-        public static void AddConfiguration<TEntity>(ModelBuilder modelBuilder, IEntityTypeConfiguration<TEntity> configuration)
+        /// <summary>
+        /// Method is used for loading all DatabaseModel Configurations
+        /// </summary>
+        /// <typeparam name="TEntity">Type of entity</typeparam>
+        /// <param name="modelBuilder">Model Builder</param>
+        /// <param name="configuration">Entity Configuration</param>
+        private static void AddConfiguration<TEntity>(ModelBuilder modelBuilder, IEntityTypeConfiguration<TEntity> configuration)
         where TEntity : class
         {
             configuration.Configure(modelBuilder.Entity<TEntity>());
         }
 
+        /// <summary>
+        /// Scan assemblies to find all Database entities configurations
+        /// </summary>
+        /// <param name="modelBuilder">Model Builder</param>
         public static void ApplyDbConfiguration(this ModelBuilder modelBuilder)
         {
             Type interfaceType = typeof(IEntityTypeConfiguration<>);

@@ -41,12 +41,16 @@ namespace Blog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("a0be145c-8f9b-4eab-82f2-269a3ad9ac49"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("e33a0889-0772-456c-ae7c-0354fb2c93fe"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.AddForeignKey(
                 name: "FK_fm_roleClaims_fm_roles_RoleId",
@@ -101,12 +105,16 @@ namespace Blog.Data.Migrations
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("be3c1b9a-92a2-4f9e-8b0e-522614e25c19"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test", "Test" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.InsertData(
                 table: "fm_mailLists",
                 columns: new[] { "Id", "DateCreated", "DateModified", "Description", "Name" },
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 values: new object[] { new Guid("d71f1922-5aac-41d9-ba6a-555040890655"), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Test2", "Test1" });
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
             migrationBuilder.AddForeignKey(
                 name: "FK_fm_roleClaims_AspNetRoles_RoleId",
