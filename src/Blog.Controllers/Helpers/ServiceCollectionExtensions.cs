@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Reflection;
     using AutoMapper;
     using Data.Base;
     using Data.Models;
@@ -96,8 +97,18 @@
         {
             var repositoryType = typeof(ITransientRepository);
 
-            var types = repositoryType
-                .Assembly
+            var assemblyRepositoriesName = "Blog.Data.Repositories";
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            var assembly = assemblies.SingleOrDefault(x => x.GetName().Name == "Blog.Data.Repositories");
+
+            if(assembly == null)
+            {
+                assembly = Assembly.Load(assemblyRepositoriesName);
+            }
+
+            var types = assembly
                 .GetExportedTypes()
                 .Where(t => t.IsClass && !t.IsAbstract)
                 .Select(t => new

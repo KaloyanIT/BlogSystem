@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-namespace Blog.DataAccess.SqlServer
+﻿namespace Blog.DataAccess.SqlServer
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Blog.Data.Base;
+    using Data.Base;
+    using Microsoft.EntityFrameworkCore;
 
     public abstract class SqlServerEntityFrameworkCrudRepository<TEntity, TDbContext> :
         SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext>, IRepository<TEntity>
@@ -28,26 +28,26 @@ namespace Blog.DataAccess.SqlServer
                 throw new ArgumentNullException("Delete entity is null");
             }
 
-            var entry = this.Context.Entry(deleteThis);
+            var entry = Context.Entry(deleteThis);
 
             if (entry.State == EntityState.Detached)
             {
-                this.EntityDbSet.Attach(deleteThis);
+                EntityDbSet.Attach(deleteThis);
             }
 
-            this.EntityDbSet.Remove(deleteThis);
+            EntityDbSet.Remove(deleteThis);
 
-            await this.Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            return this.EntityDbSet;
+            return EntityDbSet;
         }
 
         public async Task<TEntity> GetById(Guid id)
         {
-            return await this.EntityDbSet.FirstOrDefaultAsync(x => x.Id == id);
+            return await EntityDbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task Save(TEntity saveThis)
@@ -57,9 +57,9 @@ namespace Blog.DataAccess.SqlServer
                 throw new ArgumentNullException("Save entity is null");
             }
 
-            await this.VerifyItemIsAddedOrAttachedToDbSet(this.EntityDbSet, saveThis);
+            await VerifyItemIsAddedOrAttachedToDbSet(EntityDbSet, saveThis);
 
-            await this.Context.SaveChangesAsync();
+            await Context.SaveChangesAsync();
         }
     }
 }
