@@ -25,7 +25,7 @@
         {
             if (deleteThis == null)
             {
-                throw new ArgumentNullException("Delete entity is null");
+                throw new ArgumentNullException(nameof(deleteThis), "Delete entity is null");
             }
 
             var entry = Context.Entry(deleteThis);
@@ -54,7 +54,7 @@
         {
             if (saveThis == null)
             {
-                throw new ArgumentNullException("Save entity is null");
+                throw new ArgumentNullException(nameof(saveThis), "Save entity is null");
             }
 
             await VerifyItemIsAddedOrAttachedToDbSet(EntityDbSet, saveThis);

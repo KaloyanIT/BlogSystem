@@ -15,7 +15,7 @@
 
         public TagsController(ITagService tagService)
         {
-            _tagService = tagService ?? throw new ArgumentNullException("tagServiceInstance", "Tag service is null.");
+            _tagService = tagService ?? throw new ArgumentNullException(nameof(tagService), "Tag service is null.");
         }
 
         public IActionResult Index()

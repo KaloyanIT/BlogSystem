@@ -6,7 +6,7 @@ namespace Blog.UnitTests.Domain
 {
     public class CommentShould
     {
-        public string validString = "validWord";
+        private string validString = "validWord";
 
         [Fact]
         public void ThrowArgumentNullException_WhenItemId_IsGuidEmpty()

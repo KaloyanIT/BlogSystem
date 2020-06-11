@@ -8,7 +8,6 @@
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.FileProviders;
@@ -55,7 +54,7 @@
         }
 
 
-        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
 

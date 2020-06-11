@@ -15,7 +15,7 @@
         {
             if (context == null)
             {
-                throw new ArgumentNullException("Missing context.");
+                throw new ArgumentNullException(nameof(context), "Missing context.");
             }
 
             _context = context;
@@ -32,7 +32,8 @@
         public void Dispose()
         {
             ((IDisposable)Context).Dispose();
-        }
+            GC.SuppressFinalize(this);
+        }       
 
         protected async Task VerifyItemIsAddedOrAttachedToDbSet(DbSet<TEntity> dbset, TEntity item)
         {

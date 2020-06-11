@@ -7,7 +7,7 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class MainSeeder
+    public static class MainSeeder
     {
         public static async Task Seed(IServiceProvider serviceProvider, IConfiguration configuration)
         {

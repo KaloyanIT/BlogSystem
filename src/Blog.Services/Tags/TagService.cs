@@ -16,8 +16,8 @@
 
         public TagService(ITagRepository tagSqlRepository, IBlogPostTagRepository blogPostTagRepository)
         {
-            _tagSqlRepository = tagSqlRepository ?? throw new ArgumentNullException("tagSqlRepositoryInstance", "TagSqlRepository is null.");
-            _blogPostTagRepository = blogPostTagRepository ?? throw new ArgumentNullException("blogPostTagRepositoryInstance", "BlogPostTagRepository is null.");
+            _tagSqlRepository = tagSqlRepository ?? throw new ArgumentNullException(nameof(tagSqlRepository), "TagSqlRepository is null.");
+            _blogPostTagRepository = blogPostTagRepository ?? throw new ArgumentNullException(nameof(blogPostTagRepository), "BlogPostTagRepository is null.");
         }
 
         public Task DeleteById(Guid? id)
@@ -36,7 +36,7 @@
         {
             if (!id.HasValue)
             {
-                throw new ArgumentNullException("id", "TagService GetById id has no value");
+                throw new ArgumentNullException(nameof(id), "TagService GetById id has no value");
             }
 
             var result = _tagSqlRepository.GetById(id.Value);
@@ -48,7 +48,7 @@
         {
             if (value == null)
             {
-                throw new ArgumentNullException("tagServiceModel", "TagServiceModel is null.");
+                throw new ArgumentNullException(nameof(value), "TagServiceModel is null.");
             }
             Tag tag;
             if (value.Id == Guid.Empty)

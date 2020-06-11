@@ -21,7 +21,7 @@
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                throw new ArgumentNullException("Blog title is null.");
+                throw new ArgumentNullException(nameof(title), "Blog title is null.");
             }
 
             var result = await GetAll().FirstOrDefaultAsync(x => x.Title == title);

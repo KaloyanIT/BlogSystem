@@ -1,5 +1,6 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
+    using System.Globalization;
     using System.Threading.Tasks;
     using Blog.Controllers.ViewModels.Public.Account;
     using Blog.Data.Models;
@@ -18,6 +19,7 @@
             _signInManager = signInManager;
         }
 
+        
 
         public IActionResult Login(string? returnUrl = null)
         {
@@ -47,7 +49,7 @@
             if (result.IsLockedOut)
             {
                 var forgotPassLink = Url.Action("ForgotPassword", "Account", new { }, Request.Scheme);
-                var content = string.Format("Your account is locked out, to reset your password, please click this link: {0}", forgotPassLink);
+                var content = string.Format(CultureInfo.CurrentCulture, "Your account is locked out, to reset your password, please click this link: {0}", forgotPassLink);
 
                 //var message = new Message(new string[] { logi.Email }, „Locked out account information“, content, null);
                 //await _emailSender.SendEmailAsync(message);
