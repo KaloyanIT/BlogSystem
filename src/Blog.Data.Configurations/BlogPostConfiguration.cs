@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<BlogPost> builder)
         {
-            builder.ToTable(DataBaseConstants.BLOG_POST_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.BlogPostTableName);
         }
     }
 }

@@ -22,12 +22,12 @@
         {
             if (blogPostId == Guid.Empty)
             {
-                throw new ArgumentNullException("BlogPostKeyword blogPostId can not be empty guid.");
+                throw new ArgumentNullException(nameof(blogPostId), "BlogPostKeyword blogPostId can not be empty guid.");
             }
 
             if (keywordId == Guid.Empty)
             {
-                throw new ArgumentNullException("BlogPostKeyword keywordId can not be empty guid.");
+                throw new ArgumentNullException(nameof(keywordId),"BlogPostKeyword keywordId can not be empty guid.");
             }
 
             this.BlogPostId = blogPostId;
@@ -38,12 +38,12 @@
         {
             if (blogPost == null)
             {
-                throw new ArgumentNullException("BlogPostKeyword BlogPost can not be null.");
+                throw new ArgumentNullException(nameof(blogPost),"BlogPostKeyword BlogPost can not be null.");
             }
 
             if (keyword == null)
             {
-                throw new ArgumentNullException("BlogPostKeyword Keyword can not be null.");
+                throw new ArgumentNullException(nameof(keyword), "BlogPostKeyword Keyword can not be null.");
             }
 
             this.BlogPost = blogPost;

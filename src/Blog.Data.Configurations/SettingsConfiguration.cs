@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<Settings> builder)
         {
-            builder.ToTable(DataBaseConstants.SETTINGS_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.SettingsTableName);
         }
     }
 }

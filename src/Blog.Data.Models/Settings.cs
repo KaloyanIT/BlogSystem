@@ -19,12 +19,12 @@
         {
             if(string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException("name", "Settings name can not be null!");
+                throw new ArgumentNullException(nameof(name), "Settings name can not be null!");
             }
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                throw new ArgumentNullException("content", "Settings content can not be null!");
+                throw new ArgumentNullException(nameof(content), "Settings content can not be null!");
             }
 
             this.Name = name;

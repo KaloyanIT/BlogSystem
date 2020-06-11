@@ -9,7 +9,7 @@ namespace Blog.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.ToTable(DataBaseConstants.TAG_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.TagTableName);
         }
     }
 }

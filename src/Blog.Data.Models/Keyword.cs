@@ -22,7 +22,7 @@ namespace Blog.Data.Models
         {
             if (string.IsNullOrWhiteSpace(name))
             {
-                throw new ArgumentNullException("Keyword name can not be null.");
+                throw new ArgumentNullException(nameof(name), "Keyword name can not be null.");
             }
 
             Name = name;

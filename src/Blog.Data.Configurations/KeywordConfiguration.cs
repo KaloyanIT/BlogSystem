@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<Keyword> builder)
         {
-            builder.ToTable(DataBaseConstants.KEYWORD_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.KeywordTableName);
         }
     }
 }

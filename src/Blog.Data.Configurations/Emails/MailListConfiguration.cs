@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<MailList> builder)
         {
-            builder.ToTable(DataBaseConstants.MAIL_LIST_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.MailListTableName);
 
             builder.HasData(
                 new MailList("Test", "Test"),

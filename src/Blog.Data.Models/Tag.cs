@@ -22,7 +22,7 @@ namespace Blog.Data.Models
         {
             if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
             {
-                throw new ArgumentNullException("Tag name can not be null or whitespace or with length less than 3 characters.");
+                throw new ArgumentNullException(nameof(name),"Tag name can not be null or whitespace or with length less than 3 characters.");
             }
 
             Name = name;
@@ -33,7 +33,7 @@ namespace Blog.Data.Models
         {
             if (string.IsNullOrWhiteSpace(name) || name.Length < 3)
             {
-                throw new ArgumentNullException("Tag name can not be null or whitespace or with length less than 3 characters.");
+                throw new ArgumentNullException(nameof(name), "Tag name can not be null or whitespace or with length less than 3 characters.");
             }
 
             Name = name;

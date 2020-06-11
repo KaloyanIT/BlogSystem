@@ -66,12 +66,12 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityRole>(entity => { entity.ToTable(name: DataBaseConstants.ROLES_TABLE_NAME); });
-            modelBuilder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable(DataBaseConstants.USER_ROLES_TABLE_NAME); });
-            modelBuilder.Entity<IdentityUserClaim<string>>(entity => { entity.ToTable(DataBaseConstants.USER_CLAIMS_TABLE_NAME); });
-            modelBuilder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable(DataBaseConstants.USER_LOGIN_TABLE_NAME); });
-            modelBuilder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable(DataBaseConstants.USER_TOKEN_TABLE_NAME); });
-            modelBuilder.Entity<IdentityRoleClaim<string>>(entity => { entity.ToTable(DataBaseConstants.ROLE_CLAIM_TABLE_NAME); });
+            modelBuilder.Entity<IdentityRole>(entity => { entity.ToTable(name: DataBaseConstants.RolesTableName); });
+            modelBuilder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable(DataBaseConstants.UserRolesTableName); });
+            modelBuilder.Entity<IdentityUserClaim<string>>(entity => { entity.ToTable(DataBaseConstants.UserClaimsTableName); });
+            modelBuilder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable(DataBaseConstants.UserLoginTableName); });
+            modelBuilder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable(DataBaseConstants.UserTokenTableName); });
+            modelBuilder.Entity<IdentityRoleClaim<string>>(entity => { entity.ToTable(DataBaseConstants.RoleClaimTableName); });
 
             modelBuilder.ApplyDbConfiguration();
         }

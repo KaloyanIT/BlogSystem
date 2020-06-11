@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Blog.Infrastructure
 {
-    public class AssemblyHelper
+    public static class AssemblyHelper
     {
         public static Assembly[] GetDomainAssemblies()
         {

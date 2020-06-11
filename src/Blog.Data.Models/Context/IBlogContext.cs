@@ -41,7 +41,9 @@
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken));
 
+#pragma warning disable CA1716 // Identifiers should not match keywords
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
+#pragma warning restore CA1716 // Identifiers should not match keywords
 
         EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class;
 

@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<MailListSubscriber> builder)
         {
-            builder.ToTable(DataBaseConstants.MAIL_LIST_SUBSCRIBER_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.MailListSubscribeTableName);
 
             builder.HasKey(bc => new { bc.MailListId, bc.SubscriberId });
 

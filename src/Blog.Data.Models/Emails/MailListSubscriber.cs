@@ -18,16 +18,10 @@
 
         }
         
-        public MailListSubscriber(Guid maliListId, Guid subscriberId)
+        public MailListSubscriber(Guid mailListId, Guid subscriberId)
         {
             SubscriberId = subscriberId;
-            MailListId = MailListId;
-        }
-
-        //public MailListSubscriber(MailList mailList, Subscriber subscriber)
-        //{
-        //    Subscriber = subscriber;
-        //    MailList = mailList;
-        //}
+            MailListId = mailListId;
+        }      
     }
 }

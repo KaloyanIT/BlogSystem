@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<Subscriber> builder)
         {
-            builder.ToTable(DataBaseConstants.SUBSCRIBER_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.SubscriberTableName);
         }
     }
 }

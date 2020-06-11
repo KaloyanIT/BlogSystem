@@ -33,23 +33,23 @@
         {
             if (itemId == null || itemId == Guid.Empty)
             {
-                throw new ArgumentNullException("Comment blogId can not be null or empty Guid.");
+                throw new ArgumentNullException(nameof(itemId), "Comment blogId can not be null or empty Guid.");
             }
 
             if (string.IsNullOrWhiteSpace(username))
             {
-                throw new ArgumentNullException("Comment username can not be null or empty string.");
+                throw new ArgumentNullException(nameof(username), "Comment username can not be null or empty string.");
             }
 
             if (string.IsNullOrWhiteSpace(email))
             {
-                throw new ArgumentNullException("Comment email can not be null or empty string.");
+                throw new ArgumentNullException(nameof(email), "Comment email can not be null or empty string.");
             }
 
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                throw new ArgumentNullException("Comment content can not be null or empty string");
+                throw new ArgumentNullException(nameof(content), "Comment content can not be null or empty string");
             }
 
             if (!string.IsNullOrWhiteSpace(userId))

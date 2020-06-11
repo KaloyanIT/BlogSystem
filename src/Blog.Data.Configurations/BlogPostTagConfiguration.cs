@@ -10,7 +10,7 @@
     {
         public void Configure(EntityTypeBuilder<BlogPostTag> builder)
         {
-            builder.ToTable(DataBaseConstants.BLOG_POST_TAG_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.BlogPostTagTableName);
 
             builder.HasKey(bc => new { bc.BlogPostId, bc.TagId });
 

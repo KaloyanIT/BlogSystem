@@ -33,7 +33,7 @@
             var blogs = await _blogService.GetAll()
                 .OrderByDescending(x => x.DateCreated)
                 .To<BlogViewModel>()
-                .ToListAsync();
+                .ToListAsync().ConfigureAwait(false);
 
             return View(blogs);
         }

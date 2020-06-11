@@ -35,22 +35,22 @@
         {
             if (string.IsNullOrWhiteSpace(title))
             {
-                throw new ArgumentNullException("BlogPost title");
+                throw new ArgumentNullException(nameof(title), "BlogPost title");
             }
 
             if (string.IsNullOrWhiteSpace(content))
             {
-                throw new ArgumentNullException("BlogPost content");
+                throw new ArgumentNullException(nameof(content), "BlogPost content");
             }
 
             if (string.IsNullOrWhiteSpace(summary))
             {
-                throw new ArgumentNullException("BlogPost Summary");
+                throw new ArgumentNullException(nameof(summary), "BlogPost Summary");
             }
 
             if (string.IsNullOrWhiteSpace(userId))
             {
-                throw new ArgumentNullException("BlogPost UserId");
+                throw new ArgumentNullException(nameof(userId), "BlogPost UserId");
             }
 
             Title = title;

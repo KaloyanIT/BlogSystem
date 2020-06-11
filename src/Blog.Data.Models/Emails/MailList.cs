@@ -16,12 +16,12 @@
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw new ArgumentNullException("name", "Mail List name can not be null or empty string.");
+                throw new ArgumentNullException(nameof(name), "Mail List name can not be null or empty string.");
             }
 
             if (string.IsNullOrEmpty(description))
             {
-                throw new ArgumentNullException("description", "Mail List description can not be null or empty string.");
+                throw new ArgumentNullException(nameof(description), "Mail List description can not be null or empty string.");
             }
 
             Name = name;

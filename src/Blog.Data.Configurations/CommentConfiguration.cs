@@ -9,7 +9,7 @@
     {
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
-            builder.ToTable(DataBaseConstants.COMMENT_TABLE_NAME);
+            builder.ToTable(DataBaseConstants.CommentTableName);
         }
     }
 }

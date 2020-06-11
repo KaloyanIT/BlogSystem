@@ -6,7 +6,7 @@
 
     using global::AutoMapper;
 
-    public class AutoMapperConfig
+    public sealed class AutoMapperConfig
     {
         public static MapperConfiguration? MapperConfiguration { get; private set; }
 
@@ -16,7 +16,7 @@
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
             var projectAssemblies = assemblies
-                .Where(a => a.FullName!.Contains("Blog")).ToList();
+                .Where(a => a.FullName!.Contains("Blog", StringComparison.OrdinalIgnoreCase)).ToList();
 
             MapperConfiguration = new MapperConfiguration(
                 cfg =>
