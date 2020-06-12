@@ -157,34 +157,31 @@
             return View(blog);
         }
 
-        //// GET: Blogs/Delete/5
-        //public async Task<IActionResult> Delete(Guid? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // GET: Blogs/Delete/5
+        public async Task<IActionResult> Delete(Guid? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
 
-        //    var blog = await _context.Blogs
-        //        .FirstOrDefaultAsync(m => m.Id == id);
-        //    if (blog == null)
-        //    {
-        //        return NotFound();
-        //    }
+            var blog = await _blogService.GetById(id);
 
-        //    return View(blog);
-        //}
+            var viewModel = _mapper.Map<DetailedBlogViewModel>(blog);
 
-        // POST: Blogs/Delete/5
-        //[HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> DeleteConfirmed(Guid id)
-        //{
-        //    var blog = await _context.Blogs.FindAsync(id);
-        //    _context.Blogs.Remove(blog);
-        //    await _context.SaveChangesAsync();
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return View(viewModel);
+        }
+
+        //POST: Blogs/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            await _blogService.Delete(id);
+
+
+            return RedirectToAction(nameof(Index));
+        }
 
         //private bool BlogExists(Guid id)
         //{

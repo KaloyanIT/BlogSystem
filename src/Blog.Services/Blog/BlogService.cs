@@ -33,6 +33,18 @@
             await _blogRepository.Save(blogPost);
         }
 
+        public async Task Delete(Guid? id)
+        {
+            if(!id.HasValue)
+            {
+                throw new ArgumentNullException(nameof(id), "Id can not be null!");
+            }
+
+            var blog = await this.GetById(id);
+
+            await _blogRepository.Delete(blog);
+        }
+
         public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
         {
             var blog = _mapper.Map<BlogPost>(blogServiceModel);

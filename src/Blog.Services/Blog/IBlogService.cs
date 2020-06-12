@@ -20,5 +20,7 @@
         Task<BlogPost> GetById(Guid? id);
 
         Task<bool> Exists(Guid? id);
+
+        Task Delete(Guid? id);
     }
 }

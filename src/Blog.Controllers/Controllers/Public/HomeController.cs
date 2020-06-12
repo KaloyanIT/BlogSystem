@@ -1,11 +1,9 @@
 ﻿namespace Blog.Controllers.Controllers.Public
 {
     using System.Linq;
-    using System.Threading.Tasks;
     using AutoMapper;
-    using Microsoft.AspNetCore.Mvc;
-
     using Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Mvc;
     using Services.Blog;
     using ViewModels.Public.Blogs;
 
@@ -22,7 +20,7 @@
 
         public IActionResult Index()
         {
-            var blogs = _blogService.GetAllLatest();
+            var blogs = _blogService.GetAllLatest().Where(x => x.ShowOnHomePage);
 
             var blogsViewModels = blogs.To<BlogViewModel>().ToList();
 
