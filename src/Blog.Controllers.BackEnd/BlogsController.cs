@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Blog.Data.Base.Extensions;
     using Blog.ViewModels.BackEnd.Blogs;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
@@ -20,6 +21,8 @@
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
+        private const int MaxPageSize = 10;
+
         public BlogsController(IBlogService blogService, IUserService userService, IMapper mapper)
         {
             _blogService = blogService;
@@ -27,13 +30,12 @@
             _mapper = mapper;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index(int page = 1)
         {
-            var model = new List<BlogViewModel>();
-            var blogs = await _blogService.GetAll()
+            var blogs = _blogService.GetAll()
                 .OrderByDescending(x => x.DateCreated)
                 .To<BlogViewModel>()
-                .ToListAsync().ConfigureAwait(false);
+                .GetPaged(page, MaxPageSize);         
 
             return View(blogs);
         }
