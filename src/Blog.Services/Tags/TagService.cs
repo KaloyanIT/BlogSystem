@@ -3,7 +3,6 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-
     using Data.Models;
     using Data.Repositories.BlogPostTags;
     using Data.Repositories.Tags;
@@ -16,13 +15,36 @@
 
         public TagService(ITagRepository tagSqlRepository, IBlogPostTagRepository blogPostTagRepository)
         {
-            _tagSqlRepository = tagSqlRepository ?? throw new ArgumentNullException(nameof(tagSqlRepository), "TagSqlRepository is null.");
-            _blogPostTagRepository = blogPostTagRepository ?? throw new ArgumentNullException(nameof(blogPostTagRepository), "BlogPostTagRepository is null.");
+            _tagSqlRepository = tagSqlRepository ??
+                throw new ArgumentNullException(nameof(tagSqlRepository), "TagSqlRepository is null.");
+            _blogPostTagRepository = blogPostTagRepository ??
+                throw new ArgumentNullException(nameof(blogPostTagRepository), "BlogPostTagRepository is null.");
+        }
+
+        public async Task Create(CreateTagServiceModel serviceModel)
+        {
+            var tag = new Tag(serviceModel.Name);
+
+            await _tagSqlRepository.Save(tag);
         }
 
         public Task DeleteById(Guid? id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task Edit(EditTagServiceModel serviceModel)
+        {
+            var tag = await this.GetById(serviceModel.Id);
+
+            if(tag == null)
+            {
+                return;
+            }
+
+            tag.EditName(serviceModel.Name);
+
+            await _tagSqlRepository.Save(tag);
         }
 
         public IQueryable<Tag> GetAll()

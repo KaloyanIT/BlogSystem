@@ -1,10 +1,11 @@
 ﻿namespace Blog.ViewModels.BackEnd.Tags
 {
     using System;
+    using Services.Tags.Models;
     using Data.Models;
     using Infrastructure.AutoMapper;
 
-    public class TagViewModel : IHaveMapFrom<Tag>
+    public class TagViewModel : IHaveMapFrom<Tag>, IHaveMapTo<EditTagServiceModel>
     {
         public Guid Id { get; set; }
 

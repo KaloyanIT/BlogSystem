@@ -1,8 +1,8 @@
-﻿using Blog.Data.Models;
-namespace Blog.Data.Repositories.Tags
+﻿namespace Blog.Data.Repositories.Tags
 {
     using DataAccess;
     using Base;
+    using Models;
 
     public interface ITagRepository : IRepository<Tag>, ITransientRepository
     {

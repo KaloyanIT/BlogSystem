@@ -6,7 +6,7 @@
     using Blog.Data.Base.Extensions;
     using Blog.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
-    using Services.User;
+    using Services.Users;
     using ViewModels.BackEnd.Users;
 
     [Area("Admin")]

@@ -12,7 +12,7 @@
     using Microsoft.EntityFrameworkCore;
     using Services.Blog;
     using Services.Blog.Models;
-    using Services.User;
+    using Services.Users;
 
     [Area("Admin")]
     public class BlogsController : Controller

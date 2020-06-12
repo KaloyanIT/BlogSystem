@@ -1,9 +1,10 @@
-﻿namespace Blog.Services.User
+﻿namespace Blog.Services.Users
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Data.Models.Context;
+    using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
 
@@ -23,7 +24,7 @@
                 return false;
             }
 
-            var user = await _blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _blogContext.Set<User>().FirstOrDefaultAsync(x => x.Id == id);
 
             if (user == null)
             {
@@ -32,7 +33,7 @@
 
             try
             {
-                _blogContext.Set<IdentityUser>().Remove(user);
+                _blogContext.Set<User>().Remove(user);
                 await _blogContext.SaveChangesAsync();
             }
             catch (Exception)
