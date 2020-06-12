@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Blog.Data.Base.Extensions;
+    using Blog.Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Services.User;
     using ViewModels.BackEnd.Users;
@@ -19,17 +21,13 @@
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var model = new List<UserViewModel>();
-            var users = _userService.GetAll();
+            var userViewModels = _userService.GetAll()
+                .To<UserViewModel>()
+                .GetPaged(page, 10);            
 
-            foreach (var user in users)
-            {
-                model.Add(_mapper.Map<UserViewModel>(user));
-            }
-
-            return View(model);
+            return View(userViewModels);
         }
 
         public async Task<IActionResult> Edit(string id)
