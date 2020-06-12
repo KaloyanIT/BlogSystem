@@ -1,13 +1,12 @@
-﻿namespace Blog.Controllers.Controllers.Public
+﻿namespace Blog.Controllers.FrontEnd
 {
     using System.Threading.Tasks;
-    using Blog.Data.Models;
-    using Blog.Infrastructure.Emails;
+    using Data.Models;
+    using Infrastructure.Emails;
+    using ViewModels.FrontEnd.Account;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
-
-    using ViewModels.Public.Account;
 
 
     [Authorize]
@@ -18,7 +17,7 @@
         private readonly SignInManager<User> _signInManager;
         private readonly IEmailSender _emailSender;
 
-        public AccountController(UserManager<User> userManager, 
+        public AccountController(UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailSender emailSender)
         {
@@ -103,6 +102,6 @@
         public IActionResult SuccessRegistration()
         {
             return View();
-        }                     
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Blog.Controllers.ViewModels.Public.Blogs
+﻿namespace Blog.ViewModels.FrontEnd.Blogs
 {
     using Data.Models;
     using Infrastructure.AutoMapper;

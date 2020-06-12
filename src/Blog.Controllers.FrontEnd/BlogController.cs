@@ -1,12 +1,12 @@
-﻿namespace Blog.Controllers.Controllers.Public
+﻿namespace Blog.Controllers.FrontEnd
 {
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Blog.ViewModels.FrontEnd.Blogs;
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Blog;
-    using ViewModels.Public.Blogs;
 
     public class BlogController : Controller
     {

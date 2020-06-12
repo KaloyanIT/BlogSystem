@@ -1,4 +1,4 @@
-﻿namespace Blog.Controllers.Controllers.Public
+﻿namespace Blog.Controllers.FrontEnd
 {
     using Microsoft.AspNetCore.Mvc;
 

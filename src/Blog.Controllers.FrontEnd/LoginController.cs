@@ -1,11 +1,11 @@
-﻿namespace Blog.Controllers.Controllers.Public
+﻿namespace Blog.Controllers.FrontEnd
 {
     using System.Globalization;
     using System.Threading.Tasks;
-    using Blog.Controllers.ViewModels.Public.Account;
-    using Blog.Data.Models;
+    using Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.FrontEnd.Account;
 
     [Route("account/[action]")]
     public class LoginController : Controller
@@ -19,7 +19,7 @@
             _signInManager = signInManager;
         }
 
-        
+
 
         public IActionResult Login(string? returnUrl = null)
         {

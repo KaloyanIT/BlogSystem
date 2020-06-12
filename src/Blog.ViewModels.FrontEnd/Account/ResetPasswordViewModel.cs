@@ -1,5 +1,4 @@
-﻿
-namespace Blog.Controllers.ViewModels.Public.Account
+﻿namespace Blog.ViewModels.FrontEnd.Account
 {
     using System.ComponentModel.DataAnnotations;
 

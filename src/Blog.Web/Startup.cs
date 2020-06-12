@@ -4,7 +4,6 @@
     using System.IO;
     using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
-    using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
@@ -30,7 +29,7 @@
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandartServices();
-                
+
 
             services.AddSingleton(_configuration.GetEmailConfiguration());
             services.AddTransient<IEmailSender, EmailSender>();

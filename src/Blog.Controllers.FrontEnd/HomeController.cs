@@ -1,11 +1,11 @@
-﻿namespace Blog.Controllers.Controllers.Public
+﻿namespace Blog.Controllers.FrontEnd
 {
     using System.Linq;
     using AutoMapper;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Services.Blog;
-    using ViewModels.Public.Blogs;
+    using ViewModels.FrontEnd.Blogs;
 
     public class HomeController : Controller
     {
