@@ -7,6 +7,8 @@
     using Microsoft.AspNetCore.Mvc;
     using Services.Tags;
     using Services.Tags.Models;
+    using Blog.Infrastructure.Extensions;
+    using Blog.Data.Base.Extensions;
 
     [Area("Admin")]
     public class TagsController : Controller
@@ -18,22 +20,24 @@
             _tagService = tagService ?? throw new ArgumentNullException(nameof(tagService), "Tag service is null.");
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var tags = _tagService.GetAll();
+            var viewModels = _tagService.GetAll()
+                .To<TagViewModel>()
+                .GetPaged(page, 10);
 
-            var viewModels = new List<TagViewModel>();
+            //var viewModels = new List<TagViewModel>();
 
-            foreach (var item in tags)
-            {
-                viewModels.Add(new TagViewModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    DateCreated = item.DateCreated,
-                    DateModified = item.DateModified
-                });
-            }
+            //foreach (var item in tags)
+            //{
+            //    viewModels.Add(new TagViewModel()
+            //    {
+            //        Id = item.Id,
+            //        Name = item.Name,
+            //        DateCreated = item.DateCreated,
+            //        DateModified = item.DateModified
+            //    });
+            //}
 
             return View(viewModels);
         }

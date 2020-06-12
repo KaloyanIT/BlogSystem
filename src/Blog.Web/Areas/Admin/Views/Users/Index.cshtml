@@ -4,11 +4,8 @@
     ViewData["Title"] = "Users";
 }
 
-<h1>@ViewData["Title"]</h1>
+@(await Component.InvokeAsync<GridHeaderViewComponent>(ViewData["Title"]))
 
-<div class="row">
-    <a class="btn btn-primary" role="button" asp-action="Create">Create New</a>
-</div>
 <div class="row">
     <div class="col-10">
 
@@ -34,13 +31,13 @@
                         <td>@Html.DisplayFor(model => item.Email)</td>
                         <td>@Html.DisplayFor(model => item.PhoneNumber)</td>
                         @*<td>@Html.DisplayFor(model => item.)</td>*@
-                    <td>
-                        <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                        <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                        <a class="btn btn-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </td>
+                        <td>
+                            <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-primary btn-sm" role="button" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a class="btn btn-danger btn-sm" role="button" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
                     </tr>
-                }              
+                }
             </tbody>
         </table>
         @(await Component.InvokeAsync<PagerViewComponent>(Model))

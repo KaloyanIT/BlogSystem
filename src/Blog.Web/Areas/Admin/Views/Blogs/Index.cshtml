@@ -4,11 +4,8 @@
     ViewData["Title"] = "Blog posts";
 }
 
-<h1>@ViewData["Title"]</h1>
+@(await Component.InvokeAsync<GridHeaderViewComponent>(ViewData["Title"]))
 
-<div class="row">
-    <a class="btn btn-primary" role="button" asp-action="Create">Create New</a>
-</div>
 <div class="row">
     <div class="col-10">
         <table class="table table-bordered table-hover">
