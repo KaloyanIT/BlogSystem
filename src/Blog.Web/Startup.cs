@@ -25,11 +25,12 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            AutoMapperConfig.Init();
+            //AutoMapperConfig.Init();
 
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandartServices();
+                
 
             services.AddSingleton(_configuration.GetEmailConfiguration());
             services.AddTransient<IEmailSender, EmailSender>();
@@ -51,6 +52,8 @@
 
             var protectionBuilder = services.AddDataProtection().SetApplicationName("BLOG_IT")
                     .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
+
+            services.InjectAutoMapper();
         }
 
 

@@ -3,68 +3,128 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
     using global::AutoMapper;
 
-    public sealed class AutoMapperConfig
+    public sealed class AutoMapperConfig : Profile
     {
         public static MapperConfiguration? MapperConfiguration { get; private set; }
+
+        //public AutoMapperConfig()
+        //{
+        //    var mapFromType = typeof(IHaveMapFrom<>);
+        //    var mapToType = typeof(IHaveMapTo<>);
+        //    var reverseMapType = typeof(IHaveReverseMap<>);
+        //    var customMapType = typeof(IHaveCustomMap);
+
+        //    var modelRegistrations = AssemblyHelper
+        //        .GetAllBlogAssemblies()
+        //        .SelectMany(x => x.GetExportedTypes())
+        //        .Where(t => t.IsClass && !t.IsAbstract)
+        //        .Select(t => new
+        //        {
+        //            Type = t, 
+        //            HaveMapFrom = this.GetMappingModel(t, mapFromType), 
+        //            HaveMapTo = this.GetMappingModel(t, mapToType), 
+        //           HaveReverseMap = this.GetMappingModel(t, reverseMapType), 
+        //           HaveCustomMap = t.GetInterfaces()
+        //                .Where(i => i == customMapType)
+        //                .Select(i => (IHaveCustomMap?)Activator.CreateInstance(t))
+        //                .FirstOrDefault()
+        //        });
+
+        //    foreach (var modelRegistration in modelRegistrations)
+        //    {
+        //        if(modelRegistration.HaveMapFrom != null)
+        //        {
+        //            this.CreateMap(modelRegistration.HaveMapFrom, modelRegistration.Type);
+        //        }
+
+        //        if(modelRegistration.HaveMapTo != null)
+        //        {
+        //            this.CreateMap(modelRegistration.Type, modelRegistration.HaveMapTo);
+        //        }
+
+        //        if(modelRegistration.HaveReverseMap != null)
+        //        {
+        //            this.CreateMap(modelRegistration.HaveMapFrom, modelRegistration.Type).ReverseMap();
+        //        }
+
+        //        modelRegistration.HaveCustomMap?.CreateMappings(this);
+        //    }
+        //}
 
         public static void Init()
         {
             var autoMapperCfg = new AutoMapperConfig();
-            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var projectAssemblies = assemblies
-                .Where(a => a.FullName!.Contains("Blog", StringComparison.OrdinalIgnoreCase)).ToList();
+            var projectAssemblies = AssemblyHelper.GetAllBlogAssemblies();
 
             MapperConfiguration = new MapperConfiguration(
                 cfg =>
                 {
-                    foreach (var assembly in assemblies)
-                    {
-                        if (assembly.IsDynamic)
-                        {
-                            continue;
-                        }
+                    LoadMappings(cfg);
+                    //foreach (var assembly in projectAssemblies)
+                    //{
+                    //    if (assembly.IsDynamic)
+                    //    {
+                    //        continue;
+                    //    }
 
-                        var types = assembly.GetExportedTypes();
-                        LoadMappings(types, cfg);
-                    }
+                    //    var types = assembly.GetExportedTypes();
+                    //    LoadMappings(types, cfg);
+                    //}
                 });
         }
 
-        private static void LoadMappings(IEnumerable<Type> types, IProfileExpression mapperConfiguration)
+        private static Type? GetMappingModel(Type type, Type mappingInterface)
+           => type.GetInterfaces()
+               .FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == mappingInterface)
+               ?.GetGenericArguments()
+               .First();
+
+        private static void LoadMappings(IProfileExpression mapperConfiguration)
         {
-            foreach (var type in types.Where(x => x.IsAbstract == false && x.IsInterface == false))
-            {
-                var interfaces = type.GetInterfaces().Where(x => x.IsGenericType);
+            var mapFromType = typeof(IHaveMapFrom<>);
+            var mapToType = typeof(IHaveMapTo<>);
+            var reverseMapType = typeof(IHaveReverseMap<>);
+            var customMapType = typeof(IHaveCustomMap);
 
-                foreach (var i in interfaces)
+            var modelRegistrations = AssemblyHelper
+                .GetAllBlogAssemblies()
+                .SelectMany(x => x.GetExportedTypes())
+                .Where(t => t.IsClass && !t.IsAbstract)
+                .Select(t => new
                 {
-                    var interfaceArgs = i.GetGenericArguments()[0];
+                    Type = t,
+                    HaveMapFrom = GetMappingModel(t, mapFromType),
+                    HaveMapTo = GetMappingModel(t, mapToType),
+                    HaveReverseMap = GetMappingModel(t, reverseMapType),
+                    HaveCustomMap = t.GetInterfaces()
+                        .Where(i => i == customMapType)
+                        .Select(i => (IHaveCustomMap?)Activator.CreateInstance(t))
+                        .FirstOrDefault()
+                })
+                .ToList();
 
-                    if (i.GetGenericTypeDefinition() == typeof(IHaveReverseMap<>))
-                    {
-                        mapperConfiguration.CreateMap(interfaceArgs, type).ReverseMap();
-                    }
-                    else if (i.GetGenericTypeDefinition() == typeof(IHaveMapFrom<>))
-                    {
-                        mapperConfiguration.CreateMap(interfaceArgs, type);
-                    }
-                    else if (i.GetGenericTypeDefinition() == typeof(IHaveMapTo<>))
-                    {
-                        mapperConfiguration.CreateMap(type, interfaceArgs);
-                    }
-                    else if (typeof(IHaveCustomMap).IsAssignableFrom(type))
-                    {
-                        var map = (IHaveCustomMap)Activator.CreateInstance(type)!;
-
-                        map.CreateMappings(mapperConfiguration);
-                    }
-
+            foreach (var modelRegistration in modelRegistrations)
+            {
+                if (modelRegistration.HaveMapFrom != null)
+                {
+                    mapperConfiguration.CreateMap(modelRegistration.HaveMapFrom, modelRegistration.Type);
                 }
-            }
+
+                if (modelRegistration.HaveMapTo != null)
+                {
+                    mapperConfiguration.CreateMap(modelRegistration.Type, modelRegistration.HaveMapTo);
+                }
+
+                if (modelRegistration.HaveReverseMap != null)
+                {
+                    mapperConfiguration.CreateMap(modelRegistration.HaveReverseMap, modelRegistration.Type).ReverseMap();
+                }
+
+                modelRegistration.HaveCustomMap?.CreateMappings(mapperConfiguration);
+            }       
         }
     }
 }

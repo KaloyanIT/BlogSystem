@@ -22,7 +22,8 @@
         public static IServiceCollection InjectIdentity(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IBlogContext, BlogContext>();
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
+            services.AddDbContext<BlogContext>(options => 
+                options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
 
             services.AddIdentity<User, IdentityRole>()
               .AddEntityFrameworkStores<BlogContext>()
@@ -51,7 +52,16 @@
             services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
                 opt.TokenLifespan = TimeSpan.FromDays(3));
 
+            return services;
+        }
+
+        public static IServiceCollection InjectAutoMapper(this IServiceCollection services)
+        {
+            AutoMapperConfig.Init();
+
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration!.CreateMapper());
+
+            //services.AddAutoMapper(typeof(IHaveMap).GetType().Assembly);
 
             return services;
         }
@@ -101,7 +111,7 @@
 
             var assemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-            var assembly = assemblies.SingleOrDefault(x => x.GetName().Name == "Blog.Data.Repositories");
+            var assembly = assemblies.SingleOrDefault(x => x.GetName().Name == assemblyRepositoriesName);
 
             if(assembly == null)
             {

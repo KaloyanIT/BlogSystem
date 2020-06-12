@@ -23,6 +23,11 @@
 
         public async Task Create(CreateBlogServiceModel serviceModel)
         {
+            if(serviceModel == null)
+            {
+                throw new ArgumentNullException(nameof(serviceModel), "Service model can not be null!");
+            }
+
             var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
             await _blogRepository.Save(blogPost);
