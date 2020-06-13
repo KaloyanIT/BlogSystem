@@ -1,10 +1,11 @@
 ﻿namespace Blog.Controllers.BackEnd
 {
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using AutoMapper;
     using Blog.Data.Base.Extensions;
+    using Blog.Data.Models;
     using Blog.Infrastructure.Extensions;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Users;
     using ViewModels.BackEnd.Users;
@@ -13,11 +14,15 @@
     public class UsersController : Controller
     {
         private readonly IUserService _userService;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
-        public UsersController(IUserService userService, IMapper mapper)
+        public UsersController(IUserService userService,
+            UserManager<User> userManager,
+            IMapper mapper)
         {
             _userService = userService;
+            _userManager = userManager;
             _mapper = mapper;
         }
 
@@ -25,9 +30,42 @@
         {
             var userViewModels = _userService.GetAll()
                 .To<UserViewModel>()
-                .GetPaged(page, 10);            
+                .GetPaged(page, 10);
 
             return View(userViewModels);
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CreateUserViewModel userViewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(userViewModel);
+            }
+
+            var user = _mapper.Map<User>(userViewModel);
+
+            var result = await _userManager.CreateAsync(user);
+
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
+                {
+                    ModelState.TryAddModelError(error.Code, error.Description);
+                }
+
+                return View(userViewModel);
+            }
+
+            //Add Logic for sending a email with view for setting up password
+
+            return View();
         }
 
         public async Task<IActionResult> Edit(string id)
