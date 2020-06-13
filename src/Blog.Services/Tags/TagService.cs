@@ -28,9 +28,16 @@
             await _tagSqlRepository.Save(tag);
         }
 
-        public Task DeleteById(Guid? id)
+        public async Task DeleteById(Guid? id)
         {
-            throw new NotImplementedException();
+            var tag = await this.GetById(id);
+
+            if(tag == null)
+            {
+                return;
+            }
+
+            await _tagSqlRepository.Delete(tag);
         }
 
         public async Task Edit(EditTagServiceModel serviceModel)

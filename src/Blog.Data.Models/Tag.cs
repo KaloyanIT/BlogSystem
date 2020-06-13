@@ -1,5 +1,4 @@
-﻿
-namespace Blog.Data.Models
+﻿namespace Blog.Data.Models
 {
     using System;
     using System.Collections.Generic;
