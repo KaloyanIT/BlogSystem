@@ -3,13 +3,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Base;
-    using Microsoft.AspNetCore.Identity;
+    using Data.Models;
 
     public interface IUserService : IService
     {
-        IQueryable<IdentityUser> GetAll();
+        IQueryable<User> GetAll();
 
-        Task<IdentityUser> GetById(string id);
+        Task<User> GetById(string id);
 
         Task<string> GetUsernameById(string id);
 

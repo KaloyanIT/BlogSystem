@@ -11,7 +11,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-    public class BlogContext : IdentityDbContext<IdentityUser>, IBlogContext
+    public class BlogContext: IdentityDbContext<User, IdentityRole, string>, IBlogContext
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
@@ -42,6 +42,8 @@
         public DbSet<Subscriber> Subscribers { get; set; } = null!;
 
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
+
+        //public DbSet<User> Users { get; set; }
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {

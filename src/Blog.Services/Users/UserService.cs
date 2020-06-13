@@ -44,21 +44,21 @@
             return true;
         }
 
-        public IQueryable<IdentityUser> GetAll()
+        public IQueryable<User> GetAll()
         {
             var result = _blogContext.Users.AsQueryable();
 
             return result;
         }
 
-        public async Task<IdentityUser> GetById(string id)
+        public async Task<User> GetById(string id)
         {
             if (string.IsNullOrEmpty(id))
             {
                 return null!;
             }
 
-            var user = await _blogContext.Set<IdentityUser>().FirstOrDefaultAsync(x => x.Id == id);
+            var user = await _blogContext.Set<User>().FirstOrDefaultAsync(x => x.Id == id);
 
             return user;
         }

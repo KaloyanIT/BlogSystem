@@ -1,7 +1,6 @@
-﻿@model CreateUserViewModel
-
+﻿@model EditUserViewModel
 @{
-    ViewData["Title"] = "Create user";
+    ViewData["Title"] = "Edit User";
 }
 
 <h3>@ViewData["Title"]</h3>
@@ -11,6 +10,7 @@
     <div class="col-md-8">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
@@ -23,12 +23,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Username" class="control-label"></label>
-                <input asp-for="Username" class="form-control"/>
+                <input asp-for="Username" class="form-control" readonly/>
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" type="email" class="form-control" />
+                <input asp-for="Email" type="email" class="form-control" readonly />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -68,7 +68,22 @@
             return View();
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
+        {
+            if(string.IsNullOrEmpty(id))
+            {
+                return View();
+            }
+
+            var user = await _userService.GetById(id);
+
+            var viewModel = _mapper.Map<EditUserViewModel>(user);
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> Edit(string id, EditUserViewModel editUserViewModel)
         {
             var user = await _userService.GetById(id);
 
