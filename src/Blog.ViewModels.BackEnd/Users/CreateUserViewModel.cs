@@ -23,5 +23,8 @@
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         public string Email { get; set; } = null!;
+
+        [DisplayName("Phone number")]
+        public string PhoneNumber { get; set; } = null!;
     }
 }

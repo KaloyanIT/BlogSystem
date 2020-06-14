@@ -4,8 +4,9 @@
     using System.ComponentModel.DataAnnotations;
     using Data.Models;
     using Infrastructure.AutoMapper;
+    using Services.Users.Models;
 
-    public class EditUserViewModel : IHaveMapTo<User>, IHaveMapFrom<User>
+    public class EditUserViewModel : IHaveMapTo<EditUserServiceModel>, IHaveMapFrom<User>
     {
         public string Id { get; set; } = null!;
 
@@ -25,5 +26,8 @@
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         public string Email { get; set; } = null!;
+
+        [DisplayName("Phone number")]
+        public string PhoneNumber { get; set; } = null!;
     }
 }

@@ -5,6 +5,7 @@
     using Blog.Data.Base.Extensions;
     using Blog.Data.Models;
     using Blog.Infrastructure.Extensions;
+    using Blog.Services.Users.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Services.Users;
@@ -85,16 +86,16 @@
 
         public async Task<IActionResult> Edit(string id, EditUserViewModel editUserViewModel)
         {
-            var user = await _userService.GetById(id);
-
-            if (user == null)
+            if(!ModelState.IsValid)
             {
-                return RedirectToAction("Index");
+                return View(editUserViewModel);
             }
 
-            var viewModel = _mapper.Map<EditUserViewModel>(user);
+            var serviceModel = _mapper.Map<EditUserServiceModel>(editUserViewModel);
 
-            return View(viewModel);
+            await _userService.Edit(serviceModel);            
+
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Delete(string id)

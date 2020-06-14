@@ -3,10 +3,10 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Data.Models.Context;
     using Data.Models;
-    using Microsoft.AspNetCore.Identity;
+    using Data.Models.Context;
     using Microsoft.EntityFrameworkCore;
+    using Models;
 
     public class UserService : IUserService
     {
@@ -42,6 +42,24 @@
             }
 
             return true;
+        }
+
+        public async Task Edit(EditUserServiceModel serviceModel)
+        {
+            var user = await _blogContext.Users.FirstOrDefaultAsync(x => x.Id == serviceModel.Id);
+
+            if(user == null)
+            {
+                //
+                return;
+            }
+
+            user.FirstName = serviceModel.FirstName;
+            user.LastName = serviceModel.LastName;
+            user.PhoneNumber = serviceModel.PhoneNumber;
+
+            _blogContext.Attach(user);
+            await _blogContext.SaveChangesAsync();
         }
 
         public IQueryable<User> GetAll()

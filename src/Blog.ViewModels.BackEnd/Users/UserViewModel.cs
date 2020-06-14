@@ -1,12 +1,16 @@
 ﻿namespace Blog.ViewModels.BackEnd.Users
 {
-    using Microsoft.AspNetCore.Identity;
 
+    using Data.Models;
     using Infrastructure.AutoMapper;
 
-    public class UserViewModel : IHaveMapFrom<IdentityUser>
+    public class UserViewModel : IHaveMapFrom<User>
     {
         public string Id { get; set; } = null!;
+
+        public string FirstName { get; set; } = null!;
+
+        public string LastName { get; set; } = null!;
 
         public string UserName { get; set; } = null!;
 
