@@ -4,7 +4,7 @@
     using Data.Models;
     using Infrastructure.AutoMapper;
 
-    public class UserViewModel : IHaveMapFrom<User>
+    public class DetailedUserViewModel : IHaveMapFrom<User>
     {
         public string Id { get; set; } = null!;
 

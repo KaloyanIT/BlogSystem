@@ -92,7 +92,7 @@
             return RedirectToAction(nameof(Index));
         }
 
-        // GET: Blogs/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -111,10 +111,7 @@
 
             return View(viewModel);
         }
-
-        // POST: Blogs/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditBlogViewModel blog)
@@ -159,7 +156,7 @@
             return View(blog);
         }
 
-        // GET: Blogs/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -174,7 +171,6 @@
             return View(viewModel);
         }
 
-        //POST: Blogs/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -184,10 +180,5 @@
 
             return RedirectToAction(nameof(Index));
         }
-
-        //private bool BlogExists(Guid id)
-        //{
-        //    return _context.Blogs.Any(e => e.Id == id);
-        //}
     }
 }

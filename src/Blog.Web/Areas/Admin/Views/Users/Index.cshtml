@@ -7,8 +7,7 @@
 @(await Component.InvokeAsync<GridHeaderViewComponent>(ViewData["Title"]))
 
 <div class="row">
-    <div class="col-10">
-
+    <div class="col-12">
         <table class="table table-bordered table-hover">
             <thead class="thead-dark">
                 <tr>
@@ -17,7 +16,8 @@
                     <th>Last Name</th>
                     <th>Username</th>
                     <th>Email</th>
-                    <th>Phone Number</th>
+                    <th>Date Created</th>
+                    <th>Date Modified</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -33,7 +33,8 @@
                     <td>@Html.DisplayFor(model => item.LastName)</td>
                     <td>@Html.DisplayFor(model => item.UserName)</td>
                     <td>@Html.DisplayFor(model => item.Email)</td>
-                    <td>@Html.DisplayFor(model => item.PhoneNumber)</td>
+                    <td>@Html.DisplayFor(model => item.DateCreated)</td>
+                    <td>@Html.DisplayFor(model => item.DateModified)</td>
                     @*<td>@Html.DisplayFor(model => item.)</td>*@
                     <td>
                         <a class="btn btn-warning btn-sm" role="button" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

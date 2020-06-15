@@ -86,6 +86,11 @@
 
         public async Task<IActionResult> Edit(string id, EditUserViewModel editUserViewModel)
         {
+            if(id != editUserViewModel.Id)
+            {
+                return NotFound();
+            }
+
             if(!ModelState.IsValid)
             {
                 return View(editUserViewModel);
@@ -98,11 +103,52 @@
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(string id)
+        {
+            if(string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetById(id);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<DetailedUserViewModel>(user);
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> Delete(string id)
+        {
+            if(string.IsNullOrEmpty(id))
+            {
+                return NotFound();
+            }
+
+            var user = await _userService.GetById(id);
+
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<UserViewModel>(user);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var result = await _userService.Delete(id);
 
-            return Json(new { success = result });
+            return RedirectToAction(nameof(Index));
         }
     }
 }
