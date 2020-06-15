@@ -1,4 +1,4 @@
-﻿namespace Blog.Controllers.BackEnd
+﻿namespace Blog.Controllers.BackEnd.Administration
 {
     using System.Threading.Tasks;
     using AutoMapper;

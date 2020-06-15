@@ -11,7 +11,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-    public class BlogContext: IdentityDbContext<User, IdentityRole, string>, IBlogContext
+    public class BlogContext: IdentityDbContext<User, Role, string>, IBlogContext
     {
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
@@ -43,8 +43,6 @@
 
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
 
-        //public DbSet<User> Users { get; set; }
-
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
@@ -68,7 +66,7 @@
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityRole>(entity => { entity.ToTable(name: DataBaseConstants.RolesTableName); });
+            modelBuilder.Entity<Role>(entity => { entity.ToTable(name: DataBaseConstants.RolesTableName); });
             modelBuilder.Entity<IdentityUserRole<string>>(entity => { entity.ToTable(DataBaseConstants.UserRolesTableName); });
             modelBuilder.Entity<IdentityUserClaim<string>>(entity => { entity.ToTable(DataBaseConstants.UserClaimsTableName); });
             modelBuilder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable(DataBaseConstants.UserLoginTableName); });

@@ -25,7 +25,7 @@
             services.AddDbContext<BlogContext>(options => 
                 options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, Role>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders()
               .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation")
