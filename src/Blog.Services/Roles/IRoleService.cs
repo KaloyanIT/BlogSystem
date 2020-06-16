@@ -14,5 +14,7 @@
         IQueryable<Role> GetAll();
 
         Task<Role> GetById(string id);
+
+        Task Edit(EditRoleServiceModel serviceModel);
     }
 }

@@ -58,9 +58,32 @@
         }
 
         [HttpGet]
-        public async Task<IActionResult> Edit(Guid id)
+        public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            var role = await _roleService.GetById(id);
+
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = _mapper.Map<EditRoleViewModel>(role);
+
+            return View(viewModel);
+        }
+
+        public async Task<IActionResult> Edit(string id, EditRoleViewModel viewModel)
+        {
+            if (id != viewModel.Id)
+            {
+                return NotFound();
+            }
+
+            var serviceModel = _mapper.Map<EditRoleServiceModel>(viewModel);
+
+            await _roleService.Edit(serviceModel);
+
+            return RedirectToAction("Index");
         }
 
         public async Task<IActionResult> Delete(Guid id)

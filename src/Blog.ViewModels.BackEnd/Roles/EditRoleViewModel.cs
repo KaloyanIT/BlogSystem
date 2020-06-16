@@ -1,14 +1,15 @@
 ﻿namespace Blog.ViewModels.BackEnd.Roles
 {
     using System;
-    using Blog.Infrastructure.AutoMapper;
-    using Blog.Services.Roles.Models;
+    using Data.Models;
+    using Infrastructure.AutoMapper;
+    using Services.Roles.Models;
 
-    public class EditRoleViewModel : IHaveMapTo<EditRoleServiceModel>
+    public class EditRoleViewModel : IHaveMapTo<EditRoleServiceModel>, IHaveMapFrom<Role>
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
-        public string Name { get; set; } = null!;
+        public string Name { get; set; }
 
         public string Description { get; set; } = null!;
     }

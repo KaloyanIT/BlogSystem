@@ -1,5 +1,6 @@
 ﻿namespace Blog.Services.Roles
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Data.Models;
@@ -40,6 +41,18 @@
             var role = await GetAll().FirstOrDefaultAsync(x => x.Id == id);
 
             return role;
+        }
+
+        public async Task Edit(EditRoleServiceModel serviceModel)
+        {
+            var role = await this.GetById(serviceModel.Id);
+
+            role.Name = serviceModel.Name;
+            role.Description = serviceModel.Description;
+            role.DateModified = DateTime.UtcNow;
+
+            _blogContext.Update(role);
+            await _blogContext.SaveChangesAsync();
         }
     }
 }
