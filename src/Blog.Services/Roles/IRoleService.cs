@@ -16,5 +16,7 @@
         Task<Role> GetById(string id);
 
         Task Edit(EditRoleServiceModel serviceModel);
+
+        Task Delete(string id);
     }
 }

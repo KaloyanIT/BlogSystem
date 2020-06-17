@@ -54,5 +54,12 @@
             _blogContext.Update(role);
             await _blogContext.SaveChangesAsync();
         }
+
+        public async Task Delete(string id)
+        {
+            var role = await this.GetById(id);
+
+            await _roleManager.DeleteAsync(role);
+        }
     }
 }
