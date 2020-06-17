@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Configurations\SettingsConfiguration.cs~RF369a055a.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.4" />
@@ -26,8 +22,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Data.Base\Blog.Data.Base.csproj" />
+    <ProjectReference Include="..\Blog.Data.Configurations\Blog.Data.Configurations.csproj" />
+    <ProjectReference Include="..\Blog.Data.Models\Blog.Data.Models.csproj" />
+    <ProjectReference Include="..\Blog.Data.Repositories\Blog.Data.Repositories.csproj" />
     <ProjectReference Include="..\Blog.DataAccess\Blog.DataAccess.csproj" />
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

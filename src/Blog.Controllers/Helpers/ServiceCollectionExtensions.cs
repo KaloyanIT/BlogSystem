@@ -1,30 +1,31 @@
 ﻿namespace Blog.Controllers.Helpers
 {
+    using System;
     using System.Linq;
+    using System.Reflection;
     using AutoMapper;
+    using Data.Base;
+    using Data.Models;
+    using Data.Models.Context;
+    using Identity;
+    using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-
-    using Data;
-    using Data.Base;
-    using Infrastructure.AutoMapper;
     using Services.Base;
-    using Blog.Data.Models;
-    using System;
-    using Blog.Controllers.Identity;
 
     public static class ServiceCollectionExtensions
     {
         public static IServiceCollection InjectIdentity(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IBlogContext, BlogContext>();
-            services.AddDbContext<BlogContext>(options => options.UseSqlServer(configuration.GetDefaultConnectionString()));
+            services.AddDbContext<BlogContext>(options => 
+                options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User, Role>()
               .AddEntityFrameworkStores<BlogContext>()
               .AddDefaultTokenProviders()
               .AddTokenProvider<EmailConfirmationTokenProvider<User>>("emailconfirmation")
@@ -51,7 +52,16 @@
             services.Configure<EmailConfirmationTokenProviderOptions>(opt =>
                 opt.TokenLifespan = TimeSpan.FromDays(3));
 
+            return services;
+        }
+
+        public static IServiceCollection InjectAutoMapper(this IServiceCollection services)
+        {
+            AutoMapperConfig.Init();
+
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration!.CreateMapper());
+
+            //services.AddAutoMapper(typeof(IHaveMap).GetType().Assembly);
 
             return services;
         }
@@ -97,8 +107,18 @@
         {
             var repositoryType = typeof(ITransientRepository);
 
-            var types = repositoryType
-                .Assembly
+            var assemblyRepositoriesName = "Blog.Data.Repositories";
+
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+            var assembly = assemblies.SingleOrDefault(x => x.GetName().Name == assemblyRepositoriesName);
+
+            if(assembly == null)
+            {
+                assembly = Assembly.Load(assemblyRepositoriesName);
+            }
+
+            var types = assembly
                 .GetExportedTypes()
                 .Where(t => t.IsClass && !t.IsAbstract)
                 .Select(t => new

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Blog.Data.Base;
 using Blog.DataAccess;
 
 namespace Blog.UnitTests
@@ -18,7 +19,6 @@ namespace Blog.UnitTests
         public List<T> Items
         {
             get;
-            set;
         }
 
         public IQueryable<T> GetAll()
@@ -42,7 +42,7 @@ namespace Blog.UnitTests
             {
                 if (saveThis == null)
                 {
-                    throw new ArgumentNullException("saveThis", "Argument cannot be null.");
+                    throw new ArgumentNullException(nameof(saveThis), "Argument cannot be null.");
                 }
 
                 if (saveThis.Id == this.currId)
@@ -64,7 +64,7 @@ namespace Blog.UnitTests
             {
                 if (deleteThis == null)
                 {
-                    throw new ArgumentNullException("deleteThis", "Argument cannot be null.");
+                    throw new ArgumentNullException(nameof(deleteThis), "Argument cannot be null.");
                 }
 
                 if (this.Items.Contains(deleteThis) == true)

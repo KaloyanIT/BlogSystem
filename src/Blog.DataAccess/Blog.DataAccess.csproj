@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -9,6 +9,18 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Data.Base\Blog.Data.Base.csproj" />
+    <ProjectReference Include="..\Blog.Data.Base\Blog.Data.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

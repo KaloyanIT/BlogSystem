@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,16 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Controllers\Admin\HomeController.cs~RF191a2cc4.TMP" />
-  </ItemGroup>
-
-  <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
     <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
 </Project>

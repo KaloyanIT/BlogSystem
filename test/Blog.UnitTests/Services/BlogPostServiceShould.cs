@@ -1,10 +1,8 @@
 ﻿namespace Blog.UnitTests.Services
 {
     using System;
-    using Data.Models;
-    using Blog.Services.Blog;
 
-    public class BlogPostServiceShould : IDisposable
+    public class BlogPostServiceShould
     {
         //private readonly BlogService systemUnderTest;
         //private readonly InMemoryRepository<BlogPost> blogPostRepositoryInstance;
@@ -15,9 +13,9 @@
 
         }
 
-        public void Dispose()
-        {
+        //public void Dispose()
+        //{
 
-        }
+        //}
     }
 }

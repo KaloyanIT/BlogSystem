@@ -4,11 +4,9 @@
     using System.IO;
     using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
-    using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.FileProviders;
@@ -26,11 +24,12 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            AutoMapperConfig.Init();
+            //AutoMapperConfig.Init();
 
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandartServices();
+
 
             services.AddSingleton(_configuration.GetEmailConfiguration());
             services.AddTransient<IEmailSender, EmailSender>();
@@ -52,10 +51,12 @@
 
             var protectionBuilder = services.AddDataProtection().SetApplicationName("BLOG_IT")
                     .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
+
+            services.InjectAutoMapper();
         }
 
 
-        public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
 

@@ -7,11 +7,11 @@
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
 
-    public class MainSeeder
+    public static class MainSeeder
     {
         public static async Task Seed(IServiceProvider serviceProvider, IConfiguration configuration)
         {
-            var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            var RoleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();
 
             var UserManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
@@ -25,7 +25,7 @@
 
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));
+                    roleResult = await RoleManager.CreateAsync(new Role() { Name = roleName });
                 }
 
             }

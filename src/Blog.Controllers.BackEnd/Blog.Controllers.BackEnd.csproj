@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <LangVersion>8.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
+    <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
+    <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
+    <ProjectReference Include="..\Blog.ViewModels.BackEnd\Blog.ViewModels.BackEnd.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

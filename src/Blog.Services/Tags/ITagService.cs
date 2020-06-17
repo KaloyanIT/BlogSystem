@@ -11,6 +11,10 @@ namespace Blog.Services.Tags
 
     public interface ITagService : IService
     {
+        Task Create(CreateTagServiceModel serviceModel);
+
+        Task Edit(EditTagServiceModel serviceModel);
+
         Task Save(TagServiceModel value);
 
         IQueryable<Tag> GetAll();

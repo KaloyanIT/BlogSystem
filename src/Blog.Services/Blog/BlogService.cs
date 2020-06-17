@@ -23,9 +23,26 @@
 
         public async Task Create(CreateBlogServiceModel serviceModel)
         {
+            if(serviceModel == null)
+            {
+                throw new ArgumentNullException(nameof(serviceModel), "Service model can not be null!");
+            }
+
             var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
             await _blogRepository.Save(blogPost);
+        }
+
+        public async Task Delete(Guid? id)
+        {
+            if(!id.HasValue)
+            {
+                throw new ArgumentNullException(nameof(id), "Id can not be null!");
+            }
+
+            var blog = await this.GetById(id);
+
+            await _blogRepository.Delete(blog);
         }
 
         public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)

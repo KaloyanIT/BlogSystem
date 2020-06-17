@@ -6,10 +6,10 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
 
-    public class AppClaimsPrincipalFactory : UserClaimsPrincipalFactory<User, IdentityRole>
+    public class AppClaimsPrincipalFactory : UserClaimsPrincipalFactory<User, Role>
     {
         public AppClaimsPrincipalFactory(UserManager<User> userManager,
-            RoleManager<IdentityRole> roleManager,
+            RoleManager<Role> roleManager,
             IOptions<IdentityOptions> options) : base(userManager, roleManager, options)
         {
         }

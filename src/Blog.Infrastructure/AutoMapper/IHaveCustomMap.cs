@@ -2,7 +2,7 @@
 {
     using global::AutoMapper;
 
-    public interface IHaveCustomMap
+    public interface IHaveCustomMap : IHaveMap
     {
         void CreateMappings(IProfileExpression configuration);
     }

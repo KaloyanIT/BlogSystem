@@ -28,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Blog.Controllers.BackEnd\Blog.Controllers.BackEnd.csproj" />
+    <ProjectReference Include="..\Blog.Controllers.FrontEnd\Blog.Controllers.FrontEnd.csproj" />
     <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
     <ProjectReference Include="..\Blog.Data\Blog.Data.csproj" />
     <ProjectReference Include="..\Blog.Services\Blog.Services.csproj" />
@@ -35,6 +37,17 @@
 
   <ItemGroup>
     <Folder Include="StaticFiles\src\sass\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\.editorconfig" Link=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' ">

@@ -5,8 +5,8 @@
 
     public static class ConfigurationExtensions
     {
-        private static readonly string ConnectionName = "DefaultConnection";
-        private static readonly string EmailConfigurationName = "EmailConfiguration";
+        private const string ConnectionName = "DefaultConnection";
+        private const string EmailConfigurationName = "EmailConfiguration";
 
         public static string GetDefaultConnectionString(this IConfiguration configuration)
             => configuration.GetConnectionString(ConnectionName);

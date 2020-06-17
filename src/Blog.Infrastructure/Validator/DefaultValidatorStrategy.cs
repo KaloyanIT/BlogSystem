@@ -19,7 +19,7 @@
             }
         }
 
-        private ICollection<ValidationResult> Validate(T model)
+        private static ICollection<ValidationResult> Validate(T model)
         {
             var results = new List<ValidationResult>();
 
