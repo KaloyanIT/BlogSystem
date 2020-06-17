@@ -3,23 +3,25 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Data.Base.Extensions;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Services.Tags;
     using Services.Tags.Models;
     using ViewModels.BackEnd.Tags;
 
     [Area("Admin")]
-    public class TagsController : Controller
+    public class TagsController : BackEndController
     {
         private readonly ITagService _tagService;
-        private readonly IMapper _mapper;
 
-        public TagsController(ITagService tagService, IMapper mapper)
+        public TagsController(ITagService tagService,
+            ILogger<TagsController> logger,
+            IMapper mapper) : base(logger, mapper)
         {
             _tagService = tagService ?? throw new ArgumentNullException(nameof(tagService), "Tag service is null.");
-            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper), "AutoMapper service is null."); ;
         }
 
         public IActionResult Index(int page = 1)
@@ -46,7 +48,7 @@
                 return View(tagViewModel);
             }
 
-            var tagServiceModel = _mapper.Map<CreateTagServiceModel>(tagViewModel);            
+            var tagServiceModel = Mapper.Map<CreateTagServiceModel>(tagViewModel);            
 
             await _tagService.Create(tagServiceModel);
 
@@ -68,7 +70,7 @@
                 return NotFound();
             }
 
-            var viewModel = _mapper.Map<EditTagViewModel>(tag);
+            var viewModel = Mapper.Map<EditTagViewModel>(tag);
 
             return View(viewModel);
         }
@@ -86,7 +88,7 @@
                 return this.View(tagViewModel);
             }
 
-            var editServiceModel = _mapper.Map<EditTagServiceModel>(tagViewModel);
+            var editServiceModel = Mapper.Map<EditTagServiceModel>(tagViewModel);
 
             await _tagService.Edit(editServiceModel);
 
@@ -103,7 +105,7 @@
 
             var tag = await _tagService.GetById(id);
 
-            var viewModel = _mapper.Map<TagViewModel>(tag);
+            var viewModel = Mapper.Map<TagViewModel>(tag);
 
             return View(viewModel);
         }

@@ -1,12 +1,16 @@
 ﻿namespace Blog.Controllers.BackEnd
 {
+    using AutoMapper;
+    using Base;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
 
     [Area("Admin")]
-    public class HomeController : Controller
+    public class HomeController : BackEndController
     {
-        public HomeController()
+        public HomeController(ILogger<BackEndController> logger,
+            IMapper mapper) : base(logger, mapper)
         {
         }
 

@@ -1,33 +1,33 @@
 ﻿namespace Blog.Controllers.BackEnd
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Blog.Data.Base.Extensions;
     using Blog.ViewModels.BackEnd.Blogs;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using Services.Blog;
     using Services.Blog.Models;
     using Services.Users;
 
     [Area("Admin")]
-    public class BlogsController : Controller
+    public class BlogsController : BackEndController
     {
         private readonly IBlogService _blogService;
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
 
-        private const int MaxPageSize = 10;
-
-        public BlogsController(IBlogService blogService, IUserService userService, IMapper mapper)
+        public BlogsController(IBlogService blogService,
+            ILogger<BlogsController> logger,
+            IUserService userService,
+            IMapper mapper) : base(logger, mapper)
         {
             _blogService = blogService;
             _userService = userService;
-            _mapper = mapper;
         }
 
         public IActionResult Index(int page = 1)
@@ -35,7 +35,7 @@
             var blogs = _blogService.GetAll()
                 .OrderByDescending(x => x.DateCreated)
                 .To<BlogViewModel>()
-                .GetPaged(page, MaxPageSize);         
+                .GetPaged(page, this.MaxPageSize);
 
             return View(blogs);
         }
@@ -54,7 +54,7 @@
                 return NotFound();
             }
 
-            var blogViewModel = _mapper.Map<DetailedBlogViewModel>(blog);
+            var blogViewModel = Mapper.Map<DetailedBlogViewModel>(blog);
 
             return View(blogViewModel);
         }
@@ -76,7 +76,7 @@
             }
 
             //Add validation
-            var serviceModel = _mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
+            var serviceModel = Mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);
 
             var userId = await _userService.GetIdByUsername(User.Identity.Name!);
 
@@ -107,11 +107,11 @@
                 return NotFound();
             }
 
-            var viewModel = _mapper.Map<EditBlogViewModel>(blog);
+            var viewModel = Mapper.Map<EditBlogViewModel>(blog);
 
             return View(viewModel);
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditBlogViewModel blog)
@@ -125,7 +125,7 @@
             {
                 try
                 {
-                    var serviceModel = _mapper.Map<BlogServiceModel>(blog);
+                    var serviceModel = Mapper.Map<BlogServiceModel>(blog);
 
                     var userId = await _userService.GetIdByUsername(User.Identity.Name!);
 
@@ -166,7 +166,7 @@
 
             var blog = await _blogService.GetById(id);
 
-            var viewModel = _mapper.Map<DetailedBlogViewModel>(blog);
+            var viewModel = Mapper.Map<DetailedBlogViewModel>(blog);
 
             return View(viewModel);
         }
