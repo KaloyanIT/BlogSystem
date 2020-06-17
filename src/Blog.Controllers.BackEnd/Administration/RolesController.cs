@@ -1,25 +1,26 @@
 ﻿namespace Blog.Controllers.BackEnd.Administration
 {
-    using System;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Blog.Data.Base.Extensions;
-    using Blog.Infrastructure.Extensions;
-    using Blog.Services.Roles.Models;
+    using Infrastructure.Extensions;
+    using Services.Roles.Models;
     using Blog.ViewModels.BackEnd.Roles;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Services.Roles;
 
     [Area("Admin")]
-    public class RolesController : Controller
+    public class RolesController : BackEndController
     {
         private readonly IRoleService _roleService;
-        private readonly IMapper _mapper;
 
-        public RolesController(IRoleService roleService, IMapper mapper)
+        public RolesController(IRoleService roleService,
+            ILogger<RolesController> logger,
+            IMapper mapper) : base(logger, mapper)
         {
             _roleService = roleService;
-            _mapper = mapper;
         }
 
         public IActionResult Index(int page = 1)
@@ -45,7 +46,7 @@
                 return View(viewModel);
             }
 
-            var serviceModel = _mapper.Map<CreateRoleServiceModel>(viewModel);
+            var serviceModel = Mapper.Map<CreateRoleServiceModel>(viewModel);
 
             var result = await _roleService.Create(serviceModel);
 
@@ -67,7 +68,7 @@
                 return NotFound();
             }
 
-            var viewModel = _mapper.Map<EditRoleViewModel>(role);
+            var viewModel = Mapper.Map<EditRoleViewModel>(role);
 
             return View(viewModel);
         }
@@ -79,7 +80,7 @@
                 return NotFound();
             }
 
-            var serviceModel = _mapper.Map<EditRoleServiceModel>(viewModel);
+            var serviceModel = Mapper.Map<EditRoleServiceModel>(viewModel);
 
             await _roleService.Edit(serviceModel);
 
@@ -90,7 +91,7 @@
         {
             var item = await _roleService.GetById(id);
 
-            var viewModel = _mapper.Map<DetailedRoleViewModel>(item);
+            var viewModel = Mapper.Map<DetailedRoleViewModel>(item);
 
             return View(viewModel);
         }

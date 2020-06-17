@@ -3,30 +3,35 @@
     using System;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Blog.ViewModels.BackEnd.Emails.MailLists;
     using Data.Base.Extensions;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Logging;
     using Services.Emails.MailLists;
     using Services.Emails.MailLists.Models;
 
     [Area("Admin")]
     [Route("emails/mailLists")]
-    public class MailListsController : Controller
+    public class MailListsController : BackEndController
     {
         private readonly IMailListService _mailListService;
-        private readonly IMapper _mapper;
 
-        public MailListsController(IMailListService mailListService, IMapper mapper)
+        public MailListsController(IMailListService mailListService,
+            ILogger<MailListsController> logger,
+            IMapper mapper) : base(logger, mapper)
         {
             _mailListService = mailListService;
-            _mapper = mapper;
         }
 
         [Route("index")]
         public IActionResult Index(int page = 1)
         {
-            var mailLists = _mailListService.GetAll().To<MailListViewModel>().GetPaged(page, 10);
+            var mailLists = _mailListService
+                    .GetAll()
+                    .To<MailListViewModel>()
+                    .GetPaged(page, this.MaxPageSize);
 
             return View(mailLists);
         }
@@ -47,7 +52,7 @@
                 return View(viewModel);
             }
 
-            var serviceModel = _mapper.Map<CreateMailListServiceModel>(viewModel);
+            var serviceModel = Mapper.Map<CreateMailListServiceModel>(viewModel);
 
             await _mailListService.Create(serviceModel);
 
@@ -69,7 +74,7 @@
                 return NotFound();
             }
 
-            var viewModel = _mapper.Map<EditMailListViewModel>(item);
+            var viewModel = Mapper.Map<EditMailListViewModel>(item);
 
             return View(viewModel);
         }
@@ -89,7 +94,7 @@
                 return View(viewModel);
             }
 
-            var serviceModel = _mapper.Map<EditMailListServiceModel>(viewModel);
+            var serviceModel = Mapper.Map<EditMailListServiceModel>(viewModel);
 
             await _mailListService.Edit(serviceModel);
 

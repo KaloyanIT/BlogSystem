@@ -2,17 +2,22 @@
 
 namespace Blog.Controllers.BackEnd.Base
 {
+    using System;
+    using AutoMapper;
     using Microsoft.Extensions.Logging;
 
     [Area("Admin")]
     public class BackEndController : Controller
     {
-        private readonly ILogger<BackEndController> _logger;
-        protected int MaxPageSize = 10;
+        protected ILogger<BackEndController> Logger { get; }
+        protected IMapper Mapper { get; }
 
-        public BackEndController(ILogger<BackEndController> logger)
+        protected int MaxPageSize { get; } = 10;
+
+        public BackEndController(ILogger<BackEndController> logger, IMapper mapper)
         {
-            _logger = logger;
+            Logger = logger ?? throw new ArgumentNullException(nameof(logger), "Logger is null.");
+            Mapper = mapper ?? throw new ArgumentNullException(nameof(mapper), "AutoMapper is null.");
         }
     }
 }
