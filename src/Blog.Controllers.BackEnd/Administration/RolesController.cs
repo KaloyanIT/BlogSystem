@@ -86,9 +86,21 @@
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            var item = await _roleService.GetById(id);
+
+            var viewModel = _mapper.Map<DetailedRoleViewModel>(item);
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            await _roleService.Delete(id);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
