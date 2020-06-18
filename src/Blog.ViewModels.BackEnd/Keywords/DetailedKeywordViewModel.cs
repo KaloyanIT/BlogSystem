@@ -4,7 +4,7 @@
     using Data.Models;
     using Infrastructure.AutoMapper;
 
-    public class KeywordViewModel : BaseGridViewModel, IHaveMapFrom<Keyword>
+    public class DetailedKeywordViewModel : BaseGridViewModel, IHaveMapFrom<Keyword>
     {
         public string Name { get; set; } = null!;
     }
