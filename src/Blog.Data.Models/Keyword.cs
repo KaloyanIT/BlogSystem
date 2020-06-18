@@ -28,5 +28,15 @@ namespace Blog.Data.Models
             Name = name;
             BlogKeywords = new List<BlogPostKeyword>();
         }
+
+        public void Edit(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                throw new ArgumentNullException(nameof(name), "Keyword name can not be null.");
+            }
+
+            Name = name;
+        }
     }
 }
