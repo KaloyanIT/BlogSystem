@@ -1,9 +1,9 @@
-﻿using Blog.Data.Base;
-using System;
-using Xunit;
-
-namespace Blog.UnitTests.Domain
+﻿namespace Blog.Domain.UnitTests.Domain
 {
+    using System;
+    using Blog.Data.Base;
+    using Xunit;
+
     public class BaseDbObjectShould
     {
         [Fact]

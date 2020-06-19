@@ -2,7 +2,7 @@
 using Blog.Data.Models;
 using Xunit;
 
-namespace Blog.UnitTests.Domain
+namespace Blog.Domain.UnitTests
 {
     public class BlogPostShould
     {
