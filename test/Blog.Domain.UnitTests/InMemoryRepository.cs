@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Blog.Data.Base;
 using Blog.DataAccess;
 
-namespace Blog.UnitTests
+namespace Blog.Domain.UnitTests
 {
     public class InMemoryRepository<T> : IRepository<T> where T : IDbObject
     {
