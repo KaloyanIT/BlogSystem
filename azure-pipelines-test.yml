@@ -29,7 +29,7 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet build $(buildConfiguration) $(buildNummer)'
+  displayName: 'dotnet build $(buildConfiguration) $(buildNumber)'
   inputs:
     command: 'build'
     projects: 'src/Blog.Web/Blog.Web.csproj'
@@ -39,7 +39,7 @@ steps:
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
-    arguments: '--configuration $(testConfiguration)'
+    arguments: '--configuration $(testConfiguration) --collect "Code coverage"'
 
 - task: DotNetCoreCLI@2
   displayName: dotnet publish $(buildConfiguration)
