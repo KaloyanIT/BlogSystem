@@ -25,7 +25,7 @@
 
                 if (!roleExist)
                 {
-                    roleResult = await RoleManager.CreateAsync(new Role() { Name = roleName });
+                    roleResult = await RoleManager.CreateAsync(new Role() { Name = roleName, Description = "Initial"});
                 }
 
             }
