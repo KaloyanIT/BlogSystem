@@ -40,3 +40,10 @@ steps:
     command: 'test'
     projects: 'test/**/*.csproj'
     arguments: '--configuration $(testConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish $(buildConfiguration)
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration)'
