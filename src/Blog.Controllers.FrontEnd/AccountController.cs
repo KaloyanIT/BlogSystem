@@ -29,11 +29,8 @@
         [AllowAnonymous]
         public async Task<IActionResult> Register()
         {
-            var message = new Message(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "");
-
-            await _emailSender.SendEmailAsync(message);
-
-
+            //var message = new Message(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "");
+            //await _emailSender.SendEmailAsync(message);
             return View();
         }
 
@@ -63,7 +60,7 @@
                     ModelState.TryAddModelError(error.Code, error.Description);
                 }
 
-                return View(user);
+                return View(registerViewModel);
             }
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
@@ -74,7 +71,7 @@
 
             await _userManager.AddToRoleAsync(user, "Member");
 
-            return View("Login", "Login");
+            return View("/Views/Login/Login.cshtml");
         }
 
         [HttpGet]

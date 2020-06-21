@@ -12,7 +12,8 @@
 
         public string Password { get; set; }
 
-        public bool UseSSL { get; set; }
+        public bool UseSsl { get; set; }
+
 
         public EmailConfiguration()
         {
@@ -21,7 +22,17 @@
             Port = 0;
             Username = string.Empty;
             Password = string.Empty;
-            UseSSL = false;
+            UseSsl = false;
+        }
+
+        public EmailConfiguration(string from, string smtpServer, int port, string username, string password, bool useSsl)
+        {
+            From = from;
+            SmtpServer = smtpServer;
+            Port = port;
+            Username = username;
+            Password = password;
+            UseSsl = useSsl;
         }
     }
 }

@@ -25,32 +25,62 @@
 
             Send(emailMessage);
         }
-        
+
+        public async Task SendEmailAsync(Message message)
+        {
+            var emailMessage = CreateEmailMessage(message);
+
+            await SendAsync(emailMessage);
+        }
+
+        private async Task SendAsync(MimeMessage emailMessage)
+        {
+            using var client = new SmtpClient();
+
+            try
+            {
+                await client.ConnectAsync(_emailConfiguration.SmtpServer,
+                    _emailConfiguration.Port,
+                    false);
+
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                await client.AuthenticateAsync(_emailConfiguration.Username, _emailConfiguration.Password);
+
+                await client.SendAsync(emailMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Email can not be sent");
+            }
+            finally
+            {
+                await client.DisconnectAsync(true);
+                client.Dispose();
+            }
+        }
+
         private void Send(MimeMessage emailMessage)
         {
-            using (var client = new SmtpClient())
+            using var client = new SmtpClient();
+            try
             {
-                try
-                {
-                    client.Connect(_emailConfiguration.SmtpServer,
-                        _emailConfiguration.Port,
-                        _emailConfiguration.UseSSL);
+                client.Connect(_emailConfiguration.SmtpServer,
+                    _emailConfiguration.Port,
+                    _emailConfiguration.UseSsl);
 
-                    client.AuthenticationMechanisms.Remove("XOAUTH2");
-                    client.Authenticate(_emailConfiguration.Username, _emailConfiguration.Password);
+                client.AuthenticationMechanisms.Remove("XOAUTH2");
+                client.Authenticate(_emailConfiguration.Username, _emailConfiguration.Password);
 
-                    client.Send(emailMessage);
-                }
-                catch(Exception ex)
-                {
-                    _logger.LogError(ex, "Email can not be sent");
-                }
-                finally
-                {
-                    client.Disconnect(true);
-                    client.Dispose();
-                }
-
+                client.Send(emailMessage);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Email can not be sent");
+            }
+            finally
+            {
+                client.Disconnect(true);
+                client.Dispose();
             }
         }
 
@@ -66,11 +96,6 @@
             };
 
             return emaiMessage;
-        }
-
-        public Task SendEmailAsync(Message message)
-        {
-            throw new NotImplementedException();
         }
     }
 }

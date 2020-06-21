@@ -17,17 +17,15 @@
                     .GetSection(EmailConfigurationName)
                     .Get<EmailConfiguration>();
 
-            if(emailConfiguration == null)
+            if (emailConfiguration == null)
             {
-                var defaultEmailConfiguration = new EmailConfiguration()
-                {
-                    From = "test@email.com",
-                    SmtpServer ="localhost",
-                    UseSSL = false,
-                    Username = "test@test.com",
-                    Password = "121334",
-                    Port = 24
-                };
+                var defaultEmailConfiguration = new EmailConfiguration("test@email.com",
+                    "localhost",
+                    24,
+                "test@test.com",
+                    "121334",
+                    false
+                );
 
                 return defaultEmailConfiguration;
             }
