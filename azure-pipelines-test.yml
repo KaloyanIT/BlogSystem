@@ -29,13 +29,13 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'dotnet build $(buildConfiguration) $(buildNummer)'
   inputs:
     command: 'build'
     projects: 'src/Blog.Web/Blog.Web.csproj'
     arguments: '--configuration $(buildConfiguration) /p:Version=$(buildNumber)'
 - task: DotNetCoreCLI@2
-  displayName: 'Run tests'
+  displayName: 'dotnet test $(testConfiguration)'
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
@@ -46,4 +46,10 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'BlogStaging'
+    publishLocation: 'Container'
