@@ -6,24 +6,42 @@
 
     public class MailList : BaseDbObject
     {
-        public string Name { get; private set; }
+        private string _name = null!;
+        private string _description = null!;
 
-        public string Description { get; private set; }
+        public string Name
+        {
+            get => _name;
+            
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(value), "Mail List name can not be null or empty string.");
+                }
+
+                _name = value;
+            }
+        }
+
+        public string Description 
+        { 
+            get => _description;
+            private set
+            {
+                if (string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException(nameof(value), "Mail List description can not be null or empty string.");
+                }
+
+                _description = value;
+            }
+        }
 
         public ICollection<MailListSubscriber> MailListSubscribers { get; private set; }
 
         public MailList(string name, string description)
         {
-            if (string.IsNullOrEmpty(name))
-            {
-                throw new ArgumentNullException(nameof(name), "Mail List name can not be null or empty string.");
-            }
-
-            if (string.IsNullOrEmpty(description))
-            {
-                throw new ArgumentNullException(nameof(description), "Mail List description can not be null or empty string.");
-            }
-
             Name = name;
             Description = description;
 
