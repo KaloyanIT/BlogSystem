@@ -93,7 +93,7 @@
                 {
                     services.AddScoped(type.Service, type.Implementation);
                 }
-                else if (scopedServiceType.IsAssignableFrom(type.Service))
+                else if (singletonServiceType.IsAssignableFrom(type.Service))
                 {
                     services.AddSingleton(type.Service, type.Implementation);
                 }
