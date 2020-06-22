@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Blog.Domain.UnitTests
 {
+    [Trait("BlogPostKeyword", "unit")]
     public class BlogPostKeywordShould
     {
         [Fact]

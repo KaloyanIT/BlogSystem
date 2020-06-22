@@ -1,9 +1,10 @@
-﻿using System;
-using Blog.Data.Models;
-using Xunit;
-
-namespace Blog.Domain.UnitTests
+﻿namespace Blog.Domain.UnitTests
 {
+    using System;
+    using Data.Models;
+    using Xunit;
+
+    [Trait("Comment", "unit")]
     public class CommentShould
     {
         private string validString = "validWord";
