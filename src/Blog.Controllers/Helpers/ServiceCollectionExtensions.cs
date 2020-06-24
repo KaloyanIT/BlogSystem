@@ -8,8 +8,11 @@
     using Data.Base;
     using Data.Models;
     using Data.Models.Context;
+    using EmailService.Adapters;
+    using EmailService.Models;
     using Identity;
     using Infrastructure;
+    using Infrastructure.Adapter;
     using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
@@ -17,6 +20,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using MimeKit;
     using Services.Base;
 
     public static class ServiceCollectionExtensions
@@ -63,8 +67,6 @@
 
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration!.CreateMapper());
 
-            //services.AddAutoMapper(typeof(IHaveMap).GetType().Assembly);
-
             return services;
         }
 
@@ -93,17 +95,6 @@
                 })
                 .Where(t => t.Service != null);
 
-            //var types = serviceType
-            //    .Assembly
-            //    .GetExportedTypes()
-            //    .Where(t => t.IsClass && !t.IsAbstract)
-            //    .Select(t => new
-            //    {
-            //        Service = t.GetInterface($"I{t.Name}"),
-            //        Implementation = t
-            //    })
-            //    .Where(t => t.Service != null);
-
             foreach (var type in types)
             {
                 if (serviceType.IsAssignableFrom(type.Service))
@@ -120,6 +111,8 @@
                 }
 
             }
+
+            services.AddTransient<BaseEmailMessageAdapter, BaseEmailMessageAdapter>();
 
             return services;
         }

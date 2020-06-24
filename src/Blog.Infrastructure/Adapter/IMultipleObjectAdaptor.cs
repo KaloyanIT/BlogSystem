@@ -1,8 +1,8 @@
-﻿namespace Blog.Infrastructure.Adaptor
+﻿namespace Blog.Infrastructure.Adapter
 {
     using System.Collections.Generic;
 
-    public interface IMultipleObjectAdaptor<T, T1> : ISingleObjectAdaptor<T, T1>
+    public interface IMultipleObjectAdaptor<T, T1> : ISingleObjectAdapter<T, T1>
         where T : class
         where T1 : class
     {

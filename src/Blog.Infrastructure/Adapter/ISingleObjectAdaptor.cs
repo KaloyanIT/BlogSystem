@@ -1,6 +1,6 @@
-﻿namespace Blog.Infrastructure.Adaptor
+﻿namespace Blog.Infrastructure.Adapter
 {
-    public interface ISingleObjectAdaptor<T, T1>
+    public interface ISingleObjectAdapter<T, T1>
         where T : class
         where T1 : class
     {

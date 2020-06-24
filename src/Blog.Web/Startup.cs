@@ -1,9 +1,9 @@
-﻿namespace Blog
+﻿namespace Blog.Web
 {
     using System;
     using System.IO;
-    using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
+    using Infrastructure.Emails;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
