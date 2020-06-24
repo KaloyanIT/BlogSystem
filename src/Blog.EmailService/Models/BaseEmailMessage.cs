@@ -16,7 +16,7 @@
             Subject = subject;
             Content = content;
 
-            ParseEmailAddresses(to);
+            _to = ParseEmailAddresses(to);
         }
 
         public string Subject
@@ -51,7 +51,7 @@
 
         public ICollection<MailboxAddress> To
         {
-            get => _to ?? new List<MailboxAddress>();
+            get => _to;
 
             private set => _to = value ?? throw new ArgumentNullException(nameof(value), "Email Sender collection can not be null!");
         }
