@@ -1,6 +1,7 @@
 ﻿namespace Blog.Controllers.Helpers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
@@ -8,6 +9,7 @@
     using Data.Models;
     using Data.Models.Context;
     using Identity;
+    using Infrastructure;
     using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
@@ -66,22 +68,41 @@
             return services;
         }
 
-        public static IServiceCollection InjectStandartServices(this IServiceCollection services)
+
+
+        public static IServiceCollection InjectStandardServices(this IServiceCollection services)
         {
             var serviceType = typeof(IService);
             var singletonServiceType = typeof(ISingletonService);
             var scopedServiceType = typeof(IScopedService);
 
-            var types = serviceType
-                .Assembly
-                .GetExportedTypes()
+            var assemblyNames = new List<string>() {"Blog.Services", "Blog.EmailService"};
+
+            AppDomain.CurrentDomain.Load(assemblyNames[0]);
+            AppDomain.CurrentDomain.Load(assemblyNames[1]);
+
+            var types = AssemblyHelper
+                .GetAllBlogServiceAssemblies()
+                .SelectMany(x => x.GetExportedTypes())
                 .Where(t => t.IsClass && !t.IsAbstract)
                 .Select(t => new
                 {
                     Service = t.GetInterface($"I{t.Name}"),
                     Implementation = t
+
                 })
                 .Where(t => t.Service != null);
+
+            //var types = serviceType
+            //    .Assembly
+            //    .GetExportedTypes()
+            //    .Where(t => t.IsClass && !t.IsAbstract)
+            //    .Select(t => new
+            //    {
+            //        Service = t.GetInterface($"I{t.Name}"),
+            //        Implementation = t
+            //    })
+            //    .Where(t => t.Service != null);
 
             foreach (var type in types)
             {
