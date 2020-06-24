@@ -28,7 +28,7 @@
 
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
-                .InjectStandartServices();
+                .InjectStandardServices();
 
 
             services.AddSingleton(_configuration.GetEmailConfiguration());

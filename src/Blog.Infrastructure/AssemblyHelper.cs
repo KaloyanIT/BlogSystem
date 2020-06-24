@@ -15,6 +15,24 @@
             return assemblies;
         }
 
+        public static ICollection<Assembly> GetAllBlogServiceAssemblies()
+        {
+            var assemblies = GetDomainAssemblies()
+                .Where(x => x.GetName().Name!.StartsWith("Blog", StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            assemblies
+                .SelectMany(x => x.GetReferencedAssemblies()
+                    .Where(x => x.Name!.StartsWith("Blog", StringComparison.OrdinalIgnoreCase)))
+                .Distinct()
+                //.Where(y => assemblies.Any((a) => a.FullName == y.FullName) == false)
+                .ToList()
+                .ForEach(x => assemblies.Add(AppDomain.CurrentDomain.Load(x)));
+
+
+            return assemblies;
+        }
+
         public static ICollection<Assembly> GetAllBlogAssemblies()
         {
             var assemblies = GetDomainAssemblies()
