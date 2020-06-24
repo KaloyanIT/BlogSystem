@@ -2,6 +2,8 @@
 {
     using System.Threading.Tasks;
     using Data.Models;
+    using EmailService;
+    using EmailService.Models;
     using Infrastructure.Emails;
     using ViewModels.FrontEnd.Account;
     using Microsoft.AspNetCore.Authorization;
@@ -15,22 +17,22 @@
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
-        private readonly IEmailSender _emailSender;
+        private readonly IEmailsService _emailsService;
 
         public AccountController(UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IEmailSender emailSender)
+            IEmailsService emailsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
+            _emailsService = emailsService;
         }
 
         [AllowAnonymous]
         public async Task<IActionResult> Register()
         {
-            //var message = new Message(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "");
-            //await _emailSender.SendEmailAsync(message);
+            //var message = new RegistrationEmailMessage(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "COntent", "");
+            //await _emailsService.SendEmailAsync(message);
             return View();
         }
 
@@ -66,15 +68,16 @@
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
 
-            //var message = new Message(new string[] { user.Email }, "Confirmation email link", confirmationLink, null);
-            //await _emailSender.SendEmailAsync(message);
+            var message = new RegistrationEmailMessage(new string[] { user.Email }, "Confirmation email link", "Confirm your registration", confirmationLink);
+            await _emailsService.SendEmailAsync(message);
 
             await _userManager.AddToRoleAsync(user, "Member");
 
             return View("/Views/Login/Login.cshtml");
         }
-
+        
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -90,12 +93,14 @@
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Error()
         {
             return View();
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult SuccessRegistration()
         {
             return View();

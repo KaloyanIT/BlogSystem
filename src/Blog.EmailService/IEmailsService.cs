@@ -4,7 +4,7 @@
     using Models;
     using Services.Base;
 
-    public interface IEmailService : IService
+    public interface IEmailsService : IService
     {
         void SendEmail<T>(T message) where T : BaseEmailMessage;
 

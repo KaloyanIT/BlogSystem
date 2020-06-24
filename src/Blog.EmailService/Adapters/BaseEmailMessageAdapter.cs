@@ -9,10 +9,9 @@
     {
         public void Adapt(BaseEmailMessage fromValue, MimeMessage toValue)
         {
-            var emailMessage = new MimeMessage();
-            emailMessage.To.AddRange(fromValue.To);
-            emailMessage.Subject = fromValue.Subject;
-            emailMessage.Body = new TextPart(TextFormat.Text)
+            toValue.To.AddRange(fromValue.To);
+            toValue.Subject = fromValue.Subject;
+            toValue.Body = new TextPart(TextFormat.Text)
             {
                 Text = fromValue.Content
             };
