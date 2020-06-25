@@ -24,8 +24,6 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //AutoMapperConfig.Init();
-
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandardServices();

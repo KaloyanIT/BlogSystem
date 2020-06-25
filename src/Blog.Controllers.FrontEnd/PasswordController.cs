@@ -2,6 +2,8 @@
 {
     using System.Threading.Tasks;
     using Data.Models;
+    using EmailService;
+    using EmailService.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.FrontEnd.Account;
@@ -11,11 +13,15 @@
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly IEmailsService _emailsService;
 
-        public PasswordController(UserManager<User> userManager, SignInManager<User> signInManager)
+        public PasswordController(UserManager<User> userManager,
+            SignInManager<User> signInManager,
+            IEmailsService emailsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _emailsService = emailsService;
         }
 
         [HttpGet]
@@ -29,17 +35,19 @@
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel forgotPasswordModel)
         {
             if (!ModelState.IsValid)
+            {
                 return View(forgotPasswordModel);
+            }
 
             var user = await _userManager.FindByEmailAsync(forgotPasswordModel.Email);
             if (user == null)
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
 
             var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var callback = Url.Action(nameof(ResetPassword), nameof(AccountController), new { token, email = user.Email }, Request.Scheme);
+            var callback = Url.Action(nameof(ResetPassword), nameof(PasswordController), new { token, email = user.Email }, Request.Scheme);
 
-            //var message = new Message(new string[] { "codemazetest@gmail.com" }, "Reset password token", callback, null);
-            //await _emailSender.SendEmailAsync(message);
+            var message = new ForgotPasswordEmailMessage(new string[] { user.Email }, "Reset password token", "Content link ", callback);
+            await _emailsService.SendEmailAsync(message);
 
             return RedirectToAction(nameof(ForgotPasswordConfirmation));
         }

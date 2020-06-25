@@ -4,7 +4,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Logout", "Account")">
+            <a class="nav-link" href="@Url.Action("Logout", "Login")">
                 <span class="glyphicon glyphicon-log-out"></span>Logout
             </a>
         </li>
@@ -12,7 +12,7 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Login", "Account")">
+            <a class="nav-link" href="@Url.Action("Index", "Login")">
                 <span class="glyphicon glyphicon-log-in"></span>Login
             </a>
 

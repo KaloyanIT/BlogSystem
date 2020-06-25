@@ -4,15 +4,14 @@
     using Data.Models;
     using EmailService;
     using EmailService.Models;
-    using Infrastructure.Emails;
-    using ViewModels.FrontEnd.Account;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using ViewModels.FrontEnd.Account;
 
 
     [Authorize]
-    [Route("[controller]/[action]")]
+    //[Route("[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -28,11 +27,10 @@
             _emailsService = emailsService;
         }
 
+        [Route("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register()
+        public IActionResult Register()
         {
-            //var message = new RegistrationEmailMessage(new string[] { "testest@pesho.ckk" }, "Confirmation email link", "COntent", "");
-            //await _emailsService.SendEmailAsync(message);
             return View();
         }
 
@@ -75,7 +73,7 @@
 
             return View("/Views/Login/Login.cshtml");
         }
-        
+
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string token, string email)
