@@ -27,19 +27,16 @@
             return View(blogsViewModels);
         }
 
+        [Route("about")]
         public ActionResult About()
         {
             return View();
         }
 
+        [Route("contact")]
         public IActionResult Contact()
         {
             return View();
-        }
-
-        public ActionResult BlogPostSummaryPartial()
-        {
-            return PartialView();
         }
     }
 }
