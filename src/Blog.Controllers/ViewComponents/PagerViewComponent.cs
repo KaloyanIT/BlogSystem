@@ -1,14 +1,14 @@
 ﻿namespace Blog.Controllers.ViewComponents
 {
     using System.Threading.Tasks;
-    using Blog.Infrastructure.Pager;
+    using Infrastructure.Pager;
     using Microsoft.AspNetCore.Mvc;
 
     public class PagerViewComponent : ViewComponent
     {       
-        public Task<IViewComponentResult> InvokeAsync(PagedResultBase result)
+        public Task<IViewComponentResult> InvokeAsync(PagedResultBase result, string viewName = "Default")
         {
-            return Task.FromResult((IViewComponentResult)View("Default", result));
+            return Task.FromResult((IViewComponentResult)View(viewName, result));
         }
     }
 }

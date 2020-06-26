@@ -21,7 +21,7 @@
 
         public IActionResult Index(int page = 1)
         {
-            var blogs = _blogService.GetAllLatest()
+            var blogs = _blogService.GetAll()
                 .Where(x => x.ShowOnHomePage)
                 .To<BlogViewModel>()
                 .GetPaged(page, 10);
