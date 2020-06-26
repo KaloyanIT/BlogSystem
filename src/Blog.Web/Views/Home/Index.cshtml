@@ -1,20 +1,17 @@
-﻿@model ICollection<BlogViewModel>
-
+﻿@using Blog.Controllers.ViewComponents
+@model PagedResult<BlogViewModel>
 
 @{
     ViewData["Title"] = "Home";
 }
 
-@{
-    var slides = Model.Count % 3 == 0 ? Model.Count / 3 : (Model.Count / 3) + 1;
-}
 
 <div class="row">
     <div class="col-lg-8 col-md-10 mx-auto">
-        @foreach (var blog in Model)
+        @foreach (var blog in Model.Results)
         {
             <div class="post-preview">
-                <a href="@Url.Action("Details", "Blog", new { id = blog.Id })">
+                <a href="@Url.Action("Details", "Blog", new {id = blog.Id})">
                     <h2 class="post-title">
                         @blog.Title
                     </h2>
@@ -29,10 +26,14 @@
                 </p>
             </div>
         }
+
         <hr>
         <!-- Pager -->
-        <div class="clearfix">
+        @(await Component.InvokeAsync<PagerViewComponent>(Model))
+
+
+        @*<div class="clearfix">
             <a class="btn btn-primary float-right" href="@Url.Action("OlderPosts", "Blog")">Older Posts &rarr;</a>
-        </div>
+        </div>*@
     </div>
 </div>

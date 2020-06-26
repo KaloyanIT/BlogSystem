@@ -17,7 +17,7 @@
 
         IQueryable<BlogPost> GetAllLatest();
 
-        Task<BlogPost> GetById(Guid? id);
+        Task<BlogPost?> GetById(Guid? id);
 
         Task<bool> Exists(Guid? id);
 
