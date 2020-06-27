@@ -4,15 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1 class="form-heading">login Form</h1>
-<div class="login-form">
-    <div class="main-div">
-        @*<div class="panel">
-            <h2>Admin Login</h2>
-            <p>Please enter your email and password</p>
-        </div>*@
+<h1>Login</h1>
+<div>
+    <div>
         <form asp-controller="Login" asp-action="Login" id="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-            <div asp-validation-summary="All" class="text-danger"></div>
+            @*<div asp-validation-summary="All" class="text-danger"></div>s*@
             <div class="form-group">
                 <input type="email" asp-for="@Model.Username" class="form-control" id="inputEmail" placeholder="Email Address">
                 <span asp-validation-for="Username" class="text-danger"></span>
@@ -26,9 +22,10 @@
                     <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
                 </label>
             </div>
-            <div class="forgot">
-                <a asp-action="ForgotPassword" asp-controller="Password">Forgot password?</a>
+            <div>
+                <a class="stretched-link" asp-action="ForgotPassword" asp-controller="Password">Forgot password?</a>
             </div>
+            <br />
             <button type="submit" class="btn btn-primary">Login</button>
         </form>
     </div>
