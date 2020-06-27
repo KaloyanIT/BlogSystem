@@ -44,6 +44,9 @@
             services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromHours(4);
+                options.LoginPath = "/login";
+                options.AccessDeniedPath = "/error";
+                options.SlidingExpiration = true;
             });
 
 
@@ -56,7 +59,7 @@
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseDeveloperExceptionPage();
+            app.UseApplicationExceptionPage(_environment);
 
             app.SetUpDatabase(_configuration);
 

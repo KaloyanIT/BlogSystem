@@ -23,7 +23,7 @@
 
             if (!isAuthenticated)
             {
-                return RedirectToAction("Login", "Account");
+                return Redirect("/login");
             }
 
             return View();
