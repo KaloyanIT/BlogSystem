@@ -26,7 +26,6 @@
                 .To<BlogViewModel>()
                 .GetPaged(page, 10);
 
-            //var blogsViewModels = blogs.To<BlogViewModel>().ToList();
 
             return View(blogs);
         }
