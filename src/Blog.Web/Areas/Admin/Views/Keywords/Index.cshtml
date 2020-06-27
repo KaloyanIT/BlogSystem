@@ -39,7 +39,8 @@
             }
             </tbody>
         </table>
-        @(await Component.InvokeAsync<PagerViewComponent>(Model))
+        @(await Component.InvokeAsync<PagerViewComponent>(new { result = Model }))
+
 
     </div>
 </div>
