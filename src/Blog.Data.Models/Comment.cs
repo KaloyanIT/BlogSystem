@@ -1,7 +1,6 @@
 ﻿namespace Blog.Data.Models
 {
     using System;
-    using Microsoft.AspNetCore.Identity;
 
     using Base;
 
@@ -21,7 +20,7 @@
 
         public string Content { get; private set; }
 
-        public Comment() 
+        public Comment()
         {
             AttachedItemType = string.Empty;
             Username = string.Empty;
@@ -29,7 +28,7 @@
             Content = string.Empty;
         }
 
-        public Comment(Guid itemId, string username, string email, string content, string userId = "", string attchementType = "")
+        public Comment(Guid itemId, string username, string email, string content, string userId = "", string attachmentType = "")
         {
             if (itemId == null || itemId == Guid.Empty)
             {
@@ -46,23 +45,24 @@
                 throw new ArgumentNullException(nameof(email), "Comment email can not be null or empty string.");
             }
 
-
             if (string.IsNullOrWhiteSpace(content))
             {
                 throw new ArgumentNullException(nameof(content), "Comment content can not be null or empty string");
             }
 
-            if (!string.IsNullOrWhiteSpace(userId))
-            {
-                UserId = userId;
+            //if (!string.IsNullOrWhiteSpace(userId))
+            //{
+            //    //UserId = userId;
 
-                //throw new ArgumentNullException("UserId can not be null or empty string.");
-            }
+            //    throw new ArgumentNullException(nameof(userId), "UserId can not be null or empty string.");
+            //}
+
             AttachedItemId = itemId;
             Username = username;
             Email = email;
             Content = content;
-            AttachedItemType = attchementType;
+            AttachedItemType = attachmentType;
+            UserId = userId;
 
         }
     }
