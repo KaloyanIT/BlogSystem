@@ -13,6 +13,11 @@ module.exports = {
   entry: {
       // Admin
       'js/admin/blog': './StaticFiles/src/js/admin/blog.js',
+
+      //Front-end
+      'js/front-end/comments': './StaticFiles/src/js/front-end/comments.js',
+
+
       'js/common/dropdown': './StaticFiles/src/js/common/dropdown.js',
 
 
