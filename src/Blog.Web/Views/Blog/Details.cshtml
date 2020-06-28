@@ -6,6 +6,17 @@
 
 <article>
     @Html.Raw(Model.Content)
-    
+
     @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id }))
 </article>
+
+
+@section ScriptsBody
+{
+    <script type="text/javascript" src="~/StaticFiles/dist/js/front-end/comments.js"></script>
+    <script>
+        $(document).ready(function () {
+            window.comments.init();
+        });
+    </script>
+}
