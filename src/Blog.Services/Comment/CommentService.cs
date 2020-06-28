@@ -1,8 +1,9 @@
 ﻿namespace Blog.Services.Comment
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
-
+    using Data.Models;
     using Data.Repositories.Comments;
     public class CommentService : ICommentService
     {
@@ -26,6 +27,13 @@
         public Task Edit()
         {
             throw new NotImplementedException();
+        }
+
+        public IQueryable<Comment> GetAll()
+        {
+            var result = _commentRepository.GetAll();
+
+            return result;
         }
     }
 }
