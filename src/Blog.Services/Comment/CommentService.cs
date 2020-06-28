@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Data.Models;
     using Data.Repositories.Comments;
+
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
@@ -32,6 +33,13 @@
         public IQueryable<Comment> GetAll()
         {
             var result = _commentRepository.GetAll();
+
+            return result;
+        }
+
+        public IQueryable<Comment> GetAllForItem(Guid itemId)
+        {
+            var result = _commentRepository.GetCommentsForItem(itemId);
 
             return result;
         }

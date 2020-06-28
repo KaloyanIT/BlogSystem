@@ -6,4 +6,6 @@
 
 <article>
     @Html.Raw(Model.Content)
+    
+    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id }))
 </article>

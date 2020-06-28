@@ -1,5 +1,6 @@
 ﻿namespace Blog.Services.Comment
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Base;
@@ -13,6 +14,8 @@
 
         Task Edit();
 
-        IQueryable<Comment> GetAll();   
+        IQueryable<Comment> GetAll();
+
+        IQueryable<Comment> GetAllForItem(Guid itemId);
     }
 }

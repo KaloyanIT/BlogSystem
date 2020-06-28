@@ -14,6 +14,6 @@
 
         IQueryable<Comment> GetCommentsFromAnonymousUser(string attachedItem);
 
-
+        IQueryable<Comment> GetCommentsForItem(Guid id);
     }
 }
