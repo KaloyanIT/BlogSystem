@@ -37,5 +37,13 @@
 
             return result;
         }
+
+        public IQueryable<Comment> GetCommentsForItem(Guid id)
+        {
+            var result = EntityDbSet
+                .Where(x => x.AttachedItemId == id);
+
+            return result;
+        }
     }
 }

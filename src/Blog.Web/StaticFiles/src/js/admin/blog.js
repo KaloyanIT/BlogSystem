@@ -3,14 +3,14 @@
 import { textEditor } from '../text-editor';
 
 const blog = (function () {
-  function create(selector) {
-    console.log('Blog Create');
-    textEditor.init(selector);
-  }
+    function create(selector) {
+        console.log('Blog Create');
+        textEditor.init(selector);
+    }
 
-  return {
-    create,
-  };
+    return {
+        create,
+    };
 })();
 
 window.blog = blog;
