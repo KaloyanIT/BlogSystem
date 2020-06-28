@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Mvc;
 
     using Services.Comment;
+    using ViewModels.FrontEnd.Comments;
 
     public class CommentsController : Controller
     {
@@ -13,14 +14,8 @@
             _commentService = commentService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-
         [HttpPost]
-        public IActionResult AddComment()
+        public IActionResult AddComment([FromBody]CreateCommentViewModel viewModel)
         {
             return View();
         }
