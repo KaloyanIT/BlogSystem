@@ -2,28 +2,23 @@
 {
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net.Mail;
     using MimeKit;
 
     public class Message
     {
-        private readonly List<MailboxAddress> _to;
-        private readonly string _subject;
-        private readonly string _content;
-
         public Message(IEnumerable<string> to, string subject, string content)
         {
-            _to = new List<MailboxAddress>();
+            To = new List<MailboxAddress>();
 
-            _to.AddRange(to.Select(x => new MailboxAddress(x)));
-            _subject = subject;
-            _content = content;
+            To.AddRange(to.Select(x => new MailboxAddress(x)));
+            Subject = subject;
+            Content = content;
         }
 
-        public string Subject => _subject;
+        public string Subject { get; }
 
-        public string Content => _content;
+        public string Content { get; }
 
-        public List<MailboxAddress> To => _to;
+        public List<MailboxAddress> To { get; }
     }
 }

@@ -1,13 +1,18 @@
 ﻿namespace Blog.Controllers.Helpers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
     using Data.Base;
     using Data.Models;
     using Data.Models.Context;
+    using EmailService.Adapters;
+    using EmailService.Models;
     using Identity;
+    using Infrastructure;
+    using Infrastructure.Adapter;
     using Infrastructure.AutoMapper;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
@@ -15,6 +20,7 @@
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
+    using MimeKit;
     using Services.Base;
 
     public static class ServiceCollectionExtensions
@@ -61,25 +67,31 @@
 
             services.AddSingleton(typeof(IMapper), AutoMapperConfig.MapperConfiguration!.CreateMapper());
 
-            //services.AddAutoMapper(typeof(IHaveMap).GetType().Assembly);
-
             return services;
         }
 
-        public static IServiceCollection InjectStandartServices(this IServiceCollection services)
+
+
+        public static IServiceCollection InjectStandardServices(this IServiceCollection services)
         {
             var serviceType = typeof(IService);
             var singletonServiceType = typeof(ISingletonService);
             var scopedServiceType = typeof(IScopedService);
 
-            var types = serviceType
-                .Assembly
-                .GetExportedTypes()
+            var assemblyNames = new List<string>() {"Blog.Services", "Blog.EmailService"};
+
+            AppDomain.CurrentDomain.Load(assemblyNames[0]);
+            AppDomain.CurrentDomain.Load(assemblyNames[1]);
+
+            var types = AssemblyHelper
+                .GetAllBlogServiceAssemblies()
+                .SelectMany(x => x.GetExportedTypes())
                 .Where(t => t.IsClass && !t.IsAbstract)
                 .Select(t => new
                 {
                     Service = t.GetInterface($"I{t.Name}"),
                     Implementation = t
+
                 })
                 .Where(t => t.Service != null);
 
@@ -93,12 +105,14 @@
                 {
                     services.AddScoped(type.Service, type.Implementation);
                 }
-                else if (scopedServiceType.IsAssignableFrom(type.Service))
+                else if (singletonServiceType.IsAssignableFrom(type.Service))
                 {
                     services.AddSingleton(type.Service, type.Implementation);
                 }
 
             }
+
+            services.AddTransient<BaseEmailMessageAdapter, BaseEmailMessageAdapter>();
 
             return services;
         }

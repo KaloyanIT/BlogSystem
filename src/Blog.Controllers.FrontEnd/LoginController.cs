@@ -7,7 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using ViewModels.FrontEnd.Account;
 
-    [Route("account/[action]")]
+    //[Route("login/[action]")]
     public class LoginController : Controller
     {
         private readonly UserManager<User> _userManager;
@@ -20,11 +20,11 @@
         }
 
 
-
-        public IActionResult Login(string? returnUrl = null)
+        //[Route("")]
+        public IActionResult Index(string? returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl ?? "";
-            return View();
+            return View("Login");
         }
 
         [HttpPost]

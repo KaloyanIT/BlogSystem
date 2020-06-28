@@ -17,10 +17,10 @@
 
     @*<link rel="stylesheet" href="~/StaticFiles/dist/bundle.css" asp-append-version="true" />s*@
 
-    @RenderSection("Styles", required: false)
+    @await RenderSectionAsync("Styles", required: false)
 
     <title>@ViewData["Title"]</title>
-    @RenderSection("ScriptsHead", required: false)
+    @await RenderSectionAsync("ScriptsHead", required: false)
 </head>
 <body>
     <!-- Navigation -->
@@ -38,6 +38,6 @@
 
     <script src="~/StaticFiles/dist/bundle.js" asp-append-version="true"></script>
 
-    @RenderSection("ScriptsBody", required: false)
+    @await RenderSectionAsync("ScriptsBody", required: false)
 </body>
 </html>

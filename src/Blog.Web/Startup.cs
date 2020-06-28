@@ -1,9 +1,9 @@
-﻿namespace Blog
+﻿namespace Blog.Web
 {
     using System;
     using System.IO;
-    using Blog.Infrastructure.Emails;
     using Controllers.Helpers;
+    using Infrastructure.Emails;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
@@ -24,11 +24,9 @@
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //AutoMapperConfig.Init();
-
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
-                .InjectStandartServices();
+                .InjectStandardServices();
 
 
             services.AddSingleton(_configuration.GetEmailConfiguration());
@@ -46,6 +44,9 @@
             services.ConfigureApplicationCookie(options =>
             {
                 options.ExpireTimeSpan = TimeSpan.FromHours(4);
+                options.LoginPath = "/login";
+                options.AccessDeniedPath = "/error";
+                options.SlidingExpiration = true;
             });
 
 
@@ -58,7 +59,7 @@
 
         public void Configure(IApplicationBuilder app)
         {
-            app.UseDeveloperExceptionPage();
+            app.UseApplicationExceptionPage(_environment);
 
             app.SetUpDatabase(_configuration);
 

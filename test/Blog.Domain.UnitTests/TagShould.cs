@@ -4,6 +4,7 @@ using Xunit;
 
 namespace Blog.Domain.UnitTests
 {
+    [Trait("Tag", "unit")]
     public class TagShould
     {
         [Theory]

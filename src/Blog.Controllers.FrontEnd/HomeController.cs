@@ -2,6 +2,7 @@
 {
     using System.Linq;
     using AutoMapper;
+    using Data.Base.Extensions;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Services.Blog;
@@ -18,28 +19,27 @@
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            var blogs = _blogService.GetAllLatest().Where(x => x.ShowOnHomePage);
+            var blogs = _blogService.GetAll()
+                .Where(x => x.ShowOnHomePage)
+                .To<BlogViewModel>()
+                .GetPaged(page, 10);
 
-            var blogsViewModels = blogs.To<BlogViewModel>().ToList();
 
-            return View(blogsViewModels);
+            return View(blogs);
         }
 
+        [Route("about")]
         public ActionResult About()
         {
             return View();
         }
 
+        [Route("contact")]
         public IActionResult Contact()
         {
             return View();
-        }
-
-        public ActionResult BlogPostSummaryPartial()
-        {
-            return PartialView();
         }
     }
 }

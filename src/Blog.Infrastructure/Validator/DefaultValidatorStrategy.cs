@@ -1,4 +1,4 @@
-﻿namespace Blog.Infrastructure.Validators
+﻿namespace Blog.Infrastructure.Validator
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

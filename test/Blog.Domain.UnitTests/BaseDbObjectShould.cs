@@ -1,9 +1,10 @@
-﻿namespace Blog.Domain.UnitTests.Domain
+﻿namespace Blog.Domain.UnitTests
 {
     using System;
-    using Blog.Data.Base;
+    using Data.Base;
     using Xunit;
 
+    [Trait("BaseDbObject", "unit")]
     public class BaseDbObjectShould
     {
         [Fact]

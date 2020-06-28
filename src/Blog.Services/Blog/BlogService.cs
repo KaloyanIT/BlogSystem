@@ -80,7 +80,7 @@
             return result;
         }
 
-        public async Task<BlogPost> GetById(Guid? id)
+        public async Task<BlogPost?> GetById(Guid? id)
         {
             if (!id.HasValue)
             {
