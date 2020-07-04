@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 const comments = (function () {
-    let commentsContainerClass = '.comments-section';
+    const commentsContainerClass = '.comments-section';
 
     function init() {
-        if ($(commentsContainerClass).length == 0) {
+        if ($(commentsContainerClass).length === 0) {
             console.log('Module is not initialized');
             return;
         }
@@ -12,8 +12,8 @@ const comments = (function () {
         const textAreaSelector = '.comments-content';
         const submitButtonSelector = '.comments-button';
 
-        function onComment(ev) {
-            let value = $(commentsContainerClass)
+        function onComment() {
+            const value = $(commentsContainerClass)
                 .find(textAreaSelector)
                 .val();
             console.log(value);
