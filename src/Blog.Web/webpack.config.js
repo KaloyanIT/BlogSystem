@@ -19,6 +19,10 @@ module.exports = {
 
 
       'js/common/dropdown': './StaticFiles/src/js/common/dropdown.js',
+      'js/common/data': './StaticFiles/src/js/common/data.js',
+      'js/common/validator': './StaticFiles/src/js/common/validator.js',
+      'js/common/logger': './StaticFiles/src/js/common/logger.js',
+
 
 
       'bundle': './StaticFiles/src/js/bundle.js',
