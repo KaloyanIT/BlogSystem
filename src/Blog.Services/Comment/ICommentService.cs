@@ -4,7 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Base;
-    using Data.Models;
+    using Data.Models.Comments;
 
     public interface ICommentService : IService
     {
@@ -14,8 +14,10 @@
 
         Task Edit();
 
-        IQueryable<Data.Models.Comments.Comment> GetAll();
+        IQueryable<Comment> GetAll();
 
-        IQueryable<Data.Models.Comments.Comment> GetAllForItem(Guid itemId);
+        IQueryable<Comment> GetAllForItem(Guid itemId);
+
+        IQueryable<Comment> GetAll(Guid itemId, CommentItemType itemType);
     }
 }
