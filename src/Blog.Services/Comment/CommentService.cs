@@ -43,5 +43,12 @@
 
             return result;
         }
+
+        public IQueryable<Comment> GetAll(Guid itemId, CommentItemType itemType)
+        {
+            var result = _commentRepository.GetCommentsForItem(itemId, itemType);
+
+            return result;
+        }
     }
 }

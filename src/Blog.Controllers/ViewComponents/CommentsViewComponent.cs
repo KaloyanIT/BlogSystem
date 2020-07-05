@@ -20,11 +20,10 @@
 
         public async Task<IViewComponentResult> InvokeAsync(Guid id, CommentItemType commentItemType, string templateName = "Default")
         {
-            var comments = _commentService.GetAllForItem(id)
-                .To<CommentDetailedViewModel>()
-                .ToList();
+            var comments = _commentService.GetAll(id, commentItemType)
+                .To<CommentDetailedViewModel>();
 
-            return (IViewComponentResult)View(templateName, comments);
+            return (IViewComponentResult)View(templateName, comments.ToList());
         }
     }
 }

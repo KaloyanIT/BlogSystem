@@ -1,12 +1,13 @@
 /* eslint-disable no-undef */
 
-// import { Data } from '../common/data';
+import { Data } from '../common/data';
 // import { Logger } from '../common/logger';
 
 const comments = (function () {
     const commentsContainerClass = '.comments-section';
 
-    function init() {
+    function init(itemId, itemType) {
+        console.log(itemId, itemType);
         // let logger = new Logger('development');
         if ($(commentsContainerClass).length === 0) {
             console.log('Module is not initialized');
@@ -21,6 +22,20 @@ const comments = (function () {
             const value = $(commentsContainerClass)
                 .find(textAreaSelector)
                 .val();
+
+            let data = {
+                attachedItemId: itemId,
+                commentItemType: itemType,
+                content: value,
+            };
+
+            Data.postJson({
+                url: '/comments/addComment',
+                data,
+            }).then(function (res) {
+                console.log(res);
+            });
+
             console.log(value);
         }
 
