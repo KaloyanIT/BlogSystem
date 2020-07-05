@@ -4,19 +4,21 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Data.Models.Emails;
     using Data.Repositories.MailLists;
+    using Microsoft.Extensions.Logging;
     using Models;
 
-    public class MailListService : IMailListService
+    public class MailListService : BaseService, IMailListService
     {
         private readonly IMailListRepository _mailListRepository;
-        private readonly IMapper _mapper;
 
-        public MailListService(IMailListRepository mailListRepository, IMapper mapper)
+        public MailListService(IMailListRepository mailListRepository,
+            IMapper mapper,
+            ILogger<MailListService> logger) : base(mapper, logger)
         {
             _mailListRepository = mailListRepository;
-            _mapper = mapper;
         }
 
         public async Task Create(CreateMailListServiceModel serviceModel)

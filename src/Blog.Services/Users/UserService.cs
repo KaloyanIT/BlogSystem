@@ -3,16 +3,21 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using Base;
     using Data.Models;
     using Data.Models.Context;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using Models;
 
-    public class UserService : IUserService
+    public class UserService : BaseService, IUserService
     {
         private readonly BlogContext _blogContext;
 
-        public UserService(BlogContext blogContext)
+        public UserService(BlogContext blogContext,
+            IMapper mapper, 
+            ILogger<UserService> logger) : base(mapper, logger)
         {
             _blogContext = blogContext;
         }
