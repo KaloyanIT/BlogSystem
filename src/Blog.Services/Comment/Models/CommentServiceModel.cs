@@ -1,12 +1,14 @@
 ﻿namespace Blog.Services.Comment.Models
 {
     using System;
+    using Data.Models.Comments;
+    using Infrastructure.AutoMapper;
 
-    public class CommentServiceModel
+    public class CommentServiceModel : IHaveMapTo<Comment>
     {
         public Guid AttachedItemId { get; set; }
         
-        public string AttachedItemType { get; set; } = null!;
+        public CommentItemType CommentItemType { get; set; }
 
         public string? UserId { get; set; }
 

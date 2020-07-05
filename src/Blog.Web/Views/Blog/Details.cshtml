@@ -1,4 +1,5 @@
-﻿@model DetailedBlogPostViewModel
+﻿@using Blog.Data.Models.Comments
+@model DetailedBlogPostViewModel
 
 @{
     ViewData["Title"] = Model.Title;
@@ -7,7 +8,7 @@
 <article>
     @Html.Raw(Model.Content)
 
-    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id }))
+    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, CommentItemType.Blog }))
 </article>
 
 
@@ -16,7 +17,7 @@
     <script type="text/javascript" src="~/StaticFiles/dist/js/front-end/comments.js"></script>
     <script>
         $(document).ready(function () {
-            window.comments.init();
+            window.comments.init('@Model.Id', '@CommentItemType.Blog');
         });
     </script>
 }
