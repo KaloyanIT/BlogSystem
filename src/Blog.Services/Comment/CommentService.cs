@@ -4,25 +4,26 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Data.Models.Comments;
     using Data.Repositories.Comments;
+    using Microsoft.Extensions.Logging;
     using Models;
 
-    public class CommentService : ICommentService
+    public class CommentService : BaseService, ICommentService
     {
         private readonly ICommentRepository _commentRepository;
-        private readonly IMapper _mapper;
 
         public CommentService(ICommentRepository commentRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<CommentService> logger) : base(mapper, logger)
         {
             _commentRepository = commentRepository;
-            _mapper = mapper;
         }
 
         public async Task AddComment(CommentServiceModel commentServiceModel)
         {
-            var comment = _mapper.Map<Comment>(commentServiceModel);
+            var comment = Mapper.Map<Comment>(commentServiceModel);
 
             await _commentRepository.Save(comment);
         }
