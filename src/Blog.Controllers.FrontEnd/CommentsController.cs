@@ -1,5 +1,6 @@
 ﻿namespace Blog.Controllers.FrontEnd
 {
+    using System.Threading.Tasks;
     using AutoMapper;
     using Helpers;
     using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@
 
         [HttpPost]
         //[ValidateAntiForgeryToken]
-        public IActionResult AddComment([FromBody]CreateCommentViewModel viewModel)
+        public async Task<IActionResult> AddComment([FromBody]CreateCommentViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -39,9 +40,9 @@
 
             serviceModel.UserId = this.User.GetLoggedInUserId<string>();
             serviceModel.Username = this.User.GetLoggedInUserName();
-            serviceModel.Email = this.User.GetLoggedInUserEmail();
+            serviceModel.Email = this.User.GetLoggedInUserName();
 
-            _commentService.AddComment(serviceModel);
+            await _commentService.AddComment(serviceModel);
 
             return View();
         }
