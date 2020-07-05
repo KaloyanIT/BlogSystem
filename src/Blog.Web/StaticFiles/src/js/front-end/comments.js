@@ -23,7 +23,7 @@ const comments = (function () {
                 .find(textAreaSelector)
                 .val();
 
-            let data = {
+            const data = {
                 attachedItemId: itemId,
                 commentItemType: itemType,
                 content: value,
