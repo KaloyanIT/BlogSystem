@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using Base;
+    using Helpers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Logging;
@@ -19,7 +20,9 @@
         {
             var isAuthenticated = User.Identity.IsAuthenticated;
 
-            var user = User;
+            var user = User.GetLoggedInUserId<string>();
+
+
 
             if (!isAuthenticated)
             {

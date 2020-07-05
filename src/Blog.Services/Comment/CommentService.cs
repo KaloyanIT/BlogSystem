@@ -3,21 +3,28 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Data.Models.Comments;
     using Data.Repositories.Comments;
+    using Models;
 
     public class CommentService : ICommentService
     {
         private readonly ICommentRepository _commentRepository;
+        private readonly IMapper _mapper;
 
-        public CommentService(ICommentRepository commentRepository)
+        public CommentService(ICommentRepository commentRepository,
+            IMapper mapper)
         {
             _commentRepository = commentRepository;
+            _mapper = mapper;
         }
 
-        public Task AddComment()
+        public async Task AddComment(CommentServiceModel commentServiceModel)
         {
-            throw new NotImplementedException();
+            var comment = _mapper.Map<Comment>(commentServiceModel);
+
+            await _commentRepository.Save(comment);
         }
 
         public Task<bool> DeleteComment()
