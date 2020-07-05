@@ -1,4 +1,6 @@
-﻿namespace Blog.Data.Models.Context
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.Data.Models.Context
 {
     using System;
     using Blog.Data.Base;

@@ -1,4 +1,6 @@
-﻿namespace Blog.Data.Repositories.Comments
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.Data.Repositories.Comments
 {
     using System;
     using System.Linq;
@@ -14,10 +16,11 @@
         }
 
         protected override DbSet<Comment> EntityDbSet => Context.Comments;
-        public IQueryable<Comment> GetCommentsForItem(Guid itemId, string attachedItem)
+        public IQueryable<Comment> GetCommentsForItem(Guid itemId, CommentItemType itemType)
         {
             var result = EntityDbSet
-                .Where(x => x.AttachedItemId == itemId && x.AttachedItemType == attachedItem);
+                .Where(x => x.AttachedItemId == itemId 
+                            && x.CommentItemType == itemType);
 
             return result;
         }
@@ -30,10 +33,10 @@
             return result;
         }
 
-        public IQueryable<Comment> GetCommentsFromAnonymousUser(string attachedItem)
+        public IQueryable<Comment> GetCommentsFromAnonymousUser()
         {
             var result = EntityDbSet
-                .Where(x => x.UserId == null && x.AttachedItemType == attachedItem);
+                .Where(x => x.CommentItemType == CommentItemType.Anonymous);
 
             return result;
         }

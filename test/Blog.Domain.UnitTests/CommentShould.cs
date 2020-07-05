@@ -1,7 +1,8 @@
-﻿namespace Blog.Domain.UnitTests
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.Domain.UnitTests
 {
     using System;
-    using Data.Models;
     using Xunit;
 
     [Trait("Comment", "unit")]
@@ -15,7 +16,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.Empty, this.validString, this.validString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.Empty, CommentItemType.Blog, validString, validString, validString));
         }
 
         [Fact]
@@ -24,7 +25,7 @@
             //Arrange
             var id = Guid.NewGuid();
             //Act
-            var comment = new Comment(id, this.validString, this.validString, this.validString);
+            var comment = new Comment(id, CommentItemType.Blog, validString, validString, validString);
 
             //Assert
             Assert.Equal(id, comment.AttachedItemId);
@@ -39,7 +40,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), invalidString, this.validString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), CommentItemType.Blog, invalidString, validString, validString));
         }
 
         [Fact]
@@ -49,7 +50,7 @@
             var id = Guid.NewGuid();
             string username = "Username";
             //Act
-            var comment = new Comment(id, username, this.validString, this.validString);
+            var comment = new Comment(id, CommentItemType.Blog, username, validString, validString);
 
             //Assert
             Assert.Equal(username, comment.Username);
@@ -64,7 +65,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), this.validString, invalidString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), CommentItemType.Blog, validString, invalidString, validString));
         }
 
         [Fact]
@@ -75,7 +76,7 @@
             string username = "Username";
             string email = "email";
             //Act
-            var comment = new Comment(id, username, email, this.validString);
+            var comment = new Comment(id, CommentItemType.Blog, username, email, validString);
 
             //Assert
             Assert.Equal(email, comment.Email);
@@ -90,7 +91,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), this.validString, this.validString, invalidString));
+            Assert.Throws<ArgumentNullException>(() => new Comment(Guid.NewGuid(), CommentItemType.Blog, validString, validString, invalidString));
         }
 
         [Fact]
@@ -103,7 +104,7 @@
             string content = "content";
 
             //Act
-            var comment = new Comment(id, username, email, content);
+            var comment = new Comment(id, CommentItemType.Blog, username, email, content);
 
             //Assert
             Assert.Equal(content, comment.Content);
@@ -119,7 +120,7 @@
             string userId = "user-id";
 
             //Act
-            var comment = new Comment(id, username, email, this.validString, userId);
+            var comment = new Comment(id, CommentItemType.Blog, username, email, validString, userId);
 
             //Assert
             Assert.Equal(userId, comment.UserId);

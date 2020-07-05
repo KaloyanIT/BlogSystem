@@ -1,4 +1,6 @@
-﻿namespace Blog.Data.Repositories.Comments
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.Data.Repositories.Comments
 {
     using System;
     using System.Linq;
@@ -8,11 +10,11 @@
 
     public interface ICommentRepository : IRepository<Comment>, ITransientRepository
     {
-        IQueryable<Comment> GetCommentsForItem(Guid itemId, string attachedItem);
+        IQueryable<Comment> GetCommentsForItem(Guid itemId, CommentItemType itemType);
 
         IQueryable<Comment> GetCommentsForUser(string userId);
 
-        IQueryable<Comment> GetCommentsFromAnonymousUser(string attachedItem);
+        IQueryable<Comment> GetCommentsFromAnonymousUser();
 
         IQueryable<Comment> GetCommentsForItem(Guid id);
     }
