@@ -22,9 +22,9 @@
             <div id="collapse-1" class="collapse">
                 @foreach (var comment in Model)
                 {
-                    <div class="commented-section mt-2">
+                    <div class="commented-section mt-2" data-id="@comment.Id"/>
                         <div class="d-flex flex-row align-items-center commented-user">
-                            <h5 class="mr-2">##Username##</h5>
+                            <h5 class="mr-2">@comment.Username</h5>
                             <span class="dot mb-1"></span>
                             <span class="mb-1 ml-2">@comment.DateCreated</span>
                         </div>
@@ -40,7 +40,7 @@
                                 <h6 class="ml-2 mt-1">Reply</h6>
                             </div>
                         </div>
-                    </div>
+                    
                 }
 
             </div>

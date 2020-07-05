@@ -17,6 +17,6 @@ namespace Blog.ViewModels.FrontEnd.Comments
 
         public string Content { get; set; } = null!;
 
-        //public string Username { get; set; }
+        public string Username { get; set; }
     }
 }
