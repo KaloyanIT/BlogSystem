@@ -1,8 +1,13 @@
 /* eslint-disable no-undef */
+
+// import { Data } from '../common/data';
+// import { Logger } from '../common/logger';
+
 const comments = (function () {
     const commentsContainerClass = '.comments-section';
 
     function init() {
+        // let logger = new Logger('development');
         if ($(commentsContainerClass).length === 0) {
             console.log('Module is not initialized');
             return;

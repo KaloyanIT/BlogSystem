@@ -1,14 +1,13 @@
-﻿namespace Blog.Data.Models
+﻿using System;
+using Blog.Data.Base;
+
+namespace Blog.Data.Models.Comments
 {
-    using System;
-
-    using Base;
-
     public class Comment : BaseDbObject
     {
         public Guid AttachedItemId { get; private set; }
 
-        public string AttachedItemType { get; private set; }
+        public CommentItemType CommentItemType { get; private set; }
 
         public string? UserId { get; private set; }
 
@@ -22,15 +21,14 @@
 
         public Comment()
         {
-            AttachedItemType = string.Empty;
             Username = string.Empty;
             Email = string.Empty;
             Content = string.Empty;
         }
 
-        public Comment(Guid itemId, string username, string email, string content, string userId = "", string attachmentType = "")
+        public Comment(Guid itemId, CommentItemType itemType, string username, string email, string content, string userId = "")
         {
-            if (itemId == null || itemId == Guid.Empty)
+            if (itemId == Guid.Empty)
             {
                 throw new ArgumentNullException(nameof(itemId), "Comment blogId can not be null or empty Guid.");
             }
@@ -61,7 +59,7 @@
             Username = username;
             Email = email;
             Content = content;
-            AttachedItemType = attachmentType;
+            CommentItemType = itemType;
             UserId = userId;
 
         }

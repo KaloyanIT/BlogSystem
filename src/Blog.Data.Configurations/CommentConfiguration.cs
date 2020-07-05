@@ -1,6 +1,8 @@
-﻿namespace Blog.Data.Configurations
+﻿
+namespace Blog.Data.Configurations
 {
-    using Models;
+    using System;
+    using Models.Comments;
     using Infrastructure.Constants;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -10,6 +12,12 @@
         public void Configure(EntityTypeBuilder<Comment> builder)
         {
             builder.ToTable(DataBaseConstants.CommentTableName);
+
+            builder.Property(e => e.CommentItemType)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (CommentItemType)Enum.Parse(typeof(CommentItemType), v)
+                );
         }
     }
 }

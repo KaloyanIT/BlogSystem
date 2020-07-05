@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Data.Models.Comments;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Services.Comment;
@@ -17,7 +18,7 @@
             _commentService = commentService;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Guid id, string templateName = "Default")
+        public async Task<IViewComponentResult> InvokeAsync(Guid id, CommentItemType commentItemType, string templateName = "Default")
         {
             var comments = _commentService.GetAllForItem(id)
                 .To<CommentDetailedViewModel>()

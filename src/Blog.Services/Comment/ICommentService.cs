@@ -14,8 +14,8 @@
 
         Task Edit();
 
-        IQueryable<Comment> GetAll();
+        IQueryable<Data.Models.Comments.Comment> GetAll();
 
-        IQueryable<Comment> GetAllForItem(Guid itemId);
+        IQueryable<Data.Models.Comments.Comment> GetAllForItem(Guid itemId);
     }
 }
