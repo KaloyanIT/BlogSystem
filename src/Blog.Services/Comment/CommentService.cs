@@ -23,9 +23,24 @@
 
         public async Task AddComment(CommentServiceModel commentServiceModel)
         {
-            var comment = Mapper.Map<Comment>(commentServiceModel);
+            //var comment = Mapper.Map<Comment>(commentServiceModel);
 
-            await _commentRepository.Save(comment);
+            var comment = new Comment(commentServiceModel.AttachedItemId,
+                commentServiceModel.CommentItemType,
+                commentServiceModel.Username, 
+                commentServiceModel.Email, 
+                commentServiceModel.Content,
+                commentServiceModel.UserId);
+
+            try
+            {
+                await _commentRepository.Save(comment);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogError(ex, ex.Message);
+                throw;
+            }
         }
 
         public Task<bool> DeleteComment()

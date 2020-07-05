@@ -8,7 +8,7 @@
 <article>
     @Html.Raw(Model.Content)
 
-    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, CommentItemType.Blog }))
+    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))
 </article>
 
 
