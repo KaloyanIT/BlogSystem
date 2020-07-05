@@ -5,10 +5,11 @@
     using System.Threading.Tasks;
     using Base;
     using Data.Models.Comments;
+    using Models;
 
     public interface ICommentService : IService
     {
-        Task AddComment();
+        Task AddComment(CommentServiceModel serviceModel);
 
         Task<bool> DeleteComment();
 

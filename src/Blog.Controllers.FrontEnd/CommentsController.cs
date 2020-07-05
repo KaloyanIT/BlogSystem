@@ -1,6 +1,7 @@
 ﻿namespace Blog.Controllers.FrontEnd
 {
     using AutoMapper;
+    using Helpers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Services.Comment;
@@ -29,9 +30,18 @@
                 return Json(new {success = false, message = "Invalid content!"});
             }
 
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new {success = false, message = "Have to be logged in!"});
+            }
+
             var serviceModel = _mapper.Map<CommentServiceModel>(viewModel);
 
-            var user = this.User.Identity.Name;
+            serviceModel.UserId = this.User.GetLoggedInUserId<string>();
+            serviceModel.Username = this.User.GetLoggedInUserName();
+            serviceModel.Email = this.User.GetLoggedInUserEmail();
+
+            _commentService.AddComment(serviceModel);
 
             return View();
         }
