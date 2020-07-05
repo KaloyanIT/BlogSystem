@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Data.Models;
+    using Data.Models.Comments;
     using Data.Repositories.Comments;
 
     public class CommentService : ICommentService

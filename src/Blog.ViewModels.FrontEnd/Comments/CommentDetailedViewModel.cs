@@ -1,4 +1,6 @@
-﻿namespace Blog.ViewModels.FrontEnd.Comments
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.ViewModels.FrontEnd.Comments
 {
     using System;
     using Data.Models;

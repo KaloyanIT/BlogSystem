@@ -1,4 +1,6 @@
-﻿namespace Blog.ViewModels.BackEnd.Comments
+﻿using Blog.Data.Models.Comments;
+
+namespace Blog.ViewModels.BackEnd.Comments
 {
     using System;
     using Base;

@@ -33,7 +33,7 @@ module.exports = {
     path: path.resolve(__dirname, dirName),
     publicPath: '/js/',
     filename: '[name].js',
-  },
+  }, 
   module: {
     rules: [
       {
