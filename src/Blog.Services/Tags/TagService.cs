@@ -3,17 +3,23 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using Base;
     using Data.Models;
     using Data.Repositories.BlogPostTags;
     using Data.Repositories.Tags;
+    using Microsoft.Extensions.Logging;
     using Tags.Models;
 
-    public class TagService : ITagService
+    public class TagService : BaseService, ITagService
     {
         private readonly ITagRepository _tagSqlRepository;
         private readonly IBlogPostTagRepository _blogPostTagRepository;
 
-        public TagService(ITagRepository tagSqlRepository, IBlogPostTagRepository blogPostTagRepository)
+        public TagService(ITagRepository tagSqlRepository,
+            IBlogPostTagRepository blogPostTagRepository,
+            IMapper mapper, 
+            ILogger<TagService> logger) : base(mapper, logger)
         {
             _tagSqlRepository = tagSqlRepository ??
                 throw new ArgumentNullException(nameof(tagSqlRepository), "TagSqlRepository is null.");

@@ -3,18 +3,24 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
+    using Base;
     using Data.Models;
     using Data.Models.Context;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using Models;
 
-    public class RoleService : IRoleService
+    public class RoleService : BaseService, IRoleService
     {
         private readonly BlogContext _blogContext;
         private readonly RoleManager<Role> _roleManager;
 
-        public RoleService(BlogContext blogContext, RoleManager<Role> roleManager)
+        public RoleService(BlogContext blogContext,
+            RoleManager<Role> roleManager,
+            IMapper mapper, 
+            ILogger<RoleService> logger) : base(mapper, logger)
         {
             _blogContext = blogContext;
             _roleManager = roleManager;

@@ -4,21 +4,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Data.Models;
     using Data.Models.Context;
     using Data.Repositories.Keywords;
+    using Microsoft.Extensions.Logging;
     using Models;
     using Roles.Models;
 
-    public class KeywordService : IKeywordService
+    public class KeywordService : BaseService, IKeywordService
     {
         private readonly IKeywordRepository _keywordRepository;
-        private readonly IMapper _mapper;
 
-        public KeywordService(IKeywordRepository keywordRepository, IMapper mapper)
+        public KeywordService(IKeywordRepository keywordRepository,
+            IMapper mapper,
+            ILogger<KeywordService> logger) : base(mapper, logger)
         {
             _keywordRepository = keywordRepository;
-            _mapper = mapper;
         }
 
 

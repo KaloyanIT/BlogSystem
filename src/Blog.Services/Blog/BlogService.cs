@@ -4,20 +4,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
+    using Base;
     using Data.Models;
     using Data.Repositories.Blog;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Logging;
     using Models;
 
-    public class BlogService : IBlogService
+    public class BlogService : BaseService, IBlogService
     {
         private readonly IBlogRepository _blogRepository;
-        private readonly IMapper _mapper;
 
-        public BlogService(IBlogRepository blogRepository, IMapper mapper)
+        public BlogService(IBlogRepository blogRepository, 
+            IMapper mapper,
+            ILogger<BlogService> logger) : base(mapper, logger)
+
         {
             _blogRepository = blogRepository;
-            _mapper = mapper;
         }
 
 
@@ -47,7 +50,7 @@
 
         public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
         {
-            var blog = _mapper.Map<BlogPost>(blogServiceModel);
+            var blog = Mapper.Map<BlogPost>(blogServiceModel);
 
             await _blogRepository.Save(blog);
 
