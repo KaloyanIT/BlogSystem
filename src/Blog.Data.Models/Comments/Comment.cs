@@ -13,6 +13,8 @@ namespace Blog.Data.Models.Comments
 
         public User? User { get; private set; }
 
+        public int Rating { get; private set; }
+
         public string Username { get; private set; }
 
         public string Email { get; private set; }
@@ -61,7 +63,17 @@ namespace Blog.Data.Models.Comments
             Content = content;
             CommentItemType = itemType;
             UserId = userId;
+            Rating = 0;
+        }
 
+        public void VoteUp()
+        {
+            Rating = Rating + 1;
+        }
+
+        public void VoteDown()
+        {
+            Rating = Rating + 1;
         }
     }
 }

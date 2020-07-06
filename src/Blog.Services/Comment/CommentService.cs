@@ -73,5 +73,41 @@
 
             return result;
         }
+
+        public async Task VoteUp(Guid commentId)
+        {
+            var comment = await this.GetById(commentId);
+
+            if (comment != null)
+            {
+                comment.VoteUp();
+
+                await _commentRepository.Save(comment);
+            }
+        }
+
+        public async Task VoteDown(Guid commentId)
+        {
+            var comment = await this.GetById(commentId);
+
+            if (comment != null)
+            {
+                comment.VoteDown();
+
+                await _commentRepository.Save(comment);
+            }
+        }
+
+        public async Task<Comment?> GetById(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return null;
+            }
+
+            var item = await _commentRepository.GetById(id);
+
+            return item;
+        }
     }
 }

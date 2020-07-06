@@ -3,19 +3,24 @@
     using System;
     using System.Threading.Tasks;
     using Adapters;
+    using AutoMapper;
     using Infrastructure.Emails;
     using MailKit.Net.Smtp;
     using Microsoft.Extensions.Logging;
     using MimeKit;
     using Models;
+    using Services.Base;
 
-    public class EmailsService : IEmailsService
+    public class EmailsService : BaseService, IEmailsService
     {
         private readonly BaseEmailMessageAdapter _adapter;
         private readonly EmailConfiguration _emailConfiguration;
         private readonly ILogger<EmailsService> _logger;
 
-        public EmailsService(BaseEmailMessageAdapter adapter, EmailConfiguration emailConfiguration, ILogger<EmailsService> logger)
+        public EmailsService(BaseEmailMessageAdapter adapter,
+            EmailConfiguration emailConfiguration,
+            IMapper mapper,
+            ILogger<EmailsService> logger) : base(mapper, logger)
         {
             _adapter = adapter;
             _emailConfiguration = emailConfiguration;
