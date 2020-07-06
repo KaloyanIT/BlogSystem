@@ -20,5 +20,7 @@ namespace Blog.ViewModels.BackEnd.Comments
         public string Email { get; set; }
 
         public string Content { get; set; }
+
+        public int Rating { get; set; }
     }
 }

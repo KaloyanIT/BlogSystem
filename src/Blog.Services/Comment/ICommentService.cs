@@ -20,5 +20,11 @@
         IQueryable<Comment> GetAllForItem(Guid itemId);
 
         IQueryable<Comment> GetAll(Guid itemId, CommentItemType itemType);
+
+        Task VoteUp(Guid commentId);
+
+        Task VoteDown(Guid commentId);
+
+        Task<Comment?> GetById(Guid id);
     }
 }
