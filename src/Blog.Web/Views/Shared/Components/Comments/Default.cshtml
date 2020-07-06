@@ -1,13 +1,24 @@
-﻿@model ICollection<CommentDetailedViewModel>
+﻿@using Blog.Controllers.Helpers
+@model ICollection<CommentDetailedViewModel>
 
-<h1>Comments Section</h1>
+<h1>Comments</h1>
 <div class="comments-section">
     <div class="coment-bottom bg-white p-2 px-4">
-        <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-            @*<img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/KLeobJk.jpg" width="38">*@
-            <textarea type="text" class="form-control mr-3 comments-content" placeholder="Add comment"></textarea>
-            <button class="btn btn-primary comments-button" type="button">Comment</button>
-        </div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                @*<img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/KLeobJk.jpg" width="38">*@
+                <textarea type="text" class="form-control mr-3 comments-content" placeholder="Add comment"></textarea>
+                @Html.AntiForgeryToken()
+                <button class="btn btn-primary comments-button" type="button">Comment</button>
+            </div>
+        }
+        else
+        {
+            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                <p>Please <a href="/register">Register</a> or <a href="/login">Login</a> to leave a comment.</p>
+            </div>
+        }
         <div class="collapsable-comment">
             @if (Model.Count == 0)
             {
@@ -22,25 +33,28 @@
             <div id="collapse-1" class="collapse">
                 @foreach (var comment in Model)
                 {
-                    <div class="commented-section mt-2" data-id="@comment.Id"/>
-                        <div class="d-flex flex-row align-items-center commented-user">
-                            <h5 class="mr-2">@comment.Username</h5>
-                            <span class="dot mb-1"></span>
-                            <span class="mb-1 ml-2">@comment.DateCreated</span>
+                    <div class="commented-section mt-2" data-id="@comment.Id" />
+                    <div class="d-flex flex-row align-items-center commented-user">
+                        <h5 class="mr-2">@comment.Username</h5>
+                        <span class="dot mb-1"></span>
+                        <span class="mb-1 ml-2">@comment.DateCreated</span>
+                    </div>
+                    <div class="comment-text-sm">
+                        <span>@comment.Content</span>
+                    </div>
+                    <div class="reply-section">
+                        <div class="d-flex flex-row align-items-center voting-icons">
+                            @if (User.Identity.IsAuthenticated.)
+                            {
+                                <a class="vote-up"><i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i></a>
+                                <a class="vote-down"><i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i></a>
+                            }
+                            <span class="ml-2">@comment.Rating</span>
+                            @*<span class="dot ml-2"></span>
+                            <h6 class="ml-2 mt-1">Reply</h6>*@
                         </div>
-                        <div class="comment-text-sm">
-                            <span>@comment.Content</span>
-                        </div>
-                        <div class="reply-section">
-                            <div class="d-flex flex-row align-items-center voting-icons">
-                                <i class="fa fa-sort-up fa-2x mt-3 hit-voting"></i>
-                                <i class="fa fa-sort-down fa-2x mb-3 hit-voting"></i>
-                                <span class="ml-2">10</span>
-                                <span class="dot ml-2"></span>
-                                <h6 class="ml-2 mt-1">Reply</h6>
-                            </div>
-                        </div>
-                    
+                    </div>
+
                 }
 
             </div>

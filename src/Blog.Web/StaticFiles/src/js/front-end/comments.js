@@ -29,9 +29,17 @@ const comments = (function () {
                 content: value,
             };
 
+            const headers = {
+                'Content-Type': 'application/json',
+                RequestVerificationToken: $(commentsContainerClass)
+                    .find("input[name='__RequestVerificationToken']")
+                    .val(),
+            };
+
             Data.postJson({
                 url: '/comments/addComment',
                 data,
+                headers,
             }).then(function (res) {
                 console.log(res);
             });

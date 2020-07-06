@@ -3,6 +3,7 @@
 /* eslint-disable func-names */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-rest-params */
+
 const Data = (function () {
     function makeAjaxRequest({ url, method, body, headers, isForm }) {
         return new Promise((resolve, reject) => {
@@ -81,12 +82,16 @@ const Data = (function () {
         return makeRequest({ url, method: 'GET', headers });
     }
 
-    function postJson({ url, data }) {
+    function postJson({ url, data, headers }) {
+        if (!headers) {
+            headers = { 'Content-Type': 'application/json' };
+        }
+
         return makeRequest({
             url,
             method: 'POST',
             body: JSON.stringify(data),
-            headers: { 'Content-Type': 'application/json' },
+            headers,
         });
     }
 
