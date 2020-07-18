@@ -9,6 +9,7 @@
     using Blog.Services.Meta.OpenGraphs;
     using Blog.Services.Meta.OpenGraphs.Models;
     using Blog.ViewModels.BackEnd.Blogs;
+    using Blog.ViewModels.BackEnd.Meta.OpenGraphs;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -61,6 +62,15 @@
 
             var blogViewModel = Mapper.Map<DetailedBlogViewModel>(blog);
 
+            var openGraph = await _openGraphService.GetByAttachedItemId(blog.Id);
+
+            if(openGraph != null)
+            {
+                var openGraphViewModel = Mapper.Map<OpenGraphViewModel>(openGraph);
+
+                blogViewModel.OpenGraph = openGraphViewModel;
+            }
+           
             return View(blogViewModel);
         }
 

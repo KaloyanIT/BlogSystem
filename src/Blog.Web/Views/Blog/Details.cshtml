@@ -7,7 +7,7 @@
 
 @section Head 
 {
-    @(await Component.InvokeAsync<OpenGraphViewComponent>(new { id = Guid.NewGuid() }) )
+    @(await Component.InvokeAsync<OpenGraphViewComponent>(new { attachedItemId = Model.Id }) )
 }
 
 <article>

@@ -11,6 +11,8 @@
     {
         IQueryable<OpenGraph> GetAll();
 
+        Task<OpenGraph> GetBiId(Guid id);
+
         Task<OpenGraph?> GetByAttachedItemId(Guid itemId);
 
         Task Create(CreateOpenGraphServiceModel createOpenGraphServiceModel, Guid attachedItemId);
