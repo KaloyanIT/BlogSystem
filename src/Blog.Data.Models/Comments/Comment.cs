@@ -50,13 +50,6 @@ namespace Blog.Data.Models.Comments
                 throw new ArgumentNullException(nameof(content), "Comment content can not be null or empty string");
             }
 
-            //if (!string.IsNullOrWhiteSpace(userId))
-            //{
-            //    //UserId = userId;
-
-            //    throw new ArgumentNullException(nameof(userId), "UserId can not be null or empty string.");
-            //}
-
             AttachedItemId = itemId;
             Username = username;
             Email = email;
