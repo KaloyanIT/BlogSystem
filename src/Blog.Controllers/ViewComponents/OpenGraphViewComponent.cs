@@ -18,9 +18,15 @@
             _mapper = mapper;
         }
 
-        public async Task<IViewComponentResult> InvokeAsync(Guid attachedItemId)
+        public async Task<IViewComponentResult> InvokeAsync(Guid? attachedItemId = null)
         {
-            var openGraph = await _openGraphService.GetByAttachedItemId(attachedItemId);
+            if(!attachedItemId.HasValue)
+            {
+                //TODO: Use it for Default Value
+                return View(new OpenGraphViewModel());
+            }
+
+            var openGraph = await _openGraphService.GetByAttachedItemId(attachedItemId.Value);
 
             if(openGraph == null)
             {

@@ -24,7 +24,7 @@
         }
 
 
-        public async Task Create(CreateBlogServiceModel serviceModel)
+        public async Task<BlogPost> Create(CreateBlogServiceModel serviceModel)
         {
             if(serviceModel == null)
             {
@@ -34,6 +34,8 @@
             var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
             await _blogRepository.Save(blogPost);
+
+            return blogPost;
         }
 
         public async Task Delete(Guid? id)

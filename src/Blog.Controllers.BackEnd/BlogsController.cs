@@ -6,6 +6,8 @@
     using AutoMapper;
     using Base;
     using Blog.Data.Base.Extensions;
+    using Blog.Services.Meta.OpenGraphs;
+    using Blog.Services.Meta.OpenGraphs.Models;
     using Blog.ViewModels.BackEnd.Blogs;
     using Infrastructure.Extensions;
     using Microsoft.AspNetCore.Mvc;
@@ -19,14 +21,17 @@
     public class BlogsController : BackEndController
     {
         private readonly IBlogService _blogService;
+        private readonly IOpenGraphService _openGraphService;
         private readonly IUserService _userService;
 
         public BlogsController(IBlogService blogService,
             ILogger<BlogsController> logger,
+            IOpenGraphService openGraphService,
             IUserService userService,
             IMapper mapper) : base(logger, mapper)
         {
             _blogService = blogService;
+            _openGraphService = openGraphService;
             _userService = userService;
         }
 
@@ -35,7 +40,7 @@
             var blogs = _blogService.GetAll()
                 .OrderByDescending(x => x.DateCreated)
                 .To<BlogViewModel>()
-                .GetPaged(page, this.MaxPageSize);
+                .GetPaged(page, MaxPageSize);
 
             return View(blogs);
         }
@@ -62,7 +67,9 @@
         // GET: Blogs/Create
         public IActionResult Create()
         {
-            return View();
+            var viewModel = new CreateBlogViewModel();
+
+            return View(viewModel);
         }
 
 
@@ -87,7 +94,11 @@
 
             serviceModel.UserId = userId;
 
-            await _blogService.Create(serviceModel);
+            var blogPost = await _blogService.Create(serviceModel);
+
+            var openGraph = Mapper.Map<CreateOpenGraphServiceModel>(blog.OpenGraphViewModel);
+
+            await _openGraphService.Create(openGraph, blogPost.Id);
 
             return RedirectToAction(nameof(Index));
         }

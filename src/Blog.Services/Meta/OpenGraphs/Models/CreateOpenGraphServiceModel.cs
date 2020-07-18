@@ -1,10 +1,8 @@
-﻿namespace Blog.ViewModels.FrontEnd.Meta
+﻿namespace Blog.Services.Meta.OpenGraphs.Models
 {
     using System;
-    using Data.Migrations;
-    using Infrastructure.AutoMapper;
 
-    public class OpenGraphViewModel : IHaveMapFrom<CreateOpenGraph>
+    public class CreateOpenGraphServiceModel
     {
         public Guid AttachedItemId { get; set; }
 
@@ -16,6 +14,7 @@
 
         public string Url { get; set; } = null!;
 
-        public string ImageUrl { get; set; } = null!;
+        public string? ImageUrl { get; set; } = null!;
+
     }
 }

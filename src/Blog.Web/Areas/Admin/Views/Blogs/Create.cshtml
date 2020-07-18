@@ -32,6 +32,11 @@
                 <input asp-for="ShowOnHomepage" type="checkbox" class="form-control" />
                 <span asp-validation-for="ShowOnHomepage" class="text-danger"></span>
             </div>
+
+            @{ var openGraphModel = new OpenGraphViewModel();}
+
+            @Html.EditorFor(x => Model.OpenGraphViewModel, "OpenGraph")
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
