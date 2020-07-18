@@ -20,7 +20,7 @@
             return _openGraphRepository.GetAll();
         }
 
-        public Task<OpenGraph> GetByAttachedItemId(Guid attachedItemId)
+        public Task<OpenGraph?> GetByAttachedItemId(Guid attachedItemId)
         {
             var openGraph = _openGraphRepository.GetByAttachedItemId(attachedItemId);
 
