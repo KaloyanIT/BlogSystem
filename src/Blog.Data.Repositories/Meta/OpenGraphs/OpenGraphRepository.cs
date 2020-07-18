@@ -1,5 +1,7 @@
 ﻿namespace Blog.Data.Repositories.Meta.OpenGraphs
 {
+    using System;
+    using System.Threading.Tasks;
     using DataAccess.SqlServer;
     using Microsoft.EntityFrameworkCore;
     using Models.Context;
@@ -12,5 +14,12 @@
         }
 
         protected override DbSet<OpenGraph> EntityDbSet => EntityDbSet;
+
+        public async Task<OpenGraph> GetByAttachedItemId(Guid attachedItemId)
+        {
+            var openGraph = await EntityDbSet.FindAsync(new { attachedItemId = attachedItemId});
+
+            return openGraph;
+        }
     }
 }
