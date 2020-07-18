@@ -9,7 +9,7 @@
 
     public interface IBlogService : IService
     {
-        Task Create(CreateBlogServiceModel blogServiceModel);
+        Task<BlogPost> Create(CreateBlogServiceModel blogServiceModel);
 
         Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel);
 
