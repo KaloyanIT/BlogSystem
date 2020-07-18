@@ -23,7 +23,12 @@
         {
             serviceModel.AttachedItemId = attachedItemId;
 
-            var openGraph = new OpenGraph(attachedItemId, serviceModel.Title, serviceModel.Description, serviceModel.Url, serviceModel.ImageUrl);
+            var openGraph = new OpenGraph(attachedItemId, 
+                serviceModel.Title,
+                serviceModel.Description,
+                serviceModel.Type,
+                serviceModel.Url,
+                serviceModel.ImageUrl);
 
             try
             {
@@ -38,6 +43,13 @@
         public IQueryable<OpenGraph> GetAll()
         {
             return _openGraphRepository.GetAll();
+        }
+
+        public async Task<OpenGraph> GetBiId(Guid id)
+        {
+            var openGraph = await _openGraphRepository.GetById(id);
+
+            return openGraph;
         }
 
         public Task<OpenGraph?> GetByAttachedItemId(Guid attachedItemId)
