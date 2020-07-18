@@ -8,6 +8,6 @@
 
     public interface IOpenGraphRepository : IRepository<OpenGraph>, ITransientRepository
     {
-        Task<OpenGraph> GetByAttachedItemId(Guid attachedItemId);
+        Task<OpenGraph?> GetByAttachedItemId(Guid attachedItemId);
     }
 }

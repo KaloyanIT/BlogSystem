@@ -15,7 +15,7 @@
 
         protected override DbSet<OpenGraph> EntityDbSet => EntityDbSet;
 
-        public async Task<OpenGraph> GetByAttachedItemId(Guid attachedItemId)
+        public async Task<OpenGraph?> GetByAttachedItemId(Guid attachedItemId)
         {
             var openGraph = await EntityDbSet.FindAsync(new { attachedItemId = attachedItemId});
 
