@@ -13,11 +13,11 @@
         {
         }
 
-        protected override DbSet<OpenGraph> EntityDbSet => EntityDbSet;
+        protected override DbSet<OpenGraph> EntityDbSet => Context.OpenGraphs;
 
         public async Task<OpenGraph?> GetByAttachedItemId(Guid attachedItemId)
         {
-            var openGraph = await EntityDbSet.FindAsync(new { attachedItemId = attachedItemId});
+            var openGraph = await EntityDbSet.FirstOrDefaultAsync(x => x.AttachedItemId == attachedItemId);
 
             return openGraph;
         }
