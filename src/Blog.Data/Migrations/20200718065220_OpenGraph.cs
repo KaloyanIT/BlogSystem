@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Blog.Data.Migrations
 {
-    public partial class OpenGraph : Migration
+    public partial class CreateOpenGraph : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -1,7 +1,7 @@
-﻿using System;
-using Blog.Data.Models;
-namespace Blog.Services.Blog.Models
+﻿namespace Blog.Services.Blog.Models
 {
+    using System;
+    using Data.Models;
     using Infrastructure.AutoMapper;
 
     public class CreateBlogServiceModel : IHaveMapTo<BlogPost>

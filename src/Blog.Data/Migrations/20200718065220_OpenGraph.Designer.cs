@@ -11,7 +11,7 @@ namespace Blog.Data.Migrations
 {
     [DbContext(typeof(BlogContext))]
     [Migration("20200718065220_OpenGraph")]
-    partial class OpenGraph
+    partial class CreateOpenGraph
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
