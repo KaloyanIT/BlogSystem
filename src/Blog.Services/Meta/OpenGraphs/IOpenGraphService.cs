@@ -10,6 +10,6 @@
     {
         IQueryable<OpenGraph> GetAll();
 
-        Task<OpenGraph> GetByAttachedItemId(Guid itemId);
+        Task<OpenGraph?> GetByAttachedItemId(Guid itemId);
     }
 }

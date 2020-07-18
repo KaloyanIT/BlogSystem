@@ -1,23 +1,35 @@
-﻿using System;
-using System.Threading.Tasks;
-using Blog.ViewModels.FrontEnd.Meta;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Blog.Controllers.ViewComponents
+﻿namespace Blog.Controllers.ViewComponents
 {
+    using System;
+    using System.Threading.Tasks;
+    using Services.Meta.OpenGraphs;
+    using ViewModels.FrontEnd.Meta;
+    using Microsoft.AspNetCore.Mvc;
+    using AutoMapper;
+
     public class OpenGraphViewComponent : ViewComponent
     {
-        public OpenGraphViewComponent()
-        {
+        private readonly IOpenGraphService _openGraphService;
+        private readonly IMapper _mapper;
 
+        public OpenGraphViewComponent(IOpenGraphService openGraphService, IMapper mapper)
+        {
+            _openGraphService = openGraphService;
+            _mapper = mapper;
         }
 
-        public Task<IViewComponentResult> InvokeAsync(Guid id)
+        public async Task<IViewComponentResult> InvokeAsync(Guid attachedItemId)
         {
-            //Get it
-            var viewModel = new OpenGraphViewModel();
+            var openGraph = await _openGraphService.GetByAttachedItemId(attachedItemId);
 
-            return Task.FromResult((IViewComponentResult)View(viewModel));
+            if(openGraph == null)
+            {
+                return View(new OpenGraphViewModel());
+            }
+
+            var viewModel = _mapper.Map<OpenGraphViewModel>(openGraph);
+
+            return View(viewModel);
         }
     }
 }
