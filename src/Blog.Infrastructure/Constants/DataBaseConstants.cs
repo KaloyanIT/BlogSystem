@@ -17,6 +17,8 @@
         public const string MailListSubscribeTableName = DBPrefix + "mailListsSubscribers";
         public const string SubscriberTableName = DBPrefix + "subscribers";
 
+        public const string OpenGraphTableName = DBPrefix + "openGraphs";
+
         public const string UserTableName = DBPrefix + "users";
         public const string RolesTableName = DBPrefix + "roles";
         public const string UserRolesTableName = DBPrefix + "userRoles";

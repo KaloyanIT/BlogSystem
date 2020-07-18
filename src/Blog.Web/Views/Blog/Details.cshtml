@@ -5,6 +5,11 @@
     ViewData["Title"] = Model.Title;
 }
 
+@section Head 
+{
+    @(await Component.InvokeAsync<OpenGraphViewComponent>(new { id = Guid.NewGuid() }) )
+}
+
 <article>
     @Html.Raw(Model.Content)
 
