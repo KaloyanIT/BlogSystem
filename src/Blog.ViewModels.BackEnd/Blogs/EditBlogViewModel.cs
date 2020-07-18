@@ -2,7 +2,8 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-
+    using AutoMapper.Configuration.Annotations;
+    using Blog.ViewModels.BackEnd.Meta.OpenGraphs;
     using Data.Models;
     using Infrastructure.AutoMapper;
     using Services.Blog.Models;
@@ -21,5 +22,8 @@
         public string Summary { get; set; } = null!;
 
         public bool ShowOnHomepage { get; set; }
+
+        [Ignore]
+        public OpenGraphViewModel OpenGraphViewModel { get; set; }
     }
 }

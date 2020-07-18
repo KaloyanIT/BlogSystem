@@ -4,9 +4,11 @@ namespace Blog.Controllers.BackEnd.Base
 {
     using System;
     using AutoMapper;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.Extensions.Logging;
 
     [Area("Admin")]
+    [Authorize]
     public class BackEndController : Controller
     {
         protected ILogger<BackEndController> Logger { get; }
