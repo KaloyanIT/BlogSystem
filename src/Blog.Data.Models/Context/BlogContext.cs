@@ -7,6 +7,7 @@ namespace Blog.Data.Models.Context
     using Blog.Data.Base.Extensions;
     using Blog.Data.Models;
     using Blog.Data.Models.Emails;
+    using Blog.Data.Models.Meta;
     using Blog.Infrastructure.Constants;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -44,6 +45,8 @@ namespace Blog.Data.Models.Context
         public DbSet<Subscriber> Subscribers { get; set; } = null!;
 
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
+
+        public DbSet<OpenGraph> OpenGraphs { get; set; }  = null!;
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
