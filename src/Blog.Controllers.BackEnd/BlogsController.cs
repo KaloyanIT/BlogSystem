@@ -62,14 +62,7 @@
 
             var blogViewModel = Mapper.Map<DetailedBlogViewModel>(blog);
 
-            var openGraph = await _openGraphService.GetByAttachedItemId(blog.Id);
-
-            if(openGraph != null)
-            {
-                var openGraphViewModel = Mapper.Map<OpenGraphViewModel>(openGraph);
-
-                blogViewModel.OpenGraph = openGraphViewModel;
-            }
+           blogViewModel.OpenGraph = await this.GetOpenGraphViewModel(blog.Id);
            
             return View(blogViewModel);
         }
@@ -129,8 +122,24 @@
             }
 
             var viewModel = Mapper.Map<EditBlogViewModel>(blog);
+          
+            viewModel.OpenGraphViewModel = await this.GetOpenGraphViewModel(blog.Id);
 
             return View(viewModel);
+        }
+
+        private async Task<OpenGraphViewModel> GetOpenGraphViewModel(Guid attachedItemId)
+        {
+            var openGraph = await _openGraphService.GetByAttachedItemId(attachedItemId);
+
+            if(openGraph == null)
+            {
+                return new OpenGraphViewModel();
+            }
+
+            var openGraphViewModel = Mapper.Map<OpenGraphViewModel>(openGraph);
+
+            return openGraphViewModel;
         }
 
         [HttpPost]
