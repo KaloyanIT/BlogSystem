@@ -83,4 +83,25 @@
         [Required]
         public Guid Id { get; set; }
     }
+
+    public class NotLikeAttribute : ValidationAttribute
+    {
+        private readonly string _comparisonValue;
+        public NotLikeAttribute(string comparisonValue)
+        {
+            _comparisonValue = comparisonValue;
+        }
+
+        protected override ValidationResult IsValid(object value, System.ComponentModel.DataAnnotations.ValidationContext validationContext)
+        {       
+            if (object.Equals(value, _comparisonValue))
+            {
+                // here i am verifying whether the 2 values are equal
+                // here you could do any custom validation you like
+                return new ValidationResult(this.FormatErrorMessage(validationContext.DisplayName));
+            }
+
+            return ValidationResult.Success;
+        }
+    }
 }
