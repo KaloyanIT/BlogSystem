@@ -4,7 +4,7 @@
 
     public class EditOpenGraphServiceModel
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
 
         public Guid AttachedItemId { get; set; }
 

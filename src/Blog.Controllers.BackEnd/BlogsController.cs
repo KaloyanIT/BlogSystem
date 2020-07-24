@@ -170,7 +170,7 @@
 
                     var openGraphServiceModel = Mapper.Map<EditOpenGraphServiceModel>(blog.OpenGraphViewModel);
 
-                    await _openGraphService.Edit(openGraphServiceModel);
+                    await _openGraphService.Edit(openGraphServiceModel, blog.OpenGraphViewModel.Id);
 
                 }
                 catch (DbUpdateConcurrencyException)

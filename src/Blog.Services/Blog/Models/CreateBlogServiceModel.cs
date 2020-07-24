@@ -17,9 +17,5 @@
         public bool ShowOnHomePage { get; set; }
 
         public string UserId { get; set; } = null!;
-
-        public DateTime DateCreated { get; set; }
-
-        public DateTime? DateModified { get; set; }
     }
 }

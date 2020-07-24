@@ -33,8 +33,6 @@
                 <span asp-validation-for="ShowOnHomepage" class="text-danger"></span>
             </div>
 
-            @{ var openGraphModel = new OpenGraphViewModel();}
-
             @Html.EditorFor(x => Model.OpenGraphViewModel, "OpenGraph")
 
             <div class="form-group">
