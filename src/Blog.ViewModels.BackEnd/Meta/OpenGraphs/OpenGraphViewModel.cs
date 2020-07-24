@@ -6,7 +6,7 @@
     using Data.Models.Meta;
     using Infrastructure.AutoMapper;
 
-    public class OpenGraphViewModel : IHaveMapFrom<OpenGraph>, IHaveMapTo<CreateOpenGraphServiceModel>
+    public class OpenGraphViewModel : IHaveMapFrom<OpenGraph>, IHaveMapTo<CreateOpenGraphServiceModel>, IHaveMapTo<EditOpenGraphServiceModel>
     {
         public OpenGraphViewModel()
         {
@@ -17,6 +17,8 @@
         {
             this.AttachedItemId = attachedItemId;
         }
+
+        public Guid Id { get; set; }
 
         public Guid AttachedItemId { get; set; }
 

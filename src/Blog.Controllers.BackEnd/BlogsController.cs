@@ -134,7 +134,7 @@
 
             if(openGraph == null)
             {
-                return new OpenGraphViewModel();
+                return new OpenGraphViewModel(attachedItemId);
             }
 
             var openGraphViewModel = Mapper.Map<OpenGraphViewModel>(openGraph);
@@ -167,6 +167,11 @@
                     serviceModel.UserId = Guid.Parse(userId);
 
                     await _blogService.Edit(serviceModel);
+
+                    var openGraphServiceModel = Mapper.Map<EditOpenGraphServiceModel>(blog.OpenGraphViewModel);
+
+                    await _openGraphService.Edit(openGraphServiceModel);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {

@@ -7,6 +7,7 @@
     using System.Linq;
     using Models;
     using AutoMapper;
+    using System.Diagnostics.CodeAnalysis;
 
     public class OpenGraphService : IOpenGraphService
     {
@@ -38,6 +39,24 @@
             {
 
             }
+        }
+
+        public async Task Edit(EditOpenGraphServiceModel serviceModel)
+        {
+            var openGraph = await _openGraphRepository.GetByAttachedItemId(serviceModel.Id);
+
+            if(openGraph == null)
+            {
+                throw new Exception("Open Graph can not be found!");
+            }
+
+            openGraph.Edit(serviceModel.Title,
+                serviceModel.Description,
+                serviceModel.Type,
+                serviceModel.Url,
+                serviceModel.ImageUrl);
+
+            await _openGraphRepository.Save(openGraph);
         }
 
         public IQueryable<OpenGraph> GetAll()

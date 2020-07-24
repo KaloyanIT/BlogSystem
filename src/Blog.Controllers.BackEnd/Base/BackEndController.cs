@@ -12,6 +12,7 @@ namespace Blog.Controllers.BackEnd.Base
     public class BackEndController : Controller
     {
         protected ILogger<BackEndController> Logger { get; }
+
         protected IMapper Mapper { get; }
 
         protected int MaxPageSize { get; } = 10;
