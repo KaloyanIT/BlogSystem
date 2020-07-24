@@ -200,8 +200,10 @@
             }
 
             var blog = await _blogService.GetById(id);
+            var openGraph = await _openGraphService.GetByAttachedItemId(id.Value);
 
             var viewModel = Mapper.Map<DetailedBlogViewModel>(blog);
+            viewModel.OpenGraph = Mapper.Map<OpenGraphViewModel>(openGraph);
 
             return View(viewModel);
         }
