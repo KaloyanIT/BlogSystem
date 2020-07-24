@@ -8,6 +8,7 @@
     using Models;
     using AutoMapper;
     using System.Diagnostics.CodeAnalysis;
+    using Org.BouncyCastle.Math.EC;
 
     public class OpenGraphService : IOpenGraphService
     {
@@ -39,6 +40,18 @@
             {
 
             }
+        }
+
+        public async Task Delete(Guid attachedItemId)
+        {
+            var openGraph = await GetByAttachedItemId(attachedItemId);
+
+            if(openGraph == null)
+            {
+                throw new Exception("OpenGraph can not be found!");
+            }
+
+            await _openGraphRepository.Delete(openGraph);
         }
 
         public async Task Edit(EditOpenGraphServiceModel serviceModel, Guid id)

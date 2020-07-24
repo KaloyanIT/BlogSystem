@@ -18,5 +18,7 @@
         Task Create(CreateOpenGraphServiceModel createOpenGraphServiceModel, Guid attachedItemId);
 
         Task Edit(EditOpenGraphServiceModel serviceModel, Guid id);
+
+        Task Delete(Guid attachedItemId);
     }
 }

@@ -211,7 +211,7 @@
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             await _blogService.Delete(id);
-
+            await _openGraphService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }
