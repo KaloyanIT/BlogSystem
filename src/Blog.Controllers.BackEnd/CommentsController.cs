@@ -1,5 +1,7 @@
 ﻿namespace Blog.Controllers.BackEnd
 {
+    using System;
+    using System.Threading.Tasks;
     using AutoMapper;
     using Base;
     using Data.Base.Extensions;
@@ -29,6 +31,41 @@
                 .GetPaged(page, MaxPageSize);
 
             return View(viewModel);
+        }
+
+        public async Task<IActionResult> Delete(Guid id)
+        {          
+            var commentViewModel = await GetCommentViewModel(id);
+
+            return View(commentViewModel);
+        }
+
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            var commentViewModel = await GetCommentViewModel(id);
+
+            return View(commentViewModel);
+        }
+
+        public async Task<IActionResult> Details(Guid id)
+        {           
+            var commentViewModel = await GetCommentViewModel(id);
+
+            return View(commentViewModel);
+        }
+
+        private async Task<CommentViewModel?> GetCommentViewModel(Guid id)
+        {
+            var comment = await _commentService.GetById(id);
+
+            if(comment == null)
+            {
+                return null;
+            }
+
+            var commentViewModel = Mapper.Map<CommentViewModel>(comment);
+
+            return commentViewModel;
         }
     }
 }

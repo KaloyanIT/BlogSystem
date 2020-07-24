@@ -1,14 +1,12 @@
 ﻿namespace Blog.Services.Meta.OpenGraphs
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Data.Models.Meta;
     using Data.Repositories.Meta.OpenGraphs;
-    using System.Linq;
     using Models;
-    using AutoMapper;
-    using System.Diagnostics.CodeAnalysis;
-    using Org.BouncyCastle.Math.EC;
 
     public class OpenGraphService : IOpenGraphService
     {
@@ -18,14 +16,14 @@
         public OpenGraphService(IOpenGraphRepository openGraphRepository, IMapper mapper)
         {
             _openGraphRepository = openGraphRepository;
-            this._mapper = mapper;
+            _mapper = mapper;
         }
 
         public async Task Create(CreateOpenGraphServiceModel serviceModel, Guid attachedItemId)
         {
             serviceModel.AttachedItemId = attachedItemId;
 
-            var openGraph = new OpenGraph(attachedItemId, 
+            var openGraph = new OpenGraph(attachedItemId,
                 serviceModel.Title,
                 serviceModel.Description,
                 serviceModel.Type,
@@ -36,7 +34,7 @@
             {
                 await _openGraphRepository.Save(openGraph);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -46,7 +44,7 @@
         {
             var openGraph = await GetByAttachedItemId(attachedItemId);
 
-            if(openGraph == null)
+            if (openGraph == null)
             {
                 throw new Exception("OpenGraph can not be found!");
             }
@@ -58,7 +56,7 @@
         {
             var openGraph = await _openGraphRepository.GetById(id);
 
-            if(openGraph == null)
+            if (openGraph == null)
             {
                 throw new Exception("Open Graph can not be found!");
             }
