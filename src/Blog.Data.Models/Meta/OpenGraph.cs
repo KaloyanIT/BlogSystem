@@ -105,6 +105,16 @@ namespace Blog.Data.Models.Meta
             ImageUrl = imageUrl;
         }
 
+        public void Edit(string title, string description, string type, string url, string? imageUrl = null)
+        {
+            Title = title;
+            Description = description;
+            Type = type;
+            Url = url;
+
+            ImageUrl = imageUrl;
+        }
+
         private void ValidateTitle(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
