@@ -23,8 +23,6 @@
 
         public async Task AddComment(CommentServiceModel commentServiceModel)
         {
-            //var comment = Mapper.Map<Comment>(commentServiceModel);
-
             var comment = new Comment(commentServiceModel.AttachedItemId,
                 commentServiceModel.CommentItemType,
                 commentServiceModel.Username, 
@@ -48,9 +46,18 @@
             throw new NotImplementedException();
         }
 
-        public Task Edit()
+        public async Task Edit(string content, Guid id)
         {
-            throw new NotImplementedException();
+            var comment = await _commentRepository.GetById(id);
+
+            if(comment == null)
+            {
+                throw new Exception("Comment content can not be null!");
+            }
+
+            comment.Edit(content);
+
+            await _commentRepository.Save(comment);
         }
 
         public IQueryable<Comment> GetAll()
