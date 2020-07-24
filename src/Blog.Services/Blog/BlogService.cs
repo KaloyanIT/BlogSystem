@@ -52,7 +52,9 @@
 
         public async Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel)
         {
-            var blog = Mapper.Map<BlogPost>(blogServiceModel);
+            var blog = await _blogRepository.GetById(blogServiceModel.Id);
+
+            Mapper.Map(blogServiceModel, blog);
 
             await _blogRepository.Save(blog);
 
