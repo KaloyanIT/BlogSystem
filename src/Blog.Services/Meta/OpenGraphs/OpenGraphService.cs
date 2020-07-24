@@ -41,9 +41,9 @@
             }
         }
 
-        public async Task Edit(EditOpenGraphServiceModel serviceModel)
+        public async Task Edit(EditOpenGraphServiceModel serviceModel, Guid id)
         {
-            var openGraph = await _openGraphRepository.GetByAttachedItemId(serviceModel.Id);
+            var openGraph = await _openGraphRepository.GetById(id);
 
             if(openGraph == null)
             {

@@ -6,7 +6,7 @@
     using Data.Models.Meta;
     using Infrastructure.AutoMapper;
 
-    public class OpenGraphViewModel : IHaveMapFrom<OpenGraph>, IHaveMapTo<CreateOpenGraphServiceModel>, IHaveMapTo<EditOpenGraphServiceModel>
+    public class OpenGraphViewModel : IHaveMapFrom<OpenGraph>, IHaveMapTo<CreateOpenGraphServiceModel>, IHaveReverseMap<EditOpenGraphServiceModel>
     {
         public OpenGraphViewModel()
         {
