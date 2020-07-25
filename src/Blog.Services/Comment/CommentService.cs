@@ -23,8 +23,6 @@
 
         public async Task AddComment(CommentServiceModel commentServiceModel)
         {
-            //var comment = Mapper.Map<Comment>(commentServiceModel);
-
             var comment = new Comment(commentServiceModel.AttachedItemId,
                 commentServiceModel.CommentItemType,
                 commentServiceModel.Username, 
@@ -43,14 +41,32 @@
             }
         }
 
-        public Task<bool> DeleteComment()
+        public async Task<bool> DeleteComment(Guid id)
         {
-            throw new NotImplementedException();
+            var comment = await GetById(id);
+
+            if(comment == null)
+            {
+                throw new Exception("Comment content can not be null!");
+            }
+
+            await _commentRepository.Delete(comment);
+
+            return true;
         }
 
-        public Task Edit()
+        public async Task Edit(EditCommentServiceModel serviceModel)
         {
-            throw new NotImplementedException();
+            var comment = await GetById(serviceModel.Id);
+
+            if(comment == null)
+            {
+                throw new Exception("Comment content can not be null!");
+            }
+
+            comment.Edit(serviceModel.Content);
+
+            await _commentRepository.Save(comment);
         }
 
         public IQueryable<Comment> GetAll()

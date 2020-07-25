@@ -134,7 +134,7 @@
 
             if(openGraph == null)
             {
-                return new OpenGraphViewModel();
+                return new OpenGraphViewModel(attachedItemId);
             }
 
             var openGraphViewModel = Mapper.Map<OpenGraphViewModel>(openGraph);
@@ -167,6 +167,11 @@
                     serviceModel.UserId = Guid.Parse(userId);
 
                     await _blogService.Edit(serviceModel);
+
+                    var openGraphServiceModel = Mapper.Map<EditOpenGraphServiceModel>(blog.OpenGraphViewModel);
+
+                    await _openGraphService.Edit(openGraphServiceModel, blog.OpenGraphViewModel.Id);
+
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -195,8 +200,10 @@
             }
 
             var blog = await _blogService.GetById(id);
+            var openGraph = await _openGraphService.GetByAttachedItemId(id.Value);
 
             var viewModel = Mapper.Map<DetailedBlogViewModel>(blog);
+            viewModel.OpenGraph = Mapper.Map<OpenGraphViewModel>(openGraph);
 
             return View(viewModel);
         }
@@ -206,7 +213,7 @@
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             await _blogService.Delete(id);
-
+            await _openGraphService.Delete(id);
 
             return RedirectToAction(nameof(Index));
         }

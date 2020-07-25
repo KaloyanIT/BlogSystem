@@ -1,12 +1,12 @@
 ﻿namespace Blog.Services.Meta.OpenGraphs
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
     using Data.Models.Meta;
     using Data.Repositories.Meta.OpenGraphs;
-    using System.Linq;
     using Models;
-    using AutoMapper;
 
     public class OpenGraphService : IOpenGraphService
     {
@@ -16,14 +16,14 @@
         public OpenGraphService(IOpenGraphRepository openGraphRepository, IMapper mapper)
         {
             _openGraphRepository = openGraphRepository;
-            this._mapper = mapper;
+            _mapper = mapper;
         }
 
         public async Task Create(CreateOpenGraphServiceModel serviceModel, Guid attachedItemId)
         {
             serviceModel.AttachedItemId = attachedItemId;
 
-            var openGraph = new OpenGraph(attachedItemId, 
+            var openGraph = new OpenGraph(attachedItemId,
                 serviceModel.Title,
                 serviceModel.Description,
                 serviceModel.Type,
@@ -34,10 +34,40 @@
             {
                 await _openGraphRepository.Save(openGraph);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
+        }
+
+        public async Task Delete(Guid attachedItemId)
+        {
+            var openGraph = await GetByAttachedItemId(attachedItemId);
+
+            if (openGraph == null)
+            {
+                throw new Exception("OpenGraph can not be found!");
+            }
+
+            await _openGraphRepository.Delete(openGraph);
+        }
+
+        public async Task Edit(EditOpenGraphServiceModel serviceModel, Guid id)
+        {
+            var openGraph = await _openGraphRepository.GetById(id);
+
+            if (openGraph == null)
+            {
+                throw new Exception("Open Graph can not be found!");
+            }
+
+            openGraph.Edit(serviceModel.Title,
+                serviceModel.Description,
+                serviceModel.Type,
+                serviceModel.Url,
+                serviceModel.ImageUrl);
+
+            await _openGraphRepository.Save(openGraph);
         }
 
         public IQueryable<OpenGraph> GetAll()

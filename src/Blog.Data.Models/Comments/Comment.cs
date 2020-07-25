@@ -59,6 +59,16 @@ namespace Blog.Data.Models.Comments
             Rating = 0;
         }
 
+        public void Edit(string content)
+        {
+            if (string.IsNullOrWhiteSpace(content))
+            {
+                throw new ArgumentNullException(nameof(content), "Comment content can not be null or empty string");
+            }
+
+            Content = content;
+        }
+
         public void VoteUp()
         {
             Rating = Rating + 1;

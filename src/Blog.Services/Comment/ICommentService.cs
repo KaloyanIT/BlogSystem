@@ -11,9 +11,9 @@
     {
         Task AddComment(CommentServiceModel serviceModel);
 
-        Task<bool> DeleteComment();
+        Task<bool> DeleteComment(Guid id);
 
-        Task Edit();
+        Task Edit(EditCommentServiceModel serviceModel);
 
         IQueryable<Comment> GetAll();
 
