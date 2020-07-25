@@ -46,16 +46,16 @@
             throw new NotImplementedException();
         }
 
-        public async Task Edit(string content, Guid id)
+        public async Task Edit(EditCommentServiceModel serviceModel)
         {
-            var comment = await _commentRepository.GetById(id);
+            var comment = await _commentRepository.GetById(serviceModel.Id);
 
             if(comment == null)
             {
                 throw new Exception("Comment content can not be null!");
             }
 
-            comment.Edit(content);
+            comment.Edit(serviceModel.Content);
 
             await _commentRepository.Save(comment);
         }

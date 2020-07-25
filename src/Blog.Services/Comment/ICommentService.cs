@@ -13,7 +13,7 @@
 
         Task<bool> DeleteComment();
 
-        Task Edit(string content, Guid id);
+        Task Edit(EditCommentServiceModel serviceModel);
 
         IQueryable<Comment> GetAll();
 
