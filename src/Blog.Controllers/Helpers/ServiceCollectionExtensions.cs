@@ -9,18 +9,17 @@
     using Data.Models;
     using Data.Models.Context;
     using EmailService.Adapters;
-    using EmailService.Models;
     using Identity;
     using Infrastructure;
-    using Infrastructure.Adapter;
     using Infrastructure.AutoMapper;
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc.Razor;
     using Microsoft.AspNetCore.Routing;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using MimeKit;
     using Services.Base;
 
     public static class ServiceCollectionExtensions
@@ -28,7 +27,7 @@
         public static IServiceCollection InjectIdentity(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IBlogContext, BlogContext>();
-            services.AddDbContext<BlogContext>(options => 
+            services.AddDbContext<BlogContext>(options =>
                 options.UseSqlServer(configuration.GetDefaultConnectionString(), x => x.MigrationsAssembly("Blog.Data")));
 
             services.AddIdentity<User, Role>()
@@ -70,15 +69,13 @@
             return services;
         }
 
-
-
         public static IServiceCollection InjectStandardServices(this IServiceCollection services)
         {
             var serviceType = typeof(IService);
             var singletonServiceType = typeof(ISingletonService);
             var scopedServiceType = typeof(IScopedService);
 
-            var assemblyNames = new List<string>() {"Blog.Services", "Blog.EmailService"};
+            var assemblyNames = new List<string>() { "Blog.Services", "Blog.EmailService" };
 
             AppDomain.CurrentDomain.Load(assemblyNames[0]);
             AppDomain.CurrentDomain.Load(assemblyNames[1]);
@@ -127,7 +124,7 @@
 
             var assembly = assemblies.SingleOrDefault(x => x.GetName().Name == assemblyRepositoriesName);
 
-            if(assembly == null)
+            if (assembly == null)
             {
                 assembly = Assembly.Load(assemblyRepositoriesName);
             }
@@ -169,6 +166,17 @@
             services.Configure<RouteOptions>(options =>
             {
                 options.LowercaseUrls = true;
+            });
+
+            return services;
+        }
+
+        public static IServiceCollection AddCokkiesPolicy(this IServiceCollection services)
+        {
+            services.Configure<CookiePolicyOptions>(options =>
+            {               
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
             return services;
