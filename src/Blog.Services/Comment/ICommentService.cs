@@ -11,7 +11,7 @@
     {
         Task AddComment(CommentServiceModel serviceModel);
 
-        Task<bool> DeleteComment();
+        Task<bool> DeleteComment(Guid id);
 
         Task Edit(EditCommentServiceModel serviceModel);
 

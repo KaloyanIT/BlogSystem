@@ -41,14 +41,23 @@
             }
         }
 
-        public Task<bool> DeleteComment()
+        public async Task<bool> DeleteComment(Guid id)
         {
-            throw new NotImplementedException();
+            var comment = await GetById(id);
+
+            if(comment == null)
+            {
+                throw new Exception("Comment content can not be null!");
+            }
+
+            await _commentRepository.Delete(comment);
+
+            return true;
         }
 
         public async Task Edit(EditCommentServiceModel serviceModel)
         {
-            var comment = await _commentRepository.GetById(serviceModel.Id);
+            var comment = await GetById(serviceModel.Id);
 
             if(comment == null)
             {

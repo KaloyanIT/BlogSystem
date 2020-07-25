@@ -41,6 +41,15 @@
             return View(commentViewModel);
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            await _commentService.DeleteComment(id);
+
+            return RedirectToAction(nameof(Index));
+        }
+
         public async Task<IActionResult> Edit(Guid id)
         {
              var comment = await _commentService.GetById(id);
