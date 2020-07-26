@@ -15,6 +15,8 @@ namespace Blog.Data.Models.Context
     using Microsoft.EntityFrameworkCore.ChangeTracking;
     using Microsoft.AspNetCore.Http;
     using Blog.Controllers.Helpers;
+    using Blog.Data.Models.Files;
+    using Blog.Data.Models.Links;
 
     public class BlogContext : IdentityDbContext<User, Role, string>, IBlogContext
     {
@@ -53,6 +55,12 @@ namespace Blog.Data.Models.Context
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
 
         public DbSet<OpenGraph> OpenGraphs { get; set; } = null!;
+
+        public DbSet<File> Files { get; set; }
+
+        public DbSet<Library> Library { get; set; }
+
+        public DbSet<Link> Link { get; set; }
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
