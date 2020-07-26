@@ -22,8 +22,6 @@
 
             var user = User.GetLoggedInUserId<string>();
 
-
-
             if (!isAuthenticated)
             {
                 return Redirect("/login");
