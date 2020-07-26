@@ -3,23 +3,28 @@
 namespace Blog.Data.Models.Context
 {
     using System;
-    using Blog.Data.Base;
-    using Blog.Data.Base.Extensions;
-    using Blog.Data.Models;
-    using Blog.Data.Models.Emails;
-    using Blog.Data.Models.Meta;
-    using Blog.Infrastructure.Constants;
+    using Base.Contracts;
+    using Base.Extensions;
+    using Models;
+    using Models.Emails;
+    using Models.Meta;
+    using Infrastructure.Constants;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using Microsoft.AspNetCore.Http;
 
     public class BlogContext: IdentityDbContext<User, Role, string>, IBlogContext
     {
-        public BlogContext(DbContextOptions<BlogContext> options) : base(options)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public BlogContext(DbContextOptions<BlogContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
             ChangeTracker.Tracked += OnEntityTracked;
             ChangeTracker.StateChanged += OnEntityStateChanged;
+
+            _httpContextAccessor = httpContextAccessor;
         }
 
         #region DatabaseSets

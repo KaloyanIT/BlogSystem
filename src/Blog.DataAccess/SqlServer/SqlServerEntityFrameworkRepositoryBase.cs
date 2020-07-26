@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Blog.Data.Base;
+    using Data.Base.Contracts;
     using Microsoft.EntityFrameworkCore;
 
     public abstract class SqlServerEntityFrameworkRepositoryBase<TEntity, TDbContext> : IDisposable

@@ -1,4 +1,4 @@
-﻿namespace Blog.Data.Base
+﻿namespace Blog.Data.Base.Contracts
 {
     using System;
     using System.ComponentModel.DataAnnotations;
