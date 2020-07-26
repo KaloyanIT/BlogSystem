@@ -14,8 +14,9 @@ namespace Blog.Data.Models.Context
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
     using Microsoft.AspNetCore.Http;
+    using Blog.Controllers.Helpers;
 
-    public class BlogContext: IdentityDbContext<User, Role, string>, IBlogContext
+    public class BlogContext : IdentityDbContext<User, Role, string>, IBlogContext
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
 
@@ -51,13 +52,18 @@ namespace Blog.Data.Models.Context
 
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
 
-        public DbSet<OpenGraph> OpenGraphs { get; set; }  = null!;
+        public DbSet<OpenGraph> OpenGraphs { get; set; } = null!;
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
             {
                 entity.DateCreated = DateTime.UtcNow;
+            }
+
+            if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveCreatedBy userEntity)
+            {
+                userEntity.CreatedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
             }
         }
 
@@ -67,9 +73,14 @@ namespace Blog.Data.Models.Context
             {
                 entity.DateModified = DateTime.UtcNow;
             }
+
+            if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveModifiedBy userEntity)
+            {
+                userEntity.ModifiedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
+            }
         }
 
-        #endregion                                        
+        #endregion
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
