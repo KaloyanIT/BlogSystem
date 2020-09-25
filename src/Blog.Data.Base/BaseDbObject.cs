@@ -1,14 +1,15 @@
 ﻿namespace Blog.Data.Base
 {
+    using Contracts;
     using System;
 
     /// <summary>
     ///  Abstract Class which combine all needed properties for normal function of the one system database object.
     /// </summary>
-    public abstract class BaseDbObject : IDbObject, IHaveDateCreated, IHaveDateModified
+    public abstract class BaseDbObject : IDbObject, IHaveDateCreated, IHaveDateModified, IHaveCreatedBy, IHaveModifiedBy
     {
         /// <summary>
-        /// 
+        /// Base Database Object
         /// </summary>
         protected BaseDbObject()
         {
@@ -29,5 +30,15 @@
         /// Date of modification
         /// </summary>
         public DateTime? DateModified { get; set; }
+
+        /// <summary>
+        /// Creator user id
+        /// </summary>
+        public string CreatedBy { get; set; } = null!;
+
+        /// <summary>
+        /// Editor user id
+        /// </summary>
+        public string? ModifiedBy { get; set; }
     }
 }

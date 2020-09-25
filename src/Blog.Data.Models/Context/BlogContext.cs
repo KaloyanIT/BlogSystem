@@ -3,23 +3,31 @@
 namespace Blog.Data.Models.Context
 {
     using System;
-    using Blog.Data.Base;
-    using Blog.Data.Base.Extensions;
-    using Blog.Data.Models;
-    using Blog.Data.Models.Emails;
-    using Blog.Data.Models.Meta;
-    using Blog.Infrastructure.Constants;
+    using Base.Contracts;
+    using Base.Extensions;
+    using Models;
+    using Models.Emails;
+    using Models.Meta;
+    using Infrastructure.Constants;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
+    using Microsoft.AspNetCore.Http;
+    using Blog.Controllers.Helpers;
+    using Blog.Data.Models.Files;
+    using Blog.Data.Models.Links;
 
-    public class BlogContext: IdentityDbContext<User, Role, string>, IBlogContext
+    public class BlogContext : IdentityDbContext<User, Role, string>, IBlogContext
     {
-        public BlogContext(DbContextOptions<BlogContext> options) : base(options)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public BlogContext(DbContextOptions<BlogContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
         {
             ChangeTracker.Tracked += OnEntityTracked;
             ChangeTracker.StateChanged += OnEntityStateChanged;
+
+            _httpContextAccessor = httpContextAccessor;
         }
 
         #region DatabaseSets
@@ -46,13 +54,24 @@ namespace Blog.Data.Models.Context
 
         public DbSet<MailListSubscriber> MailListSubscribers { get; set; } = null!;
 
-        public DbSet<OpenGraph> OpenGraphs { get; set; }  = null!;
+        public DbSet<OpenGraph> OpenGraphs { get; set; } = null!;
+
+        public DbSet<File> Files { get; set; }
+
+        public DbSet<Library> Library { get; set; }
+
+        public DbSet<Link> Link { get; set; }
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveDateCreated entity)
             {
                 entity.DateCreated = DateTime.UtcNow;
+            }
+
+            if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveCreatedBy userEntity)
+            {
+                userEntity.CreatedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
             }
         }
 
@@ -62,9 +81,14 @@ namespace Blog.Data.Models.Context
             {
                 entity.DateModified = DateTime.UtcNow;
             }
+
+            if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveModifiedBy userEntity)
+            {
+                userEntity.ModifiedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
+            }
         }
 
-        #endregion                                        
+        #endregion
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

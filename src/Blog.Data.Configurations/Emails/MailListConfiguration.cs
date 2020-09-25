@@ -10,11 +10,6 @@
         public void Configure(EntityTypeBuilder<MailList> builder)
         {
             builder.ToTable(DataBaseConstants.MailListTableName);
-
-            builder.HasData(
-                new MailList("Test", "Test"),
-                new MailList("Test1", "Test2")
-            );
         }
     }
 }

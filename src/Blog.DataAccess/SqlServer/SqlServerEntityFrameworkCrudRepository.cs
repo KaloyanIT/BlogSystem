@@ -3,7 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
-    using Data.Base;
+    using Data.Base.Contracts;
     using Microsoft.EntityFrameworkCore;
 
     public abstract class SqlServerEntityFrameworkCrudRepository<TEntity, TDbContext> :

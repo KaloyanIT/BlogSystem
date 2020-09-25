@@ -1,16 +1,21 @@
 ﻿namespace Blog.Data.Models
 {
     using System;
-    using Blog.Data.Base;
+    using Base.Contracts;
     using Microsoft.AspNetCore.Identity;
 
-    public class Role : IdentityRole, IHaveDateCreated, IHaveDateModified
+    public class Role : IdentityRole, IHaveDateCreated, IHaveDateModified, IHaveCreatedBy, IHaveModifiedBy
     {
         public string Description { get; set; } = null!;
 
         public DateTime DateCreated { get; set; }
 
         public DateTime? DateModified { get; set; }
+
+        public string CreatedBy { get; set; } = null!;
+
+        public string? ModifiedBy { get; set; }
+
 
         public Role()
         {

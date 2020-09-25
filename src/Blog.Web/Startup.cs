@@ -26,7 +26,8 @@
         {
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
-                .InjectStandardServices();
+                .InjectStandardServices()
+                .AddCokkiesPolicy();
 
 
             services.AddSingleton(_configuration.GetEmailConfiguration());

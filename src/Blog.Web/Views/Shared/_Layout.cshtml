@@ -88,10 +88,10 @@
 
     <!-- Page Header -->
     @await Html.PartialAsync("_Header")
-
     <div class="container">
         @RenderBody()
     </div>
+    <partial name="_CookieConsentPartial" />
 
     <!--   Footer -->
     @await Html.PartialAsync("_Footer")
