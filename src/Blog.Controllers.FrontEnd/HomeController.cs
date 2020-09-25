@@ -31,13 +31,25 @@
         }
 
         [Route("about")]
-        public ActionResult About()
+        public IActionResult About()
         {
             return View();
         }
 
         [Route("contact")]
         public IActionResult Contact()
+        {
+            return View();
+        }
+
+        [Route("cookie-policy")]
+        public IActionResult CookiePolicy()
+        {
+            return View();
+        }
+
+        [Route("privacy-policy")]
+        public IActionResult PrivacyPolicy()
         {
             return View();
         }
