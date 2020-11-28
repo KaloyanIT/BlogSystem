@@ -1,0 +1,9 @@
+﻿@model ICollection<string>
+
+<ul class="footer-links">
+    @foreach (var tag in Model)
+    {
+        <li><a href="@Url.Action("GetByTag", "Blog", new { tagName = @tag })">@tag</a></li>
+    }
+</ul>
+

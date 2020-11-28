@@ -18,7 +18,7 @@
         [Authorize]
         public IActionResult Index()
         {
-            var isAuthenticated = User.Identity.IsAuthenticated;
+            var isAuthenticated = User.Identity!.IsAuthenticated;
 
             var user = User.GetLoggedInUserId<string>();
 

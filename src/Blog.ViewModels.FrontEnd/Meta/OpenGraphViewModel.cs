@@ -1,10 +1,10 @@
 ﻿namespace Blog.ViewModels.FrontEnd.Meta
 {
     using System;
-    using Data.Migrations;
+    using Data.Models.Meta;
     using Infrastructure.AutoMapper;
 
-    public class OpenGraphViewModel : IHaveMapFrom<CreateOpenGraph>
+    public class OpenGraphViewModel : IHaveMapFrom<OpenGraph>
     {
         public Guid AttachedItemId { get; set; }
 

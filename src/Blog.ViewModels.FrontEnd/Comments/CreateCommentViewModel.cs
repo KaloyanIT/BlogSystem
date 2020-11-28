@@ -36,7 +36,7 @@
                 return new ValidationResult(this.FormatErrorMessage(validationContext.DisplayName));
             }
 
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
     }
 }

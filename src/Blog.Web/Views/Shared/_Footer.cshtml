@@ -1,64 +1,21 @@
-﻿<!--<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">-->
-@*<ul class="list-inline text-center">
-        <li class="list-inline-item">
-            <a href="#">
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
-        </li>
-        <li class="list-inline-item">
-            <a href="#">
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-facebook fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
-        </li>
-        <li class="list-inline-item">
-            <a href="#">
-                <span class="fa-stack fa-lg">
-                    <i class="fas fa-circle fa-stack-2x"></i>
-                    <i class="fab fa-github fa-stack-1x fa-inverse"></i>
-                </span>
-            </a>
-        </li>
-    </ul>*@
-<!--<p class="copyright text-muted">Copyright &copy; kaloyanit.com @DateTime.Now.Year</p>
-            </div>
-        </div>
-    </div>
-</footer>-->
-
-<footer class="site-footer">
+﻿<footer class="site-footer">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-md-6">
                 <h6>About</h6>
-                <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
+                <p class="text-justify">Personal blog driven by my biggest passion. Here I will try to write mostly about programming related content. More information can be found on <a href="@Url.Action("About", "Home")">About page</a>.</p>
             </div>
 
             <div class="col-xs-6 col-md-3">
                 <h6>Categories</h6>
-                <ul class="footer-links">
-                    <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-                    <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-                    <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-                    <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-                    <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-                    <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
-                </ul>
+                @(await Component.InvokeAsync<TagsViewComponent>(new { tagsToGet = 6 }))
             </div>
 
             <div class="col-xs-6 col-md-3">
                 <h6>Quick Links</h6>
                 <ul class="footer-links">
-                    <li><a href="@Url.Action("About", "Home")">About Us</a></li>
-                    <li><a href="@Url.Action("Contact", "Home")">Contact Us</a></li>
+                    <li><a href="@Url.Action("About", "Home")">About</a></li>
+                    @*<li><a href="@Url.Action("Contact", "Home")">Contact</a></li>*@
                     <li><a href="@Url.Action("CookiePolicy", "Home")">Cookie Policy</a></li>
                     <li><a href="@Url.Action("PrivacyPolicy", "Home")">Privacy Policy</a></li>
                 </ul>
@@ -77,10 +34,10 @@
 
             <div class="col-md-4 col-sm-6 col-xs-12">
                 <ul class="social-icons">
-                    <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                    <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a class="twitter" href="https://twitter.com/KaloyanKostov1"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="github" href="https://github.com/KaloyanIT"><i class="fa fa-github"></i></a></li>
+                    <li><a class="stack-overflow" href="https://stackoverflow.com/users/4399836/kaloyan-kostov"><i class="fa fa-stack-overflow"></i></a></li>
+                    <li><a class="linkedin" href="https://www.linkedin.com/in/kaloyan-k-b41585b2"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
         </div>

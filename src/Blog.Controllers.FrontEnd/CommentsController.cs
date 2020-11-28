@@ -32,7 +32,7 @@
                 return Json(new { success = false, message = "Invalid content!" });
             }
 
-            if (!User.Identity.IsAuthenticated)
+            if (!User.Identity!.IsAuthenticated)
             {
                 return Json(new { success = false, message = "Have to be logged in!" });
             }
@@ -101,7 +101,7 @@
                 return new ValidationResult(this.FormatErrorMessage(validationContext.DisplayName));
             }
 
-            return ValidationResult.Success;
+            return ValidationResult.Success!;
         }
     }
 }
