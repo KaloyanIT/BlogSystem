@@ -1,7 +1,6 @@
 ﻿namespace Blog.Controllers.BackEnd
 {
     using System;
-    using System.Runtime.InteropServices.WindowsRuntime;
     using System.Threading.Tasks;
     using AutoMapper;
     using Base;
@@ -30,7 +29,7 @@
             var viewModels = _keywordService
                 .GetAll()
                 .To<KeywordViewModel>()
-                .GetPaged(page, this.MaxPageSize);
+                .GetPaged(page, MaxPageSize);
 
 
             return View(viewModels);

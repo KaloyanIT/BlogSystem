@@ -44,7 +44,7 @@
                 using (var context = serviceScope.ServiceProvider.GetService<BlogContext>())
                 {
                     //context.Database.EnsureCreated();
-                    context.Database.Migrate();
+                    context!.Database.Migrate();
 
 
                     MainSeeder.Seed(serviceScope.ServiceProvider, configuration).Wait();

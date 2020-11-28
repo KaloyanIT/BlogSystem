@@ -17,9 +17,11 @@ namespace Blog.Data.Models.Context
     using Blog.Controllers.Helpers;
     using Blog.Data.Models.Files;
     using Blog.Data.Models.Links;
+    using System.Diagnostics.CodeAnalysis;
 
     public class BlogContext : IdentityDbContext<User, Role, string>, IBlogContext
     {
+        [NotNull]
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public BlogContext(DbContextOptions<BlogContext> options, IHttpContextAccessor httpContextAccessor) : base(options)
@@ -27,7 +29,7 @@ namespace Blog.Data.Models.Context
             ChangeTracker.Tracked += OnEntityTracked;
             ChangeTracker.StateChanged += OnEntityStateChanged;
 
-            _httpContextAccessor = httpContextAccessor;
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
         #region DatabaseSets
@@ -71,7 +73,7 @@ namespace Blog.Data.Models.Context
 
             if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveCreatedBy userEntity)
             {
-                userEntity.CreatedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
+                userEntity.CreatedBy = _httpContextAccessor.HttpContext!.User.GetLoggedInUserId<string>();
             }
         }
 
@@ -84,7 +86,7 @@ namespace Blog.Data.Models.Context
 
             if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveModifiedBy userEntity)
             {
-                userEntity.ModifiedBy = _httpContextAccessor.HttpContext.User.GetLoggedInUserId<string>();
+                userEntity.ModifiedBy = _httpContextAccessor.HttpContext!.User.GetLoggedInUserId<string>()!;
             }
         }
 
