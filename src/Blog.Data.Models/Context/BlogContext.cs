@@ -71,7 +71,9 @@ namespace Blog.Data.Models.Context
                 entity.DateCreated = DateTime.UtcNow;
             }
 
-            if (!e.FromQuery && e.Entry.State == EntityState.Added && e.Entry.Entity is IHaveCreatedBy userEntity)
+            if (!e.FromQuery && e.Entry.State == EntityState.Added 
+                && e.Entry.Entity is IHaveCreatedBy userEntity
+                && _httpContextAccessor.HttpContext != null)
             {
                 userEntity.CreatedBy = _httpContextAccessor.HttpContext!.User.GetLoggedInUserId<string>();
             }
@@ -84,7 +86,9 @@ namespace Blog.Data.Models.Context
                 entity.DateModified = DateTime.UtcNow;
             }
 
-            if (e.NewState == EntityState.Modified && e.Entry.Entity is IHaveModifiedBy userEntity)
+            if (e.NewState == EntityState.Modified 
+                && e.Entry.Entity is IHaveModifiedBy userEntity
+                && _httpContextAccessor.HttpContext != null)
             {
                 userEntity.ModifiedBy = _httpContextAccessor.HttpContext!.User.GetLoggedInUserId<string>()!;
             }
