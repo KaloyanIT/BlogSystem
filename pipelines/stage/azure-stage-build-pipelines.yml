@@ -21,11 +21,11 @@ steps:
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet build $(buildConfiguration) $(buildNumber)'
+  displayName: 'dotnet build $(buildConfiguration)'
   inputs:
     command: 'build'
     projects: 'src/Blog.Web/Blog.Web.csproj'
-    arguments: '--configuration $(buildConfiguration) /p:Version=$(buildNumber)'
+    arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'dotnet test $(testConfiguration)'
   inputs:
