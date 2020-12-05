@@ -7,7 +7,7 @@ trigger:
 - master
 
 pool:
-  vmImage: 'vs2017-win2016'
+  vmImage: 'windows-latest'
 
 steps:
 - task: UseDotNet@2
@@ -15,20 +15,33 @@ steps:
     packageType: 'sdk'
     version: '5.0.x'
 - task: DotNetCoreCLI@2
-  displayName: 'Restore NuGet Packages'
+  displayName: 'Restore NuGetPackages'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
     feedsToUse: 'select'
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'dotnet build $(buildConfiguration) $(buildNumber)'
   inputs:
     command: 'build'
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    projects: 'src/Blog.Web/Blog.Web.csproj'
+    arguments: '--configuration $(buildConfiguration) /p:Version=$(buildNumber)'
 - task: DotNetCoreCLI@2
-  displayName: 'Run Tests'
+  displayName: 'dotnet test $(testConfiguration)'
   inputs:
     command: 'test'
     projects: 'test/**/*.csproj'
-    arguments: '--configuration $(testConfiguration)'
+    arguments: '--configuration $(testConfiguration) --collect "Code coverage"'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish $(buildConfiguration)
+  inputs:
+    command: 'publish'
+    publishWebProjects: true
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: true
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'BlogStaging'
+    publishLocation: 'Container'
