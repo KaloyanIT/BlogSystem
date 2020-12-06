@@ -2,11 +2,13 @@
 {
     using System;
     using System.IO;
+    using Blog.Controllers.ViewComponents;
     using Controllers.Helpers;
     using Infrastructure.Emails;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Razor.TagHelpers;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.FileProviders;
@@ -27,11 +29,14 @@
             services.InjectIdentity(_configuration)
                 .InjectRepositories()
                 .InjectStandardServices()
+                .InjectConfigurationOptions(_configuration)
                 .AddCokkiesPolicy();
 
 
             services.AddSingleton(_configuration.GetEmailConfiguration());
             services.AddTransient<IEmailSender, EmailSender>();
+
+            services.AddTransient<ITagHelperComponent, GoogleAnalyticsTagHelperComponent>();
 
 
             services.AddMvcConfigurations();
