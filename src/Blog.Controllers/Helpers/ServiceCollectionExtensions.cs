@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using AutoMapper;
+    using Blog.Infrastructure.Options;
     using Data.Base;
     using Data.Models;
     using Data.Models.Context;
@@ -171,10 +172,17 @@
             return services;
         }
 
+        public static IServiceCollection InjectConfigurationOptions(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.Configure<GoogleAnalyticsOptions>(options => configuration.GetSection("GoogleAnalytics").Bind(options));
+
+            return services;
+        }
+
         public static IServiceCollection AddCokkiesPolicy(this IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
-            {               
+            {
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
