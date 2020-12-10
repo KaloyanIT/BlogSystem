@@ -24,10 +24,11 @@
             var blogs = _blogService.GetAll()
                 .Where(x => x.ShowOnHomePage)
                 .To<BlogViewModel>()
-                .GetPaged(page, 10);
-
-
+                .GetPaged(page, 10);        
+            
             return View(blogs);
+
+            //return new JsonResult(new {success = true, blogs});
         }
 
         [Route("about")]

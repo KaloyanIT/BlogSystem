@@ -6,13 +6,9 @@
 
     public class SubscriberService : BaseService, ISubscriberService
     {
-        private readonly ISubscriberService _subscriberService;
-
-        public SubscriberService(ISubscriberService subscriberService,
-            IMapper mapper,
+        public SubscriberService(IMapper mapper,
             ILogger<SubscriberService> logger) : base(mapper, logger)
         {
-            _subscriberService = subscriberService;
         }
     }
 }

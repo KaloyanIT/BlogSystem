@@ -1,16 +1,12 @@
-﻿namespace Blog.Web
-{
-    using Microsoft.AspNetCore;
-    using Microsoft.AspNetCore.Hosting;
+﻿using Blog.Web;
+using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
-    public sealed class Program
-    {
-        public static void Main(string[] args) 
-            => CreateWebHostBuilder(args).Build().Run();
-        
+static void Main(string[] args)
+    => CreateWebHostBuilder(args).Build().Run();
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
-    }
-}
+
+static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+    WebHost.CreateDefaultBuilder(args)
+        .UseStartup<Startup>();
+

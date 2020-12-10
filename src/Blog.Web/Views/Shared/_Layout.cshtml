@@ -4,6 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]</title>
 
     @await RenderSectionAsync("Head", required: false)
 
@@ -22,54 +23,13 @@
 
     @await RenderSectionAsync("Styles", required: false)
 
-    <title>@ViewData["Title"]</title>
+
     @await RenderSectionAsync("ScriptsHead", required: false)
-    <style>
-        .bdge {
-            height: 21px;
-            background-color: orange;
-            color: #fff;
-            font-size: 11px;
-            padding: 8px;
-            border-radius: 4px;
-            line-height: 3px
-        }
-
-        .comments {
-            text-decoration: underline;
-            text-underline-position: under;
-            cursor: pointer
-        }
-
-        .dot {
-            height: 7px;
-            width: 7px;
-            margin-top: 3px;
-            background-color: #bbb;
-            border-radius: 50%;
-            display: inline-block
-        }
-
-        .hit-voting:hover {
-            color: blue
-        }
-
-        .hit-voting {
-            cursor: pointer
-        }
-
-        .servicedrop {
-            transition-delay: 1s
-        }
-
-        .action-collapse {
-            cursor: pointer
-        }
 </head>
 <body>
     <!-- Navigation -->
     @await Html.PartialAsync("_Navigation")
-
+    s
     <!-- Page Header -->
     @await Html.PartialAsync("_Header")
     <div class="container">
