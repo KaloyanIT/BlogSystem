@@ -1,6 +1,7 @@
 ﻿namespace Blog.Services.Tags
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
@@ -28,7 +29,12 @@
         }
 
         public async Task Create(CreateTagServiceModel serviceModel)
-        {
+        {        
+            if(serviceModel == null)
+            {
+                throw new ArgumentNullException(nameof(serviceModel));
+            }
+
             var tag = new Tag(serviceModel.Name);
 
             await _tagSqlRepository.Save(tag);

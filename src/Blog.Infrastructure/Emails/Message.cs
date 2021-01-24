@@ -10,7 +10,7 @@
         {
             To = new List<MailboxAddress>();
 
-            To.AddRange(to.Select(x => new MailboxAddress(x)));
+            To.AddRange(to.Select(x => MailboxAddress.Parse(x)));
             Subject = subject;
             Content = content;
         }

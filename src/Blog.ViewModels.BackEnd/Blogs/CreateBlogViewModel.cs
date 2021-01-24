@@ -1,15 +1,19 @@
 ﻿namespace Blog.ViewModels.BackEnd.Blogs
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Blog.Services.Blog.Models;
     using Blog.ViewModels.BackEnd.Meta.OpenGraphs;
+    using Blog.ViewModels.BackEnd.Tags;
     using Infrastructure.AutoMapper;
+    using Microsoft.AspNetCore.Mvc.Rendering;
 
     public class CreateBlogViewModel : IHaveReverseMap<CreateBlogServiceModel>
     {
         public CreateBlogViewModel()
         {
-            this.OpenGraphViewModel = new OpenGraphViewModel();
+            OpenGraphViewModel = new OpenGraphViewModel();
         }
 
         [Required]
@@ -21,7 +25,11 @@
         [Required]
         public string Summary { get; set; } = null!;
 
-        public OpenGraphViewModel OpenGraphViewModel {get; set;}
+        public OpenGraphViewModel OpenGraphViewModel { get; set; }
+
+        public ICollection<Guid> TagIds { get; set; } = null!;
+
+        public ICollection<SelectListItem> TagsSelectListItems {get; set;} = null!;
 
         public bool ShowOnHomepage { get; set; }
     }

@@ -23,10 +23,10 @@
         {
             var blogs = _blogService.GetAll()
                 .Where(x => x.ShowOnHomePage)
+                .OrderByDescending(x => x.DateCreated)
                 .To<BlogViewModel>()
-                .GetPaged(page, 10);
-
-
+                .GetPaged(page, 20);        
+            
             return View(blogs);
         }
 

@@ -17,15 +17,11 @@
     var finishIndex = Math.Min(Model.CurrentPage + 5, Model.PageCount);
 }
 
-<div class="row">
-    <div class="col-md-8 col-sm-8 items-info">
-        Items @Model.FirstRowOnPage to @Model.LastRowOnPage of @Model.RowCount total
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-8 col-sm-8">
-        @if (Model.PageCount > 1)
-        {
+@if (Model.PageCount > 1)
+{
+    <div class="row">
+        <div class="col-md-8 col-sm-8">
+
             <ul class="pagination pull-right">
                 <li><a href="@urlTemplate.Replace("{0}", "1")">&laquo;</a></li>
                 @for (var i = startIndex; i <= finishIndex; i++)
@@ -43,6 +39,11 @@
                 }
                 <li><a href="@urlTemplate.Replace("{0}", Model.PageCount.ToString())">&raquo;</a></li>
             </ul>
-        }
+        </div>
     </div>
-</div>
+    <div class="row">
+        <div class="col-md-8 col-sm-8 items-info">
+            Blog Posts @Model.FirstRowOnPage to @Model.LastRowOnPage of @Model.RowCount total
+        </div>
+    </div>
+}
