@@ -1,12 +1,16 @@
-﻿using Blog.Web;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
+﻿namespace Blog.Web
+{
+    using Microsoft.AspNetCore;
+    using Microsoft.AspNetCore.Hosting;
 
-static void Main(string[] args)
-    => CreateWebHostBuilder(args).Build().Run();
+    public sealed class Program
+    {
+        public static void Main(string[] args) 
+            => CreateWebHostBuilder(args).Build().Run();
+        
 
-
-static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-    WebHost.CreateDefaultBuilder(args)
-        .UseStartup<Startup>();
-
+        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>();
+    }
+}
