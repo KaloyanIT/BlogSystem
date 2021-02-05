@@ -5,31 +5,34 @@
     ViewData["Title"] = "Home";
 }
 
+@(await Component.InvokeAsync<HeaderViewComponent>() )
 
-<div class="row">
-    <div class="col-lg-8 col-md-10 mx-auto">
-        @foreach (var blog in Model.Results)
-        {
-            <div class="post-preview">
-                <a href="@Url.Action("Details", "Blog", new {id = blog.Id})">
-                    <h2 class="post-title">
-                        @blog.Title
-                    </h2>
-                    <h3 class="post-subtitle">
-                        @blog.Summary
-                    </h3>
-                </a>
-                <p class="post-meta">
-                    Posted by
-                    <a href="#">@blog.CreatedBy</a>
-                    on @blog.DateCreated
-                </p>
-            </div>
-        }
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            @foreach (var blog in Model.Results)
+            {
+                <div class="post-preview">
+                    <a href="@Url.Action("Details", "Blog", new {id = blog.Id})">
+                        <h2 class="post-title">
+                            @blog.Title
+                        </h2>
+                        <h3 class="post-subtitle">
+                            @blog.Summary
+                        </h3>
+                    </a>
+                    <p class="post-meta">
+                        Posted by
+                        <a href="#">@blog.CreatedBy</a>
+                        on @blog.DateCreated
+                    </p>
+                </div>
+            }
 
-        <hr>
-        <!-- Pager -->
-        @(await Component.InvokeAsync<PagerViewComponent>(new { result = Model }))
+            <hr>
+            <!-- Pager -->
+            @(await Component.InvokeAsync<PagerViewComponent>(new { result = Model }))
+        </div>
     </div>
 </div>
 
