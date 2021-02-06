@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>@ViewData["Title"]</title>
+    <title>@ViewData["Title"] | KaloyanIT Blog</title>
 
     @await RenderSectionAsync("Head", required: false)
 
@@ -32,10 +32,10 @@
     @await Html.PartialAsync("_Navigation")
 
     <!-- Page Header -->
-    @await Html.PartialAsync("_Header")
-    <div class="container">
-        @RenderBody()
-    </div>
+    @*@await Html.PartialAsync("_Header")*@
+
+    @RenderBody()
+
     <partial name="_CookieConsentPartial" />
 
     <!--   Footer -->

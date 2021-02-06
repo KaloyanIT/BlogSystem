@@ -97,10 +97,10 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateBlogViewModel blog)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(blog);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(blog);
+            //}
 
             //Add validation
             var serviceModel = Mapper.Map<CreateBlogViewModel, CreateBlogServiceModel>(blog);

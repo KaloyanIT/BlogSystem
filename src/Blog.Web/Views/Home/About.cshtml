@@ -1,21 +1,25 @@
 ﻿
 @{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = "About me";
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="item-box-blog">
-            <div class="item-box-blog-body">
-                <!--Heading-->
-                <div class="item-box-blog-heading">
-                    <a href="#" tabindex="0">
-                        <h2>About</h2>
-                    </a>
-                </div>
-                <!--Text-->
-                <div class="item-box-blog-text">
-                    <p></p>
+@await Component.InvokeAsync("Header", new { Title = "About Me", SubTitle = "This is what I do." }) 
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="item-box-blog">
+                <div class="item-box-blog-body">
+                    <!--Heading-->
+                    <div class="item-box-blog-heading">
+                        <a href="#" tabindex="0">
+                            <h2>About</h2>
+                        </a>
+                    </div>
+                    <!--Text-->
+                    <div class="item-box-blog-text">
+                        <p></p>
+                    </div>
                 </div>
             </div>
         </div>
