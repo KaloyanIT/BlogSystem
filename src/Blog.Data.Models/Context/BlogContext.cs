@@ -1,23 +1,23 @@
-﻿using Blog.Data.Models.Comments;
-
-namespace Blog.Data.Models.Context
+﻿namespace Blog.Data.Models.Context
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Base.Contracts;
     using Base.Extensions;
-    using Models;
-    using Models.Emails;
-    using Models.Meta;
+    using Comments;
+    using Controllers.Helpers;
+    using Files;
     using Infrastructure.Constants;
+    using Links;
+    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore.ChangeTracking;
-    using Microsoft.AspNetCore.Http;
-    using Blog.Controllers.Helpers;
-    using Blog.Data.Models.Files;
-    using Blog.Data.Models.Links;
-    using System.Diagnostics.CodeAnalysis;
+    using Models;
+    using Models.Emails;
+    using Models.Meta;
+
 
     public class BlogContext : IdentityDbContext<User, Role, string>, IBlogContext
     {
@@ -58,11 +58,13 @@ namespace Blog.Data.Models.Context
 
         public DbSet<OpenGraph> OpenGraphs { get; set; } = null!;
 
-        public DbSet<File> Files { get; set; }
+        public DbSet<File> Files { get; set; } = null!;
 
-        public DbSet<Library> Library { get; set; }
+        public DbSet<Library> Library { get; set; } = null!;
 
-        public DbSet<Link> Link { get; set; }
+        public DbSet<Link> Link { get; set; } = null!;
+
+        public DbSet<ContactData> ContactsData { get; set; } = null!;
 
         private void OnEntityTracked(object? sender, EntityTrackedEventArgs e)
         {
@@ -71,7 +73,7 @@ namespace Blog.Data.Models.Context
                 entity.DateCreated = DateTime.UtcNow;
             }
 
-            if (!e.FromQuery && e.Entry.State == EntityState.Added 
+            if (!e.FromQuery && e.Entry.State == EntityState.Added
                 && e.Entry.Entity is IHaveCreatedBy userEntity
                 && _httpContextAccessor.HttpContext != null)
             {
@@ -86,7 +88,7 @@ namespace Blog.Data.Models.Context
                 entity.DateModified = DateTime.UtcNow;
             }
 
-            if (e.NewState == EntityState.Modified 
+            if (e.NewState == EntityState.Modified
                 && e.Entry.Entity is IHaveModifiedBy userEntity
                 && _httpContextAccessor.HttpContext != null)
             {

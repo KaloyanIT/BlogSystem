@@ -8,6 +8,6 @@
         /// <summary>
         /// Created by User Id
         /// </summary>
-        string CreatedBy { get; set; }
+        string? CreatedBy { get; set; }
     }
 }
