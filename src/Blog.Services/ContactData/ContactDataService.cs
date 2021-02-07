@@ -5,6 +5,7 @@
     using Data.Models;
     using ContactData.Models;
     using System;
+    using System.Linq;
 
     public class ContactDataService : IContactDataService
     {
@@ -27,6 +28,20 @@
             await _contactDataRepository.Save(contactData);
 
             return contactData;
+        }
+
+        public IQueryable<ContactData> GetAll()
+        {
+            var result = _contactDataRepository.GetAll();
+
+            return result;
+        }
+
+        public async Task<ContactData?> GetById(Guid id)
+        {
+            var result = await _contactDataRepository.GetById(id);
+
+            return result;
         }
     }
 }
