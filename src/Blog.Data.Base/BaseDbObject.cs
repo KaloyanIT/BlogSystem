@@ -34,8 +34,7 @@
         /// <summary>
         /// Creator user id
         /// </summary>
-        public string CreatedBy { get; set; } = null!;
-
+        public string? CreatedBy { get; set; }
         /// <summary>
         /// Editor user id
         /// </summary>
