@@ -2,6 +2,7 @@
 {
     using System.Threading.Tasks;
     using AutoMapper;
+    using Blog.EmailService;
     using Blog.Infrastructure.Options;
     using Blog.Services.ContactData;
     using Blog.Services.ContactData.Models;
@@ -12,14 +13,17 @@
     public class ContactController : Controller
     {
         private readonly IContactDataService _contactDataService;
+        private readonly IEmailSender _emailSender;
         private readonly IMapper _mapper;
         private readonly GoogleRecaptchaOptions _googleRecaptcha;
 
         public ContactController(IContactDataService contactDataService,
             IOptions<GoogleRecaptchaOptions> recaptchaOptions,
+            IEmailSender emailSender,
             IMapper mapper)
         {
             _contactDataService = contactDataService;
+            _emailSender = emailSender;
             _googleRecaptcha = recaptchaOptions.Value;
             _mapper = mapper;
         }
@@ -40,6 +44,8 @@
             var serviceModel = _mapper.Map<CreateContactDataServiceModel>(viewModel);
 
             var model = await _contactDataService.Create(serviceModel);
+
+            await _emailSender.Send(model.Email, "Contact message recieved!", "Hi");
 
             ViewData["SiteKey"] = _googleRecaptcha.SiteKey;
 

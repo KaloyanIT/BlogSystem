@@ -1,11 +1,8 @@
 ﻿namespace Blog.EmailService
 {
-    using System;
     using System.Threading.Tasks;
     using Adapters;
     using AutoMapper;
-    using Infrastructure.Emails;
-    using MailKit.Net.Smtp;
     using Microsoft.Extensions.Logging;
     using MimeKit;
     using Models;
@@ -14,16 +11,13 @@
     public class EmailsService : BaseService, IEmailsService
     {
         private readonly BaseEmailMessageAdapter _adapter;
-        private readonly EmailConfiguration _emailConfiguration;
         private readonly ILogger<EmailsService> _logger;
 
         public EmailsService(BaseEmailMessageAdapter adapter,
-            EmailConfiguration emailConfiguration,
             IMapper mapper,
             ILogger<EmailsService> logger) : base(mapper, logger)
         {
             _adapter = adapter;
-            _emailConfiguration = emailConfiguration;
             _logger = logger;
         }
 
@@ -47,31 +41,31 @@
 
         private async Task SendAsync(MimeMessage emailMessage)
         {
-            using var client = new SmtpClient();
+            //using var client = new SmtpClient();
 
-            emailMessage.From.Add(MailboxAddress.Parse(_emailConfiguration.From));
+            //emailMessage.From.Add(MailboxAddress.Parse(_emailConfiguration.From));
 
-            try
-            {
-                await client.ConnectAsync(_emailConfiguration.SmtpServer,
-                    _emailConfiguration.Port,
-                    _emailConfiguration.UseSsl);
+            //try
+            //{
+            //    await client.ConnectAsync(_emailConfiguration.SmtpServer,
+            //        _emailConfiguration.Port,
+            //        _emailConfiguration.UseSsl);
 
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
+            //    client.AuthenticationMechanisms.Remove("XOAUTH2");
 
-                await client.AuthenticateAsync(_emailConfiguration.Username, _emailConfiguration.Password);
+            //    await client.AuthenticateAsync(_emailConfiguration.Username, _emailConfiguration.Password);
 
-                await client.SendAsync(emailMessage);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Email can not be sent");
-            }
-            finally
-            {
-                await client.DisconnectAsync(true);
-                client.Dispose();
-            }
+            //    await client.SendAsync(emailMessage);
+            //}
+            //catch (Exception ex)
+            //{
+            //    _logger.LogError(ex, "Email can not be sent");
+            //}
+            //finally
+            //{
+            //    await client.DisconnectAsync(true);
+            //    client.Dispose();
+            //}
         }
     }
 }
