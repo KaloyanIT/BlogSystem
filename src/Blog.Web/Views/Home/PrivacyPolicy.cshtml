@@ -3,21 +3,4 @@
     ViewData["Title"] = "Privacy Policy";
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="item-box-blog">
-            <div class="item-box-blog-body">
-                <!--Heading-->
-                <div class="item-box-blog-heading">
-                    <a href="#" tabindex="0">
-                        <h2>Privacy Policy</h2>
-                    </a>
-                </div>
-                <!--Text-->
-                <div class="item-box-blog-text">
-                    <p></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@await Component.InvokeAsync("Header", new { Title = "Privacy Policy", SubTitle = "" })

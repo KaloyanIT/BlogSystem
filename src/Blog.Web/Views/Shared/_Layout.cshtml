@@ -31,12 +31,14 @@
     <!-- Navigation -->
     @await Html.PartialAsync("_Navigation")
 
+
+
     <!-- Page Header -->
     @*@await Html.PartialAsync("_Header")*@
 
     @RenderBody()
-
     <partial name="_CookieConsentPartial" />
+
 
     <!--   Footer -->
     @await Html.PartialAsync("_Footer")
