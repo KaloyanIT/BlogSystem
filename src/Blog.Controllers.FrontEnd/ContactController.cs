@@ -30,6 +30,8 @@
 
         public IActionResult Index()
         {
+            ViewData["SiteKey"] = _googleRecaptcha.SiteKey;
+
             return View();
         }
 

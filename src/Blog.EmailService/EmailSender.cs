@@ -1,9 +1,7 @@
 ﻿namespace Blog.EmailService
 {
-    using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Blog.Infrastructure.Options;
+    using Infrastructure.Options;
     using Microsoft.Extensions.Options;
     using SendGrid;
     using SendGrid.Helpers.Mail;
