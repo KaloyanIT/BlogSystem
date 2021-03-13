@@ -9,7 +9,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Blog.Infrastructure\Blog.Infrastructure.csproj" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.3" />
   </ItemGroup>
 
 </Project>

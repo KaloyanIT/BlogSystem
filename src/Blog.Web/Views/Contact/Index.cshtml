@@ -4,33 +4,64 @@
     ViewData["Title"] = "Contact";
 }
 
+@section Styles {
+    <link href="~/css/pages/contact-us.css" rel="stylesheet" />
+}
+
 @await Component.InvokeAsync("Header", new { Title = "Contact Me", SubTitle = "Have questions? I have answers." })
 
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
+            <partial name="_MessagePartial"/>
             <p>Want to get in touch?</p>
-            <form asp-action="Create" asp-controller="Contact" method="post">
-                <div class="form-group">
-                    <label asp-for="@Model.Name">Name</label>
-                    <input type="text" asp-for="@Model.Name" class="form-control" id="formGroupExampleInput2" placeholder="Name">
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email">Email address</label>
-                    <input type="email" asp-for="Email" class="form-control" placeholder="name@example.com">
+            <form asp-action="Create" asp-controller="Contact" id="contact-form" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="@Model.Name">Name</label>
+                            <input type="text" asp-for="@Model.Name" class="form-control" id="formGroupExampleInput2" placeholder="Name">
+                            <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Email">Email address</label>
+                            <input type="email" asp-for="Email" class="form-control" placeholder="name@example.com">
+                            <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label asp-for="Subject">Subject</label>
-                    <input type="text"asp-for="Subject" class="form-control" placeholder="Subject">
+                    <input type="text" asp-for="Subject" class="form-control" placeholder="Subject">
+                    <span class="text-danger" asp-validation-for="@Model.Subject"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Message">Message</label>
-                    <textarea class="form-control"asp-for="Message" rows="3"></textarea>
+                    <textarea class="form-control" asp-for="Message" rows="3"></textarea>
+                    <span class="text-danger" asp-validation-for="@Model.Message"></span>
                 </div>
-                <button class="btn btn-primary" type="submit">Button</button>
+                <button class="btn btn-primary g-recaptcha"
+                        data-sitekey="@ViewData["SiteKey"]"
+                        data-callback='onSubmit'
+                        data-action='submit' type="submit">
+                    Send
+                </button>
             </form>
         </div>
     </div>
 </div>
 
+@section ScriptsBody {
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+            document.getElementById("contact-form").submit();
+        }
+
+
+    </script>
+
+}
 
