@@ -31,10 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="StaticFiles\src\sass\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="..\..\.editorconfig" Link=".editorconfig" />
   </ItemGroup>
 
@@ -42,6 +38,13 @@
     <Content Include="StaticFiles\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="StaticFiles\src\sass\**" />
+    <Content Remove="StaticFiles\src\sass\**" />
+    <EmbeddedResource Remove="StaticFiles\src\sass\**" />
+    <None Remove="StaticFiles\src\sass\**" />
   </ItemGroup>
 
   <ItemGroup>
