@@ -101,6 +101,9 @@ indent_style=space
 indent_size=4
 tab_width=4
 
+# Default severity for analyzer diagnostics with category 'Reliability'
+dotnet_analyzer_diagnostic.category-Reliability.severity = none
+
 [*.{appxmanifest,axml,build,config,csproj,dbml,discomap,dtd,json,jsproj,lsproj,njsproj,nuspec,proj,props,resjson,resw,resx,StyleCop,targets,tasks,vbproj,xml,xsd}]
 indent_style=space
 indent_size=2

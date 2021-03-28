@@ -40,8 +40,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5EE02D06-20CF-4760-B6ED-8CC8954AC3DB}"
 	ProjectSection(SolutionItems) = preProject
 		src\Blog.Data.Base\.editorconfig = src\Blog.Data.Base\.editorconfig
-		src\Blog.Data.Base\DefaultSet.ruleset = src\Blog.Data.Base\DefaultSet.ruleset
-		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Controllers.FrontEnd", "src\Blog.Controllers.FrontEnd\Blog.Controllers.FrontEnd.csproj", "{3608336F-4D24-457C-9924-4A111AA98B26}"
@@ -52,9 +50,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{90356322-13DE-4DF1-853E-08C618F5E0C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.EmailService", "src\Blog.EmailService\Blog.EmailService.csproj", "{E7968892-DA08-47BE-A1DF-418431B67592}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.EmailService", "src\Blog.EmailService\Blog.EmailService.csproj", "{E7968892-DA08-47BE-A1DF-418431B67592}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.Base", "src\Blog.Services.Base\Blog.Services.Base.csproj", "{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Services.Base", "src\Blog.Services.Base\Blog.Services.Base.csproj", "{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Services.UnitTests", "test\Blog.Services.UnitTests\Blog.Services.UnitTests.csproj", "{05EE6815-3D70-4632-B755-6892B7769815}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +130,10 @@ Global
 		{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05EE6815-3D70-4632-B755-6892B7769815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05EE6815-3D70-4632-B755-6892B7769815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05EE6815-3D70-4632-B755-6892B7769815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05EE6815-3D70-4632-B755-6892B7769815}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,6 +155,7 @@ Global
 		{312E9366-DD75-477A-A25D-1BF5835D1B7D} = {E57E6404-D851-4BE7-8DC1-E7DDE51B4FD6}
 		{E7968892-DA08-47BE-A1DF-418431B67592} = {90356322-13DE-4DF1-853E-08C618F5E0C7}
 		{1E1092E2-CEAD-4080-8F21-FEBC374EB1AC} = {90356322-13DE-4DF1-853E-08C618F5E0C7}
+		{05EE6815-3D70-4632-B755-6892B7769815} = {312E9366-DD75-477A-A25D-1BF5835D1B7D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5ED14AD-FAA4-422C-B629-79A52254ED27}

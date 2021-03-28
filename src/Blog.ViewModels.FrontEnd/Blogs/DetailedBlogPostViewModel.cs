@@ -13,5 +13,7 @@
         public string Summary { get; set; } = null!;
 
         public string Content { get; set; } = null!;
+
+        public DateTime DateCreated {get; set; }
     }
 }

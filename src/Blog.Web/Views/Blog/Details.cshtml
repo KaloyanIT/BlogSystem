@@ -5,16 +5,21 @@
     ViewData["Title"] = Model.Title;
 }
 
-@section Head 
+@section Head
 {
     @(await Component.InvokeAsync<OpenGraphViewComponent>(new { attachedItemId = Model.Id }) )
 }
 
-<article>
-    @Html.Raw(Model.Content)
+@await Component.InvokeAsync("Header", new { Title = Model.Title, SubTitle = Model.Summary, CreationDate = Model.DateCreated, Author = "Kaloyan Kostov" })
 
-    @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))
-</article>
+<div class="container">
+    <article>
+        @Html.Raw(Model.Content)
+
+        @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))
+    </article>
+</div>
+
 
 
 @section ScriptsBody

@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Blog.Controllers.BackEnd.Base
+﻿namespace Blog.Controllers.BackEnd.Base
 {
     using System;
     using AutoMapper;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.Extensions.Logging;
+    using Microsoft.AspNetCore.Mvc;
 
     [Area("Admin")]
     [Authorize]

@@ -175,6 +175,8 @@
         public static IServiceCollection InjectConfigurationOptions(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<GoogleAnalyticsOptions>(options => configuration.GetSection("GoogleAnalytics").Bind(options));
+            services.Configure<GoogleRecaptchaOptions>(options => configuration.GetSection("GoogleRecaptcha").Bind(options));
+            services.Configure<SendGridOptions>(options => configuration.GetSection("SendGrid").Bind(options));
 
             return services;
         }

@@ -3,8 +3,8 @@
     using System;
     using System.IO;
     using Blog.Controllers.ViewComponents;
+    using Blog.EmailService;
     using Controllers.Helpers;
-    using Infrastructure.Emails;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.DataProtection;
     using Microsoft.AspNetCore.Hosting;
@@ -33,10 +33,9 @@
                 .AddCokkiesPolicy();
 
 
-            services.AddSingleton(_configuration.GetEmailConfiguration());
-            services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddTransient<ITagHelperComponent, GoogleAnalyticsTagHelperComponent>();
+            services.AddTransient<IEmailSender, EmailSender>();
 
 
             services.AddMvcConfigurations();
