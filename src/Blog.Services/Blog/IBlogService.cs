@@ -14,6 +14,10 @@
         Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel);
 
         IQueryable<BlogPost> GetAll();
+        
+        IQueryable<BlogPost> GetAll(bool showOnHomepage);
+        
+        IQueryable<BlogPost> GetAll(bool showOnHomepage, string tag);
 
         IQueryable<BlogPost> GetAllLatest();
 

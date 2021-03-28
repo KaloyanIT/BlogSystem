@@ -1,6 +1,8 @@
 ﻿namespace Blog.Services.Blog.Models
 {
     using System;
+    using System.Collections.Generic;
+    using AutoMapper;
     using Data.Models;
     using Infrastructure.AutoMapper;
 
@@ -17,5 +19,7 @@
         public bool ShowOnHomePage { get; set; }
 
         public string UserId { get; set; } = null!;
+
+        public ICollection<Guid> TagIds { get; set; } = null!;
     }
 }

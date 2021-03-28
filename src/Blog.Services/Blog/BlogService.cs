@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using AutoMapper;
     using Base;
+    using BlogPostTags;
     using Data.Models;
     using Data.Repositories.Blog;
     using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,16 @@
     public class BlogService : BaseService, IBlogService
     {
         private readonly IBlogRepository _blogRepository;
+        private readonly IBlogPostTagsService _blogPostTagsService;
 
         public BlogService(IBlogRepository blogRepository, 
+            IBlogPostTagsService blogPostTagsService,
             IMapper mapper,
             ILogger<BlogService> logger) : base(mapper, logger)
 
         {
             _blogRepository = blogRepository;
+            _blogPostTagsService = blogPostTagsService;
         }
 
 
@@ -34,6 +38,8 @@
             var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
 
             await _blogRepository.Save(blogPost);
+
+            await _blogPostTagsService.CreateTags(blogPost.Id, serviceModel.TagIds);
 
             return blogPost;
         }
@@ -76,6 +82,23 @@
         public IQueryable<BlogPost> GetAll()
         {
             var result = _blogRepository.GetAll();
+
+            return result;
+        }
+
+        public IQueryable<BlogPost> GetAll(bool showOnHomepage)
+        {
+            var result = _blogRepository.GetAll()
+                .Where(x => x.ShowOnHomePage == showOnHomepage);
+
+            return result;
+        }
+
+        public IQueryable<BlogPost> GetAll(bool showOnHomepage, string tag)
+        {
+            var result = _blogRepository.GetAll()
+                .Where(x => x.ShowOnHomePage == showOnHomepage)
+                .Where(x => x.BlogTags!.Any(y => y.Tag!.Name == tag));
 
             return result;
         }
