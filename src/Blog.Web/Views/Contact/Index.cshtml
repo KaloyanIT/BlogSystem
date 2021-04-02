@@ -2,10 +2,12 @@
 
 @{
     ViewData["Title"] = "Contact";
+    string url = "https://www.google.com/recaptcha/api.js?render=" + @ViewData["SiteKey"];
 }
 
 @section Styles {
     <link href="~/css/pages/contact-us.css" rel="stylesheet" />
+    <script src="@url"></script>
 }
 
 @await Component.InvokeAsync("Header", new { Title = "Contact Me", SubTitle = "Have questions? I have answers." })
@@ -42,10 +44,11 @@
                     <textarea class="form-control" asp-for="Message" rows="3"></textarea>
                     <span class="text-danger" asp-validation-for="@Model.Message"></span>
                 </div>
+                <input asp-for="RecaptchaToken" hidden class="recaptcha-token" />
+
                 <button class="btn btn-primary g-recaptcha"
                         data-sitekey="@ViewData["SiteKey"]"
-                        data-callback='onSubmit'
-                        data-action='submit' type="submit">
+                        type="submit">
                     Send
                 </button>
             </form>
@@ -56,8 +59,21 @@
 @section ScriptsBody {
     <script src="https://www.google.com/recaptcha/api.js"></script>
     <script>
-        function onSubmit(token) {
-            document.getElementById("contact-form").submit();
+
+        $('button.g-recaptcha').on('click', onClick);
+
+        function onClick(e) {
+            e.preventDefault();
+
+             grecaptcha.ready(function () {
+                grecaptcha.execute('@ViewData["SiteKey"]', { action: 'submit' }).then(function (token) {
+                    console.log(token);
+
+                    $('.recaptcha-token').val(token);
+                    $('#contact-form').submit();
+                    // Add your logic to submit to your backend server here.
+                });
+            });
         }
 
 
