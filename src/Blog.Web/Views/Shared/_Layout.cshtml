@@ -19,6 +19,7 @@
     <!-- Custom styles for this template -->
     <link href="~/css/blog-theme/clean-blog.css" rel="stylesheet">
     <link href="~/lib/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/css/prism.css" rel="stylesheet"/>
 
     <link rel="stylesheet" href="~/StaticFiles/dist/bundle.css" asp-append-version="true" />
 
@@ -26,6 +27,7 @@
 
 
     @await RenderSectionAsync("ScriptsHead", required: false)
+    <script src="~/js/prism.js"></script>
 </head>
 <body>
     <!-- Navigation -->
