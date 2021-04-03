@@ -24,6 +24,8 @@
         private readonly IMapper _mapper;
         private readonly GoogleRecaptchaOptions _googleRecaptcha;
 
+        private readonly string _contactTemplateId = "d-3f902e78da5f43799ed273c7f598e563";
+
         public ContactController(IContactDataService contactDataService,
             IReCaptchaVerificationService reCaptchaVerificationService,
             IOptions<GoogleRecaptchaOptions> recaptchaOptions,
@@ -69,7 +71,8 @@
 
                 var model = await _contactDataService.Create(serviceModel);
 
-                await _emailSender.Send(model.Email, "Thank you!", "Hi");
+
+                await _emailSender.Send(model.Email, _contactTemplateId, new { });
 
                 TempData[MessagesConstants.TempDataSuccessMessageKey] = MessagesConstants.ContactSuccessMessage;
             }
