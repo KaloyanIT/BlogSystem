@@ -17,5 +17,7 @@
 
         [Required]
         public string Message { get; set; } = null!;
+
+        public string RecaptchaToken {get; set; } = null!;
     }
 }

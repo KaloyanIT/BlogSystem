@@ -29,6 +29,17 @@
             
             return View(blogs);
         }
+        
+        [Route("tags")]
+        public IActionResult Tags(string tagName, int page = 1)
+        {
+            var blogs = _blogService.GetAll(true, tagName)
+                .OrderByDescending(x => x.DateCreated)
+                .To<BlogViewModel>()
+                .GetPaged(page, 20);        
+            
+            return View(blogs);
+        }
 
         [Route("about")]
         public IActionResult About()
