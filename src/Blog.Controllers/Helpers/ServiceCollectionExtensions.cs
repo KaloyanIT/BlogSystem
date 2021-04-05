@@ -177,6 +177,7 @@
             services.Configure<GoogleAnalyticsOptions>(options => configuration.GetSection("GoogleAnalytics").Bind(options));
             services.Configure<GoogleRecaptchaOptions>(options => configuration.GetSection("GoogleRecaptcha").Bind(options));
             services.Configure<SendGridOptions>(options => configuration.GetSection("SendGrid").Bind(options));
+            services.Configure<SystemOptions>(options => configuration.GetSection("System").Bind(options));
 
             return services;
         }
