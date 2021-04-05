@@ -1,12 +1,14 @@
 ﻿@model LoginViewModel
-@{
-    ViewData["Title"] = "Login";
+@{ ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+    }
 
-<h1>Login</h1>
-<div>
-    <div>
+@await Component.InvokeAsync("Header", new { Title = "Login", SubTitle = "" })
+
+
+<div class="container">
+    <div class="col-md-6 mx-auto">
+        <h1>Login</h1>
         <form asp-controller="Login" asp-action="Login" id="Login" asp-route-returnUrl="@ViewData["ReturnUrl"]">
             @*<div asp-validation-summary="All" class="text-danger"></div>s*@
             <div class="form-group">
@@ -22,9 +24,9 @@
                     <input class="form-check-input" asp-for="RememberMe" /> @Html.DisplayNameFor(model => model.RememberMe)
                 </label>
             </div>
-            <div>
+            @*<div>
                 <a class="stretched-link" asp-action="ForgotPassword" asp-controller="Password">Forgot password?</a>
-            </div>
+            </div>*@
             <br />
             <button type="submit" class="btn btn-primary">Login</button>
         </form>

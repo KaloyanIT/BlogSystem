@@ -11,8 +11,7 @@
                     @if (Model.CreationDate.HasValue)
                     {
                         <span class="meta">
-                            Posted by
-                            <a href="#">@Model.Author</a>
+                            <a class="btn-link" href="@Url.Action("About", "Home")">@Model.Author</a>
                             on @Model.CreationDate.Value.ToString("dd MMMM, yyyy")
                         </span>
                     }
