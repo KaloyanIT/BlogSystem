@@ -1,9 +1,7 @@
 ﻿@using Blog.Data.Models.Comments
 @model DetailedBlogPostViewModel
 
-@{
-    ViewData["Title"] = Model.Title;
-}
+@{ ViewData["Title"] = Model.Title; }
 
 @section Head
 {
@@ -16,7 +14,10 @@
     <article>
         @Html.Raw(Model.Content)
 
-        @(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))
+        @*@(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))*@
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        @*<div class="addthis_inline_share_toolbox"></div>*@
     </article>
 </div>
 
@@ -24,10 +25,16 @@
 
 @section ScriptsBody
 {
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    @*<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-606b612125e5d045"></script>*@
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-606b612125e5d045"></script>
+
+
     <script type="text/javascript" src="~/StaticFiles/dist/js/front-end/comments.js"></script>
     <script>
-        $(document).ready(function () {
+        @*$(document).ready(function () {
             window.comments.init('@Model.Id', '@CommentItemType.Blog');
-        });
+        });*@
     </script>
 }
