@@ -4,8 +4,8 @@ const textEditor = (function () {
     function init(cssSelector) {
         tinymce.init({
             selector: cssSelector,
-            width: 600,
-            height: 300,
+            width: 800,
+            height: 600,
             plugins: [
                 'advlist autolink link image lists charmap print codesample code preview hr anchor pagebreak spellchecker',
                 'searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking',

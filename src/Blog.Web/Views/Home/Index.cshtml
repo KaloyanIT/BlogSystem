@@ -22,9 +22,9 @@
                         </h3>
                     </a>
                     <p class="post-meta">
-                        Posted by
-                        <a href="@Url.Action("About", "Home")">@blog.CreatedBy</a>
-                        on @blog.DateCreated
+                        Posted
+                        @*<a href="@Url.Action("About", "Home")">Kaloyan Kostov</a>*@
+                        on @blog.DateCreated.ToString("dd.MM.yyyy")
                     </p>
                 </div>
             }
