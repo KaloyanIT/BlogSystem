@@ -3,6 +3,22 @@
 
 @{ ViewData["Title"] = Model.Title; }
 
+@section styles {
+    <style>
+        @@media only screen and (min-width: 768px) {
+              header.masthead .page-heading h1,
+              header.masthead .site-heading h1 {
+                font-size: 60px;
+              }
+            }
+
+        a.btn-link {
+            color: white;
+        }
+
+    </style>
+}
+
 @section Head
 {
     @(await Component.InvokeAsync<OpenGraphViewComponent>(new { attachedItemId = Model.Id }) )
