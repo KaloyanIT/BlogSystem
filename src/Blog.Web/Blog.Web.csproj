@@ -6,6 +6,7 @@
     <FileVersion>0.0.0.1</FileVersion>
     <Version>0.0.0.1</Version>
     <UserSecretsId>0f4490f4-c479-4950-af22-f9e06d35230f</UserSecretsId>
+    <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
 
   <ItemGroup>
