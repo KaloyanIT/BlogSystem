@@ -7,10 +7,6 @@
  </PropertyGroup>
 
  <ItemGroup>
-   <PackageReference Include="runtime.win.System.Console" Version="4.3.1" />
- </ItemGroup>
-
- <ItemGroup>
    <ProjectReference Include="..\Blog.Controllers\Blog.Controllers.csproj" />
    <ProjectReference Include="..\Blog.ViewModels.FrontEnd\Blog.ViewModels.FrontEnd.csproj" />
  </ItemGroup>
