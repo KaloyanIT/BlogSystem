@@ -27,7 +27,6 @@ steps:
   displayName: 'Build'
   inputs:
     command: 'build'
-    projects: 'Blog.sln'
     arguments: '--configuration $(buildConfiguration) --no-restore'
 - task: CmdLine@2
   displayName: 'Run webpack build'
