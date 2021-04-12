@@ -32,6 +32,7 @@ steps:
   displayName: 'Run webpack build'
   inputs:
     script: 'npm install & npm run build'
+    workingDirectory: src/Blog.Web
 - task: DotNetCoreCLI@2
   displayName: 'Run Tests'
   inputs:
