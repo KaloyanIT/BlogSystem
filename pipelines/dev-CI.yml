@@ -46,7 +46,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '-r portable --self-contained true --configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"'
+    arguments: '-r win --self-contained true --configuration $(BuildConfiguration) --output "$(build.artifactstagingdirectory)"'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
