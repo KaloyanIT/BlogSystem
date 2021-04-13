@@ -14,9 +14,15 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '5.0.x'
+
+- task: CmdLine@2
+  inputs:
+    script: 'dotnet add package runtime.win.System.Console --version 4.3.1'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
+
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet Packages'
   inputs:
