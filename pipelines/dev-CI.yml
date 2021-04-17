@@ -14,9 +14,11 @@ steps:
   inputs:
     packageType: 'sdk'
     version: '5.0.x'
+
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
+
 - task: DotNetCoreCLI@2
   displayName: 'Restore NuGet Packages'
   inputs:
@@ -27,12 +29,12 @@ steps:
   displayName: 'Build'
   inputs:
     command: 'build'
-    projects: 'Blog.sln'
     arguments: '--configuration $(buildConfiguration) --no-restore'
 - task: CmdLine@2
   displayName: 'Run webpack build'
   inputs:
     script: 'npm install & npm run build'
+    workingDirectory: src/Blog.Web
 - task: DotNetCoreCLI@2
   displayName: 'Run Tests'
   inputs:
