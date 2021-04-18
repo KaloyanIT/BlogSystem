@@ -1,6 +1,6 @@
 ﻿@model ICollection<string>
 
-<ul class="footer-links">
+<ul class="footer-links mt-4">
     @foreach (var tag in Model)
     {
         <li><a href="@Url.Action("Tags", "Home", new { tagName = @tag })">@tag</a></li>

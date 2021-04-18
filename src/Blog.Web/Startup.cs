@@ -59,6 +59,7 @@
                     .SetDefaultKeyLifetime(TimeSpan.FromDays(90));
 
             services.InjectAutoMapper();
+            services.AddApplicationInsightsTelemetry();
         }
 
 
