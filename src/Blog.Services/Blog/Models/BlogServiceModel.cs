@@ -14,6 +14,8 @@
 
         public string Summary { get; set; } = null!;
 
+        public string Slug {get; set; } = null!;
+
         public bool ShowOnHomePage { get; set; }
 
         public Guid UserId { get; set; }

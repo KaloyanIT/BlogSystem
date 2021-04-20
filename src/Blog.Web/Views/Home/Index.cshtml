@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Home";
+    ViewData["MetaDescription"] = "Personal blog driven by my biggest passion - writing code. Here I will try to write mostly about programming related content - .NET, C#, Entity Framework and many other stuff and technologies.";
 }
 
 @(await Component.InvokeAsync<HeaderViewComponent>() )
@@ -13,7 +14,7 @@
             @foreach (var blog in Model.Results)
             {
                 <div class="post-preview">
-                    <a href="@Url.Action("Details", "Blog", new {id = blog.Id})">
+                    <a href="@Url.Action("Index", "Blog", new {slug = blog.Slug})">
                         <h2 class="post-title">
                             @blog.Title
                         </h2>

@@ -23,6 +23,8 @@
 
         public string CreatedBy { get; set; } = null!;
 
+        public string Slug { get; set; } = null!;
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<BlogPost, BlogViewModel>()

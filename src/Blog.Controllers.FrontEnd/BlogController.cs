@@ -8,6 +8,7 @@
 
     using Services.Blog;
 
+    [Route("blogs")]
     public class BlogController : Controller
     {
         private readonly IBlogService _blogService;
@@ -19,9 +20,24 @@
             _mapper = mapper;
         }
 
-        public IActionResult Index()
+        [AcceptVerbs("GET", Route = "{slug}")]
+        public async Task<IActionResult> Index(string slug)
         {
-            return RedirectToAction("OlderPosts");
+            if(string.IsNullOrEmpty(slug))
+            {
+                return NotFound();
+            }
+
+            var blogPost = await _blogService.GetBySlug(slug);
+
+            if(blogPost == null)
+            {
+                return NotFound();
+            }
+
+             var detailedBlogPost = _mapper.Map<DetailedBlogPostViewModel>(blogPost);
+
+            return View(detailedBlogPost);
         }
 
         public async Task<IActionResult> Details(Guid? id)

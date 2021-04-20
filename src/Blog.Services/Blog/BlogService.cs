@@ -17,7 +17,7 @@
         private readonly IBlogRepository _blogRepository;
         private readonly IBlogPostTagsService _blogPostTagsService;
 
-        public BlogService(IBlogRepository blogRepository, 
+        public BlogService(IBlogRepository blogRepository,
             IBlogPostTagsService blogPostTagsService,
             IMapper mapper,
             ILogger<BlogService> logger) : base(mapper, logger)
@@ -35,7 +35,7 @@
                 throw new ArgumentNullException(nameof(serviceModel), "Service model can not be null!");
             }
 
-            var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.ShowOnHomePage);
+            var blogPost = new BlogPost(serviceModel.Title, serviceModel.Content, serviceModel.Summary, serviceModel.UserId, serviceModel.Slug, serviceModel.ShowOnHomePage);
 
             await _blogRepository.Save(blogPost);
 
@@ -118,6 +118,18 @@
             }
 
             var result = await _blogRepository.GetById(id.Value);
+
+            return result;
+        }
+
+        public async Task<BlogPost?> GetBySlug(string slug)
+        {
+            if(string.IsNullOrWhiteSpace(slug))
+            {
+                return null!;
+            }
+
+            var result = await _blogRepository.GetBySlug(slug);
 
             return result;
         }

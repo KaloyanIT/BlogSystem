@@ -14,9 +14,9 @@
         Task<BlogServiceModel> Edit(BlogServiceModel blogServiceModel);
 
         IQueryable<BlogPost> GetAll();
-        
+
         IQueryable<BlogPost> GetAll(bool showOnHomepage);
-        
+
         IQueryable<BlogPost> GetAll(bool showOnHomepage, string tag);
 
         IQueryable<BlogPost> GetAllLatest();
@@ -26,5 +26,7 @@
         Task<bool> Exists(Guid? id);
 
         Task Delete(Guid? id);
+
+        Task<BlogPost?> GetBySlug(string slug);
     }
 }

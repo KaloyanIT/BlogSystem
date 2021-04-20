@@ -14,6 +14,8 @@
 
         public bool ShowOnHomePage { get; private set; }
 
+        public string Slug { get; private set; }
+
         public string UserId { get; private set; }
 
         public User? User { get; private set; }
@@ -31,7 +33,7 @@
             ShowOnHomePage = true;
         }
 
-        public BlogPost(string title, string content, string summary, string userId, bool showOnHomePage = true) : base()
+        public BlogPost(string title, string content, string summary, string userId, string slug, bool showOnHomePage = true) : base()
         {
             if (string.IsNullOrWhiteSpace(title))
             {
@@ -53,10 +55,16 @@
                 throw new ArgumentNullException(nameof(userId), "BlogPost UserId");
             }
 
+            if (string.IsNullOrWhiteSpace(slug))
+            {
+                throw new ArgumentException($"'{nameof(slug)}' cannot be null or whitespace.", nameof(slug));
+            }
+
             Title = title;
             Content = content;
             Summary = summary;
             UserId = userId;
+            Slug = slug;
             ShowOnHomePage = showOnHomePage;
         }
     }

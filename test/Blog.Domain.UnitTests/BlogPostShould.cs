@@ -18,7 +18,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new BlogPost(invalidString, this.validString, this.validString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new BlogPost(invalidString, this.validString, this.validString, this.validString, this.validString));
         }
 
         [Theory]
@@ -30,7 +30,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, invalidString, this.validString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, invalidString, this.validString, this.validString, this.validString));
         }
 
         [Theory]
@@ -42,7 +42,7 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, this.validString, invalidString, this.validString));
+            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, this.validString, invalidString, this.validString, this.validString));
         }
 
         [Theory]
@@ -54,7 +54,19 @@
             //Arrange
             //Act
             //Assert
-            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, this.validString, this.validString, invalidString));
+            Assert.Throws<ArgumentNullException>(() => new BlogPost(this.validString, this.validString, this.validString, invalidString, this.validString));
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void ThrowArgumentException_WhenSlug_IsNUll(string invalidString)
+        {
+            //Arrange
+            //Act
+            //Assert
+            Assert.Throws<ArgumentException>(() => new BlogPost(this.validString, this.validString, this.validString, this.validString, invalidString));
         }
 
         [Fact]
@@ -63,7 +75,7 @@
             //Arrange
             string title = "Name";
             //Act
-            var blogPost = new BlogPost(title, this.validString, this.validString, this.validString);
+            var blogPost = new BlogPost(title, this.validString, this.validString, this.validString, this.validString);
 
             //Assert
             Assert.True(title == blogPost.Title);
@@ -75,7 +87,7 @@
             //Arrange
             string content = "Content";
             //Act
-            var blogPost = new BlogPost(this.validString, content, this.validString, this.validString);
+            var blogPost = new BlogPost(this.validString, content, this.validString, this.validString, this.validString);
 
             //Assert
             Assert.True(content == blogPost.Content);
@@ -87,7 +99,7 @@
             //Arrange
             string summary = "Summary";
             //Act
-            var blogPost = new BlogPost(this.validString, this.validString, summary, this.validString);
+            var blogPost = new BlogPost(this.validString, this.validString, summary, this.validString, this.validString);
 
             //Assert
             Assert.True(summary == blogPost.Summary);
@@ -99,10 +111,22 @@
             //Arrange
             string userId = "Name";
             //Act
-            var blogPost = new BlogPost(this.validString, this.validString, this.validString, userId);
+            var blogPost = new BlogPost(this.validString, this.validString, this.validString, userId, this.validString);
 
             //Assert
             Assert.True(userId == blogPost.UserId);
+        }
+
+         [Fact]
+        public void SetSlugProperty_WhenIsValid()
+        {
+            //Arrange
+            string slug = "test-slug";
+            //Act
+            var blogPost = new BlogPost(this.validString, this.validString, this.validString, this.validString, slug);
+
+            //Assert
+            Assert.True(slug == blogPost.Slug);
         }
     }
 }

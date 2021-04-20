@@ -17,6 +17,18 @@
 
         protected override DbSet<BlogPost> EntityDbSet => Context.Blogs;
 
+        public async Task<BlogPost> GetBySlug(string slug)
+        {
+            if (string.IsNullOrWhiteSpace(slug))
+            {
+                throw new ArgumentException($"'{nameof(slug)}' cannot be null or whitespace.", nameof(slug));
+            }
+
+            var result = await GetAll().FirstOrDefaultAsync(x => x.Slug == slug);
+
+            return result;
+        }
+
         public async Task<BlogPost> GetByTitle(string title)
         {
             if (string.IsNullOrWhiteSpace(title))

@@ -23,6 +23,8 @@
 
         public bool ShowOnHomepage { get; set; }
 
+        public string Slug {get; set; } = null!;
+
         [Ignore]
         public OpenGraphViewModel OpenGraphViewModel { get; set; }
     }

@@ -25,6 +25,9 @@
         [Required]
         public string Summary { get; set; } = null!;
 
+        [Required]
+        public string Slug {get; set; } = null!;
+
         public OpenGraphViewModel OpenGraphViewModel { get; set; }
 
         public ICollection<Guid> TagIds { get; set; } = null!;

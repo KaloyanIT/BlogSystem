@@ -1,0 +1,56 @@
+﻿@using Blog.Data.Models.Comments
+@model DetailedBlogPostViewModel
+
+@{ ViewData["Title"] = Model.Title;
+                ViewData["MetaDescription"] = Model.Summary; }
+
+@section styles {
+    <style>
+        @@media only screen and (min-width: 768px) {
+            header.masthead .page-heading h1,
+            header.masthead .site-heading h1 {
+                font-size: 60px;
+            }
+        }
+
+        a.btn-link {
+            color: white;
+        }
+    </style>
+}
+
+@section Head
+{
+    @(await Component.InvokeAsync<OpenGraphViewComponent>(new { attachedItemId = Model.Id }) )
+}
+
+@await Component.InvokeAsync("Header", new { Title = Model.Title, SubTitle = Model.Summary, CreationDate = Model.DateCreated, Author = "Kaloyan Kostov" })
+
+<div class="container">
+    <article>
+        @Html.Raw(Model.Content)
+
+        @*@(await Component.InvokeAsync<CommentsViewComponent>(new { id = Model.Id, commentItemType = CommentItemType.Blog }))*@
+
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+        @*<div class="addthis_inline_share_toolbox"></div>*@
+    </article>
+</div>
+
+
+
+@section ScriptsBody
+{
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    @*<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-606b612125e5d045"></script>*@
+    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-606b612125e5d045"></script>
+
+
+    <script type="text/javascript" src="~/StaticFiles/dist/js/front-end/comments.js"></script>
+    <script>
+        @*$(document).ready(function () {
+            window.comments.init('@Model.Id', '@CommentItemType.Blog');
+        });*@
+    </script>
+}

@@ -18,6 +18,8 @@
 
         public bool ShowOnHomePage { get; set; }
 
+        public string Slug { get; set; } = null!;
+
         public string UserId { get; set; } = null!;
 
         public ICollection<Guid> TagIds { get; set; } = null!;

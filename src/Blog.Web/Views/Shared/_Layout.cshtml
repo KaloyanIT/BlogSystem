@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] | KaloyanIT Blog</title>
 
+    @if (ViewData["MetaDescription"] != null)
+    {
+<meta name="description" content="@ViewData["MetaDescription"]">
+}
+
+    <link href="~/images/icons/favicon.ico" type="image/x-icon" rel="icon" />
+    <link rel="apple-touch-icon" href="~/images/icons/apple-touch-icon.png"/>
+
     @await RenderSectionAsync("Head", required: false)
 
     <!-- Bootstrap CSS -->
@@ -19,7 +27,7 @@
     <!-- Custom styles for this template -->
     <link href="~/css/blog-theme/clean-blog.css" rel="stylesheet">
     <link href="~/lib/bootstrap-multiselect/dist/css/bootstrap-multiselect.css" rel="stylesheet" />
-    <link href="~/css/prism.css" rel="stylesheet"/>
+    <link href="~/css/prism.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="~/StaticFiles/dist/bundle.css" asp-append-version="true" />
 
