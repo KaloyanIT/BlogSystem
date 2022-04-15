@@ -17,7 +17,7 @@
 
         protected override DbSet<BlogPost> EntityDbSet => Context.Blogs;
 
-        public async Task<BlogPost> GetByTitle(string title)
+        public async Task<BlogPost?> GetByTitle(string title)
         {
             if (string.IsNullOrWhiteSpace(title))
             {

@@ -42,7 +42,7 @@
             return items;
         }
 
-        public async Task<Role> GetById(string id)
+        public async Task<Role?> GetById(string id)
         {
             var role = await GetAll().FirstOrDefaultAsync(x => x.Id == id);
 
@@ -53,7 +53,7 @@
         {
             var role = await this.GetById(serviceModel.Id);
 
-            role.Name = serviceModel.Name;
+            role!.Name = serviceModel.Name;
             role.Description = serviceModel.Description;
             role.DateModified = DateTime.UtcNow;
 

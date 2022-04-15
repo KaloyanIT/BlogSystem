@@ -12,7 +12,7 @@
 
         IQueryable<User> GetAll();
 
-        Task<User> GetById(string id);
+        Task<User?> GetById(string id);
 
         Task<string> GetUsernameById(string id);
 

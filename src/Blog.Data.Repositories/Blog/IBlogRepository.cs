@@ -7,6 +7,6 @@
 
     public interface IBlogRepository : IRepository<BlogPost>, ITransientRepository
     {
-        Task<BlogPost> GetByTitle(string title);
+        Task<BlogPost?> GetByTitle(string title);
     }
 }

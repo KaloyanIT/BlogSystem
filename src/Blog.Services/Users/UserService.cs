@@ -74,7 +74,7 @@
             return result;
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User?> GetById(string id)
         {
             if (string.IsNullOrEmpty(id))
             {

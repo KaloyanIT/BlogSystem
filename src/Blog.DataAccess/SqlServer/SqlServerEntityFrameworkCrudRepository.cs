@@ -47,7 +47,9 @@
 
         public async Task<TEntity> GetById(Guid id)
         {
+#pragma warning disable CS8603
             return await EntityDbSet.FirstOrDefaultAsync(x => x.Id == id);
+#pragma warning restore CS8603
         }
 
         public async Task Save(TEntity saveThis)
